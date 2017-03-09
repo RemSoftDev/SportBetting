@@ -1,0 +1,264 @@
+﻿<Window x:Class="SportBetting.Wpf.Prism.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+        Title="MainWindow"
+        AutomationProperties.AutomationId="StartWindow"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        SizeToContent="Manual"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <!--  Resources  -->
+    <Window.Resources>
+
+        <Style x:Key="orangeButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Height" Value="60" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlContent"
+                                   Width="{TemplateBinding Width}"
+                                   Height="60"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonCenterOrange.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       Height="60"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownOrangeLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       Height="60"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonRightOrange.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonCenterDownOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonLeftDownOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonRightDownOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="normalText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#FFEFEFEF" />
+            <Setter Property="LineHeight" Value="22" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Storyboard x:Key="Slide1">
+            <ColorAnimationUsingKeyFrames RepeatBehavior="Forever"
+                                          Storyboard.TargetName="square1"
+                                          Storyboard.TargetProperty="Color">
+                <EasingColorKeyFrame KeyTime="0" Value="Gray" />
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="Black" />
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Black" />
+                <EasingColorKeyFrame KeyTime="0:0:1.8" Value="Black" />
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Slide2">
+            <ColorAnimationUsingKeyFrames RepeatBehavior="Forever"
+                                          Storyboard.TargetName="square2"
+                                          Storyboard.TargetProperty="Color">
+                <EasingColorKeyFrame KeyTime="0" Value="Black" />
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="Gray" />
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Black" />
+                <EasingColorKeyFrame KeyTime="0:0:1.8" Value="Black" />
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Slide3">
+            <ColorAnimationUsingKeyFrames RepeatBehavior="Forever"
+                                          Storyboard.TargetName="square3"
+                                          Storyboard.TargetProperty="Color">
+                <EasingColorKeyFrame KeyTime="0" Value="Black" />
+                <EasingColorKeyFrame KeyTime="0:0:0.6" Value="Black" />
+                <EasingColorKeyFrame KeyTime="0:0:1.2" Value="Gray" />
+                <EasingColorKeyFrame KeyTime="0:0:1.8" Value="Black" />
+            </ColorAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </Window.Resources>
+
+    <Window.Triggers>
+
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Slide1}" />
+            <BeginStoryboard Storyboard="{StaticResource Slide2}" />
+            <BeginStoryboard Storyboard="{StaticResource Slide3}" />
+        </EventTrigger>
+
+    </Window.Triggers>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush AlignmentX="Left"
+                        AlignmentY="Top"
+                        ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                        Stretch="None"
+                        TileMode="Tile"
+                        Viewport="0,0,3,3"
+                        ViewportUnits="Absolute" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0"
+                   Width="105"
+                   Height="295"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   Source="{converters:ResolveImagePath Path=ServerImage.png}" />
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Center">
+                <Border x:Name="bMessages"
+                        Width="400"
+                        Height="60"
+                        Margin="20,0,20,20"
+                        Background="Black"
+                        CornerRadius="10"
+                        Padding="5">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="1"
+                                          Direction="270"
+                                          Opacity="0.5"
+                                          ShadowDepth="1"
+                                          Color="LightGray" />
+                    </Border.Effect>
+                    <TextBlock x:Name="txtMessage"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Center"
+                               FontFamily="Play"
+                               FontSize="18"
+                               Foreground="#FFBFBBB5"
+                               Text=""
+                               TextAlignment="Center"
+                               TextWrapping="WrapWithOverflow" />
+                </Border>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Rectangle Width="10"
+                               Height="10"
+                               Margin="10"
+                               Stroke="Black"
+                               StrokeThickness="1">
+                        <Rectangle.Fill>
+                            <SolidColorBrush x:Name="square1" Color="Gray" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="10"
+                               Height="10"
+                               Margin="10"
+                               Stroke="Black"
+                               StrokeThickness="1">
+                        <Rectangle.Fill>
+                            <SolidColorBrush x:Name="square2" Color="Black" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Rectangle Width="10"
+                               Height="10"
+                               Margin="10"
+                               Stroke="Black"
+                               StrokeThickness="1">
+                        <Rectangle.Fill>
+                            <SolidColorBrush x:Name="square3" Color="Black" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </StackPanel>
+            </StackPanel>
+            <Image Grid.Column="2"
+                   Width="105"
+                   Height="295"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Source="{converters:ResolveImagePath Path=TerminalImage.png}" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="3"
+                    Grid.Column="3"
+                    VerticalAlignment="Center"
+                    Command="{Binding SendLogsCommand}"
+                    IsEnabled="{Binding EnabledSendLogs}"
+                    Style="{StaticResource orangeButton}">
+                <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="Export Logs" />
+                </Viewbox>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

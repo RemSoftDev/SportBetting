@@ -1,0 +1,1300 @@
+﻿<UserControl x:Class="SportBetting.WPF.Prism.Resources.MatchTemplate6"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:SportBetting.WPF.Prism.Shared.Controls;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+             xmlns:wpfHelper="clr-namespace:SportBetting.WPF.Prism.Shared.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             d:DataContext="{d:DesignInstance Type=viewModels:MatchVw}"
+             d:DesignWidth="1000"
+             mc:Ignorable="d">
+    <Label Margin="0"
+           HorizontalContentAlignment="Stretch"
+           AutomationProperties.AutomationId="Match"
+           Padding="0"
+           Visibility="{Binding Visibility}">
+        <VirtualizingStackPanel Orientation="Vertical"
+                                VirtualizationMode="Recycling"
+                                Visibility="{Binding Visibility}">
+
+            <!--  sport header  -->
+            <DockPanel Name="HeaderTemplate6"
+                       Height="30"
+                       Margin="0"
+                       Background="#FFf0f0f0"
+                       LastChildFill="False"
+                       Visibility="{Binding IsHeader,
+                                            Converter={StaticResource myBooleanToVisibilityConverter}}"
+                       wpfHelper:SizeObserver.Observe="True">
+
+                <TextBlock Margin="15,0,0,0"
+                           VerticalAlignment="Center"
+                           AutomationProperties.AutomationId="SportName"
+                           DockPanel.Dock="Left"
+                           Style="{StaticResource headerText}"
+                           Text="{Binding SportView.DisplayName}" />
+
+                <StackPanel Width="145"
+                            DockPanel.Dock="Right"
+                            Orientation="Horizontal">
+                    <TextBlock Width="68"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource headerText}"
+                               Text="1"
+                               TextAlignment="Center" />
+                    <TextBlock Width="68"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource headerText}"
+                               Text="2"
+                               TextAlignment="Center" />
+                </StackPanel>
+            </DockPanel>
+
+            <Border BorderBrush="#FFf0f0f0" BorderThickness="2, 0, 2, 2">
+                <Grid Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="73" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="134" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Background" Value="#FF4d4d4d" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                    <Setter Property="Background" Value="#FF393939" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <!--  temporary closed cover  -->
+                    <Grid Grid.RowSpan="2" Grid.ColumnSpan="3">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Style.Triggers>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>interrupted</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <ImageBrush AlignmentX="Left"
+                                                            AlignmentY="Top"
+                                                            ImageSource="{converters2:ResolveImagePath Path=Disabled_row.png}"
+                                                            Stretch="Fill" />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="ZIndex" Value="1" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="32"
+                                   FontWeight="Medium"
+                                   Foreground="#FFb3b3b3"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>interrupted</DataTrigger.Value>
+                                            <Setter Property="Text" Value="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TEMPORARY_CLOSED}}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+
+                    <!--
+                        <Canvas Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Background="White"
+                        Opacity="0.05" />
+                    -->
+
+                    <Canvas Grid.Row="0" Grid.Column="1">
+                        <Canvas.Style>
+                            <Style TargetType="Canvas">
+                                <Style.Triggers>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>red</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#99d01f00" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#99ffa800" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>green</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#9967b457" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>purple</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#997470c0" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#99FF8211" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Style>
+                    </Canvas>
+
+
+
+                    <Canvas Grid.Row="1" Grid.ColumnSpan="2">
+                        <Canvas.Style>
+                            <Style TargetType="Canvas">
+                                <Style.Triggers>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>red</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#77d01f00" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#77ffa800" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>green</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#7767b457" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>purple</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#777470c0" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#77FF8211" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Style>
+                    </Canvas>
+
+                    <Canvas Grid.RowSpan="2" Grid.ColumnSpan="3">
+                        <Canvas.Style>
+                            <Style TargetType="Canvas">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush AlignmentX="Left"
+                                                    AlignmentY="Top"
+                                                    ImageSource="{converters2:ResolveImagePath Path=Pattern-dark.png}"
+                                                    Opacity="0.8"
+                                                    Stretch="None"
+                                                    TileMode="Tile"
+                                                    Viewport="0,0,3,3"
+                                                    ViewportUnits="Absolute" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <ImageBrush AlignmentX="Left"
+                                                            AlignmentY="Top"
+                                                            ImageSource="{converters2:ResolveImagePath Path=Pattern-Light.png}"
+                                                            Opacity="0.8"
+                                                            Stretch="None"
+                                                            TileMode="Tile"
+                                                            Viewport="0,0,3,3"
+                                                            ViewportUnits="Absolute" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Style>
+                    </Canvas>
+
+                    <!--  not today  -->
+                    <Label Margin="0"
+                           AutomationProperties.AutomationId="Today"
+                           Padding="0"
+                           Visibility="{Binding StartDate,
+                                                Converter={StaticResource bInversTimeToVisibilityConverter}}">
+                        <VirtualizingStackPanel Grid.Row="0"
+                                                Grid.Column="0"
+                                                Width="134"
+                                                Height="73"
+                                                HorizontalAlignment="Center"
+                                                IsEnabled="{Binding IsEnabled}"
+                                                Visibility="{Binding StartDate,
+                                                                     Converter={StaticResource bInversTimeToVisibilityConverter}}">
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="54" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="24" />
+                                    <RowDefinition Height="22" />
+                                    <RowDefinition Height="24" />
+
+                                </Grid.RowDefinitions>
+
+
+
+
+                                <!--  date && month  -->
+                                <VirtualizingStackPanel Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        Margin="5,5,5,0"
+                                                        VerticalAlignment="Bottom"
+                                                        DockPanel.Dock="Top"
+                                                        Orientation="Horizontal"
+                                                        VirtualizationMode="Recycling"
+                                                        Visibility="{Binding StartDate,
+                                                                             Converter={StaticResource bInversTimeToVisibilityConverter}}">
+                                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                                        <VirtualizingStackPanel Orientation="Horizontal" VirtualizationMode="Recycling">
+                                            <TextBlock FontFamily="Play"
+                                                       FontSize="19"
+                                                       FontWeight="Medium"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding StartDate,
+                                                                      StringFormat={}{0:dd}}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="NoWrap" />
+                                            <TextBlock FontFamily="Play"
+                                                       FontSize="19"
+                                                       FontWeight="Medium"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding StartDate,
+                                                                      StringFormat={}{0:MMM.}}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="NoWrap" />
+                                        </VirtualizingStackPanel>
+                                    </Viewbox>
+
+                                </VirtualizingStackPanel>
+                                <!--  time && day  -->
+                                <VirtualizingStackPanel Grid.Row="1"
+                                                        Grid.Column="0"
+                                                        Margin="5,0,5,0"
+                                                        DockPanel.Dock="Bottom"
+                                                        VirtualizationMode="Recycling">
+                                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                                        <VirtualizingStackPanel Orientation="Horizontal" VirtualizationMode="Recycling">
+                                            <!--  time  -->
+                                            <TextBlock FontFamily="Play"
+                                                       FontSize="16"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding StartDate,
+                                                                      StringFormat={}{0:HH:mm}}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="NoWrap" />
+
+                                        </VirtualizingStackPanel>
+                                    </Viewbox>
+                                </VirtualizingStackPanel>
+                                <VirtualizingStackPanel Grid.Row="2"
+                                                        Grid.Column="0"
+                                                        Margin="5,0,5,0"
+                                                        DockPanel.Dock="Bottom"
+                                                        VirtualizationMode="Recycling">
+                                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                                        <!--  day  -->
+                                        <TextBlock FontFamily="Play"
+                                                   FontSize="16"
+                                                   Foreground="#FFE5E5E5"
+                                                   Text="{Binding StartDate,
+                                                                  StringFormat={}{0:dddd}}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="NoWrap" />
+                                    </Viewbox>
+                                </VirtualizingStackPanel>
+
+                                <Image Grid.RowSpan="3"
+                                       Grid.Column="1"
+                                       Width="30"
+                                       Height="30"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Source="{Binding SportView.LineObject.GroupSport.SportDescriptor,
+                                                        Converter={StaticResource SportDescriptorToIconConverter}}" />
+                            </Grid>
+                        </VirtualizingStackPanel>
+                    </Label>
+
+                    <!--  today  -->
+                    <Label Height="73"
+                           Margin="0"
+                           AutomationProperties.AutomationId="Today"
+                           Padding="0"
+                           Visibility="{Binding StartDate,
+                                                Converter={StaticResource bTimeToVisibilityConverter}}">
+                        <VirtualizingStackPanel Grid.Row="0"
+                                                Grid.Column="0"
+                                                Width="134"
+                                                Height="73"
+                                                HorizontalAlignment="Center"
+                                                Visibility="{Binding StartDate,
+                                                                     Converter={StaticResource bTimeToVisibilityConverter}}">
+                            <!--
+                                <VirtualizingStackPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BackgroundTime.png}" />
+                                </VirtualizingStackPanel.Background>
+                            -->
+
+                            <!--  not started  -->
+                            <Grid MinHeight="80" Visibility="{Binding LiveBetStatus, Converter={StaticResource bStatusToVisibilityConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="54" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="36" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Style.Triggers>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>red</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AAd01f00" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>orange</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AAffa800" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>green</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AA67b457" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>purple</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AA7470c0" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AAFF8211" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <!--  status image  -->
+                                <!--
+                                    <Image x:Name="StatusImage"
+                                    Grid.Row="0"
+                                    Grid.RowSpan="5"
+                                    Grid.Column="0"
+                                    Width="6"
+                                    Height="70">
+                                    <Image.Source>
+                                    
+                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                    <Binding Path="IsEnabled" />
+                                    <Binding Path="LivePeriodInfo" />
+                                    <Binding Path="AllEnabledOddCount" />
+                                    </MultiBinding>
+                                    
+                                    </Image.Source>
+                                    </Image>
+                                -->
+
+                                <Canvas Grid.RowSpan="5" Grid.ColumnSpan="2">
+                                    <Canvas.Style>
+                                        <Style TargetType="Canvas">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <ImageBrush AlignmentX="Left"
+                                                                AlignmentY="Top"
+                                                                ImageSource="{converters2:ResolveImagePath Path=Pattern-dark.png}"
+                                                                Opacity="0.8"
+                                                                Stretch="None"
+                                                                TileMode="Tile"
+                                                                Viewport="0,0,3,3"
+                                                                ViewportUnits="Absolute" />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <ImageBrush AlignmentX="Left"
+                                                                        AlignmentY="Top"
+                                                                        ImageSource="{converters2:ResolveImagePath Path=Pattern-Light.png}"
+                                                                        Opacity="0.8"
+                                                                        Stretch="None"
+                                                                        TileMode="Tile"
+                                                                        Viewport="0,0,3,3"
+                                                                        ViewportUnits="Absolute" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Canvas.Style>
+                                </Canvas>
+
+
+                                <Viewbox Grid.Row="1"
+                                         Grid.Column="0"
+                                         MinWidth="58"
+                                         MaxWidth="58"
+                                         Margin="0,2,2,-2"
+                                         HorizontalAlignment="Right"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="30"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:mm}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </Viewbox>
+
+                                <!--  main text  -->
+                                <Viewbox Grid.Row="2"
+                                         Grid.Column="0"
+                                         Margin="0,-5,0,-5"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="50"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:HH}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </Viewbox>
+
+                                <StackPanel Grid.RowSpan="5"
+                                            Grid.Column="1"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Orientation="Vertical">
+                                    <Image Width="30"
+                                           Height="30"
+                                           Source="{Binding SportView.LineObject.GroupSport.SportDescriptor,
+                                                            Converter={StaticResource SportDescriptorToIconConverter}}" />
+                                    <Grid Margin="0,3,0,0" Visibility="{Binding HaveStream, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                        <Image Width="40"
+                                               Height="30"
+                                               Source="{converters2:ResolveImagePath Path=cam-basis.png}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="PreviewMouseDown">
+                                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}, AncestorLevel=2}, Path=DataContext.OnCameraClickedCommand}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Image>
+                                        <Image Width="27"
+                                               Height="23"
+                                               Margin="0,0,0,2"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Source="{converters2:ResolveImagePath Path=cam.png}">
+                                            <Image.Style>
+                                                <Style TargetType="{x:Type Image}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding StreamStarted}" Value="False">
+                                                            <Setter Property="Opacity" Value="0.1" />
+                                                            <DataTrigger.EnterActions>
+                                                                <RemoveStoryboard BeginStoryboardName="camSB" />
+                                                            </DataTrigger.EnterActions>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding StreamStarted}" Value="True">
+                                                            <DataTrigger.EnterActions>
+                                                                <BeginStoryboard x:Name="camSB" Storyboard="{StaticResource cameraStoryboard}" />
+                                                            </DataTrigger.EnterActions>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="PreviewMouseDown">
+                                                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}, AncestorLevel=2}, Path=DataContext.OnCameraClickedCommand}" CommandParameter="{Binding}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Image>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+
+                            <!--  started  -->
+                            <StackPanel MinHeight="73"
+                                        Orientation="Horizontal"
+                                        Visibility="{Binding LiveBetStatus,
+                                                             Converter={StaticResource bInversStatusToVisibilityConverter}}">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Style.Triggers>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>red</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AAd01f00" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>orange</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AAffa800" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>green</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AA67b457" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>purple</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AA7470c0" />
+                                            </DataTrigger>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                                <Setter Property="Background" Value="#AAFF8211" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+                                <Grid Visibility="{Binding LiveMInuteVisibility}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="54" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="15" />
+                                        <RowDefinition Height="36" />
+                                        <RowDefinition Height="15" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!--  status image  -->
+                                    <!--
+                                        <Image Grid.Row="0"
+                                        Grid.RowSpan="5"
+                                        Grid.Column="0"
+                                        Width="6"
+                                        Height="70">
+                                        <Image.Source>
+                                        
+                                        <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                        <Binding Path="IsEnabled" />
+                                        <Binding Path="LivePeriodInfo" />
+                                        <Binding Path="AllEnabledOddCount" />
+                                        </MultiBinding>
+                                        
+                                        </Image.Source>
+                                        </Image>
+                                    -->
+                                    <Canvas Grid.RowSpan="5" Grid.ColumnSpan="2">
+                                        <Canvas.Style>
+                                            <Style TargetType="Canvas">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush AlignmentX="Left"
+                                                                    AlignmentY="Top"
+                                                                    ImageSource="{converters2:ResolveImagePath Path=Pattern-dark.png}"
+                                                                    Opacity="0.8"
+                                                                    Stretch="None"
+                                                                    TileMode="Tile"
+                                                                    Viewport="0,0,3,3"
+                                                                    ViewportUnits="Absolute" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                                        <Setter Property="Background">
+                                                            <Setter.Value>
+                                                                <ImageBrush AlignmentX="Left"
+                                                                            AlignmentY="Top"
+                                                                            ImageSource="{converters2:ResolveImagePath Path=Pattern-Light.png}"
+                                                                            Opacity="0.8"
+                                                                            Stretch="None"
+                                                                            TileMode="Tile"
+                                                                            Viewport="0,0,3,3"
+                                                                            ViewportUnits="Absolute" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Canvas.Style>
+                                    </Canvas>
+
+
+                                    <!--  main text  -->
+                                    <Viewbox Grid.Row="2"
+                                             Grid.Column="0"
+                                             Margin="0,-5,0,-5"
+                                             Stretch="Uniform"
+                                             StretchDirection="DownOnly">
+                                        <TextBlock FontFamily="Play"
+                                                   FontSize="50"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFE5E5E5"
+                                                   Text="{Binding LiveMinuteToShow}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="NoWrap" />
+                                    </Viewbox>
+
+                                    <Viewbox Grid.Row="2"
+                                             Grid.Column="0"
+                                             Margin="3,-5,0,0"
+                                             HorizontalAlignment="Left"
+                                             VerticalAlignment="Center"
+                                             Stretch="Uniform"
+                                             StretchDirection="DownOnly">
+                                        <StackPanel Width="80" Orientation="Vertical">
+                                            <TextBlock FontFamily="Play"
+                                                       FontSize="20"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding LivePeriodInfoString}"
+                                                       TextAlignment="Left"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Viewbox>
+                                    <Image Grid.RowSpan="5"
+                                           Grid.Column="1"
+                                           Width="30"
+                                           Height="30"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           Source="{Binding SportView.LineObject.GroupSport.SportDescriptor,
+                                                            Converter={StaticResource SportDescriptorToIconConverter}}" />
+
+                                </Grid>
+
+                                <Grid Visibility="{Binding InversedLiveMInuteVisibility}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition Width="54" />
+                                        <!--
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="5" />
+                                        -->
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="15" />
+                                        <RowDefinition Height="36" />
+                                        <RowDefinition Height="15" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <!--  status image  -->
+                                    <!--
+                                        <Image Grid.Row="0"
+                                        Grid.RowSpan="5"
+                                        Grid.Column="0"
+                                        Width="6"
+                                        Height="70">
+                                        <Image.Source>
+                                        
+                                        <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                        <Binding Path="IsEnabled" />
+                                        <Binding Path="LivePeriodInfo" />
+                                        <Binding Path="AllEnabledOddCount" />
+                                        </MultiBinding>
+                                        
+                                        </Image.Source>
+                                        </Image>
+                                    -->
+                                    <Canvas Grid.RowSpan="5" Grid.ColumnSpan="2">
+                                        <Canvas.Style>
+                                            <Style TargetType="Canvas">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <ImageBrush AlignmentX="Left"
+                                                                    AlignmentY="Top"
+                                                                    ImageSource="{converters2:ResolveImagePath Path=Pattern-dark.png}"
+                                                                    Opacity="0.8"
+                                                                    Stretch="None"
+                                                                    TileMode="Tile"
+                                                                    Viewport="0,0,3,3"
+                                                                    ViewportUnits="Absolute" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                                        <Setter Property="Background">
+                                                            <Setter.Value>
+                                                                <ImageBrush AlignmentX="Left"
+                                                                            AlignmentY="Top"
+                                                                            ImageSource="{converters2:ResolveImagePath Path=Pattern-Light.png}"
+                                                                            Opacity="0.8"
+                                                                            Stretch="None"
+                                                                            TileMode="Tile"
+                                                                            Viewport="0,0,3,3"
+                                                                            ViewportUnits="Absolute" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Canvas.Style>
+                                    </Canvas>
+
+                                    <!--  main text  -->
+                                    <Viewbox Grid.Row="2"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="4"
+                                             Margin="3,-5,0,0"
+                                             HorizontalAlignment="Left"
+                                             Stretch="Uniform"
+                                             StretchDirection="DownOnly">
+                                        <StackPanel Width="80" Orientation="Vertical">
+                                            <TextBlock FontFamily="Play"
+                                                       FontSize="20"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding LivePeriodInfoString}"
+                                                       TextAlignment="Left"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Viewbox>
+                                    <StackPanel Grid.RowSpan="5"
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Orientation="Vertical">
+                                        <Image Width="30"
+                                               Height="30"
+                                               Source="{Binding SportView.LineObject.GroupSport.SportDescriptor,
+                                                                Converter={StaticResource SportDescriptorToIconConverter}}" />
+                                        <Grid Margin="0,3,0,0" Visibility="{Binding HaveStream, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                            <Image Width="40"
+                                                   Height="30"
+                                                   Source="{converters2:ResolveImagePath Path=cam-basis.png}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}, AncestorLevel=2}, Path=DataContext.OnCameraClickedCommand}" CommandParameter="{Binding}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Image>
+                                            <Image Width="27"
+                                                   Height="23"
+                                                   Margin="0,0,0,2"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Source="{converters2:ResolveImagePath Path=cam.png}">
+                                                <Image.Style>
+                                                    <Style TargetType="{x:Type Image}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding StreamStarted}" Value="False">
+                                                                <Setter Property="Opacity" Value="0.1" />
+                                                                <DataTrigger.EnterActions>
+                                                                    <RemoveStoryboard BeginStoryboardName="camSB" />
+                                                                </DataTrigger.EnterActions>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding StreamStarted}" Value="True">
+                                                                <DataTrigger.EnterActions>
+                                                                    <BeginStoryboard x:Name="camSB" Storyboard="{StaticResource cameraStoryboard}" />
+                                                                </DataTrigger.EnterActions>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}, AncestorLevel=2}, Path=DataContext.OnCameraClickedCommand}" CommandParameter="{Binding}" />
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                            </Image>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+
+                            </StackPanel>
+
+                        </VirtualizingStackPanel>
+                    </Label>
+
+                    <!--  go to bet domains button  -->
+                    <Button Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="-1,0,4,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            AutomationProperties.AutomationId="{Binding Path=Name, StringFormat='Match_{0}'}"
+                            Padding="0, 3, 0, 0"
+                            Style="{StaticResource MatchButton}">
+                        <DockPanel LastChildFill="False">
+                            <!--  number of bet domains  -->
+                            <DockPanel MinWidth="40"
+                                       DockPanel.Dock="Right"
+                                       Visibility="{Binding MoreBetdomainCount,
+                                                            Converter={StaticResource BiggerThanToVisibilityConverter},
+                                                            ConverterParameter=0}">
+                                <Border Margin="0,3,0,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        BorderBrush="#FF26282a"
+                                        BorderThickness="1"
+                                        CornerRadius="5">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#FF26282a" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=IsSelected}" Value="True" />
+                                                        <Condition Binding="{Binding Path=BaseBetDomainView.IsSelected}" Value="False" />
+                                                        <Condition Binding="{Binding Path=BottomSpecialBetDomain.IsSelected}" Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#FF407d32" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <StackPanel Width="35"
+                                                Margin="3,3,3,3"
+                                                Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="Play"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="+" />
+                                        <TextBlock Margin="0,3,3,3"
+                                                   AutomationProperties.AutomationId="VisibleBetdomainCount"
+                                                   FontFamily="Play"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="{Binding MoreBetdomainCount}" />
+                                    </StackPanel>
+                                </Border>
+                            </DockPanel>
+
+                            <!--  upper row  -->
+                            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                                <!--  display name  -->
+                                <TextBlock VerticalAlignment="Top"
+                                           FontFamily="Play"
+                                           FontSize="19"
+                                           FontWeight="Medium"
+                                           Foreground="#FFFFFFFF"
+                                           LineHeight="19"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Text="{Binding Name}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="NoWrap" />
+                                <TextBlock Margin="3, -2, 0, 0"
+                                           VerticalAlignment="Top"
+                                           AutomationProperties.AutomationId="LiveScore"
+                                           FontFamily="Play"
+                                           FontSize="19"
+                                           FontWeight="Medium"
+                                           Foreground="#FFFF4E00"
+                                           LineHeight="19"
+                                           Text="{Binding LiveScore}" />
+                            </StackPanel>
+                            <!--  bottom row  -->
+                            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+                                <TextBlock DockPanel.Dock="Right"
+                                           FontFamily="Play"
+                                           FontSize="13"
+                                           FontWeight="Regular"
+                                           Foreground="#FFb3b3b3"
+                                           Text=""
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                                <TextBlock AutomationProperties.AutomationId="TournamentName"
+                                           FontFamily="Play"
+                                           FontSize="13"
+                                           Foreground="#FFb3b3b3"
+                                           Text="{Binding TournamentNameToShow}"
+                                           TextAlignment="Left"
+                                           TextTrimming="WordEllipsis"
+                                           TextWrapping="NoWrap" />
+                                <TextBlock Margin="0, 0, -40, 0"
+                                           DockPanel.Dock="Right"
+                                           FontFamily="Play"
+                                           FontSize="13"
+                                           FontWeight="Regular"
+                                           Foreground="#FFd6ad0a"
+                                           Text="&gt;"
+                                           TextAlignment="Right"
+                                           TextWrapping="Wrap"
+                                           Visibility="{Binding BaseBetDomainView.DisplayName,
+                                                                Converter={StaticResource textPresentToVisibilityConverter}}" />
+                                <TextBlock Margin="0, 0, -30, 0"
+                                           AutomationProperties.AutomationId="BaseBetDomain"
+                                           FontFamily="Play"
+                                           FontSize="13"
+                                           FontWeight="Regular"
+                                           Foreground="#FFd6ad0a"
+                                           Text="{Binding BaseBetDomainView.DisplayName}"
+                                           TextAlignment="Right"
+                                           TextWrapping="Wrap" />
+                            </DockPanel>
+                        </DockPanel>
+                    </Button>
+
+                    <Canvas Grid.Row="0"
+                            Grid.Column="2"
+                            Background="White"
+                            Opacity="0.05" />
+                    <!--  odd buttons  -->
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="2"
+                                Width="145"
+                                Orientation="Horizontal">
+                        <ItemsControl Width="138" ItemsSource="{Binding BaseBetDomainView.Odds}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Name="OddToggleButton39"
+                                                  Width="68"
+                                                  Margin="0,0,1,0"
+                                                  HorizontalAlignment="Left"
+                                                  IsChecked="{Binding IsSelected,
+                                                                      Mode=OneWay}"
+                                                  IsEnabled="{Binding IsEnabled}"
+                                                  Style="{StaticResource OddButtonLive}"
+                                                  Visibility="{Binding Visibility}">
+                                        <Canvas Width="63" Height="63">
+                                            <TextBlock Canvas.Top="0"
+                                                       Style="{StaticResource OddResultTextBlockLive}"
+                                                       Text="{Binding Value,
+                                                                      StringFormat=\{0:n2\}}" />
+                                        </Canvas>
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Margin="0,0,0,0"
+                                                            HorizontalAlignment="Right"
+                                                            Orientation="Horizontal"
+                                                            VirtualizationMode="Recycling" />
+
+
+
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                    </StackPanel>
+                    <!--  second row  -->
+                    <Grid Grid.Row="1"
+                          Grid.Column="1"
+                          Margin="0,0,4,0"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          IsEnabled="False"
+                          Visibility="{Binding LiveSecondRowVisibility}">
+
+                        <DockPanel LastChildFill="True">
+                            <TextBlock Margin="0, 0, 5, 0"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Right"
+                                       FontFamily="Play"
+                                       FontSize="13"
+                                       FontWeight="Regular"
+                                       Foreground="#FFd6ad0a"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="&gt;"
+                                       TextAlignment="Right"
+                                       TextWrapping="Wrap"
+                                       Visibility="{Binding BottomSpecialBetDomain.DisplayName,
+                                                            Converter={StaticResource textPresentToVisibilityConverter}}" />
+                            <TextBlock Margin="5"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Play"
+                                       FontSize="13"
+                                       FontWeight="Regular"
+                                       Foreground="#FFd6ad0a"
+                                       LineHeight="13"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{Binding BottomSpecialBetDomain.DisplayName}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap" />
+                        </DockPanel>
+                    </Grid>
+
+                    <!--  odd buttons  -->
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="2"
+                                Width="145"
+                                Margin="0, 0, 0, 2"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal"
+                                Visibility="{Binding LiveSecondRowVisibility}">
+                        <ItemsControl Width="145" ItemsSource="{Binding BottomSpecialBetDomain.Odds}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ToggleButton Name="OddToggleButton40"
+                                                  Width="68"
+                                                  Margin="0,0,1,0"
+                                                  HorizontalAlignment="Right"
+                                                  IsChecked="{Binding IsSelected,
+                                                                      Mode=OneWay}"
+                                                  IsEnabled="{Binding IsEnabled}"
+                                                  Style="{StaticResource OddButtonSpecialbetLive}"
+                                                  Visibility="{Binding Visibility}">
+                                        <TextBlock VerticalAlignment="Stretch"
+                                                   Style="{StaticResource OddResultTextBlockLive}"
+                                                   Text="{Binding Value,
+                                                                  StringFormat=\{0:n2\}}" />
+                                    </ToggleButton>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel HorizontalAlignment="Left"
+                                                            Orientation="Horizontal"
+                                                            VirtualizationMode="Recycling" />
+
+
+
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </VirtualizingStackPanel>
+    </Label>
+</UserControl>

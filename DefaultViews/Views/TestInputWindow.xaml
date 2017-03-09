@@ -1,0 +1,250 @@
+﻿<Window x:Class="DefaultViews.Views.TestInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+        xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+        Title="TestInput window"
+        Height="500"
+        AutomationProperties.AutomationId="IdCardScannerEmulator"
+        SizeToContent="Manual"
+        SnapsToDevicePixels="True"
+        WindowStartupLocation="Manual"
+        WindowStyle="ToolWindow"
+        d:DataContext="{d:DesignInstance Type=viewModels2:TestInputViewModel}"
+        mc:Ignorable="d">
+
+    <Window.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="BooleanToVisibilityCollapsedConverter" />
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="InverseBooleanToVisibilityCollapsedConverter" />
+
+
+    </Window.Resources>
+
+    <DockPanel>
+        <DockPanel>
+            <DockPanel.Background>
+                <ImageBrush AlignmentX="Left"
+                            AlignmentY="Top"
+                            ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                            Stretch="None"
+                            TileMode="Tile"
+                            Viewport="0,0,3,3"
+                            ViewportUnits="Absolute" />
+            </DockPanel.Background>
+
+            <StackPanel DockPanel.Dock="Top">
+                <TextBox Margin="20"
+                         VerticalAlignment="Center"
+                         FontFamily="Play"
+                         FontSize="24"
+                         Text="{Binding Text,
+                                        Mode=TwoWay,
+                                        NotifyOnSourceUpdated=True,
+                                        NotifyOnTargetUpdated=True,
+                                        UpdateSourceTrigger=PropertyChanged}"
+                         TextAlignment="Center"
+                         TextWrapping="Wrap" />
+
+
+            </StackPanel>
+            <StackPanel Margin="0,0,0,10"
+                        HorizontalAlignment="Stretch"
+                        DockPanel.Dock="Top"
+                        Orientation="Horizontal">
+                <!--  cancel button  -->
+                <Button Width="149"
+                        Height="60"
+                        Margin="5,0,5,0"
+                        AutomationProperties.AutomationId="insertCard"
+                        Command="{Binding InsertCardCommand}"
+                        Focusable="False"
+                        IsDefault="False"
+                        Style="{StaticResource navigationButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock FontFamily="Play"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#FFEFEFEF"
+                                   LineHeight="22"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="insert card"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </Viewbox>
+                </Button>
+                <Button Width="149"
+                        Height="60"
+                        Margin="5,0,5,0"
+                        AutomationProperties.AutomationId="barcode"
+                        Command="{Binding BarcodeCommand}"
+                        Focusable="False"
+                        IsDefault="False"
+                        Style="{StaticResource navigationButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock FontFamily="Play"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#FFEFEFEF"
+                                   LineHeight="22"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="input barcode"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </Viewbox>
+                </Button>
+                <Button Width="149"
+                        Height="60"
+                        Margin="5,0,5,0"
+                        AutomationProperties.AutomationId="ejectcard"
+                        Command="{Binding EjectCardCommand}"
+                        Focusable="False"
+                        IsDefault="False"
+                        Style="{StaticResource navigationButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock FontFamily="Play"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#FFEFEFEF"
+                                   LineHeight="22"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="eject card"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="ticket"
+                       FontFamily="Play"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFEFEFEF" />
+                <RadioButton Grid.Column="1"
+                             Margin="5"
+                             VerticalAlignment="Center"
+                             AutomationProperties.AutomationId="isticket"
+                             GroupName="type"
+                             IsChecked="{Binding IsTicket}" />
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Content="credit note"
+                       FontFamily="Play"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFEFEFEF" />
+                <RadioButton Grid.Row="1"
+                             Grid.Column="1"
+                             Margin="5"
+                             VerticalAlignment="Center"
+                             AutomationProperties.AutomationId="iscreditnote"
+                             GroupName="type"
+                             IsChecked="{Binding IsCredit}" />
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Content="payment note"
+                       FontFamily="Play"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFEFEFEF" />
+                <RadioButton Grid.Row="2"
+                             Grid.Column="1"
+                             Margin="5"
+                             VerticalAlignment="Center"
+                             AutomationProperties.AutomationId="ispaymentnote"
+                             GroupName="type"
+                             IsChecked="{Binding IsPayment}" />
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Content="registration note"
+                       FontFamily="Play"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFEFEFEF" />
+                <RadioButton Grid.Row="3"
+                             Grid.Column="1"
+                             Margin="5"
+                             VerticalAlignment="Center"
+                             AutomationProperties.AutomationId="isregistrationnote"
+                             GroupName="type"
+                             IsChecked="{Binding IsRegistration}" />
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       Content="Card barcode"
+                       FontFamily="Play"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFEFEFEF" />
+                <RadioButton Grid.Row="4"
+                             Grid.Column="1"
+                             Margin="5"
+                             VerticalAlignment="Center"
+                             AutomationProperties.AutomationId="iscardbarcode"
+                             GroupName="type"
+                             IsChecked="{Binding IsCardBarcode}" />
+                <Label Grid.Row="5"
+                       Grid.Column="0"
+                       Content="network lost"
+                       FontFamily="Play"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#FFEFEFEF" />
+                <CheckBox Grid.Row="5"
+                          Grid.Column="1"
+                          Margin="5"
+                          VerticalAlignment="Center"
+                          AutomationProperties.AutomationId="isnetworklost"
+                          IsChecked="{Binding IsNetworkLost}" />
+            </Grid>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock FontFamily="Play"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="money validators enabled" />
+                <Grid Margin="10">
+                <Canvas Width="10"
+                        Height="10"
+                        Background="Red"
+                        Visibility="{Binding MoneyEnabled,
+                                             Converter={StaticResource InverseBooleanToVisibilityCollapsedConverter}}" />
+                <Canvas Width="10"
+                        Height="10"
+                        Background="Green"
+                        Visibility="{Binding MoneyEnabled,
+                                             Converter={StaticResource BooleanToVisibilityCollapsedConverter}}" />
+                </Grid>
+            </StackPanel>
+
+
+
+            <Label DockPanel.Dock="Top"
+                   FontFamily="Play"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="#FFEFEFEF">
+                Last written numbers
+            </Label>
+            <ListView AutomationProperties.AutomationId="numbers"
+                      DockPanel.Dock="Top"
+                      ItemsSource="{Binding CardNumbers}"
+                      SelectedIndex="{Binding SelectedIndex}" />
+
+        </DockPanel>
+    </DockPanel>
+</Window>

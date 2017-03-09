@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F535DE63-18AD-4205-A6EE-1EBFE0121372}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ViewModels</RootNamespace>
+    <AssemblyName>ViewModels</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <DontImportPostSharp>True</DontImportPostSharp>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DdeNet">
+      <HintPath>..\packages\DdeNet.1.0.0\lib\net45\DdeNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=4.0.5.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\..\..\OutletBetting\Lib\Ninject\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp, Version=4.3.22.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PostSharp.4.3.22\lib\net35-client\PostSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CashOperation.cs" />
+    <Compile Include="CheckpointModel.cs" />
+    <Compile Include="Helpers\LiveMonitorsService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration.cs" />
+    <Compile Include="RegistrationDataTemplateSelector.cs" />
+    <Compile Include="TCMenuButton.cs" />
+    <Compile Include="TCUtility.cs" />
+    <Compile Include="TermsAndConditionsCategory.cs" />
+    <Compile Include="Tip.cs" />
+    <Compile Include="UserTemplateSelector.cs" />
+    <Compile Include="ViewModels\AccountingBaseViewModel.cs" />
+    <Compile Include="ViewModels\AddCreditPaymentViewModel.cs" />
+    <Compile Include="ViewModels\AuthViewModel.cs" />
+    <Compile Include="ViewModels\BalanceCheckpointsViewModel.cs" />
+    <Compile Include="ViewModels\BasketViewModel.cs" />
+    <Compile Include="ViewModels\BetDomainsViewModel.cs" />
+    <Compile Include="ViewModels\BindCardViewModel.cs" />
+    <Compile Include="ViewModels\CalibrationViewModel.cs" />
+    <Compile Include="ViewModels\CardPinViewModel.cs" />
+    <Compile Include="ViewModels\CashHistoryViewModel.cs" />
+    <Compile Include="ViewModels\CategoriesViewModel.cs" />
+    <Compile Include="ViewModels\ChangeOperatorViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordReminderViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\ChangeUserProfileViewModel.cs" />
+    <Compile Include="ViewModels\ChangeUserViewModel.cs" />
+    <Compile Include="ViewModels\CreateOperatorViewModel.cs" />
+    <Compile Include="ViewModels\CreateReportViewModel.cs" />
+    <Compile Include="ViewModels\CreditViewModel.cs" />
+    <Compile Include="ViewModels\DepositMoneyViewModel.cs" />
+    <Compile Include="ViewModels\EmptyViewModel.cs" />
+    <Compile Include="ViewModels\EntertainmentViewModel.cs" />
+    <Compile Include="ViewModels\FilterViewModel.cs" />
+    <Compile Include="ViewModels\FooterViewModel.cs" />
+    <Compile Include="ViewModels\FoundUserProfileViewModel.cs" />
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
+    <Compile Include="ViewModels\HistoryFile.cs" />
+    <Compile Include="ViewModels\LiveMonitorViewModel.cs" />
+    <Compile Include="ViewModels\LiveViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MatchesViewModel.cs" />
+    <Compile Include="ViewModels\MoneyPayoutViewModel.cs" />
+    <Compile Include="ViewModels\NoContentViewModel.cs" />
+    <Compile Include="ViewModels\OperationTypeSelection.cs" />
+    <Compile Include="ViewModels\OperatorProfileViewModel.cs" />
+    <Compile Include="ViewModels\OperatorSettlementHistoryViewModel.cs" />
+    <Compile Include="ViewModels\OperatorSettlementViewModel.cs" />
+    <Compile Include="ViewModels\OperatorShiftReportsViewModel.cs" />
+    <Compile Include="ViewModels\OperatorShiftReportViewModel.cs" />
+    <Compile Include="ViewModels\OutrightViewModel.cs" />
+    <Compile Include="ViewModels\PaymentViewModel.cs" />
+    <Compile Include="ViewModels\PinInsertingViewModel.cs" />
+    <Compile Include="ViewModels\PrintTicketViewModel.cs" />
+    <Compile Include="ViewModels\ProfitAccountingViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\MatchResultsViewModel.cs" />
+    <Compile Include="ViewModels\RestartViewModel.cs" />
+    <Compile Include="ViewModels\ResultsViewModel.cs" />
+    <Compile Include="ViewModels\SearchOperatorsViewModel.cs" />
+    <Compile Include="ViewModels\SearchUsersViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\ShopPaymentsViewModel.cs" />
+    <Compile Include="ViewModels\ShowReportViewModel.cs" />
+    <Compile Include="ViewModels\StartWindowViewModel.cs" />
+    <Compile Include="ViewModels\StationBalanceViewModel.cs" />
+    <Compile Include="ViewModels\StationVerificationViewModel.cs" />
+    <Compile Include="ViewModels\SystemInfoMonitorsViewModel.cs" />
+    <Compile Include="ViewModels\SystemInfoNetworkViewModel.cs" />
+    <Compile Include="ViewModels\SystemInfoViewModel.cs" />
+    <Compile Include="ViewModels\SystemStationVerificationViewModel.cs" />
+    <Compile Include="ViewModels\TerminalAccountingViewModel.cs" />
+    <Compile Include="ViewModels\TermsAndConditionsViewModel.cs" />
+    <Compile Include="ViewModels\TestInputViewModel.cs" />
+    <Compile Include="ViewModels\TicketCheckerViewModel.cs" />
+    <Compile Include="ViewModels\TicketDetailsViewModel.cs" />
+    <Compile Include="ViewModels\TopTournamentsViewModel.cs" />
+    <Compile Include="ViewModels\TournamentsViewModel.cs" />
+    <Compile Include="ViewModels\UserChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\UserHistoryViewModel.cs" />
+    <Compile Include="ViewModels\UserManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileMenuViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\UserRegistrationViewModel.cs" />
+    <Compile Include="ViewModels\UserTicketsViewModel.cs" />
+    <Compile Include="ViewModels\VFLViewModel.cs" />
+    <Compile Include="ViewModels\VHCViewModel.cs" />
+    <Compile Include="ViewModels\WithdrawMoneyViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="betcenter_terms_and_conditions.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="terms_and_conditions.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OutletBetting\Common\Common.csproj">
+      <Project>{0D4E9E7E-235A-445F-A97F-D502FBAF47C7}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\DAL\DAL.csproj">
+      <Project>{8AC0E79B-EFDB-45F5-9F3E-F644ADB93A89}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\IocContainer\IocContainer.csproj">
+      <Project>{171E5DB2-EAC9-42F8-B171-67E91A3B3417}</Project>
+      <Name>IocContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\SharedInterfaces\SharedInterfaces.csproj">
+      <Project>{4FE76384-166F-46AC-894B-EC233EBE4354}</Project>
+      <Name>SharedInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\Shared\Shared.csproj">
+      <Project>{39E0A93B-4CB5-4EAB-B656-16412D54C60C}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\TranslationByMarkupExtension\TranslationByMarkupExtension.csproj">
+      <Project>{11107EB4-AEAD-40DA-90CE-B226E34E14FC}</Project>
+      <Name>TranslationByMarkupExtension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\WsdlRepository\WsdlRepository.csproj">
+      <Project>{CAF16909-50E9-4C34-A515-6AC38F21EBC4}</Project>
+      <Name>WsdlRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SCF\SCF\CashIn_2010.csproj">
+      <Project>{461604F0-67C4-4AFF-AA82-6F5179944190}</Project>
+      <Name>CashIn_2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SPF\SPF\Spf_2010.csproj">
+      <Project>{B51C2CE2-AEA5-4FFA-83CE-B799EB662EB5}</Project>
+      <Name>Spf_2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseObjects\BaseObjects.csproj">
+      <Project>{A2A567ED-2E6A-4885-8287-87A903D0B36D}</Project>
+      <Name>BaseObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCardReader\SmartCardReader.csproj">
+      <Project>{9c7a00c6-2824-446f-b1f4-80d7989e9115}</Project>
+      <Name>SmartCardReader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Aspects\SportBetting.WPF.Prism.Modules.Aspects.csproj">
+      <Project>{14A195A7-C838-49EF-85D1-56A0E61CD64D}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Aspects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Keyboard\SportBetting.WPF.Prism.Modules.Keyboard.csproj">
+      <Project>{827FB93F-45CF-47AD-A728-62CB5573AFE3}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Keyboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Services\SportBetting.WPF.Prism.Modules.Services.csproj">
+      <Project>{A596DF82-427C-42C7-AF87-9B42F27E9C8B}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Shared\SportBetting.WPF.Prism.Shared.csproj">
+      <Project>{79E50E95-4E0E-4C85-B9AE-E42CC380E2D3}</Project>
+      <Name>SportBetting.WPF.Prism.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\PostSharp.4.3.22\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.3.22\tools\PostSharp.targets')" />
+  <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.4.3.22\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.3.22\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

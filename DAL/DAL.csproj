@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8AC0E79B-EFDB-45F5-9F3E-F644ADB93A89}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SportRadar.DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingUiTest|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\StagingUiTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'production|AnyCPU'">
+    <OutputPath>bin\production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingUiTest|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\StagingUiTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'production|x64'">
+    <OutputPath>bin\x64\production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LigaStavok|AnyCPU'">
+    <OutputPath>bin\LigaStavok\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LigaStavok|x64'">
+    <OutputPath>bin\x64\LigaStavok\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'staging|AnyCPU'">
+    <OutputPath>bin\staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'staging|x64'">
+    <OutputPath>bin\x64\staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet|AnyCPU'">
+    <OutputPath>bin\Masterbet\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet|x64'">
+    <OutputPath>bin\x64\Masterbet\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'common|AnyCPU'">
+    <OutputPath>bin\common\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'common|x64'">
+    <OutputPath>bin\x64\common\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Betcenter2|AnyCPU'">
+    <OutputPath>bin\Betcenter2\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Betcenter2|x64'">
+    <OutputPath>bin\x64\Betcenter2\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet2|AnyCPU'">
+    <OutputPath>bin\Masterbet2\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet2|x64'">
+    <OutputPath>bin\x64\Masterbet2\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Npgsql">
+      <HintPath>libs\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml.Serialization" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonObjects\BetDomainMap.cs" />
+    <Compile Include="CommonObjects\DataCopy.cs" />
+    <Compile Include="CommonObjects\DateTime.cs" />
+    <Compile Include="CommonObjects\DbConvert.cs" />
+    <Compile Include="CommonObjects\DbNullProps.cs" />
+    <Compile Include="CommonObjects\DictionaryOfItemDictionary.cs" />
+    <Compile Include="CommonObjects\ErrorList.cs" />
+    <Compile Include="CommonObjects\HashCodeColumns.cs" />
+    <Compile Include="CommonObjects\IdentityCache.cs" />
+    <Compile Include="CommonObjects\IdentityList.cs" />
+    <Compile Include="CommonObjects\IdentityListDictionary.cs" />
+    <Compile Include="CommonObjects\Interfaces.cs" />
+    <Compile Include="CommonObjects\ItemDictionary.cs" />
+    <Compile Include="CommonObjects\LineBase.cs" />
+    <Compile Include="CommonObjects\LineContainer.cs" />
+    <Compile Include="CommonObjects\LineProviderManager.cs" />
+    <Compile Include="CommonObjects\LineSerializeHelper.cs" />
+    <Compile Include="CommonObjects\ObjectBase.cs" />
+    <Compile Include="CommonObjects\Parameter.cs" />
+    <Compile Include="CommonObjects\PlayerSession.cs" />
+    <Compile Include="CommonObjects\PlayerTicket.cs" />
+    <Compile Include="CommonObjects\SportRadarLineContainer.cs" />
+    <Compile Include="CommonObjects\SqlObjectFactory.cs" />
+    <Compile Include="CommonObjects\StationAppConfig.cs" />
+    <Compile Include="CommonObjects\StationCash.cs" />
+    <Compile Include="CommonObjects\TableSpec.cs" />
+    <Compile Include="CommonObjects\TransactionQueueSr.cs" />
+    <Compile Include="CommonObjects\UpdateRecordSr.cs" />
+    <Compile Include="CommonObjects\UpdateStatistic.cs" />
+    <Compile Include="CommonObjects\UpdateStatistics.cs" />
+    <Compile Include="CommonObjects\XmlSerializableObject.cs" />
+    <Compile Include="Connection\ConnectionManager.cs" />
+    <Compile Include="Connection\DatabaseManager.cs" />
+    <Compile Include="NewLineObjects\ActiveTournament.cs" />
+    <Compile Include="NewLineObjects\BetDomain.cs" />
+    <Compile Include="NewLineObjects\BetDomainType.cs" />
+    <Compile Include="NewLineObjects\Competitor.cs" />
+    <Compile Include="NewLineObjects\CompetitorInfos.cs" />
+    <Compile Include="NewLineObjects\CompetitorToOutright.cs" />
+    <Compile Include="NewLineObjects\MultistringGroupLn.cs" />
+    <Compile Include="NewLineObjects\IGroupLn.cs" />
+    <Compile Include="NewLineObjects\IMatchLn.cs" />
+    <Compile Include="NewLineObjects\IBetDomainLn.cs" />
+    <Compile Include="NewLineObjects\DatabaseCache.cs" />
+    <Compile Include="NewLineObjects\DictionaryOfLineObjectCollection.cs" />
+    <Compile Include="NewLineObjects\Group.cs" />
+    <Compile Include="NewLineObjects\IOddLn.cs" />
+    <Compile Include="NewLineObjects\Language.cs" />
+    <Compile Include="NewLineObjects\Liability.cs" />
+    <Compile Include="NewLineObjects\LineSr.cs" />
+    <Compile Include="NewLineObjects\LiveMatchInfo.cs" />
+    <Compile Include="NewLineObjects\LockedObjects.cs" />
+    <Compile Include="NewLineObjects\Match.cs" />
+    <Compile Include="NewLineObjects\MatchInfos.cs" />
+    <Compile Include="NewLineObjects\MatchResult.cs" />
+    <Compile Include="NewLineObjects\MatchToGroup.cs" />
+    <Compile Include="NewLineObjects\Odd.cs" />
+    <Compile Include="NewLineObjects\ResourceAssignment.cs" />
+    <Compile Include="NewLineObjects\ResourceRepository.cs" />
+    <Compile Include="NewLineObjects\TaggedString.cs" />
+    <Compile Include="NewLineObjects\TournamentInfosLn.cs" />
+    <Compile Include="NewLineObjects\TournamentMatchLocksLn.cs" />
+    <Compile Include="NewLineObjects\TypeBase.cs" />
+    <Compile Include="NewLineObjects\Updates.cs" />
+    <Compile Include="OldLineObjects\ActiveTournament.cs" />
+    <Compile Include="OldLineObjects\ActiveTournamentSr.cs" />
+    <Compile Include="OldLineObjects\BetDomainSr.cs" />
+    <Compile Include="OldLineObjects\CategorySr.cs" />
+    <Compile Include="OldLineObjects\CompetitorInfoSr.cs" />
+    <Compile Include="OldLineObjects\CompetitorSr.cs" />
+    <Compile Include="OldLineObjects\BetDomainTypeSr.cs" />
+    <Compile Include="OldLineObjects\CountrySr.cs" />
+    <Compile Include="OldLineObjects\LanguageSr.cs" />
+    <Compile Include="OldLineObjects\LanguageStringSr.cs" />
+    <Compile Include="OldLineObjects\LiabilitySR.cs" />
+    <Compile Include="OldLineObjects\MatchInfoSr.cs" />
+    <Compile Include="OldLineObjects\MatchSr.cs" />
+    <Compile Include="OldLineObjects\MatchToCompetitorSr.cs" />
+    <Compile Include="OldLineObjects\MultiStringGroupSr.cs" />
+    <Compile Include="OldLineObjects\MultiStringSr.cs" />
+    <Compile Include="OldLineObjects\OddSr.cs" />
+    <Compile Include="OldLineObjects\OddTypes.cs" />
+    <Compile Include="OldLineObjects\ResourceAssignmentSr.cs" />
+    <Compile Include="OldLineObjects\ResourceRepositorySr.cs" />
+    <Compile Include="OldLineObjects\SportSr.cs" />
+    <Compile Include="OldLineObjects\StatisticValueSr.cs" />
+    <Compile Include="OldLineObjects\TournamentInfoSr.cs" />
+    <Compile Include="OldLineObjects\TournamentLockSr.cs" />
+    <Compile Include="OldLineObjects\TournamentSr.cs" />
+    <Compile Include="OldLineObjects\UpdateFileEntrySr.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DalStationSettings.cs" />
+    <Compile Include="ViewObjects\BetDomainVw.cs" />
+    <Compile Include="ViewObjects\GroupVw.cs" />
+    <Compile Include="ViewObjects\IBetDomainVw.cs" />
+    <Compile Include="ViewObjects\IGroupVw.cs" />
+    <Compile Include="ViewObjects\IMatchVw.cs" />
+    <Compile Include="ViewObjects\IOddVw.cs" />
+    <Compile Include="ViewObjects\ITipItemVw.cs" />
+    <Compile Include="ViewObjects\MatchVw.cs" />
+    <Compile Include="ViewObjects\OddVw.cs" />
+    <Compile Include="ViewObjects\ResultVw.cs" />
+    <Compile Include="ViewObjects\TipItemVw.cs" />
+    <Compile Include="ViewObjects\ViewObjectBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bet_domain_map.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DatabaseResources\CreateTestMatches.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="DatabaseResources\PgSrbsClient.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0d4e9e7e-235a-445f-a97f-d502fbaf47c7}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

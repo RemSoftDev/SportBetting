@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BetDisplayxaml1" xml:space="preserve">
+    <value>Breite der Terminal-Live-Wett-Anzeige zu klein: {0}</value>
+  </data>
+  <data name="BetDisplayxaml2" xml:space="preserve">
+    <value>Höhe der Terminal-Live-Wett-Anzeige zu klein: {0}</value>
+  </data>
+  <data name="ButtonActions2" xml:space="preserve">
+    <value>Saving tickets two times</value>
+  </data>
+  <data name="ButtonActions3" xml:space="preserve">
+    <value>Sucessfully printed Credit note with stake {0}EUR</value>
+  </data>
+  <data name="ButtonActions4" xml:space="preserve">
+    <value>Failed to print Credit note with stake {0}EUR</value>
+  </data>
+  <data name="ButtonActions5" xml:space="preserve">
+    <value>Unbekannte Antwort auf SaveTicket(): {0}</value>
+  </data>
+  <data name="DataSynchronizer1" xml:space="preserve">
+    <value>Ende der Sync-Station-Settings-Schleife erreicht</value>
+  </data>
+  <data name="DataSynchronizer2" xml:space="preserve">
+    <value>Ende der Sync-Database-Schleife erreicht</value>
+  </data>
+  <data name="DataSynchronizer3" xml:space="preserve">
+    <value>Ende der Export-Database-Schleife erreicht</value>
+  </data>
+  <data name="DataSynchronizer4" xml:space="preserve">
+    <value>Ende der Cleanup-Database-Schleife erreicht</value>
+  </data>
+  <data name="DataSynchronizer8" xml:space="preserve">
+    <value>Sport-DB-Sync wird fortgesetzt</value>
+  </data>
+  <data name="DataSynchronizer9" xml:space="preserve">
+    <value>Station restarted because it was unable to load new version</value>
+  </data>
+  <data name="DBQueries1" xml:space="preserve">
+    <value>match is null in DbQueries.GetBetDomains</value>
+  </data>
+  <data name="DBQueries5" xml:space="preserve">
+    <value>Wenn es keine Sport-Wetten gibt, sollte dann der LastMinuteMatch-Button nicht deaktiviert sein?</value>
+  </data>
+  <data name="ExportDatabase1" xml:space="preserve">
+    <value>FTP DB-Upload fehlgeschlagen.</value>
+  </data>
+  <data name="InfoDisplayxaml1" xml:space="preserve">
+    <value>ungültige Live-Info-Fenster-Größe von {0}x{1} auf Fenster {2}</value>
+  </data>
+  <data name="KeyMenuWindowxaml1" xml:space="preserve">
+    <value>Ticket-Duplikat wurde gedruckt</value>
+  </data>
+  <data name="KeyMenuWindowxaml2" xml:space="preserve">
+    <value>Ticket-Duplikat konnte nicht gedruckt werden</value>
+  </data>
+  <data name="LimitHandling1" xml:space="preserve">
+    <value>Combi Limits not set in Table CombiLimit</value>
+  </data>
+  <data name="LimitHandling2" xml:space="preserve">
+    <value>Combi Limits not set in Table CombiLimit</value>
+  </data>
+  <data name="LiveBetClient1" xml:space="preserve">
+    <value>Verbindung zum LiveBet-Server beendet</value>
+  </data>
+  <data name="LiveBetClient2" xml:space="preserve">
+    <value>Import failed</value>
+  </data>
+  <data name="LiveBetClient3" xml:space="preserve">
+    <value>Verbindung zum LiveBetServer abgebrochen. Es wurde {0} versucht eine Nachricht vom Server zu lesen.</value>
+  </data>
+  <data name="LiveBetClient4" xml:space="preserve">
+    <value>Client hat Verbindung zum LiveBet-Server {0} am Port {1} verloren. wegen null-message</value>
+  </data>
+  <data name="OddButton1" xml:space="preserve">
+    <value>Unknown LB_PeriodInfo on Terminal {0}: {1}</value>
+  </data>
+  <data name="OddButton2" xml:space="preserve">
+    <value>Active BetDomain in BetStop found </value>
+  </data>
+  <data name="OddDisplayItem1" xml:space="preserve">
+    <value>Unknown LB_PeriodInfo on Terminal {0}: {1}</value>
+  </data>
+  <data name="OddDisplayItem2" xml:space="preserve">
+    <value>Active BetDomain in BetStop found </value>
+  </data>
+  <data name="OutletMainView1" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Live-Matches auf Bildschirm {0}: {1}</value>
+  </data>
+  <data name="PrinterHandler1" xml:space="preserve">
+    <value>ESC/POS-Drucker nicht gefunden: {0}</value>
+  </data>
+  <data name="PrinterHandler2" xml:space="preserve">
+    <value>ESC/POS-Drucker hat kein Papier: {0}</value>
+  </data>
+  <data name="PrinterHandler3" xml:space="preserve">
+    <value>Windows-Standard-Drucker nicht verfügbar: {0}</value>
+  </data>
+  <data name="PrinterHandler4" xml:space="preserve">
+    <value>Fehler beim Drucker-Test vom Typ: {0}: {1}</value>
+  </data>
+  <data name="PrinterHandler5" xml:space="preserve">
+    <value>Keine Verbindung zu Netzwerkdrucker</value>
+  </data>
+  <data name="Resolution1" xml:space="preserve">
+    <value>Unbekannte Auflösung {0}*{1}</value>
+  </data>
+  <data name="Sportwettenxaml1" xml:space="preserve">
+    <value>Wrong resolution:{0}x{1}</value>
+  </data>
+  <data name="StationDataHandler1" xml:space="preserve">
+    <value>LastViewIdleTime nicht gesetzt</value>
+  </data>
+  <data name="StationForker1" xml:space="preserve">
+    <value>Station erfolgreich beendet</value>
+  </data>
+  <data name="StationForker2" xml:space="preserve">
+    <value>Station abgestürzt {0}</value>
+  </data>
+  <data name="StationSettings1" xml:space="preserve">
+    <value>Fehler im Pref-File. Station gesperrt</value>
+  </data>
+  <data name="StationSettings10" xml:space="preserve">
+    <value>Kein Drucker vorhanden: Erstellung fehlgeschlagen</value>
+  </data>
+  <data name="StationSettings11" xml:space="preserve">
+    <value>Ungültiger Drucker-Port: {0} Erstellung fehlgeschlagen</value>
+  </data>
+  <data name="StationSettings12" xml:space="preserve">
+    <value>TSP100USB-Verzeichnis hat zu wenige Dateien ({0}) Keine Drucker-Tests auf dieser Station</value>
+  </data>
+  <data name="StationSettings13" xml:space="preserve">
+    <value>TSP100LAN-Verzeichnis hat zu wenige Dateien ({0}) Keine Drucker-Tests auf dieser Station</value>
+  </data>
+  <data name="StationSettings14" xml:space="preserve">
+    <value>Notenleser manipuliert von {0} EUR auf {1}</value>
+  </data>
+  <data name="StationSettings2" xml:space="preserve">
+    <value>, Cash-Pool im Wert von:  {0} wurde gelöscht</value>
+  </data>
+  <data name="StationSettings3" xml:space="preserve">
+    <value>Versuch, ungültigen CashPool-Wert zu lesen: {0}</value>
+  </data>
+  <data name="StationSettings5" xml:space="preserve">
+    <value>Hoher Cash-Pool-Wert gefunden: {0}</value>
+  </data>
+  <data name="StationSettings6" xml:space="preserve">
+    <value>Failed to setCashInLimit: {0}</value>
+  </data>
+  <data name="StationSettings7" xml:space="preserve">
+    <value>Exception setting CashInLimit</value>
+  </data>
+  <data name="StationSettings8" xml:space="preserve">
+    <value>Somebody tried to re-print a foreign ticket: {0}</value>
+  </data>
+  <data name="StationSettings9" xml:space="preserve">
+    <value>Alte LiveBetOffset-Einstellung gefunden{0} {1}</value>
+  </data>
+  <data name="TerminalMatchView1" xml:space="preserve">
+    <value>Unbekannter Match-Status am Terminal angezeigt {0}</value>
+  </data>
+  <data name="TicketHandler1" xml:space="preserve">
+    <value>Ticket erst beim 2. Mal erfolgreich an den Server gesendet.</value>
+  </data>
+  <data name="TicketHandler2" xml:space="preserve">
+    <value>Ticket wurde nicht gespeichert. Einsatz: {0}</value>
+  </data>
+  <data name="TicketHandler3" xml:space="preserve">
+    <value>Quote von Tip wurde nicht auf Station gefunden.</value>
+  </data>
+  <data name="TicketHandler4" xml:space="preserve">
+    <value>Quote von Tip wurde nicht auf Station gefunden.</value>
+  </data>
+  <data name="ViewControl1" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Live-Matches auf Bildschirm {0}: {1}</value>
+  </data>
+  <data name="ViewControl2" xml:space="preserve">
+    <value>Failed to show Table on terminal {0} Error: {1}</value>
+  </data>
+  <data name="ViewControl3" xml:space="preserve">
+    <value>Failed to show Ticket Details on terminal {0} Error: {1}</value>
+  </data>
+  <data name="ViewControl4" xml:space="preserve">
+    <value>Konnte Storno-Ticket nicht drucken mit Einsatz: {0}</value>
+  </data>
+  <data name="ViewControl5" xml:space="preserve">
+    <value>Storno-Ticket gedruckt mit Einsatz: {0}</value>
+  </data>
+  <data name="ViewControl6" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="ViewControl7" xml:space="preserve">
+    <value>Fehler beim Aktualisieren der Quoten.</value>
+  </data>
+</root>

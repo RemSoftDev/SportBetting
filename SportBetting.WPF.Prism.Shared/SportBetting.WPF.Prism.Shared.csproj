@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79E50E95-4E0E-4C85-B9AE-E42CC380E2D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SportBetting.WPF.Prism.Shared</RootNamespace>
+    <AssemblyName>SportBetting.WPF.Prism.Shared</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <DontImportPostSharp>True</DontImportPostSharp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SkipPostSharp</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'localhost|AnyCPU' ">
+    <OutputPath>bin\dev3\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'localhost|x86' ">
+    <OutputPath>bin\x86\dev3\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'staging|AnyCPU'">
+    <OutputPath>..\..\bin\staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'staging|x86'">
+    <OutputPath>bin\x86\staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'production|AnyCPU'">
+    <OutputPath>..\..\bin\production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'production|x86'">
+    <OutputPath>bin\x86\production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Betcenter|AnyCPU'">
+    <OutputPath>..\..\..\bin\Betcenter\</OutputPath>
+    <DefineConstants>TRACE;/define BETCENTER</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Betcenter|x86'">
+    <OutputPath>..\..\..\bin\x86\Betcenter\</OutputPath>
+    <DefineConstants>TRACE;/define BETCENTER</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingUiTest|AnyCPU'">
+    <OutputPath>..\..\..\..\MasterBet\Ranorex\Terminal\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'StagingUiTest|x86'">
+    <OutputPath>bin\x86\StagingUiTest\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet|AnyCPU'">
+    <OutputPath>bin\Masterbet\</OutputPath>
+    <DefineConstants>TRACE;POSTSHARP_CONSTRAINTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet|x86'">
+    <OutputPath>bin\x86\Masterbet\</OutputPath>
+    <DefineConstants>TRACE;POSTSHARP_CONSTRAINTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Betcenter2|AnyCPU'">
+    <OutputPath>bin\Betcenter2\</OutputPath>
+    <DefineConstants>TRACE;/define BETCENTER;POSTSHARP_CONSTRAINTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Betcenter2|x86'">
+    <OutputPath>bin\x86\Betcenter2\</OutputPath>
+    <DefineConstants>TRACE;/define BETCENTER;POSTSHARP_CONSTRAINTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet2|AnyCPU'">
+    <OutputPath>bin\Masterbet2\</OutputPath>
+    <DefineConstants>TRACE;POSTSHARP_CONSTRAINTS;POSTSHARP_CONSTRAINTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Masterbet2|x86'">
+    <OutputPath>bin\x86\Masterbet2\</OutputPath>
+    <DefineConstants>TRACE;POSTSHARP_CONSTRAINTS;POSTSHARP_CONSTRAINTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apache.NMS, Version=1.6.0.3083, Culture=neutral, PublicKeyToken=82756feee3957618, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Apache.NMS.1.6.0.3083\lib\net40\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ, Version=1.6.3.3483, Culture=neutral, PublicKeyToken=82756feee3957618, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Apache.NMS.ActiveMQ.1.6.3\lib\net40\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="DdeNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DdeNet.1.0.0\lib\net45\DdeNet.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\OutletBetting\Lib\Ninject\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PostSharp, Version=4.3.22.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <HintPath>..\packages\PostSharp.4.3.22\lib\net35-client\PostSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bet.cs" />
+    <Compile Include="BusinessProps.cs" />
+    <Compile Include="BusinessPropsHelper.cs" />
+    <Compile Include="Controls\FlexStackPanel.cs" />
+    <Compile Include="Controls\Loader.xaml.cs">
+      <DependentUpon>Loader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MeasureUtil.cs" />
+    <Compile Include="Controls\ResourceKey.cs" />
+    <Compile Include="Controls\UIHelper.cs" />
+    <Compile Include="Converters\AlterationIndexAsOddEvenToBooleanConverter.cs" />
+    <Compile Include="Converters\BasketSportBreadcrumbsConverter.cs" />
+    <Compile Include="Converters\BiggerThanToVisibilityCollapsedConverter.cs" />
+    <Compile Include="Converters\CollectionToHeightConverter.cs" />
+    <Compile Include="Converters\CollectionToVisibilityConverter.cs" />
+    <Compile Include="Converters\CollectionToWidthConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityHiddenConverter.cs" />
+    <Compile Include="Converters\BlockWidthConverter.cs" />
+    <Compile Include="Converters\BiggerThanToBooleanConverter.cs" />
+    <Compile Include="Converters\AvailableCashConverter.cs" />
+    <Compile Include="Converters\BiggerThanToVisibilityConverter.cs" />
+    <Compile Include="Converters\CashpoolColorConverter.cs" />
+    <Compile Include="Converters\BooleanToBoldConverter.cs" />
+    <Compile Include="Converters\InversStatusToBooleanConverter.cs" />
+    <Compile Include="Converters\InversTimeToBooleanConverter .cs" />
+    <Compile Include="Converters\MultiBooleanANDToVisibilityCollapsedConverter.cs" />
+    <Compile Include="Converters\ResourceResolver.cs" />
+    <Compile Include="Converters\DivideBlockWidthConverter.cs" />
+    <Compile Include="Converters\InverseDateTimeToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateTimeToVisibilityConverter.cs" />
+    <Compile Include="Converters\MultiBooleanANDToVisibilityHiddenConverter.cs" />
+    <Compile Include="Converters\MultistringTagConverter.cs" />
+    <Compile Include="Converters\InverseBiggerThanToVisibilityCollapsedConverter.cs" />
+    <Compile Include="Converters\InverseUserToBooleanConverter.cs" />
+    <Compile Include="Converters\MainMonitorConverter.cs" />
+    <Compile Include="Converters\MatchStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\MultiBiggerThanToBooleanConverter.cs" />
+    <Compile Include="Converters\MultiValueDeductionConverter.cs" />
+    <Compile Include="Converters\PercentageConverter.cs" />
+    <Compile Include="Converters\SettlementActualWidthConverter.cs" />
+    <Compile Include="Converters\SportBarImageSelector.cs" />
+    <Compile Include="Converters\SportDescriptorImageSelector.cs" />
+    <Compile Include="Converters\StatsConverterMultiValues.cs" />
+    <Compile Include="Converters\TeamPositionChangeConverter.cs" />
+    <Compile Include="Converters\TextPresentToVisibilityConverter.cs" />
+    <Compile Include="Converters\TippItemBackgroundColorConverter.cs" />
+    <Compile Include="Converters\TippItemForegroundColorConverter.cs" />
+    <Compile Include="Converters\ImagePathExtension.cs" />
+    <Compile Include="Converters\ToUpperCaseConverter.cs" />
+    <Compile Include="Converters\TournamentTemplateSelector.cs" />
+    <Compile Include="Converters\UserToBooleanConverter.cs" />
+    <Compile Include="Converters\MultiBooleanORToVisibilityConverter.cs" />
+    <Compile Include="Converters\MultiBooleanConverter.cs" />
+    <Compile Include="Converters\InversStatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\InversTimeToVisibilityConverter .cs" />
+    <Compile Include="Converters\LiveMatchesTemplateSelector.cs" />
+    <Compile Include="Converters\OddEnabled_DisabledConverter.cs" />
+    <Compile Include="Converters\PreMatchTemplateSelector.cs" />
+    <Compile Include="Converters\ResultInversTimeToVisibilityConverter.cs" />
+    <Compile Include="Converters\ResultTimeToVisibilityConverter.cs" />
+    <Compile Include="Converters\SportIconShowingConverter.cs" />
+    <Compile Include="Converters\TicketStateToIsCheckedConverter.cs" />
+    <Compile Include="Converters\StatusToVisibilityConverter.cs" />
+    <Compile Include="Converters\TicketTextColorConverter.cs" />
+    <Compile Include="Converters\InverseBooleanToVisibilityHiddenConverter.cs" />
+    <Compile Include="Converters\InverseBooleanToVisibilityCollapsedConverter.cs" />
+    <Compile Include="Converters\InverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ImagePathConverter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Converters\InvertBooleanConverter.cs" />
+    <Compile Include="Converters\MatchColorBarConverter.cs" />
+    <Compile Include="Converters\MatchOneTwoLineConverter.cs" />
+    <Compile Include="Converters\MultiBooleanANDToVisibilityConverter.cs" />
+    <Compile Include="Converters\OddIncreaseDecreaseConverter.cs" />
+    <Compile Include="Converters\StatsConverter.cs" />
+    <Compile Include="Converters\TimeToVisibilityConverter.cs" />
+    <Compile Include="Converters\VHCOutrightNameVisibilityConverter.cs" />
+    <Compile Include="Converters\VhcTypeToBooleanConverter.cs" />
+    <Compile Include="Converters\WebBrowserUtility.cs" />
+    <Compile Include="CreateZip.cs" />
+    <Compile Include="CustomAppender.cs" />
+    <Compile Include="DisplayHelper.cs" />
+    <Compile Include="DriversMonitor.cs" />
+    <Compile Include="IBusinessPropsHelper.cs" />
+    <Compile Include="ITransactionQueueHelper.cs" />
+    <Compile Include="LogSending.cs" />
+    <Compile Include="Models\BalanceCheckpoint.cs" />
+    <Compile Include="Models\BalanceOperation.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ComboBoxItemStringId.cs" />
+    <Compile Include="Models\EmptyUser.cs" />
+    <Compile Include="Models\FoundOperator.cs" />
+    <Compile Include="Models\HistoryCheckpoint.cs" />
+    <Compile Include="Models\MatchStatistic.cs" />
+    <Compile Include="Models\OperatorUser.cs" />
+    <Compile Include="Models\FoundUser.cs" />
+    <Compile Include="Models\AnonymousUser.cs" />
+    <Compile Include="Models\ComboBoxItem.cs" />
+    <Compile Include="Models\Interfaces\IRegistration.cs" />
+    <Compile Include="Models\LoggedInUser.cs" />
+    <Compile Include="Models\PerformanceModel.cs" />
+    <Compile Include="Models\Repositories\ActiveMQClient.cs" />
+    <Compile Include="Models\Repositories\StationRepository.cs" />
+    <Compile Include="Models\ScoresModel.cs" />
+    <Compile Include="Models\SportBarItem.cs" />
+    <Compile Include="Models\SportCategory.cs" />
+    <Compile Include="Models\TicketView.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Repositories\LanguageRepository.cs" />
+    <Compile Include="Models\Repositories\Interfaces\ILanguageRepository.cs" />
+    <Compile Include="Models\TimeZoneControl.cs" />
+    <Compile Include="Models\Tournament.cs" />
+    <Compile Include="Models\VFLMatchButton.cs" />
+    <Compile Include="MsgTag.cs" />
+    <Compile Include="MyMessageMediator.cs" />
+    <Compile Include="NbtLog.cs" />
+    <Compile Include="OldCode\BarCodeConverter.cs" />
+    <Compile Include="OldCode\BetDomainNumbers.cs" />
+    <Compile Include="OldCode\TicketActions.cs" />
+    <Compile Include="OldCode\PasswordGenerator.cs" />
+    <Compile Include="OldCode\PrinterHandler.cs" />
+    <Compile Include="OldCode\StationSettings.cs" />
+    <Compile Include="OldCode\TicketHandler.cs" />
+    <Compile Include="PeripheralChecker.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\LogMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ChangeTracker.cs" />
+    <Compile Include="Services\Interfaces\ILiveStreamService.cs" />
+    <Compile Include="Services\Interfaces\IPrinterHandler.cs" />
+    <Compile Include="Services\Interfaces\ITicketActions.cs" />
+    <Compile Include="Services\Interfaces\ITicketHandler.cs" />
+    <Compile Include="Services\Interfaces\LiveWindowEntry.cs" />
+    <Compile Include="Services\Interfaces\IProcessExecutor.cs" />
+    <Compile Include="Services\LiveStreamService.cs" />
+    <Compile Include="Services\NDEServer.cs" />
+    <Compile Include="Services\ProcessExecutor.cs" />
+    <Compile Include="Services\TicketHandler.cs" />
+    <Compile Include="Services\Interfaces\IChangeTracker.cs" />
+    <Compile Include="Converters\BooleanToVisibilityCollapsedConverter.cs" />
+    <Compile Include="TransactionQueue.cs" />
+    <Compile Include="TransactionQueueHelper.cs" />
+    <Compile Include="WpfHelper\AppVisualTree.cs" />
+    <Compile Include="WpfHelper\ButtonBehaviour.cs" />
+    <Compile Include="WpfHelper\EventBehaviourFactory.cs" />
+    <Compile Include="WpfHelper\FocusBehavior.cs" />
+    <Compile Include="WpfHelper\ISelectDate.cs" />
+    <Compile Include="WpfHelper\MouseOverBehavior.cs" />
+    <Compile Include="WpfHelper\FrameworkElementExtensions.cs" />
+    <Compile Include="WpfHelper\ScrollViewerBehaviour.cs" />
+    <Compile Include="WpfHelper\ScrollViewerModule.cs" />
+    <Compile Include="WpfHelper\BindingBehaviour.cs" />
+    <Compile Include="WpfHelper\SizeObserver.cs" />
+    <Compile Include="WpfHelper\TextBlockBehaviour.cs" />
+    <Compile Include="WpfHelper\TriggerTracing.cs" />
+    <Compile Include="WpfHelper\WaitOverlay.cs" />
+    <Compile Include="WpfHelper\WindowExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OutletBetting\Common\Common.csproj">
+      <Project>{0D4E9E7E-235A-445F-A97F-D502FBAF47C7}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\DAL\DAL.csproj">
+      <Project>{8AC0E79B-EFDB-45F5-9F3E-F644ADB93A89}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\IocContainer\IocContainer.csproj">
+      <Project>{171E5DB2-EAC9-42F8-B171-67E91A3B3417}</Project>
+      <Name>IocContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\SharedInterfaces\SharedInterfaces.csproj">
+      <Project>{4FE76384-166F-46AC-894B-EC233EBE4354}</Project>
+      <Name>SharedInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\Shared\Shared.csproj">
+      <Project>{39E0A93B-4CB5-4EAB-B656-16412D54C60C}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\TranslationByMarkupExtension\TranslationByMarkupExtension.csproj">
+      <Project>{11107eb4-aead-40da-90ce-b226e34e14fc}</Project>
+      <Name>TranslationByMarkupExtension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\WsdlRepository\WsdlRepository.csproj">
+      <Project>{CAF16909-50E9-4C34-A515-6AC38F21EBC4}</Project>
+      <Name>WsdlRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SCF\SCF\CashIn_2010.csproj">
+      <Project>{461604F0-67C4-4AFF-AA82-6F5179944190}</Project>
+      <Name>CashIn_2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SPF\SPF\Spf_2010.csproj">
+      <Project>{B51C2CE2-AEA5-4FFA-83CE-B799EB662EB5}</Project>
+      <Name>Spf_2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Preferences\Preferences.csproj">
+      <Project>{F70EEADB-C6BA-4F62-B50F-21A02810E168}</Project>
+      <Name>Preferences</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SerialPortmManager\SerialPortmanager\SerialPortManager.csproj">
+      <Project>{02e57ac9-ae08-4ba4-b401-f10107cbd338}</Project>
+      <Name>SerialPortManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCardReader\SmartCardReader.csproj">
+      <Project>{9c7a00c6-2824-446f-b1f4-80d7989e9115}</Project>
+      <Name>SmartCardReader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Aspects\SportBetting.WPF.Prism.Modules.Aspects.csproj">
+      <Project>{14A195A7-C838-49EF-85D1-56A0E61CD64D}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Aspects</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\LogMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\Loader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <UsingTask TaskName="PepitaGet.RestorePackagesTask" AssemblyFile="$(ProjectDir)tools\Pepita\PepitaGet.dll" />
+  <Target Name="BeforeBuild">
+    <PepitaGet.RestorePackagesTask />
+  </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\packages\PostSharp.4.3.22\tools\PostSharp.targets" Condition="Exists('..\packages\PostSharp.4.3.22\tools\PostSharp.targets')" />
+  <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
+    <Error Condition="!Exists('..\packages\PostSharp.4.3.22\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
+    <Error Condition="Exists('..\packages\PostSharp.4.3.22\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
+  </Target>
+  <!--  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

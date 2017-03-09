@@ -1,0 +1,235 @@
+﻿<UserControl x:Class="DefaultViews.Views.SystemInfoNetworkView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels2:SystemInfoNetworkViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+
+
+        <Style x:Key="NetworkConnectedLabel"
+               BasedOn="{StaticResource rowEntry}"
+               TargetType="TextBlock">
+            <Setter Property="Padding" Value="10, 0, 10, 0" />
+            <Setter Property="Margin" Value="20, 0, 0, 0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsNetworkConnected}" Value="true">
+                    <Setter Property="TextBlock.Background" Value="LimeGreen" />
+                    <Setter Property="Foreground" Value="Black" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsNetworkConnected}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="NetworkDisConnectedLabel"
+               BasedOn="{StaticResource rowEntry}"
+               TargetType="TextBlock">
+            <Setter Property="Padding" Value="10, 0, 10, 0" />
+            <Setter Property="Margin" Value="20, 0, 0, 0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsNetworkConnected}" Value="false">
+                    <Setter Property="TextBlock.Background" Value="Red" />
+                    <Setter Property="Foreground" Value="Black" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsNetworkConnected}" Value="true">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+
+            <Grid Width="auto"
+                  HorizontalAlignment="Center"
+                  DockPanel.Dock="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Margin="0,50,0,0"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource importantText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_NETWORK_TITLE}}" />
+                <Image x:Name="theader_network"
+                       Grid.Row="1"
+                       Width="760"
+                       Height="3"
+                       Margin="0, 20, 0, 0"
+                       HorizontalAlignment="Center"
+                       Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+                       Stretch="Fill" />
+
+            </Grid>
+        </DockPanel>
+        <StackPanel Grid.Row="1"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Center"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_NETWORK_TITLE}}" />
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Center"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_NETWORK_STATUS}}" />
+            <TextBlock HorizontalAlignment="Center"
+                       Style="{StaticResource headerEntry}"
+                       Text=": " />
+            <TextBlock HorizontalAlignment="Center"
+                       AutomationProperties.AutomationId="txtNetworkConnected"
+                       Style="{StaticResource NetworkConnectedLabel}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_NETWORK_CONNECTED}}" />
+            <TextBlock HorizontalAlignment="Center"
+                       AutomationProperties.AutomationId="txtNetworkDisconnected"
+                       Style="{StaticResource NetworkDisConnectedLabel}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_NETWORK_DISCONNECTED}}" />
+        </StackPanel>
+
+        <Grid Grid.Row="3"
+              Width="760"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*" />
+                <ColumnDefinition Width="25*" />
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="25*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_IP_ADDRESS}}" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtIpAddress"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding IpAddress}" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_MASK}}" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtIpMask"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding MaskAddress}" />
+            <TextBlock Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_GATEWAY}}" />
+            <TextBlock Grid.Row="2"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtGateway"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding GatewayAddress}" />
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_DNS}}" />
+            <TextBlock Grid.Row="3"
+                       Grid.Column="1"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtDNS"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding DnsAddress}" />
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_COMPUTER_NAME}}" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="3"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtCompName"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding ComputerName}" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_FULL_COMPUTER_NAME}}" />
+            <TextBlock Grid.Row="1"
+                       Grid.Column="3"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtFullName"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding FullComputerName}" />
+            <TextBlock Grid.Row="2"
+                       Grid.Column="2"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_WORKGROUP}}" />
+            <TextBlock Grid.Row="2"
+                       Grid.Column="3"
+                       HorizontalAlignment="Left"
+                       AutomationProperties.AutomationId="txtWorkgroup"
+                       Style="{StaticResource rowEntry}"
+                       Text="{Binding Workgroup}" />
+        </Grid>
+
+        <Image Grid.Row="4"
+               Width="760"
+               Height="3"
+               Margin="0, 20, 0, 0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+               Stretch="Fill" />
+
+        <StackPanel Grid.Row="5"
+                    Margin="0,20,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Orientation="Vertical" />
+
+    </Grid>
+
+
+
+</UserControl>

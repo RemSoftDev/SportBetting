@@ -1,0 +1,478 @@
+﻿<UserControl x:Class="SportBetting.WPF.Prism.Resources.MatchTemplate4_1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:SportBetting.WPF.Prism.Shared.Controls;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+             xmlns:wpfHelper="clr-namespace:SportBetting.WPF.Prism.Shared.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             d:DataContext="{d:DesignInstance Type=viewModels:MatchVw}"
+             d:DesignWidth="1000"
+             mc:Ignorable="d">
+    <Label Margin="0"
+           HorizontalContentAlignment="Stretch"
+           AutomationProperties.AutomationId="Match"
+           Padding="0">
+        <VirtualizingStackPanel Orientation="Vertical" VirtualizationMode="Recycling">
+
+            <!--  sport header  -->
+            <Grid Name="HeaderTemplate4"
+                  Height="30"
+                  Margin="0"
+                  Background="#FFbcbcbc"
+                  Visibility="{Binding IsHeaderForPreMatch,
+                                       Converter={StaticResource myBooleanToVisibilityConverter}}"
+                  wpfHelper:SizeObserver.Observe="True">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Margin="15,0,0,0"
+                           VerticalAlignment="Center"
+                           AutomationProperties.AutomationId="SportName"
+                           Style="{StaticResource headerText}"
+                           Text="{Binding SportView.DisplayName}" />
+
+                <TextBlock Grid.Column="1"
+                           Margin="15,0,0,0"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text=" - " />
+
+                <TextBlock Grid.Column="2"
+                           Margin="15,0,0,0"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="{Binding TournamentView.DisplayName}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="NoWrap" />
+            </Grid>
+            <Border BorderBrush="#FFbcbcbc" BorderThickness="0, 1, 0, 0">
+                <Grid Name="MatchTemplate4" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Background" Value="#FF4d4d4d" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                    <Setter Property="Background" Value="#FF393939" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <Canvas Grid.RowSpan="2" Grid.ColumnSpan="3">
+                        <Canvas.Style>
+                            <Style TargetType="Canvas">
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush AlignmentX="Left"
+                                                    AlignmentY="Top"
+                                                    ImageSource="{converters2:ResolveImagePath Path=Pattern-dark.png}"
+                                                    Opacity="0.2"
+                                                    Stretch="None"
+                                                    TileMode="Tile"
+                                                    Viewport="0,0,3,3"
+                                                    ViewportUnits="Absolute" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <ImageBrush AlignmentX="Left"
+                                                            AlignmentY="Top"
+                                                            ImageSource="{converters2:ResolveImagePath Path=Pattern-Light.png}"
+                                                            Opacity="0.2"
+                                                            Stretch="None"
+                                                            TileMode="Tile"
+                                                            Viewport="0,0,3,3"
+                                                            ViewportUnits="Absolute" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Style>
+                    </Canvas>
+
+
+                    <!--  not today  -->
+                    <Label Margin="0"
+                           AutomationProperties.AutomationId="NotToday"
+                           Padding="0"
+                           Visibility="{Binding StartDate,
+                                                Converter={StaticResource bInversTimeToVisibilityConverter}}">
+                        <VirtualizingStackPanel Grid.Row="0"
+                                                Grid.Column="0"
+                                                Width="130"
+                                                Height="70"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Visibility="{Binding StartDate,
+                                                                     Converter={StaticResource bInversTimeToVisibilityConverter}}">
+                            <!--
+                                <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BackgroundTime.png}" />
+                                </DockPanel.Background>
+                            -->
+
+                            <Grid Margin="0,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition Width="55" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="34" />
+                                    <RowDefinition Height="18" />
+                                    <RowDefinition Height="18" />
+                                </Grid.RowDefinitions>
+
+                                <!--  day  -->
+                                <VirtualizingStackPanel Grid.Row="0"
+                                                        Grid.Column="0"
+                                                        Margin="3,0,0,0"
+                                                        HorizontalAlignment="Left"
+                                                        VerticalAlignment="Bottom"
+                                                        Orientation="Horizontal"
+                                                        VirtualizationMode="Recycling">
+                                    <Viewbox HorizontalAlignment="Left"
+                                             Stretch="Uniform"
+                                             StretchDirection="DownOnly">
+                                        <VirtualizingStackPanel Orientation="Horizontal" VirtualizationMode="Recycling">
+                                            <!--
+                                                <TextBlock FontFamily="Play"
+                                                FontSize="14"
+                                                Foreground="#FFE5E5E5"
+                                                FontWeight="Bold"
+                                                Text="{Binding StartDate,
+                                                StringFormat={}{0:dddd}}"
+                                                TextAlignment="Center"
+                                                TextWrapping="NoWrap" />
+                                            -->
+                                            <TextBlock Margin="0"
+                                                       VerticalAlignment="Bottom"
+                                                       FontFamily="Play"
+                                                       FontSize="30"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding StartDate,
+                                                                      StringFormat={}{0:dd}}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="NoWrap" />
+                                            <TextBlock Margin="0, 0, 0, 4"
+                                                       VerticalAlignment="Bottom"
+                                                       FontFamily="Play"
+                                                       FontSize="14"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFE5E5E5"
+                                                       Text="{Binding StartDate,
+                                                                      StringFormat={}{0:MMM}}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="NoWrap" />
+                                        </VirtualizingStackPanel>
+                                    </Viewbox>
+
+                                </VirtualizingStackPanel>
+                                <!--  date  -->
+                                <StackPanel Grid.Row="1"
+                                            Grid.Column="0"
+                                            Margin="3,0,0,0"
+                                            HorizontalAlignment="Left"
+                                            Orientation="Horizontal">
+
+                                    <TextBlock Margin="0"
+                                               FontFamily="Play"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:ddd}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+
+                                    <TextBlock Margin="2, 0, 0, 0"
+                                               FontFamily="Play"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:HH}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+
+                                    <TextBlock Margin="0"
+                                               FontFamily="Play"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text=":"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+
+                                    <TextBlock Margin="0"
+                                               FontFamily="Play"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:mm}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+
+                                </StackPanel>
+
+                                <VirtualizingStackPanel Grid.Row="2"
+                                                        Grid.Column="0"
+                                                        Margin="3,0,5,0"
+                                                        HorizontalAlignment="Left"
+                                                        VirtualizationMode="Recycling">
+                                    <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                                        <!--  month  -->
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   FontFamily="Play"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFE5E5E5"
+                                                   Text="{Binding StartDate,
+                                                                  StringFormat={}{0:yyyy}}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="NoWrap" />
+                                    </Viewbox>
+                                </VirtualizingStackPanel>
+
+
+                                <Image Grid.RowSpan="3"
+                                       Grid.Column="1"
+                                       Width="30"
+                                       Height="30"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Source="{Binding SportView.LineObject.GroupSport.SportDescriptor,
+                                                        Converter={StaticResource SportDescriptorToIconConverter}}" />
+
+                            </Grid>
+                        </VirtualizingStackPanel>
+                    </Label>
+
+                    <!--  today  -->
+                    <Label Margin="0"
+                           AutomationProperties.AutomationId="Today"
+                           Padding="0"
+                           Visibility="{Binding StartDate,
+                                                Converter={StaticResource bTimeToVisibilityConverter}}">
+                        <VirtualizingStackPanel Grid.Row="0"
+                                                Grid.Column="0"
+                                                Width="130"
+                                                Height="70"
+                                                HorizontalAlignment="Center"
+                                                Visibility="{Binding StartDate,
+                                                                     Converter={StaticResource bTimeToVisibilityConverter}}">
+                            <!--
+                                <VirtualizingStackPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BackgroundTime.png}" />
+                                </VirtualizingStackPanel.Background>
+                            -->
+
+                            <Grid Margin="0,5,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition Width="55" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="36" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Viewbox Grid.Row="0"
+                                         Grid.Column="0"
+                                         MinWidth="58"
+                                         MaxWidth="58"
+                                         Margin="0,2,2,-2"
+                                         HorizontalAlignment="Right"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="30"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:mm}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </Viewbox>
+
+                                <!--  main text  -->
+                                <Viewbox Grid.Row="1"
+                                         Grid.Column="0"
+                                         Margin="0,-5,0,-5"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="50"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:HH}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </Viewbox>
+
+                                <!--  full date  -->
+                                <Viewbox Grid.Row="2"
+                                         Grid.Column="0"
+                                         Margin="0,0,0,0"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="12"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TODAY}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </Viewbox>
+
+                                <Image Grid.RowSpan="3"
+                                       Grid.Column="1"
+                                       Width="30"
+                                       Height="30"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Source="{Binding SportView.LineObject.GroupSport.SportDescriptor,
+                                                        Converter={StaticResource SportDescriptorToIconConverter}}" />
+                            </Grid>
+                        </VirtualizingStackPanel>
+                    </Label>
+
+                    <!--  go to bet domains button  -->
+                    <Button Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="-1,0,5,0"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            AutomationProperties.AutomationId="{Binding Path=Name, StringFormat='Match_{0}'}"
+                            IsEnabled="{Binding Active}"
+                            Padding="5,5"
+                            Style="{StaticResource OutrightButton}">
+                        <DockPanel LastChildFill="False">
+                            <!--  number of bet domains  -->
+                            <DockPanel DockPanel.Dock="Right" Visibility="{Binding MoreBetdomainCount, Converter={StaticResource BiggerThanToVisibilityConverter}, ConverterParameter=0}">
+                                <Border Margin="0,3,-1,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        BorderBrush="#FF26282a"
+                                        BorderThickness="1"
+                                        CornerRadius="5">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#FF26282a" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=IsSelected}" Value="True" />
+                                                        <Condition Binding="{Binding Path=BaseBetDomainView.IsSelected}" Value="False" />
+                                                        <Condition Binding="{Binding Path=UnderOverBetDomain.IsSelected}" Value="False" />
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Background" Value="#FF407d32" />
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <StackPanel Margin="3,3,3,3" Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="Play"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="+" />
+                                        <TextBlock Margin="0,3,3,3"
+                                                   AutomationProperties.AutomationId="VisibleBetdomainCount"
+                                                   FontFamily="Play"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFFFFFFF"
+                                                   Text="{Binding MoreBetdomainCount}" />
+                                    </StackPanel>
+                                </Border>
+                            </DockPanel>
+
+                            <!--  upper row  -->
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                                <!--  display name  -->
+                                <Border Height="42" BorderBrush="{x:Null}">
+                                    <TextBlock VerticalAlignment="Center"
+                                               AutomationProperties.AutomationId="Name"
+                                               FontFamily="Play"
+                                               FontSize="19"
+                                               FontWeight="Medium"
+                                               Foreground="#FFFFFFFF"
+                                               LineHeight="19"
+                                               LineStackingStrategy="BlockLineHeight"
+                                               Text="{Binding Name}"
+                                               TextTrimming="CharacterEllipsis"
+                                               TextWrapping="Wrap" />
+                                </Border>
+                            </DockPanel>
+                            <!--  bottom row  -->
+                            <!--
+                                <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+                                <TextBlock Margin="5,0"
+                                DockPanel.Dock="Right"
+                                FontFamily="Play"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="#FFFF4D00"
+                                Text=""
+                                TextAlignment="Left"
+                                TextWrapping="Wrap" />
+                                <TextBlock FontFamily="Play"
+                                FontSize="14"
+                                FontWeight="Regular"
+                                Foreground="#FFb3b3b3"
+                                Text="{Binding TournamentNameToShow}"
+                                TextAlignment="Left"
+                                TextWrapping="Wrap" />
+                                <TextBlock DockPanel.Dock="Right"
+                                FontFamily="Play"
+                                FontSize="14"
+                                FontWeight="Regular"
+                                Foreground="#FFb3b3b3"
+                                Text="&gt;&gt;"
+                                TextAlignment="Right"
+                                TextWrapping="Wrap" />
+                                <TextBlock DockPanel.Dock="Right"
+                                FontFamily="Play"
+                                FontSize="14"
+                                FontWeight="Regular"
+                                Foreground="#FFb3b3b3"
+                                Text="{Binding BaseBetDomainView.DisplayName}"
+                                TextAlignment="Right"
+                                TextWrapping="Wrap" />
+                                </DockPanel>
+                            -->
+                        </DockPanel>
+                    </Button>
+                </Grid>
+            </Border>
+        </VirtualizingStackPanel>
+    </Label>
+</UserControl>

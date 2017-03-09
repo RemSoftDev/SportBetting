@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="Font">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FontA" />
+			<xs:enumeration value="FontB" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Style">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="None" />
+			<xs:enumeration value="Bold" />
+			<xs:enumeration value="Emphasized" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Alignment">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Left" />
+			<xs:enumeration value="Center" />
+			<xs:enumeration value="Right" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Size">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="5" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CharacterSpacing">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Indent">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="42" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BarCodeItem">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Alignment" type="Alignment" />
+				<xs:attribute name="Indent" type="Indent" />
+				<xs:attribute name="Height" type="BCHeight" />
+				<xs:attribute name="Width" type="BCWidth" />
+				<xs:attribute name="HRIPos" type="BCHRIPos" />
+				<xs:attribute name="Type" type="BCType" />
+				<xs:attribute name="Font" type="Font" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="BCWidth">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BCHeight">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1" />
+			<xs:maxInclusive value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BCHRIPos">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="None" />
+			<xs:enumeration value="Below" />
+			<xs:enumeration value="Above" />
+			<xs:enumeration value="Both" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BCType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CODE128" />
+			<xs:enumeration value="CODE93" />
+			<xs:enumeration value="CODABAR" />
+			<xs:enumeration value="ITF" />
+			<xs:enumeration value="CODE39" />
+			<xs:enumeration value="EAN8" />
+			<xs:enumeration value="EAN13" />
+			<xs:enumeration value="UPC-E" />
+			<xs:enumeration value="UPC-A" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="FillItem">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ImageItem">
+		<xs:attribute name="Alignment" type="Alignment" />
+		<xs:attribute name="Indent" type="Indent" />
+		<xs:attribute name="Path" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="TextItem">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Alignment" type="Alignment" />
+				<xs:attribute name="Indent" type="Indent" />
+				<xs:attribute name="Font" type="Font" />
+				<xs:attribute name="Size" type="Size" />
+				<xs:attribute name="Style" type="Style" />
+				<xs:attribute name="Underline" type="xs:boolean" />
+				<xs:attribute name="Characterspacing" type="CharacterSpacing" />
+				<xs:attribute name="Invert" type="xs:boolean" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BlockText">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="Font" type="Font" />
+				<xs:attribute name="Size" type="Size" />
+				<xs:attribute name="Style" type="Style" />
+				<xs:attribute name="Underline" type="xs:boolean" />
+				<xs:attribute name="Characterspacing" type="CharacterSpacing" />
+				<xs:attribute name="Invert" type="xs:boolean" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="LineSpacing">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Block">
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="BlockText" type="BlockText" />
+		</xs:sequence>
+		<xs:attribute name="LineSpacing" type="LineSpacing" />
+	</xs:complexType>
+	<xs:complexType name="Line">
+		<xs:choice>
+			<xs:element name="ImageItem" type="ImageItem" />
+			<xs:element name="BarCodeItem" type="BarCodeItem" />
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="FillItem" type="FillItem" />
+					<xs:element name="TextItem" type="TextItem" />
+				</xs:choice>
+			</xs:sequence>
+		</xs:choice>
+		<xs:attribute name="Recurrence" type="xs:unsignedByte" />
+		<xs:attribute name="LineSpacing" type="LineSpacing" />
+		<xs:attribute name="Underline" type="xs:boolean" />
+	</xs:complexType>
+	<xs:complexType name="SPFPage">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="Line" type="Line" />
+				<xs:element name="Block" type="Block" />
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="Codepage" type="xs:unsignedInt" />
+	</xs:complexType>
+	<xs:element name="Page" type="SPFPage">
+	</xs:element>
+</xs:schema>

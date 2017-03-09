@@ -1,0 +1,1637 @@
+﻿<UserControl x:Class="DefaultViews.Views.OutrightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:TranslationByMarkupExtension="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:controls="clr-namespace:SportBetting.WPF.Prism.Shared.Controls;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             xmlns:viewObjects="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+             x:Name="BetDomainsViewControl"
+             d:DataContext="{d:DesignInstance Type=viewModels2:OutrightViewModel}"
+             d:DesignHeight="1360"
+             d:DesignWidth="1050"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <shared:TeamPositionChangeConverter x:Key="TeamPositionChangeConverter" />
+        <converters:MatchStatusToVisibilityConverter x:Key="MatchStatusToVisibilityConverter" />
+        <converters:StatsConverter x:Key="StatsConverter" />
+        <converters:StatsConverterMultiValues x:Key="StatsConvertMultiValues" />
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityCollapsedConverter" />
+        <shared:OddEnabled_DisabledConverter x:Key="myOddEnabled_DisabledConverter" />
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="myInverseStrBooleanToVisibilityConverter" />
+        <shared:StatusToVisibilityConverter x:Key="bStatusToVisibilityConverter" />
+        <shared:InversStatusToVisibilityConverter x:Key="bInversStatusToVisibilityConverter" />
+
+
+        <DataTemplate x:Key="OddTemplate" DataType="viewObjects:OddVw">
+            <ToggleButton Grid.Column="1"
+                          Margin="10,5,10,5"
+                          HorizontalContentAlignment="Left"
+                          AutomationProperties.AutomationId="{Binding DisplayName}"
+                          Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                           AncestorLevel=2,
+                                                                           AncestorType={x:Type Grid}},
+                                            Path=DataContext.PlaceBet}"
+                          CommandParameter="{Binding}"
+                          IsChecked="{Binding IsSelected,
+                                              Mode=OneWay}"
+                          IsEnabled="{Binding IsEnabled}"
+                          Style="{StaticResource toggleButtonBetDomain}"
+                          Visibility="{Binding VisibilityBetDomainView}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Margin="10, 0, 0, 0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Orientation="Horizontal">
+                        <TextBlock VerticalAlignment="Top"
+                                   FontFamily="Play"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   LineHeight="24"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Padding="0,10,0,0"
+                                   Text="{Binding DisplayName}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#FFEFEFEF" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                            <Setter Property="Foreground" Value="#FF7c7c7c" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock VerticalAlignment="Top"
+                                   FontFamily="Play"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   LineHeight="24"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Padding="10,10,0,0"
+                                   Text="{Binding SpecialBetdomainValue,
+                                                  StringFormat=\{0:N2\},
+                                                  ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap"
+                                   Visibility="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                       AncestorLevel=1,
+                                                                                       AncestorType={x:Type ItemsControl}},
+                                                        Path=DataContext.ShowSpecialValue}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#FFEFEFEF" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                            <Setter Property="Foreground" Value="#FF7c7c7c" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--
+                        <TextBlock Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        Width="116"
+                        FontFamily="Play"
+                        FontSize="30"
+                        FontWeight="Bold"
+                        Foreground="#FFEFEFEF"
+                        Padding="0,17,7,17"
+                        Style="{StaticResource OddResultTextBlockLiveMonitor}"
+                        Text="{Binding Value}"
+                        TextAlignment="Right"
+                        TextWrapping="Wrap" />
+                    -->
+                </Grid>
+            </ToggleButton>
+        </DataTemplate>
+
+
+
+        <DataTemplate DataType="{x:Type sys:String}">
+            <Canvas Width="1030" Height="45">
+                <Canvas Canvas.Left="15"
+                        Canvas.Top="17"
+                        Height="18">
+                    <TextBlock Canvas.Left="0"
+                               Canvas.Top="1"
+                               FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFCBCBCB"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{Binding}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </Canvas>
+            </Canvas>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="NewLiveBetDomainTemplate" DataType="viewObjects:BetDomainVw">
+            <Label HorizontalContentAlignment="Stretch" AutomationProperties.AutomationId="BetDomain">
+                <StackPanel Margin="0,20,0,0" Orientation="Vertical">
+                    <TextBlock Canvas.Left="0"
+                               Canvas.Top="1"
+                               Margin="10, 0, 0, 0"
+                               FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFd6ad0a"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{Binding DisplayName}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+
+                    <ItemsControl HorizontalContentAlignment="Stretch"
+                                  ItemTemplate="{StaticResource OddTemplate}"
+                                  ItemsSource="{Binding Odds}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="{Binding ColumnCount}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </StackPanel>
+            </Label>
+        </DataTemplate>
+
+        <Style x:Key="hiddenListBox" TargetType="{x:Type ListBox}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="#636363" />
+            </Style.Resources>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <ScrollViewer x:Name="ScrollViewer"
+                                          Focusable="false"
+                                          Padding="{TemplateBinding Padding}"
+                                          PanningMode="VerticalOnly"
+                                          Template="{StaticResource hiddenScrollViewerControl}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="scoreLinesListBox" TargetType="{x:Type ListBox}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+            </Style.Resources>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <ScrollViewer x:Name="ScrollViewer2"
+                                          Focusable="false"
+                                          Padding="{TemplateBinding Padding}"
+                                          PanningMode="VerticalOnly"
+                                          Template="{StaticResource hiddenScrollViewerControl}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="performanceListBox" TargetType="{x:Type ListBox}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+            </Style.Resources>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+            <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <ScrollViewer x:Name="ScrollViewer3"
+                                          Focusable="false"
+                                          Padding="{TemplateBinding Padding}"
+                                          PanningMode="HorizontalOnly"
+                                          Template="{StaticResource hiddenScrollViewerControl}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Storyboard x:Key="GoalAnimationStoryboard">
+            <DoubleAnimation AutoReverse="True"
+                             Duration="0:0:0.5"
+                             From="0.0"
+                             RepeatBehavior="30x"
+                             Storyboard.TargetProperty="Opacity"
+                             To="1.0" />
+        </Storyboard>
+
+        <Style x:Key="HomeGoalAnimation" TargetType="Grid">
+            <Setter Property="Visibility" Value="Hidden" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ChangeTracker.CurrentMatch.HomeTeamGoal}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <DataTrigger.EnterActions>
+                        <RemoveStoryboard BeginStoryboardName="DataChangeAnimation_BeginStoryboard" />
+                        <BeginStoryboard x:Name="DataChangeAnimation_BeginStoryboard" Storyboard="{StaticResource GoalAnimationStoryboard}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="AwayGoalAnimation" TargetType="Grid">
+            <Setter Property="Visibility" Value="Hidden" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ChangeTracker.CurrentMatch.AwayTeamGoal}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <DataTrigger.EnterActions>
+                        <RemoveStoryboard BeginStoryboardName="DataChangeAnimation_BeginStoryboard" />
+                        <BeginStoryboard x:Name="DataChangeAnimation_BeginStoryboard" Storyboard="{StaticResource GoalAnimationStoryboard}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--  Statistics related  -->
+        <Style x:Key="PositionArrowHome" TargetType="Image">
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="10" />
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding MatchInfo.HomePositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="1">
+                    <Setter Property="Source" Value="{converters:ResolveImagePath Path=greenArrow.png}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.HomePositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="-1">
+                    <Setter Property="Source" Value="{converters:ResolveImagePath Path=redArrow.png}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.HomePositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="0">
+                    <Setter Property="Source" Value="{converters:ResolveImagePath Path=minus.png}" />
+                    <Setter Property="Height" Value="4" />
+                    <Setter Property="Width" Value="8" />
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PositionArrowAway" TargetType="Image">
+            <Setter Property="Width" Value="12" />
+            <Setter Property="Height" Value="10" />
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding MatchInfo.AwayPositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="1">
+                    <Setter Property="Source" Value="{converters:ResolveImagePath Path=greenArrow.png}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.AwayPositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="-1">
+                    <Setter Property="Source" Value="{converters:ResolveImagePath Path=redArrow.png}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.AwayPositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="0">
+                    <Setter Property="Source" Value="{converters:ResolveImagePath Path=minus.png}" />
+                    <Setter Property="Height" Value="4" />
+                    <Setter Property="Width" Value="8" />
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="LeagueTableHeadersStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Foreground" Value="#9fa8b0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="7, 0, 7, 0" />
+        </Style>
+        <Style x:Key="LeagueTableContentStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Foreground" Value="#f0f0f0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="7, 0, 10, 0" />
+        </Style>
+
+        <Style x:Key="TeamPositionHome"
+               BasedOn="{StaticResource LeagueTableContentStyle}"
+               TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding MatchInfo.HomePositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="1">
+                    <Setter Property="Foreground" Value="#FF228300" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.HomePositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="-1">
+                    <Setter Property="Foreground" Value="#FFed0000" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.HomePositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="0">
+                    <Setter Property="Foreground" Value="#FFea6711" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TeamPositionAway"
+               BasedOn="{StaticResource LeagueTableContentStyle}"
+               TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding MatchInfo.AwayPositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="1">
+                    <Setter Property="Foreground" Value="#FF228300" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.AwayPositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="-1">
+                    <Setter Property="Foreground" Value="#FFed0000" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding MatchInfo.AwayPositionChange, Converter={StaticResource TeamPositionChangeConverter}, ConverterParameter=0}" Value="0">
+                    <Setter Property="Foreground" Value="#FFea6711" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PerformanceTableHeadersStyle" TargetType="TextBlock">
+            <Setter Property="LineHeight" Value="16" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Foreground" Value="#9fa8b0" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="7, 0, 7, 0" />
+        </Style>
+
+        <Style x:Key="StatsViewStyle" TargetType="Grid">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Setter Property="Background" Value="Transparent" />
+            <Style.Triggers>
+                <!--  <DataTrigger Binding="{Binding Path=ChangeTracker.CurrentMatch.MatchSr.Tournament.Sport.DefaultName}" Value="Soccer">  -->
+                <DataTrigger Binding="{Binding Path=MatchInfo, Converter={StaticResource StatsConverter}}" Value="true">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Setter Property="Height" Value="495" />
+                    <Setter Property="MinHeight" Value="300" />
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="{converters:ResolveImagePath Path=stats_bg.png}" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StatsTableView" TargetType="Grid">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=MatchInfo.HomePosition, Converter={StaticResource StatsConverter}}" Value="true">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="StatsPerformanceView" TargetType="Grid">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <!--
+                <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=MatchInfo.HomeLastMatchesCount, Converter={StaticResource StatsConverter}}" Value="true">
+                <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                </Style.Triggers>
+            -->
+        </Style>
+        <Style x:Key="StatsHeadToHeadView" TargetType="Grid">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=MatchInfo.HeadToHeadLastFiveMatchesString, Converter={StaticResource StatsConverter}}" Value="true">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <!--  Head to Head not active  -->
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--  END of Statistics related  -->
+
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0,0,0,1"
+                Visibility="{Binding ChangeTracker.CurrentMatch.IsLiveBet,
+                                     Converter={StaticResource myInverseStrBooleanToVisibilityConverter}}">
+
+            <Border.Background>
+                <SolidColorBrush Opacity="0.30" Color="Black" />
+            </Border.Background>
+
+            <Grid>
+                <Grid>
+                    <!--  NON Statistics grid  -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".33*" />
+                        <ColumnDefinition Width=".33*" />
+                        <ColumnDefinition Width=".33*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3"
+                          HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Row="0"
+                                   Grid.ColumnSpan="2"
+                                   Margin="0,30,0,0"
+                                   HorizontalAlignment="Center"
+                                   DockPanel.Dock="Top"
+                                   LastChildFill="True">
+                            <StackPanel>
+                                <Viewbox Width="800" StretchDirection="DownOnly">
+                                    <TextBlock AutomationProperties.AutomationId="EventName"
+                                               FontFamily="Play"
+                                               FontSize="40"
+                                               FontWeight="Bold"
+                                               Foreground="White"
+                                               LineHeight="48"
+                                               LineStackingStrategy="BlockLineHeight"
+                                               Text="{Binding ChangeTracker.CurrentMatch.Name}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap" />
+                                </Viewbox>
+                                <Viewbox Width="800" StretchDirection="DownOnly">
+                                    <!--
+                                        <TextBlock
+                                        DataContext="{Binding ChangeTracker.CurrentMatch.VisibleBetDomainViews}"
+                                        Margin="10, 0, 0, 0"
+                                        FontFamily="Play"
+                                        FontSize="22"
+                                        FontWeight="Bold"
+                                        Foreground="#FFd6ad0a"
+                                        LineHeight="22"
+                                        LineStackingStrategy="BlockLineHeight"
+                                        Text="{Binding DisplayName}"
+                                        TextAlignment="Left"
+                                        TextWrapping="Wrap" />
+                                    -->
+                                </Viewbox>
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          Grid.RowSpan="2"
+                          Grid.Column="0"
+                          Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                               Converter={StaticResource bInversStatusToVisibilityConverter}}">
+                        <Grid.Resources />
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                    </Grid>
+
+                    <!--  Future  -->
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
+                           AutomationProperties.AutomationId="EventDate">
+                        <StackPanel Margin="0,0,0,10"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:HH}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock VerticalAlignment="Top"
+                                       FontFamily="Play"
+                                       FontSize="12"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:mm}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="  "
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:dd.MMMM}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text=" "
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:yyyy}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Label>
+                    <Grid Grid.Row="1"
+                          Grid.RowSpan="2"
+                          Grid.Column="2"
+                          Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                               Converter={StaticResource bInversStatusToVisibilityConverter}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                    </Grid>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="1"
+                               Margin="0,0,0,20"
+                               VerticalAlignment="Top"
+                               FontFamily="Play"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               Text="{Binding ChangeTracker.CurrentMatch.LiveScore}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                                    Converter={StaticResource bInversStatusToVisibilityConverter}}" />
+                </Grid>
+
+                <!--  Statistics grid  -->
+                <Grid Style="{StaticResource StatsViewStyle}">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".33*" />
+                        <ColumnDefinition Width=".33*" />
+                        <ColumnDefinition Width=".33*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3"
+                          HorizontalAlignment="Center">
+                        <TextBlock FontFamily="Play"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   LineHeight="68"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{Binding ChangeTracker.CurrentMatch.Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </Grid>
+
+                    <!--  League Table block  -->
+                    <Grid Grid.Row="1"
+                          Grid.ColumnSpan="3"
+                          Width="1005"
+                          MinHeight="54"
+                          HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Grid.ColumnSpan="3">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=header_bg.png}" />
+                            </Border.Background>
+                        </Border>
+                        <Grid Grid.RowSpan="2"
+                              Grid.Column="0"
+                              Height="54"
+                              Style="{StaticResource StatsTableView}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50*" />
+                                <RowDefinition Height="50*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
+                                       Margin="7, 0, 55, 0"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.POSITION_TITLE}}" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="1"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="P" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="2"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="W" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="D" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="4"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="L" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="5"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="GF" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="6"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="GA" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="7"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="Pts" />
+
+                            <Image Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="7, 0, 0, 3"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource PositionArrowHome}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       Margin="20, 0, 0, 0"
+                                       Style="{StaticResource TeamPositionHome}"
+                                       Text="{Binding MatchInfo.HomePosition}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeMatchesPlayed}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeMatchesPlayed}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeMatchesWon}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeMatchesDraw}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="4"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeMatchesLost}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="5"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeGoalsFor}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="6"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeGoalsAgainst}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="7"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomePoints}" />
+                        </Grid>
+
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,0,0,10"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:HH}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock VerticalAlignment="Top"
+                                       FontFamily="Play"
+                                       FontSize="12"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:mm}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="  "
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:dd.MMMM}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <Grid Grid.RowSpan="2"
+                              Grid.Column="2"
+                              Height="54"
+                              Style="{StaticResource StatsTableView}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="10*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50*" />
+                                <RowDefinition Height="50*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
+                                       Margin="7, 0, 55, 0"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.POSITION_TITLE}}" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="1"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="P" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="2"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="W" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="D" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="4"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="L" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="5"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="GF" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="6"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="GA" />
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="7"
+                                       Style="{StaticResource LeagueTableHeadersStyle}"
+                                       Text="Pts" />
+
+                            <Image Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="7, 0, 0, 3"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource PositionArrowAway}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       Margin="20, 0, 0, 0"
+                                       Style="{StaticResource TeamPositionAway}"
+                                       Text="{Binding MatchInfo.AwayPosition}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayMatchesPlayed}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayMatchesWon}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="3"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayMatchesDraw}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="4"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayMatchesLost}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="5"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayGoalsFor}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="6"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayGoalsAgainst}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="7"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayPoints}" />
+                        </Grid>
+                    </Grid>
+                    <!--  END of League table block  -->
+                    <!--  Performance block  -->
+                    <Grid Grid.Row="2"
+                          Grid.ColumnSpan="3"
+                          Width="1005"
+                          MinHeight="90"
+                          Margin="7"
+                          HorizontalAlignment="Center"
+                          Style="{StaticResource StatsPerformanceView}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30*" />
+                            <RowDefinition Height="23*" />
+                            <RowDefinition Height="23*" />
+                            <RowDefinition Height="23*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.Visibility>
+                            <MultiBinding Converter="{StaticResource StatsConvertMultiValues}">
+                                <MultiBinding.Bindings>
+                                    <Binding Path="MatchInfo.HomeLastMatchesPerformancePercent" />
+                                    <Binding Path="MatchInfo.AwayLastMatchesPerformancePercent" />
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Grid.Visibility>
+
+                        <Border Grid.RowSpan="2" Grid.ColumnSpan="3">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=header_bg.png}" />
+                            </Border.Background>
+                        </Border>
+
+
+                        <DockPanel Grid.Row="0" Grid.Column="0">
+                            <TextBlock Margin="10, 0, 0, 0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontFamily="Play"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#f0f0f0"
+                                       Text="{Binding MatchInfo.HomeTeamPerformancePercent}"
+                                       TextAlignment="Left" />
+
+                            <ListBox Name="performanceLstHome"
+                                     Margin="0, 10, 7, 10"
+                                     HorizontalAlignment="Right"
+                                     HorizontalContentAlignment="Right"
+                                     DockPanel.Dock="Right"
+                                     ItemsSource="{Binding MatchInfo.HomeLastMatchesTendency}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     Style="{StaticResource performanceListBox}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Right">
+                                            <Image Margin="5, 0, 0, 0" Source="{Binding Path=Box}" />
+
+                                            <TextBlock Margin="5, 0, 0, 0"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="12"
+                                                       FontWeight="Bold"
+                                                       Foreground="#f0f0f0"
+                                                       Opacity="0.95"
+                                                       Text="{Binding Path=State}" />
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </DockPanel>
+
+
+
+                        <DockPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Margin="10, 0, 0, 0"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Left"
+                                       FontFamily="Play"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#f0f0f0"
+                                       Text="{Binding MatchInfo.AwayTeamPerformancePercent}"
+                                       TextAlignment="Left" />
+
+                            <ListBox Name="performanceLstAway"
+                                     Margin="0, 10, 7, 10"
+                                     HorizontalAlignment="Right"
+                                     HorizontalContentAlignment="Right"
+                                     DockPanel.Dock="Right"
+                                     ItemsSource="{Binding MatchInfo.AwayLastMatchesTendency}"
+                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                     Style="{StaticResource performanceListBox}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Right">
+                                            <Image Margin="5, 0, 0, 0" Source="{Binding Path=Box}" />
+
+                                            <TextBlock Margin="5, 0, 0, 0"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="12"
+                                                       FontWeight="Bold"
+                                                       Foreground="#f0f0f0"
+                                                       Opacity="0.95"
+                                                       Text="{Binding Path=State}" />
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                        </DockPanel>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*" />
+                                <ColumnDefinition Width="33*" />
+                                <ColumnDefinition Width="33*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{Binding MatchInfo.HomeLastMatchesTotal}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.GOALS_SCORED}}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeLastMatchesGoalsFor}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.GOALS_CONCEDED}}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeLastMatchesGoalsAgainst}" />
+                            <TextBlock Grid.Column="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{Binding MatchInfo.HomeLastMatchesAverage}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeLastMatchesAverageGoalsFor}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.HomeLastMatchesAverageGoalsAgainst}" />
+                        </Grid>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="19"
+                                   FontWeight="Bold"
+                                   Foreground="#9fa8b0"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.STATS_PERFORMANCE}}" />
+
+                        <Grid Grid.Row="1" Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*" />
+                                <ColumnDefinition Width="33*" />
+                                <ColumnDefinition Width="33*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{Binding MatchInfo.AwayLastMatchesTotal}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.GOALS_SCORED}}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayLastMatchesGoalsFor}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.GOALS_CONCEDED}}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayLastMatchesGoalsAgainst}" />
+                            <TextBlock Grid.Column="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource PerformanceTableHeadersStyle}"
+                                       Text="{Binding MatchInfo.AwayLastMatchesAverage}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayLastMatchesAverageGoalsFor}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       HorizontalAlignment="Right"
+                                       Style="{StaticResource LeagueTableContentStyle}"
+                                       Text="{Binding MatchInfo.AwayLastMatchesAverageGoalsAgainst}" />
+                        </Grid>
+                    </Grid>
+                    <!--  END of Performance block  -->
+                    <!--  Head to head block  -->
+                    <Grid Grid.Row="3"
+                          Grid.ColumnSpan="3"
+                          Width="1005"
+                          HorizontalAlignment="Center"
+                          Style="{StaticResource StatsHeadToHeadView}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*" />
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="25*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.RowSpan="2" Grid.ColumnSpan="3">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=header_bg.png}" />
+                            </Border.Background>
+                        </Border>
+                        <StackPanel Grid.Row="1" Grid.Column="0">
+                            <!--  <TextBlock Text="{Binding SelectedMatch.MatchInfo.HomeTeamColor}" Foreground="#FFFFFF"/>  -->
+                            <Image Width="115"
+                                   Height="136"
+                                   Source="{Binding MatchInfo.TshirtHomeImage}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="2">
+                            <!--  <TextBlock Text="{Binding SelectedMatch.MatchInfo.AwayTeamColor}" Foreground="#FFFFFF"/>  -->
+                            <Image Width="115"
+                                   Height="136"
+                                   Source="{Binding MatchInfo.TshirtAwayImage}" />
+                        </StackPanel>
+                        <TextBlock Grid.Row="0"
+                                   Grid.ColumnSpan="3"
+                                   Margin="0, 10, 0, 10"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="19"
+                                   FontWeight="Bold"
+                                   Foreground="#9fa8b0"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.HEAD_TO_HEAD}}" />
+
+
+                        <Rectangle Grid.Row="1"
+                                   Grid.Column="1"
+                                   Width="122"
+                                   Height="167"
+                                   MaxWidth="122"
+                                   MaxHeight="167"
+                                   Margin="0, 0, 0, 20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Fill="White"
+                                   Opacity="0.15"
+                                   RadiusX="5"
+                                   RadiusY="5" />
+
+                        <ListBox Name="scoresLst"
+                                 Grid.Row="1"
+                                 Grid.Column="1"
+                                 Margin="0, 10, 0, 10"
+                                 HorizontalContentAlignment="Center"
+                                 ItemsSource="{Binding MatchInfo.HeadToHeadLastFiveMatches}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 Style="{StaticResource scoreLinesListBox}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Center">
+
+                                        <Rectangle Width="{Binding Path=LineWidth}"
+                                                   Height="25"
+                                                   MaxHeight="25"
+                                                   Margin="{Binding Path=Margin}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Fill="{Binding Path=Color}"
+                                                   Opacity="0.45"
+                                                   RadiusX="2"
+                                                   RadiusY="2" />
+
+                                        <TextBlock Margin="0, 5, 0, 5"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="Play"
+                                                   FontSize="16"
+                                                   FontWeight="Bold"
+                                                   Foreground="#f0f0f0"
+                                                   Opacity="0.95"
+                                                   Text="{Binding Path=Score}" />
+
+
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </Grid>
+                    <!--  END of Head to head block  -->
+
+                </Grid>
+                <!--  END of Statistics grid  -->
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="0,0,0,1"
+                Visibility="{Binding ChangeTracker.CurrentMatch.IsLiveBet,
+                                     Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+
+            <Border.Background>
+                <SolidColorBrush Opacity="0.30" Color="Black" />
+            </Border.Background>
+
+            <Grid>
+                <Grid>
+                    <!--  NON Statistics grid  -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".33*" />
+                        <ColumnDefinition Width=".33*" />
+                        <ColumnDefinition Width=".33*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0"
+                          Grid.ColumnSpan="3"
+                          HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Row="0"
+                                   Grid.ColumnSpan="2"
+                                   Margin="0,30,0,0"
+                                   HorizontalAlignment="Center"
+                                   DockPanel.Dock="Top"
+                                   LastChildFill="True">
+                            <TextBlock FontFamily="Play"
+                                       FontSize="40"
+                                       FontWeight="Bold"
+                                       Foreground="White"
+                                       LineHeight="48"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{Binding ChangeTracker.CurrentMatch.Name}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </DockPanel>
+                        <!--  red cards of team 1  -->
+
+                        <DockPanel Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="1,0,0,0"
+                                   HorizontalAlignment="Left"
+                                   DockPanel.Dock="Left">
+
+                            <ItemsControl HorizontalContentAlignment="Left" ItemsSource="{Binding ChangeTracker.CurrentMatch.HomeTeamRedCards}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Width="10"
+                                               Height="16"
+                                               Margin="4,0,0,0"
+                                               Source="{converters:ResolveImagePath Path=red_card.png}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal" VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DockPanel>
+
+                        <!--  red cards of team 2  -->
+
+                        <DockPanel Grid.Row="1"
+                                   Grid.Column="1"
+                                   HorizontalAlignment="Right"
+                                   DockPanel.Dock="Right">
+
+                            <ItemsControl HorizontalContentAlignment="Right" ItemsSource="{Binding ChangeTracker.CurrentMatch.AwayTeamRedCards}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Width="10"
+                                               Height="16"
+                                               Margin="2,0,2,0"
+                                               Source="{converters:ResolveImagePath Path=red_card.png}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel Orientation="Horizontal" VirtualizationMode="Recycling" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DockPanel>
+
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          Grid.RowSpan="2"
+                          Grid.Column="0"
+                          Style="{StaticResource HomeGoalAnimation}">
+                        <Grid.Resources />
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image x:Name="HomeTeamWonImage"
+                               Grid.Row="0"
+                               Width="53"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Source="{converters:ResolveImagePath Path=ResultsIconSelected.png}" />
+                        <TextBlock Grid.Row="1"
+                                   Grid.ColumnSpan="3"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF4D00"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.TERMINAL_GOAL_TEXT}}"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap" />
+                    </Grid>
+                    <!--  Live  -->
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal"
+                                Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                                     Converter={StaticResource bInversStatusToVisibilityConverter}}">
+                        <TextBlock Margin="15,5,2,0"
+                                   VerticalAlignment="Bottom"
+                                   FontFamily="Play"
+                                   FontSize="36"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF4D00"
+                                   Text="{Binding ChangeTracker.CurrentMatch.LiveMinuteToShow}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+
+                        <TextBlock Margin="5,5,2,5"
+                                   VerticalAlignment="Bottom"
+                                   FontFamily="Play"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF4D00"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.Terminal_Minutes}}"
+                                   TextAlignment="Center"
+                                   Visibility="{Binding ChangeTracker.CurrentMatch.ShomMinutes}" />
+
+                        <TextBlock Margin="15,5,2,5"
+                                   VerticalAlignment="Bottom"
+                                   FontFamily="Play"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF4D00"
+                                   Text="-"
+                                   TextAlignment="Center"
+                                   Visibility="{Binding ChangeTracker.CurrentMatch.ShomMinutes}" />
+
+                        <TextBlock Margin="15,5,2,5"
+                                   VerticalAlignment="Bottom"
+                                   FontFamily="Play"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF4D00"
+                                   Text="{Binding ChangeTracker.CurrentMatch.LivePeriodInfoString}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+
+                    <!--  Future  -->
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Center"
+                           AutomationProperties.AutomationId="EventDate">
+                        <StackPanel Margin="0,0,0,10"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                                         Converter={StaticResource bStatusToVisibilityConverter}}">
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:HH}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,22,0,0"
+                                       VerticalAlignment="Top"
+                                       FontFamily="Play"
+                                       FontSize="12"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:mm}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="  "
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Margin="0,0,0,6"
+                                       VerticalAlignment="Bottom"
+                                       FontFamily="Play"
+                                       FontSize="32"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFF4D00"
+                                       Text="{Binding ChangeTracker.CurrentMatch.StartDate,
+                                                      StringFormat={}{0:dd.MMMM}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Label>
+                    <Grid Grid.Row="1"
+                          Grid.RowSpan="2"
+                          Grid.Column="2"
+                          Style="{StaticResource AwayGoalAnimation}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image x:Name="AwayTeamWonImage"
+                               Grid.Row="0"
+                               Width="53"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Source="{converters:ResolveImagePath Path=ResultsIconSelected.png}" />
+                        <TextBlock Grid.Row="1"
+                                   Grid.ColumnSpan="3"
+                                   HorizontalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   Foreground="#FFFF4D00"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.TERMINAL_GOAL_TEXT}}"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap" />
+                    </Grid>
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="1"
+                               Margin="0,0,0,20"
+                               VerticalAlignment="Top"
+                               FontFamily="Play"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               Text="{Binding ChangeTracker.CurrentMatch.LiveScore}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                                    Converter={StaticResource bInversStatusToVisibilityConverter}}" />
+
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Margin="0,0,0,20"
+                               VerticalAlignment="Top"
+                               FontFamily="Play"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MATCH_ENDED}}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding ChangeTracker.CurrentMatch.LiveBetStatus,
+                                                    Converter={StaticResource MatchStatusToVisibilityConverter}}" />
+                    <TextBlock Text="{Binding ChangeTracker.CurrentMatch.GoalsTextTest}" />
+                </Grid>
+                <!--  END of NON-Statistics grid  -->
+
+            </Grid>
+        </Border>
+        <ScrollViewer x:Name="ScrollViewerBetDomainView"
+                      Grid.Row="1"
+                      PanningMode="VerticalOnly"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      Template="{StaticResource secondVisibleScrollView}">
+            <ItemsControl IsEnabled="{Binding ChangeTracker.CurrentMatch.IsEnabled}"
+                          ItemTemplate="{StaticResource NewLiveBetDomainTemplate}"
+                          ItemsSource="{Binding ChangeTracker.CurrentMatch.VisibleBetDomainViews}" />
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ScrollChanged">
+                    <i:InvokeCommandAction Command="{Binding ScrollChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ContentVerticalOffset}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

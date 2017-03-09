@@ -1,0 +1,362 @@
+﻿<UserControl x:Class="DefaultViews.Views.TopTournamentsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             x:Name="TournamentsViewControl"
+             d:DataContext="{d:DesignInstance Type=viewModels2:TournamentsViewModel}"
+             d:DesignHeight="1360"
+             d:DesignWidth="1050"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="InverseBooleanToVisibilityConverter" />
+
+        <Style x:Key="stackpanelCollapsable" TargetType="{x:Type StackPanel}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding MinimumCombinationString}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="extraLargeAllTournamentsButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Grid x:Name="dpnlContent"
+                               Width="{TemplateBinding Width}"
+                               Height="120">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <DockPanel x:Name="dpnlLeft"
+                                   Width="3"
+                                   Height="120"
+                                   Grid.Column="0">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=AllTournamentsBtnLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnCenter"
+                                   Height="120" 
+                                   Grid.Column="1" 
+                                   HorizontalAlignment="Stretch">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=AllTournamentsBtnCenter.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                   Width="30"
+                                   Height="120"
+                                   Grid.Column="2">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=AllTournamentsBtnRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+
+                            <ContentPresenter Grid.Column="1" Grid.ColumnSpan="3" Margin="{TemplateBinding Padding}" Panel.ZIndex="100"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnCenter" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=AllTournamentsBtnDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=AllTournamentsBtnDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=AllTournamentsBtnDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="extraLargeNavigationButtonDT" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlContent"
+                               Width="{TemplateBinding Width}"
+                               Height="120"
+                               LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=ExtraLargeBreadcrumbsCenter.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                   Width="3"
+                                   Height="120"
+                                   DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=ExtraLargeBreadcrumbsLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                   Width="3"
+                                   Height="120"
+                                   DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=ExtraLargeBreadcrumbsRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=ExtraLargePressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=ExtraLargePressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=ExtraLargePressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="UsualTournament">
+            <Grid>
+                <Button Height="120"
+                        Margin="5,5,5,5"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.Choice}"
+                        CommandParameter="{Binding}"
+                        Style="{StaticResource extraLargeNavigationButtonDT}"
+                        AutomationProperties.AutomationId="{Binding Path=Name}">
+                    <StackPanel Margin="0,3,0,3" HorizontalAlignment="Center">
+                        <TextBlock x:Name="txtBlock"
+                                   FontFamily="Play"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#FFEFEFEF"
+                                   LineHeight="18"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Padding="0,5,0,0"
+                                   Text="{Binding Path=Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="Name" />
+                        <StackPanel Margin="0,-2,0,0"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Style="{StaticResource stackpanelCollapsable}">
+                            <TextBlock VerticalAlignment="Center"
+                                       FontFamily="Play"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="#FFEFEFEF"
+                                       LineHeight="12"
+                                       Text="{Binding MinimumCombinationString}"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                        AutomationProperties.AutomationId="MinCombination" />
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+                <StackPanel Margin="25,-80,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal">
+                    <Image Width="29"
+                           Height="20"
+                           Margin="-5,0,0,0"
+                           Source="{converters2:ResolveImagePath Path=MatchesCount.png}" />
+                    <TextBlock Margin="-30,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="GhostWhite"
+                               Text="{Binding MatchesCount}"
+                               TextAlignment="Center"
+                               AutomationProperties.AutomationId="MatchesCount" />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Orientation="Horizontal"
+                            Visibility="{Binding IsOutrightGroup, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                    <CheckBox Margin="0,0,5,10"
+                              Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.CheckedBox}"
+                              CommandParameter="{Binding}"
+                              IsChecked="{Binding IsSelected}"
+                              Template="{StaticResource ImageCheckboxOrange}"
+                              AutomationProperties.AutomationId="CheckBox" />
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal"
+                            Visibility="{Binding Path=ShowCountryName}">
+                    <TextBlock Margin="0,13,40,0"
+                               Foreground="GhostWhite"
+                               Text="{Binding Path=Country}"
+                               TextAlignment="Center"
+                               AutomationProperties.AutomationId="Country" />
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Orientation="Horizontal">
+                    <Image Margin="0,10,10,0" Source="{Binding ImageSource}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="AllTournaments">
+            <Grid>
+                <Button Height="120"
+                        Margin="5,5,5,5"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.Choice}"
+                        CommandParameter="{Binding}"
+                        Style="{StaticResource extraLargeAllTournamentsButton}"
+                        AutomationProperties.AutomationId="{Binding Path=Name}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock x:Name="txtBlock"
+                                   FontFamily="Play"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="Black"
+                                   LineHeight="18"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Padding="0,5,0,0"
+                                   Text="{Binding Path=AllTournamentsName}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   AutomationProperties.AutomationId="Name" />
+                    </StackPanel>
+                </Button>
+
+                <StackPanel Margin="25,-80,0,0"
+                            HorizontalAlignment="Left"
+                            Orientation="Horizontal">
+                    <Image Width="29"
+                           Height="20"
+                           Margin="-5,0,0,0"
+                           Source="{converters2:ResolveImagePath Path=MatchesCount.png}" />
+                    <TextBlock Margin="-30,0,0,0"
+                               VerticalAlignment="Center"
+                               Foreground="GhostWhite"
+                               Text="{Binding MatchesCount}"
+                               TextAlignment="Center"
+                               AutomationProperties.AutomationId="MatchesCount" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <shared:TournamentTemplateSelector x:Key="myTemplateSelector"
+                                         UsualTemplate="{StaticResource ResourceKey=UsualTournament}"
+                                         AllTournamentsTemplate="{StaticResource ResourceKey=AllTournaments}" />
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters2:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+
+    <ScrollViewer x:Name="ScrollViewer"
+                  PanningMode="VerticalOnly"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  Template="{StaticResource secondVisibleScrollView}">
+        <ItemsControl HorizontalContentAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Categories}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <Grid Height="30" Background="#FFf0f0f0" HorizontalAlignment="Stretch">
+                            <TextBlock Grid.Column="0"
+                                   Margin="15,0,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   AutomationProperties.AutomationId="SportName"
+                                   Style="{StaticResource headerText}"
+                                   Text="{Binding SportName}" />
+                        </Grid>
+                        <ItemsControl HorizontalContentAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Tournaments}" ItemTemplateSelector="{StaticResource myTemplateSelector}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ColumnsAmount}"></UniformGrid>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>    
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"></VirtualizingStackPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="ScrollChanged">
+                <i:InvokeCommandAction Command="{Binding ScrollChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ContentVerticalOffset}" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="LayoutUpdated">
+                <i:InvokeCommandAction Command="{Binding LayoutUpdatedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Grid}, AncestorLevel=1}, Path=ActualWidth}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </ScrollViewer>
+</UserControl>

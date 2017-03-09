@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Play" Size="8.25" />
+  <Class Name="NBT.Services.SPF.SPFPage" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>PartialClassExt\SPFPage.cs</FileName>
+      <HashCode>AAgAAACAAAAACAAAAAABAAAAAAAIAAACAgAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.PrinterManager" Collapsed="true">
+    <Position X="1.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>PrinterManager.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.Resource1" Collapsed="true">
+    <Position X="1.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAACAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.Block" Collapsed="true">
+    <Position X="9.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAIEAAAAAQAAAQIAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.BlockText" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>BAAACEACECAAgAAQAJAACABCAAICAAICDAEgAAATAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.TextItem" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>PartialClassExt\SPFPage.cs</FileName>
+      <HashCode>BABAiEACECAEgAAQQLApCAJCAQICAQICDQEgAAUTAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.BarCodeItem" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAFAAAAABARGAJACASCpAEIIAAACAQAAMQAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.ImageItem" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>BABAAAAAAAAEAAIAACAoAAIAAAAAAQAAAQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.Line" Collapsed="true">
+    <Position X="13.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAgAACAAAAACAAQAIAACBBAAQAAEAAAAAUAAAAIAEA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.Translator" Collapsed="true">
+    <Position X="4.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Translator.cs</FileName>
+      <HashCode>AAAgAAAAAAFAAAAEEJAAAYAAAAACAgAAAAAAAGIAAoE=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="page" />
+      <Field Name="printer" />
+    </ShowAsAssociation>
+    <AssociationLine Name="page" Type="NBT.Services.SPF.SPFPage" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.875" Y="7" />
+        <Point X="4.875" Y="0.748" />
+        <Point X="11.25" Y="0.748" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="printer" Type="NBT.Services.SPF.Printer.IPrinter" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.375" Y="7" />
+        <Point X="5.375" Y="5.255" />
+        <Point X="6.25" Y="5.255" />
+      </Path>
+    </AssociationLine>
+  </Class>
+  <Class Name="NBT.Services.SPF.XmlPreprocess" Collapsed="true">
+    <Position X="1.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>XmlPreprocess.cs</FileName>
+      <HashCode>AAAAAAgAgACAAAAAAAAAAAAAAAAAAECEAAAAACAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NBT.Services.SPF.Printer.EpsonCompatible" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Printer\EpsonCompatible.cs</FileName>
+      <HashCode>EIRIACQA9CEJiQgByAQlQpAkkUAAgIAEFAUAEADkASA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NBT.Services.SPF.FillItem" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="NBT.Services.SPF.Printer.IPrinter" Collapsed="true">
+    <Position X="6.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Printer\IPrinter.cs</FileName>
+      <HashCode>AIBIACQAsAAAgQgBSAQlAhAkkUAAgIAEEAUAEACAAQA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="NBT.Services.SPF.Font" Collapsed="true">
+    <Position X="11" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAEAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NBT.Services.SPF.Style" Collapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAEAABA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NBT.Services.SPF.Alignment" Collapsed="true">
+    <Position X="11" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAIAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NBT.Services.SPF.BCHRIPos" Collapsed="true">
+    <Position X="12.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAACAAAAAAAAAAAgAAAAAAABAAAAAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NBT.Services.SPF.BCType" Collapsed="true">
+    <Position X="12.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>SPFSchema.cs</FileName>
+      <HashCode>AAAAAAQAEAAAAABEBAAAAAAAACAAAAAAAQAAEAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

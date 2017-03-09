@@ -1,0 +1,9 @@
+﻿<Application x:Class="SportBetting.Wpf.Prism.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+          
+    </Application.Resources>
+</Application>

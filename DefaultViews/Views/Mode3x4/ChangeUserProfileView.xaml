@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="DefaultViews.Views.Mode3x4.ChangeUserProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Prism="clr-namespace:SportBetting.WPF.Prism;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:TranslationByMarkupExtension="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+             xmlns:viewModels3="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             x:Name="BetDomainsViewControl"
+             Background="Black"
+             d:DataContext="{d:DesignInstance Type=viewModels3:ChangeUserProfileViewModel}"
+             d:DesignHeight="500"
+             d:DesignWidth="500"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityConverter" />
+        <Prism:InverseBooleanToVisibilityConverter x:Key="myInverseBooleanToVisibilityConverter" />
+        <viewModels:RegistrationDataTemplateSelector x:Key="RegistrationDataTemplateSelector" />
+    </UserControl.Resources>
+
+    <Grid x:Name="grdCOntentControl">
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <ImageBrush AlignmentX="Left"
+                                    AlignmentY="Top"
+                                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                                    Stretch="None"
+                                    TileMode="Tile"
+                                    Viewport="0,0,3,3"
+                                    ViewportUnits="Absolute" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Style>
+
+        <Grid Margin="0,-55,0,0"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!--  buttons for scrolling  -->
+            <ScrollViewer x:Name="Scroller"
+                          Grid.Row="0"
+                          Margin="0,0,0,0"
+                          PanningMode="VerticalOnly"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          Template="{StaticResource hiddenScrollViewerControl}">
+                <ItemsControl HorizontalContentAlignment="Stretch"
+                              ItemTemplateSelector="{StaticResource ResourceKey=RegistrationDataTemplateSelector}"
+                              ItemsSource="{Binding ChangeUserProfileFields}" />
+            </ScrollViewer>
+            <DockPanel Grid.Row="1"
+                       HorizontalAlignment="Center"
+                       FlowDirection="LeftToRight"
+                       Focusable="False"
+                       Visibility="{Binding IsEnabledForEditing,
+                                            Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+                <Button Width="150"
+                        Height="60"
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Center"
+                        AutomationProperties.AutomationId="Change"
+                        Command="{Binding ChangeUserProfileCommand}"
+                        DockPanel.Dock="Left"
+                        Focusable="False"
+                        Style="{StaticResource orangeButton}"
+                        Visibility="{Binding StationRepository.IsTestMode,
+                                             Converter={StaticResource myInverseBooleanToVisibilityConverter}}"
+                        WpfHelper:MouseOverBehavior.IsMouseOver="{Binding IsMouseOver,
+                                                                          Mode=TwoWay}">
+                    <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.CHANGE}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </Button>
+            </DockPanel>
+            <DockPanel Grid.Row="1"
+                       HorizontalAlignment="Center"
+                       FlowDirection="LeftToRight"
+                       Focusable="False"
+                       Visibility="{Binding IsEnabledForEditing,
+                                            Converter={StaticResource myBooleanToVisibilityConverter}}"
+                       WpfHelper:MouseOverBehavior.IsMouseOver="{Binding IsMouseOver,
+                                                                         Mode=TwoWay}">
+                <Button Width="150"
+                        Height="60"
+                        Margin="0,0,0,0"
+                        AutomationProperties.AutomationId="Save"
+                        Command="{Binding SaveUserProfileCommand}"
+                        DockPanel.Dock="Left"
+                        Focusable="False"
+                        IsEnabled="{Binding IsEnabledSave}"
+                        Style="{StaticResource orangeButton}">
+                    <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               IsEnabled="{Binding IsEnabledSave}"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{l:Translate Key={x:Static TranslationByMarkupExtension:MultistringTags.TERMINAL_FORM_SAVE}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </Button>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

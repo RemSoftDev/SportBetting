@@ -1,0 +1,440 @@
+﻿<UserControl x:Class="DefaultViews.Views.OperatorSettlementHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:OperatorSettlementHistoryViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityConverter" />
+        <shared:MultiValueDeductionConverter x:Key="myMultiValueDeductionConverter" />
+        <Style x:Key="MyListView" TargetType="{x:Type ListView}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ListBorder}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListView}">
+                        <Border x:Name="PART_ControlBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="0"
+                                SnapsToDevicePixels="true">
+                            <Grid>
+                                <ScrollViewer Name="ScrollViewer"
+                                              Grid.Row="1"
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              Padding="{TemplateBinding Padding}"
+                                              VerticalScrollBarVisibility="Hidden">
+                                    <ItemsPresenter x:Name="PART_ItemsPresenter" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Resources>
+                            <!--  Foreground for Selected ListViewItem  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Transparent" />
+                            <!--  Background for Selected ListViewItem  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                            <!--  SelectedItem without focus  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+                            <!--  or  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                        </Style.Resources>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Header  -->
+        <!--  <TextBlock Margin="0,50,0,20" HorizontalAlignment="Center" Grid.Row="0" Style="{StaticResource importantText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_OPERATOR_SETTLEMENT_HISTORY}}"></TextBlock>  -->
+
+        <Border Grid.Row="0"
+                Margin="10, 5, 10, 5"
+                BorderBrush="#FFEFEFEF"
+                BorderThickness="1"
+                Padding="10, 5, 10, 5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="CashBalance"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.TerminalBalance}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="CashPosition"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.TotalStationCash}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.LOCATION_CASH_POSITION}}" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="CashPosition"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.LocationCashPosition}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.LOCATION_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="CashPosition"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.LocationBalance}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+            </Grid>
+        </Border>
+
+
+        <Grid Grid.Row="1"
+              Margin="10, 0"
+              HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="38*" />
+                <ColumnDefinition Width="12*" />
+                <ColumnDefinition Width="11*" />
+                <ColumnDefinition Width="12*" />
+                <ColumnDefinition Width="11*" />
+                <ColumnDefinition Width="16*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="3" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_SETTLEMENT_DATES}}" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="EMPTY BOX NUMBER"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_AMOUNT}}" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="3"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="PAYMENTS NUMBER"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="4"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_AMOUNT}}" />
+            <TextBlock Grid.Row="0"
+                       Grid.Column="5"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="SALDO" />
+            <Image x:Name="theader"
+                   Grid.Row="1"
+                   Grid.ColumnSpan="6"
+                   Width="{Binding ElementName='headerPanel',
+                                   Path=ActualWidth}"
+                   Height="3"
+                   Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+                   Stretch="Fill" />
+            <ListView Grid.Row="2"
+                      Grid.ColumnSpan="6"
+                      Margin="0,0, 0, 10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch"
+                      Background="Transparent"
+                      BorderBrush="Transparent"
+                      BorderThickness="0"
+                      ItemsSource="{Binding ListOfCheckpoints}"
+                      ScrollViewer.CanContentScroll="True"
+                      SelectedIndex="0"
+                      SelectedItem="{Binding SelectedCheckpoint,
+                                             Mode=TwoWay}"
+                      SelectionMode="Single"
+                      Style="{StaticResource MyListView}">
+
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="DimGray" BorderThickness="0, 0, 0, 2">
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!--
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5, 0, 0, 0" Height="45">
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy HH:mm}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Style="{StaticResource rowEntry}"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Text=" - " Style="{StaticResource rowEntry}"></TextBlock>
+                                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy HH:mm}, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}" Style="{StaticResource rowEntry}"></TextBlock>
+                                    </StackPanel>
+                                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding SettlementSaldo}" Style="{StaticResource rowEntry}" />
+                                -->
+
+                                <Grid Grid.Row="0"
+                                      Height="45"
+                                      HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="38*" />
+                                        <ColumnDefinition Width="12*" />
+                                        <ColumnDefinition Width="11*" />
+                                        <ColumnDefinition Width="12*" />
+                                        <ColumnDefinition Width="11*" />
+                                        <ColumnDefinition Width="16*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0"
+                                                Margin="5, 0, 0, 0"
+                                                VerticalAlignment="Center"
+                                                Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource headerEntry}"
+                                                   Text="{Binding StartDate,
+                                                                  StringFormat=\{0:dd.MM.yyyy HH:mm\},
+                                                                  ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                                   TextAlignment="Center" />
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource rowEntry}"
+                                                   Text=" - "
+                                                   TextAlignment="Center" />
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Style="{StaticResource headerEntry}"
+                                                   Text="{Binding EndDate,
+                                                                  StringFormat=\{0:dd.MM.yyyy HH:mm\},
+                                                                  ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                                   TextAlignment="Center" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="5"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Style="{StaticResource headerEntry}"
+                                               Text="{Binding SettlementSaldo}"
+                                               TextAlignment="Center" />
+                                    <Image Grid.Column="5"
+                                           Width="15"
+                                           Height="10"
+                                           Margin="5,0,5,0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           DockPanel.Dock="Right">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsVisible}" Value="True">
+                                                        <Setter Property="Source" Value="{converters:ResolveImagePath Path=dropdown_arrow_up.png}" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Path=IsVisible}" Value="False">
+                                                        <Setter Property="Source" Value="{converters:ResolveImagePath Path=dropdown_arrow_down.png}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <Grid.Style>
+                                        <Style TargetType="{x:Type Grid}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsVisible}" Value="True">
+                                                    <Setter Property="Background" Value="#AA636363" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                </Grid>
+
+                                <Border Grid.Row="1"
+                                        BorderBrush="DimGray"
+                                        BorderThickness="0, 2, 0, 0"
+                                        Visibility="{Binding DataContext.IsVisible,
+                                                             RelativeSource={RelativeSource AncestorType={x:Type Grid}},
+                                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                    <ListView Margin="0,10"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              HorizontalContentAlignment="Stretch"
+                                              VerticalContentAlignment="Stretch"
+                                              Background="Transparent"
+                                              BorderBrush="Transparent"
+                                              BorderThickness="0"
+                                              ItemsSource="{Binding CheckpointDetails}"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                              ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                              SelectionMode="Single">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Height="40" HorizontalAlignment="Stretch">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="40*" />
+                                                        <ColumnDefinition Width="12*" />
+                                                        <ColumnDefinition Width="12*" />
+                                                        <ColumnDefinition Width="12*" />
+                                                        <ColumnDefinition Width="12*" />
+                                                        <ColumnDefinition Width="12*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackPanel Grid.Column="0"
+                                                                Margin="5, 0, 0, 0"
+                                                                Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Left"
+                                                                   VerticalAlignment="Center"
+                                                                   Style="{StaticResource rowEntry}"
+                                                                   Text="{Binding shiftStartDate,
+                                                                                  StringFormat=\{0:dd.MM.yyyy HH:mm\},
+                                                                                  ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                                                   TextAlignment="Center" />
+                                                        <TextBlock HorizontalAlignment="Left"
+                                                                   VerticalAlignment="Center"
+                                                                   Style="{StaticResource rowEntry}"
+                                                                   Text=" - "
+                                                                   TextAlignment="Center" />
+                                                        <TextBlock HorizontalAlignment="Left"
+                                                                   VerticalAlignment="Center"
+                                                                   Style="{StaticResource rowEntry}"
+                                                                   Text="{Binding shiftEndDate,
+                                                                                  StringFormat=\{0:dd.MM.yyyy HH:mm\},
+                                                                                  ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                                                   TextAlignment="Center" />
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="1"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource rowEntry}"
+                                                               Text="{Binding emptyBoxTotalNumber}" />
+                                                    <TextBlock Grid.Column="2"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource rowEntry}"
+                                                               Text="{Binding emptyBoxTotalAmount}" />
+                                                    <TextBlock Grid.Column="3"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource rowEntry}"
+                                                               Text="{Binding paymentTotalNumber}" />
+                                                    <TextBlock Grid.Column="4"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource rowEntry}"
+                                                               Text="{Binding paymentTotalAmount}" />
+                                                    <TextBlock Grid.Column="5"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource rowEntry}">
+                                                        <TextBlock.Text>
+                                                            <MultiBinding Converter="{StaticResource myMultiValueDeductionConverter}">
+                                                                <MultiBinding.Bindings>
+                                                                    <Binding Path="emptyBoxTotalAmount" />
+                                                                    <Binding Path="paymentTotalAmount" />
+                                                                </MultiBinding.Bindings>
+                                                            </MultiBinding>
+                                                        </TextBlock.Text>
+                                                    </TextBlock>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Resources>
+                            <!--  Foreground for Selected ListViewItem  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Transparent" />
+                            <!--  Background for Selected ListViewItem  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                            <!--  SelectedItem without focus  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+                            <!--  or  -->
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent" />
+                        </Style.Resources>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

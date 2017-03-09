@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://messages.types.bas.ws.bs.sportradar.com/" xmlns:basobj="http://objects.types.bas.ws.bs.sportradar.com/" elementFormDefault="qualified" targetNamespace="http://messages.types.bas.ws.bs.sportradar.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="/BSMHub/services/BSMHubService?xsd=BettingAccountServerTypesObjects" namespace="http://objects.types.bas.ws.bs.sportradar.com/" />
+  <xs:element name="SaveFranchisorSettings" type="tns:SaveFranchisorSettings" />
+  <xs:element name="SaveFranchisorSettingsResponse" type="tns:SaveFranchisorSettingsResponse" />
+  <xs:element name="GetFranchisorSettings" type="tns:GetFranchisorSettings" />
+  <xs:element name="GetFranchisorSettingsResponse" type="tns:GetFranchisorSettingsResponse" />
+  <xs:element name="UpdateAccountSystemSettings" type="tns:UpdateAccountSystemSettings" />
+  <xs:element name="UpdateAccountSystemSettingsResponse" type="tns:UpdateAccountSystemSettingsResponse" />
+  <xs:element name="GetRegistrationForm" type="tns:GetRegistrationForm" />
+  <xs:element name="GetRegistrationFormResponse" type="tns:GetRegistrationFormResponse" />
+  <xs:element name="AccountSearch" type="tns:AccountSearch" />
+  <xs:element name="AccountSearchResponse" type="tns:AccountSearchResponse" />
+  <xs:element name="ResetPinSetting" type="tns:ResetPinSetting" />
+  <xs:element name="ResetPinSettingResponse" type="tns:ResetPinSettingResponse" />
+  <xs:element name="ToggleAccountState" type="tns:ToggleAccountState" />
+  <xs:element name="ToggleAccountStateResponse" type="tns:ToggleAccountStateResponse" />
+  <xs:element name="LoadUserComment" type="tns:LoadUserComment" />
+  <xs:element name="LoadUserCommentResponse" type="tns:LoadUserCommentResponse" />
+  <xs:element name="AddUserComment" type="tns:AddUserComment" />
+  <xs:element name="AddUserCommentResponse" type="tns:AddUserCommentResponse" />
+  <xs:element name="EditUserComment" type="tns:EditUserComment" />
+  <xs:element name="EditUserCommentResponse" type="tns:EditUserCommentResponse" />
+  <xs:element name="DeleteUserComment" type="tns:DeleteUserComment" />
+  <xs:element name="DeleteUserCommentResponse" type="tns:DeleteUserCommentResponse" />
+  <xs:element name="GetCashoutData" type="tns:GetCashoutData" />
+  <xs:element name="GetCashoutDataResponse" type="tns:GetCashoutDataResponse" />
+  <xs:element name="CreateNamedCreditNote" type="tns:CreateNamedCreditNote" />
+  <xs:element name="CreateNamedCreditNoteResponse" type="tns:CreateNamedCreditNoteResponse" />
+  <xs:element name="ChangeIDCardPin" type="tns:ChangeIDCardPin" />
+  <xs:element name="ChangeIDCardPinResponse" type="tns:ChangeIDCardPinResponse" />
+  <xs:element name="RegisterPaymentNote" type="tns:RegisterPaymentNote" />
+  <xs:element name="RegisterPaymentNoteResponse" type="tns:RegisterPaymentNoteResponse" />
+  <xs:element name="LoadPaymentNote" type="tns:LoadPaymentNote" />
+  <xs:element name="LoadPaymentNoteResponse" type="tns:LoadPaymentNoteResponse" />
+  <xs:element name="WithdrawByPaymentNote" type="tns:WithdrawByPaymentNote" />
+  <xs:element name="WithdrawByPaymentNoteResponse" type="tns:WithdrawByPaymentNoteResponse" />
+  <xs:element name="GetPaymentNotesTotal" type="tns:GetPaymentNotesTotal" />
+  <xs:element name="GetPaymentNotesTotalResponse" type="tns:GetPaymentNotesTotalResponse" />
+  <xs:element name="RegisterAccount" type="tns:RegisterAccount" />
+  <xs:element name="RegisterAccountResponse" type="tns:RegisterAccountResponse" />
+  <xs:element name="RegisterGuestIDCardAccount" type="tns:RegisterGuestIDCardAccount" />
+  <xs:element name="RegisterGuestIDCardAccountResponse" type="tns:RegisterGuestIDCardAccountResponse" />
+  <xs:element name="GetBasConfiguration" type="tns:GetBasConfiguration" />
+  <xs:element name="GetBasConfigurationResponse" type="tns:GetBasConfigurationResponse" />
+  <xs:element name="LoadProfile" type="tns:LoadProfile" />
+  <xs:element name="LoadProfileResponse" type="tns:LoadProfileResponse" />
+  <xs:element name="UpdateProfile" type="tns:UpdateProfile" />
+  <xs:element name="UpdateProfileResponse" type="tns:UpdateProfileResponse" />
+  <xs:element name="GetAccountByTicket" type="tns:GetAccountByTicket" />
+  <xs:element name="GetAccountByTicketResponse" type="tns:GetAccountByTicketResponse" />
+  <xs:element name="GetAccountByRegistrationNote" type="tns:GetAccountByRegistrationNote" />
+  <xs:element name="GetAccountByRegistrationNoteResponse" type="tns:GetAccountByRegistrationNoteResponse" />
+  <xs:element name="UpdatePlayedTickets" type="tns:UpdatePlayedTickets" />
+  <xs:element name="UpdatePlayedTicketsResponse" type="tns:UpdatePlayedTicketsResponse" />
+  <xs:element name="OpenSession" type="tns:OpenSession" />
+  <xs:element name="OpenSessionResponse" type="tns:OpenSessionResponse" />
+  <xs:element name="UpdateIdCard" type="tns:UpdateIdCard" />
+  <xs:element name="UpdateIdCardResponse" type="tns:UpdateIdCardResponse" />
+  <xs:element name="LoginWithIdCard" type="tns:LoginWithIdCard" />
+  <xs:element name="LoginWithIdCardResponse" type="tns:LoginWithIdCardResponse" />
+  <xs:element name="UnbindIdCard" type="tns:UnbindIdCard" />
+  <xs:element name="UnbindIdCardResponse" type="tns:UnbindIdCardResponse" />
+  <xs:element name="RegisterIdCard" type="tns:RegisterIdCard" />
+  <xs:element name="RegisterIdCardResponse" type="tns:RegisterIdCardResponse" />
+  <xs:element name="GetIdCardInfo" type="tns:GetIdCardInfo" />
+  <xs:element name="GetIdCardInfoResponse" type="tns:GetIdCardInfoResponse" />
+  <xs:element name="CloseSession" type="tns:CloseSession" />
+  <xs:element name="CloseSessionResponse" type="tns:CloseSessionResponse" />
+  <xs:element name="StoreSession" type="tns:StoreSession" />
+  <xs:element name="StoreSessionResponse" type="tns:StoreSessionResponse" />
+  <xs:element name="EndUserVerification" type="tns:EndUserVerification" />
+  <xs:element name="EndUserVerificationResponse" type="tns:EndUserVerificationResponse" />
+  <xs:element name="GetBalance" type="tns:GetBalance" />
+  <xs:element name="GetBalanceResponse" type="tns:GetBalanceResponse" />
+  <xs:element name="Deposit" type="tns:Deposit" />
+  <xs:element name="DepositResponse" type="tns:DepositResponse" />
+  <xs:element name="DepositTransactionId" nillable="true" type="xs:string" />
+  <xs:element name="DepositByTicket" type="tns:DepositByTicket" />
+  <xs:element name="DepositByTicketResponse" type="tns:DepositByTicketResponse" />
+  <xs:element name="DepositByTicketTransactionId" nillable="true" type="xs:string" />
+  <xs:element name="DepositByCreditNote" type="tns:DepositByCreditNote" />
+  <xs:element name="DepositByCreditNoteResponse" type="tns:DepositByCreditNoteResponse" />
+  <xs:element name="DepositByCreditNoteTransactionId" nillable="true" type="xs:string" />
+  <xs:element name="Withdraw" type="tns:Withdraw" />
+  <xs:element name="WithdrawResponse" type="tns:WithdrawResponse" />
+  <xs:element name="WithdrawByTicket" type="tns:WithdrawByTicket" />
+  <xs:element name="WithdrawByTicketResponse" type="tns:WithdrawByTicketResponse" />
+  <xs:element name="Reserve" type="tns:Reserve" />
+  <xs:element name="ReserveResponse" type="tns:ReserveResponse" />
+  <xs:element name="CancelReserve" type="tns:CancelReserve" />
+  <xs:element name="CancelReserveResponse" type="tns:CancelReserveResponse" />
+  <xs:element name="SaveTicket" type="tns:SaveTicket" />
+  <xs:element name="SaveTicketResponse" type="tns:SaveTicketResponse" />
+  <xs:element name="History" type="tns:History" />
+  <xs:element name="HistoryResponse" type="tns:HistoryResponse" />
+  <xs:element name="CancelTicket" type="tns:CancelTicket" />
+  <xs:element name="CancelTicketResponse" type="tns:CancelTicketResponse" />
+  <xs:element name="LoadStoredTickets" type="tns:LoadStoredTickets" />
+  <xs:element name="LoadStoredTicketsResponse" type="tns:LoadStoredTicketsResponse" />
+  <xs:element name="GetUserTickets" type="tns:GetUserTickets" />
+  <xs:element name="GetUserTicketsResponse" type="tns:GetUserTicketsResponse" />
+  <xs:element name="ChangePasswordFromTerminal" type="tns:ChangePasswordFromTerminal" />
+  <xs:element name="ChangePasswordFromTerminalResponse" type="tns:ChangePasswordFromTerminalResponse" />
+  <xs:element name="ChangePasswordFromShop" type="tns:ChangePasswordFromShop" />
+  <xs:element name="ChangePasswordFromShopResponse" type="tns:ChangePasswordFromShopResponse" />
+  <xs:element name="RestorePasswordByUsername" type="tns:RestorePasswordByUsername" />
+  <xs:element name="RestorePasswordByUsernameResponse" type="tns:RestorePasswordByUsernameResponse" />
+  <xs:element name="RestorePasswordByEmail" type="tns:RestorePasswordByEmail" />
+  <xs:element name="RestorePasswordByEmailResponse" type="tns:RestorePasswordByEmailResponse" />
+  <xs:element name="ValidateIdCard" type="tns:ValidateIdCard" />
+  <xs:element name="ValidateIdCardResponse" type="tns:ValidateIdCardResponse" />
+  <xs:element name="AccountServiceException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="code" type="xs:int" />
+        <xs:element name="message" type="xs:string" />
+        <xs:element minOccurs="0" name="parameters" nillable="true" type="basobj:parameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="GetFranchisorSettings">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetFranchisorSettingsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="payment_note_withdrawal" type="xs:byte" />
+      <xs:element minOccurs="0" name="user_deposit_limit_monthly" type="xs:decimal" />
+      <xs:element minOccurs="0" name="user_deposit_limit_weekly" type="xs:decimal" />
+      <xs:element minOccurs="0" name="user_deposit_limit_daily" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SaveFranchisorSettings">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:int" />
+      <xs:element minOccurs="0" name="payment_note_withdrawal" type="xs:byte" />
+      <xs:element minOccurs="0" name="user_deposit_limit_monthly" type="xs:decimal" />
+      <xs:element minOccurs="0" name="user_deposit_limit_weekly" type="xs:decimal" />
+      <xs:element minOccurs="0" name="user_deposit_limit_daily" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SaveFranchisorSettingsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="result" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateAccountSystemSettings">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="operator_id" type="xs:int" />
+      <xs:element minOccurs="1" name="account_id" type="xs:int" />
+      <xs:element minOccurs="1" name="account_system_settings" type="basobj:accountSystemSettingsWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateAccountSystemSettingsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="updated" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBasConfiguration">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBasConfigurationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="param" type="basobj:valueForm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetPaymentNotesTotal">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="locationId" type="xs:int" />
+      <xs:element minOccurs="1" name="operator_id" type="xs:int" />
+      <xs:element minOccurs="1" name="startDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" name="endDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetPaymentNotesTotalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="paymentNoteTotalNumber" type="xs:int" />
+      <xs:element minOccurs="1" name="paymentNoteTotalAmount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="operator_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" name="param" type="basobj:valueForm" />
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:integer" />
+      <xs:element minOccurs="1" name="location_id" type="xs:integer" />
+      <xs:element minOccurs="1" name="station_number" type="xs:string" />
+      <xs:element minOccurs="0" name="verified" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterAccountResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="accountId" type="xs:int" />
+      <xs:element minOccurs="0" name="registration_note_number" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterGuestIDCardAccount">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="card_number" type="xs:string" />
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterGuestIDCardAccountResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetRegistrationForm">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="GetRegistrationFormResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="basobj:registrationForm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterPaymentNote">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterPaymentNoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="number" type="xs:string" />
+      <xs:element minOccurs="1" name="expiration_time" type="xs:dateTime" />
+      <xs:element minOccurs="1" name="money_withdrawn" type="xs:boolean" />
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="station_id" type="xs:string" />
+      <xs:element minOccurs="1" default="false" name="withdrawedFromBalance" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadPaymentNote">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="number" type="xs:string" />
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="bind_users_to_franchisors" type="xs:boolean" />
+      <xs:element minOccurs="1" name="bind_users_to_locations" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadPaymentNoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="account" type="basobj:profileForm" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WithdrawByPaymentNote">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="number" type="xs:string" />
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="bind_users_to_franchisors" type="xs:boolean" />
+      <xs:element minOccurs="1" name="bind_users_to_locations" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WithdrawByPaymentNoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="1" default="false" name="withdrawedFromBalance" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccountSearch">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="confidence_factor" nillable="true" type="basobj:amountInterval" />
+      <xs:element minOccurs="0" name="turnover" nillable="true" type="basobj:amountInterval" />
+      <xs:element minOccurs="0" name="bets_count" nillable="true" type="basobj:betsCountInterval" />
+      <xs:element minOccurs="0" name="created_at" nillable="true" type="basobj:dateInterval" />
+      <xs:element minOccurs="0" name="profit_loss" nillable="true" type="basobj:amountInterval" />
+      <xs:element minOccurs="0" name="franchisorIds" nillable="true" type="xs:string" />
+      <xs:element minOccurs="1" name="searchRequest" type="basobj:searchRequest" />
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="bind_users_to_locations" type="xs:boolean" />
+      <xs:element minOccurs="0" name="additional_info" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccountSearchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="accounts" type="basobj:accounts" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateNamedCreditNote">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="1" name="note_number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateNamedCreditNoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadProfile">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="basobj:profileForm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdatePlayedTickets">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="tickets" type="basobj:playedTickets" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdatePlayedTicketsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="operator_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="param" type="basobj:valueForm" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateProfileResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAccountByTicket">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="ticket_number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAccountByTicketResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="account_id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAccountByRegistrationNote">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="registration_note_number" type="xs:string" />
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetAccountByRegistrationNoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field" nillable="true" type="basobj:valueField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OpenSession">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="station_id" type="xs:string" />
+      <xs:element minOccurs="1" name="anonymous" type="xs:boolean" />
+      <xs:element minOccurs="1" name="username" type="xs:string" />
+      <xs:element minOccurs="1" name="password" type="xs:string" />
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:int" />
+      <xs:element minOccurs="1" name="location_id" type="xs:int" />
+      <xs:element minOccurs="1" name="is_shop_session" type="xs:boolean" />
+      <xs:element minOccurs="1" name="bind_users_to_franchisors" type="xs:boolean" />
+      <xs:element minOccurs="1" name="bind_users_to_locations" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OpenSessionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="session_id" type="xs:string" />
+      <xs:element minOccurs="0" name="account_id" type="xs:int" />
+      <xs:element minOccurs="0" name="default_language" type="xs:string" />
+      <xs:element minOccurs="0" name="balance" type="basobj:accountBalance" />
+      <xs:element minOccurs="0" name="hasActiveCard" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="card_pin_enabled" type="xs:int" />
+      <xs:element minOccurs="0" name="password_reminder" type="xs:boolean" />
+      <xs:element minOccurs="0" name="force_change_password" type="xs:boolean" />
+      <xs:element minOccurs="1" name="account_system_settings" type="basobj:accountSystemSettingsWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeIDCardPin">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="0" name="pin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeIDCardPinResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="pin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnbindIdCard">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="card_number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UnbindIdCardResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoginWithIdCard">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="station_id" type="xs:string" />
+      <xs:element minOccurs="1" name="card_number" type="xs:string" />
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:integer" />
+      <xs:element minOccurs="1" name="location_id" type="xs:integer" />
+      <xs:element minOccurs="1" name="pin_check_setting" type="xs:int" />
+      <xs:element minOccurs="1" name="multiple_session" type="xs:boolean" />
+      <xs:element minOccurs="1" name="pin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="1" name="bind_users_to_franchisors" type="xs:boolean" />
+      <xs:element minOccurs="1" name="bind_users_to_locations" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoginWithIdCardResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="session_id" type="xs:string" />
+      <xs:element minOccurs="1" name="account_id" type="xs:int" />
+      <xs:element minOccurs="1" name="username" type="xs:string" />
+      <xs:element minOccurs="1" name="default_language" type="xs:string" />
+      <xs:element minOccurs="1" name="balance" type="basobj:accountBalance" />
+      <xs:element minOccurs="1" name="account_system_settings" type="basobj:accountSystemSettingsWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateIdCard">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="number" type="xs:string" />
+      <xs:element minOccurs="0" name="registration_status" type="xs:string" />
+      <xs:element minOccurs="0" name="active" type="xs:boolean" />
+      <xs:element minOccurs="0" name="account_id" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateIdCardResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterIdCard">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="1" name="active" type="xs:boolean" />
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisterIdCardResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="cardNumber" type="xs:string" />
+      <xs:element minOccurs="1" name="pin" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetIdCardInfo">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="account_id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetIdCardInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="idCardInfos" type="tns:ArrayOfIdCardInfoItems" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValidateIdCard">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="cardNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValidateIdCardResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="result" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfIdCardInfoItems">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="idCardInfoItem" nillable="true" type="tns:IdCardInfoItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IdCardInfoItem">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="number" type="xs:string" />
+      <xs:element minOccurs="1" name="registration_status" type="xs:string" />
+      <xs:element minOccurs="1" name="active" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CloseSession">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="session_id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CloseSessionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="session_closed" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StoreSession">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="pin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="1" name="location_id" type="xs:string" />
+      <xs:element minOccurs="1" name="station_id" type="xs:string" />
+      <xs:element minOccurs="1" name="tickets" type="basobj:ArrayOfStoredTicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StoreSessionResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EndUserVerification">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EndUserVerificationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBalance">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBalanceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="1" name="reserved" type="xs:decimal" />
+      <xs:element minOccurs="1" name="confidenceFactor" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Deposit">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="is_real_cash" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="balance" type="basobj:accountBalance" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositByTicket">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="ticket_number" type="xs:string" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositByTicketResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositByCreditNote">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="note_number" type="xs:string" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DepositByCreditNoteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Withdraw">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="0" name="ticket_number" type="xs:string" />
+      <xs:element minOccurs="0" name="checksum" type="xs:string" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="bet_type" type="xs:string" />
+      <xs:element minOccurs="0" name="total_stake" type="xs:decimal" />
+      <xs:element minOccurs="0" name="total_odds" type="xs:decimal" />
+      <xs:element minOccurs="0" name="possible_win" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ticket_type" type="xs:int" />
+      <xs:element minOccurs="0" name="is_real_cash" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WithdrawResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WithdrawByTicket">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="ticket_number" type="xs:string" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WithdrawByTicketResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Reserve">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ticket_number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReserveResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+      <xs:element minOccurs="1" name="userConfidenceFactor" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelReserve">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ticket_number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelReserveResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SaveTicket">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="session_id" type="xs:string" />
+      <xs:element minOccurs="1" name="ticket_number" type="xs:string" />
+      <xs:element minOccurs="1" name="location_id" type="xs:string" />
+      <xs:element minOccurs="1" name="ticket_code" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SaveTicketResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelTicket">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="ticket_number" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelTicketResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="History">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="type" type="xs:integer" />
+      <xs:element minOccurs="1" name="operation_group" type="xs:integer" />
+      <xs:element minOccurs="1" name="start_index" type="xs:integer" />
+      <xs:element minOccurs="1" name="limit" type="xs:integer" />
+      <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" default="false" name="isFilterTrash" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HistoryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="total" type="xs:integer" />
+      <xs:element minOccurs="0" name="history" type="basobj:history" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadStoredTickets">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="is_shop" type="xs:boolean" />
+      <xs:element minOccurs="1" name="location_id" type="xs:string" />
+      <xs:element minOccurs="1" name="ticket_number" type="xs:string" />
+      <xs:element minOccurs="1" name="pin">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="1" name="code">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>4-char strings only</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:string">
+            <xs:length value="4" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="AccountTicketSortingFields">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TicketNumber" />
+      <xs:enumeration value="DateCreated" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AccountTicketSortingValues">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Desc" />
+      <xs:enumeration value="Asc" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AccountTicketSorting">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="field" type="tns:AccountTicketSortingFields" />
+      <xs:element minOccurs="1" maxOccurs="1" name="value" type="tns:AccountTicketSortingValues" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ticketCategory">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="Won" />
+      <xs:enumeration value="Lost" />
+      <xs:enumeration value="Canceled" />
+      <xs:enumeration value="Open" />
+      <xs:enumeration value="PendingForApproval" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="GetUserTickets">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="accountId" type="xs:integer" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ticketCategory" type="tns:ticketCategory" />
+      <xs:element minOccurs="1" name="sorting" type="tns:AccountTicketSorting" />
+      <xs:element minOccurs="1" name="startIndex" type="xs:int" />
+      <xs:element minOccurs="1" name="pageSize" type="xs:int" />
+      <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetUserTicketsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="userTickets" type="tns:ArrayOfUserTickets" />
+      <xs:element minOccurs="1" name="totalNumber" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUserTickets">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="userTicket" nillable="true" type="tns:UserTicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserTicket">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="ticketNumber" type="xs:string" />
+      <xs:element minOccurs="1" name="checkSum" type="xs:string" />
+      <xs:element minOccurs="1" name="ticketCategory" type="tns:ticketCategory" />
+      <xs:element minOccurs="1" name="createdAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="bet_type" type="xs:string" />
+      <xs:element minOccurs="0" name="total_stake" type="xs:decimal" />
+      <xs:element minOccurs="0" name="total_odds" type="xs:decimal" />
+      <xs:element minOccurs="0" name="possible_win" type="xs:decimal" />
+      <xs:element minOccurs="0" name="payout" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadStoredTicketsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="tickets" type="basobj:ArrayOfStoredTicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangePasswordFromTerminal">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="old_password" type="xs:string" />
+      <xs:element minOccurs="1" name="new_password" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangePasswordFromTerminalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangePasswordFromShop">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="operator_id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" name="uid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="new_password" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangePasswordFromShopResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="return" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RestorePasswordByUsername">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="username" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RestorePasswordByUsernameResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RestorePasswordByEmail">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="email" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RestorePasswordByEmailResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCashoutData">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="startDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" name="endDate" type="xs:dateTime" />
+      <xs:element minOccurs="1" name="stationNumber" type="xs:string" />
+      <xs:element minOccurs="0" name="locationId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCashoutDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="1" name="nrOfTransactions" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadUserComment">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="userId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LoadUserCommentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="userComments" type="tns:ArrayOfUserComment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfUserComment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="userComment" nillable="true" type="tns:UserComment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UserComment">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="commentId" type="xs:long" />
+      <xs:element minOccurs="1" name="comment" type="xs:string" />
+      <xs:element minOccurs="1" name="edited_at" type="xs:dateTime" />
+      <xs:element minOccurs="1" name="operatorId" type="xs:long" />
+      <xs:element minOccurs="0" name="operatorName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddUserComment">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="userId" type="xs:long" />
+      <xs:element minOccurs="1" name="operatorUid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="comment" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddUserCommentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="result" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EditUserComment">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="userId" type="xs:long" />
+      <xs:element minOccurs="1" name="operatorUid" type="basobj:uid" />
+      <xs:element minOccurs="1" name="commentId" type="xs:long" />
+      <xs:element minOccurs="1" name="comment" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EditUserCommentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="result" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteUserComment">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="commentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DeleteUserCommentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="result" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResetPinSetting">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="franchisor_id" type="xs:int" />
+      <xs:element minOccurs="1" name="location_id" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ResetPinSettingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="result" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ToggleAccountState">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="account_id" type="xs:int" />
+      <xs:element minOccurs="0" name="operator_id" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ToggleAccountStateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="active" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,263 @@
+﻿<UserControl x:Class="DefaultViews.Views.ResultTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:panels="clr-namespace:xMetropol.UI.Panels;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+             xmlns:wpfHelper="clr-namespace:SportBetting.WPF.Prism.Shared.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             d:DataContext="{d:DesignInstance Type=viewModels:MatchResultVw}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityCollapsedConverter" />
+        <shared:ResultInversTimeToVisibilityConverter x:Key="bInversTimeToVisibilityConverter" />
+        <shared:BooleanToBoldConverter x:Key="BooleanToBoldConverter" />
+        <shared:ResultTimeToVisibilityConverter x:Key="bTimeToVisibilityConverter" />
+        <shared:AlterationIndexAsOddEvenToBooleanConverter x:Key="AlterationIndexAsOddEvenToBooleanConverter" />
+
+
+
+    </UserControl.Resources>
+    <Label Margin="0"
+           HorizontalContentAlignment="Stretch"
+           AutomationProperties.AutomationId="Match"
+           Padding="0">
+        <VirtualizingStackPanel Orientation="Vertical" VirtualizationMode="Recycling">
+
+            <!--  sport header  -->
+            <DockPanel Name="HeaderTemplate"
+                       Height="45"
+                       Margin="0,5,0,0"
+                       Background="#FFbcbcbc"
+                       LastChildFill="False"
+                       Visibility="{Binding IsHeader,
+                                            Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}"
+                       wpfHelper:SizeObserver.Observe="True">
+
+                <TextBlock Margin="15,0,0,0"
+                           VerticalAlignment="Center"
+                           AutomationProperties.AutomationId="SportName"
+                           DockPanel.Dock="Left"
+                           Style="{StaticResource headerText}"
+                           Text="{Binding SportView.DisplayName}" />
+                <TextBlock Margin="15,0,15,0"
+                           VerticalAlignment="Center"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource headerText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS}}" />
+
+            </DockPanel>
+
+            <Border BorderBrush="#FFbcbcbc" BorderThickness="0, 1, 0, 0">
+                <Grid Name="MatchTemplate" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="140" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Background" Value="#FF4d4d4d" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}" Value="true">
+                                    <Setter Property="Background" Value="#FF393939" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <!--  not today  -->
+                    <Label Margin="0"
+                           AutomationProperties.AutomationId="NotToday"
+                           Padding="0"
+                           Visibility="{Binding StartDate,
+                                                Converter={StaticResource bInversTimeToVisibilityConverter}}">
+                        <!--  time && day  -->
+                        <StackPanel Grid.Row="0"
+                                    Grid.Column="0"
+                                    Width="140"
+                                    Height="70"
+                                    Margin="10,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Orientation="Vertical">
+                            <StackPanel Margin="0,5,0,0"
+                                        HorizontalAlignment="Left"
+                                        Orientation="Horizontal">
+                                <TextBlock Margin="0,0,0,0"
+                                           FontFamily="Play"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="#FFFFFF"
+                                           Text="{Binding StartDate,
+                                                          StringFormat={}{0:HH:mm }}"
+                                           TextAlignment="Center"
+                                           TextWrapping="NoWrap" />
+                                <!--  day  -->
+                                <TextBlock Margin="0,0,0,0"
+                                           FontFamily="Play"
+                                           FontSize="14"
+                                           FontWeight="Bold"
+                                           Foreground="#FFFFFF"
+                                           Text="{Binding StartDate,
+                                                          StringFormat={}{0:dddd}}"
+                                           TextAlignment="Center"
+                                           TextWrapping="NoWrap" />
+                            </StackPanel>
+                            <!--  date && month  -->
+                            <TextBlock Margin="0,-5,0,0"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       FontFamily="Play"
+                                       FontSize="38"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFFFF"
+                                       Text="{Binding StartDate,
+                                                      StringFormat={}{0:dd}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="NoWrap" />
+                            <TextBlock Margin="0,-10,0,5"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       FontFamily="Play"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#FFFFFF"
+                                       Text="{Binding StartDate,
+                                                      StringFormat={}{0:MMMM}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </Label>
+
+                    <!--  today  -->
+                    <Label Margin="10,0,0,0"
+                           AutomationProperties.AutomationId="Today"
+                           Padding="0"
+                           Visibility="{Binding StartDate,
+                                                Converter={StaticResource bTimeToVisibilityConverter}}">
+                        <StackPanel Margin="0,5,0,0"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Vertical">
+                            <TextBlock Margin="40,0,0,0"
+                                       FontFamily="Play"
+                                       FontSize="14"
+                                       Foreground="#FFE5E5E5"
+                                       Text="{Binding StartDate,
+                                                      StringFormat={}{0:mm}}"
+                                       TextAlignment="Center"
+                                       TextWrapping="NoWrap" />
+
+                            <TextBlock Margin="0,-7,0,0"
+                                       FontFamily="Play"
+                                       FontSize="38"
+                                       FontWeight="Bold"
+                                       Foreground="#FFE5E5E5"
+                                       Text="{Binding StartDate,
+                                                      StringFormat={}{0:HH}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="NoWrap" />
+
+                            <TextBlock Margin="0,-8,0,0"
+                                       FontFamily="Play"
+                                       FontSize="14"
+                                       FontWeight="Bold"
+                                       Foreground="#FFE5E5E5"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TODAY}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </Label>
+
+                    <!--  go to bet domains button  -->
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="-1,0,4,0"
+                           HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch"
+                           HorizontalContentAlignment="Stretch"
+                           VerticalContentAlignment="Stretch"
+                           IsEnabled="{Binding Active}"
+                           Padding="5,5">
+                        <DockPanel LastChildFill="False">
+                            <!--  number of bet domains  -->
+                            <DockPanel DockPanel.Dock="Right">
+                                <TextBlock VerticalAlignment="Center"
+                                           FontFamily="Play"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#FFFF4D00"
+                                           LineHeight="20"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Text="{Binding Score}"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextWrapping="Wrap" />
+                            </DockPanel>
+
+                            <!--  upper row  -->
+                            <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+                                <!--  display name  -->
+                                    <StackPanel Height="42" Orientation="Vertical">
+                                        <panels:FlexStackPanel Margin="0,5,0,0" StretchDirection="DownOnly">
+                                            <TextBlock VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="20"
+                                                       FontWeight="{Binding LineObject.HomeTeamWon, Converter={StaticResource BooleanToBoldConverter}}"
+                                                       Foreground="#FFE5E5E5"
+                                                       LineHeight="20"
+                                                       LineStackingStrategy="BlockLineHeight"
+                                                       Text="{Binding HomeCompetitorName}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       TextWrapping="NoWrap" />
+                                            <TextBlock VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="20"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFE5E5E5"
+                                                       LineHeight="20"
+                                                       LineStackingStrategy="BlockLineHeight"
+                                                       Text=" : "
+                                                       TextTrimming="CharacterEllipsis"
+                                                       TextWrapping="NoWrap" />
+                                            <TextBlock VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="20"
+                                                       FontWeight="{Binding LineObject.AwayTeamWon, Converter={StaticResource BooleanToBoldConverter}}"
+                                                       Foreground="#FFE5E5E5"
+                                                       LineHeight="20"
+                                                       LineStackingStrategy="BlockLineHeight"
+                                                       Text="{Binding AwayCompetitorName}"
+                                                       TextTrimming="CharacterEllipsis"
+                                                       TextWrapping="NoWrap" />
+                                        </panels:FlexStackPanel>
+                                    </StackPanel>
+                            </DockPanel>
+
+                            <!--  bottom row  -->
+                            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True">
+                                <TextBlock Margin="5,0"
+                                           DockPanel.Dock="Right"
+                                           FontFamily="Play"
+                                           FontSize="16"
+                                           FontWeight="Bold"
+                                           Foreground="#FFFF4D00"
+                                           Text="{Binding TournamentView.DisplayName}"
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                                
+                            </DockPanel>
+                        </DockPanel>
+                    </Label>
+
+                </Grid>
+            </Border>
+        </VirtualizingStackPanel>
+    </Label>
+</UserControl>

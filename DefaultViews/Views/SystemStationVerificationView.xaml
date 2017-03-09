@@ -1,0 +1,337 @@
+﻿<UserControl x:Class="DefaultViews.Views.SystemStationVerificationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             xmlns:wpfHelp="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             d:DataContext="{d:DesignInstance viewModels2:SystemStationVerificationViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+
+        <Style x:Key="CashAcceptorLabel"
+               BasedOn="{StaticResource rowEntry}"
+               TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsCashAcceptorFound}" Value="1">
+                    <Setter Property="Foreground" Value="LimeGreen" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsCashAcceptorFound}" Value="0">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsCashAcceptorFound}" Value="-1">
+
+                    <Setter Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="CoinAcceptorLabel"
+               BasedOn="{StaticResource rowEntry}"
+               TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsCoinAcceptorFound}" Value="1">
+                    <Setter Property="Foreground" Value="LimeGreen" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsCoinAcceptorFound}" Value="0">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsCoinAcceptorFound}" Value="-1">
+
+                    <Setter Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="IdReaderLabel"
+               BasedOn="{StaticResource rowEntry}"
+               TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsIdReaderFound}" Value="1">
+                    <Setter Property="Foreground" Value="LimeGreen" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsIdReaderFound}" Value="0">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsIdReaderFound}" Value="-1">
+
+                    <Setter Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="BarcodeScannerLabel"
+               BasedOn="{StaticResource rowEntry}"
+               TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsBarcodeScannerFound}" Value="1">
+                    <Setter Property="Foreground" Value="LimeGreen" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsBarcodeScannerFound}" Value="0">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsBarcodeScannerFound}" Value="-1">
+                    <Setter Property="Foreground" Value="Red" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <DockPanel>
+        <Button HorizontalContentAlignment="Center" VerticalContentAlignment="Top">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border x:Name="_border"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="0" />
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <DockPanel>
+
+                <DockPanel HorizontalAlignment="Center" Focusable="True">
+
+                    <DockPanel HorizontalAlignment="Center"
+                               VerticalAlignment="Top"
+                               Dock="Top">
+                        <StackPanel Margin="0,20,0,20"
+                                    DockPanel.Dock="Top"
+                                    Orientation="Vertical">
+                            <Grid>
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="75" />
+                                    <RowDefinition Height="Auto" />
+
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="200" />
+
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Row="0"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="5"
+                                        BorderBrush="Gray"
+                                        BorderThickness="2" />
+
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           LineHeight="18"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Style="{StaticResource BarcodeScannerLabel}"
+                                           Text="{Binding BarcodeScannerStatus}"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap" />
+                                <Button Grid.Row="1"
+                                        Grid.Column="0"
+                                        Width="200"
+                                        Height="60"
+                                        Margin="0,15,0,0"
+                                        Command="{Binding CheckBarcodeScannerCommand}"
+                                        IsEnabled="{Binding IsCardReady}"
+                                        Style="{StaticResource nonRadioUserProfileButton}"
+                                        Visibility="Visible">
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="28*" />
+                                            <RowDefinition Height="28*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Viewbox Grid.Row="0"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK}}" />
+                                        </Viewbox>
+
+                                        <Viewbox Grid.Row="1"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK_BARCODE_READER}}" />
+                                        </Viewbox>
+
+                                    </Grid>
+
+                                    <!--
+                                        <TextBlock FontFamily="Play"
+                                        FontSize="20"
+                                        FontWeight="Bold"
+                                        Foreground="#FFEFEFEF"
+                                        LineHeight="20"
+                                        LineStackingStrategy="BlockLineHeight"
+                                        TextAlignment="Center"
+                                        TextWrapping="Wrap">
+                                        Check
+                                        <LineBreak />
+                                        Barcode Reader
+                                        </TextBlock>
+                                    -->
+
+                                </Button>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           LineHeight="18"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Style="{StaticResource CashAcceptorLabel}"
+                                           Text="{Binding CashAcceptorStatus}"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap" />
+                                <Button Grid.Row="1"
+                                        Grid.Column="1"
+                                        Width="200"
+                                        Height="60"
+                                        Margin="0,15,0,0"
+                                        Command="{Binding CheckCashAcceptorCommand}"
+                                        IsDefault="False"
+                                        IsEnabled="{Binding IsCardReady}"
+                                        Style="{StaticResource nonRadioUserProfileButton}"
+                                        Visibility="Visible">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="28*" />
+                                            <RowDefinition Height="28*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Viewbox Grid.Row="0"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK}}" />
+                                        </Viewbox>
+
+                                        <Viewbox Grid.Row="1"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK_CASH_ACCEPTOR}}" />
+                                        </Viewbox>
+
+                                    </Grid>
+
+                                </Button>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="2"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           LineHeight="18"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Style="{StaticResource CoinAcceptorLabel}"
+                                           Text="{Binding CoinAcceptorStatus}"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap" />
+                                <Button Grid.Row="1"
+                                        Grid.Column="2"
+                                        Width="200"
+                                        Height="60"
+                                        Margin="0,15,0,0"
+                                        Command="{Binding CheckCoinAcceptorCommand}"
+                                        IsDefault="False"
+                                        IsEnabled="{Binding IsCardReady}"
+                                        Style="{StaticResource nonRadioUserProfileButton}"
+                                        Visibility="Visible">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="28*" />
+                                            <RowDefinition Height="28*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Viewbox Grid.Row="0"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK}}" />
+                                        </Viewbox>
+
+                                        <Viewbox Grid.Row="1"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK_COIN_ACCEPTOR}}" />
+                                        </Viewbox>
+
+                                    </Grid>
+                                </Button>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="3"
+                                           VerticalAlignment="Center"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           LineHeight="18"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Style="{StaticResource IdReaderLabel}"
+                                           Text="{Binding IdReaderStatus}"
+                                           TextAlignment="Center"
+                                           TextWrapping="Wrap" />
+                                <Button Grid.Row="1"
+                                        Grid.Column="3"
+                                        Width="200"
+                                        Height="60"
+                                        Margin="0,15,0,0"
+                                        Command="{Binding CheckIDCardCommand}"
+                                        IsDefault="False"
+                                        IsEnabled="{Binding IsCardReady}"
+                                        Style="{StaticResource nonRadioUserProfileButton}"
+                                        Visibility="Visible">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="28*" />
+                                            <RowDefinition Height="28*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Viewbox Grid.Row="0"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK}}" />
+                                        </Viewbox>
+
+                                        <Viewbox Grid.Row="1"
+                                                 Margin="0, 0, 0, 0"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Top"
+                                                 StretchDirection="DownOnly">
+                                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHECK_ID_READER}}" />
+                                        </Viewbox>
+
+                                    </Grid>
+                                </Button>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                    </DockPanel>
+
+                </DockPanel>
+
+            </DockPanel>
+        </Button>
+    </DockPanel>
+</UserControl>

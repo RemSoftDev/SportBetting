@@ -1,0 +1,377 @@
+﻿<UserControl x:Class="DefaultViews.Views.ShowReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Custom="http://www.codeplex.com/prism"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels2:ShowReportViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:ImagePathConverter x:Key="ImagePathConverter" />
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Margin="10, 5, 10, 5"
+                BorderBrush="#FFEFEFEF"
+                BorderThickness="1"
+                Padding="10, 5, 10, 5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="TerminalBalance"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.TerminalBalance}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="TotalStationCash"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.TotalStationCash}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.LOCATION_CASH_POSITION}}" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="LocationCashPosition"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.LocationCashPosition}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.LOCATION_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="LocationBalance"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding ChangeTracker.LocationBalance}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="1"
+                    MinWidth="600"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical">
+            <DockPanel HorizontalAlignment="Stretch">
+                <TextBlock Style="{StaticResource importantText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PRINT_LOCATION}}" />
+                <TextBlock HorizontalAlignment="Right"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource importantText}"
+                           Text="{Binding StationRepository.Currency}" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_IN}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="totalCashIn"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding totalCashIn}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_OUT}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="totalCashOut"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding totalCashOut}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PRINT_STAKE_TOTAL}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="totalStake"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding totalStake}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_WINNINGS}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="totalWinning"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding totalWinning}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TAX}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="tax"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding tax}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_BASIS_FOR_PROFIT_SHARING}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="basisForProfitSharing"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding basisForProfitSharing}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1"
+                    Visibility="{Binding DisplayComissions,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}" />
+            <DockPanel Margin="0,10,0,0"
+                       HorizontalAlignment="Stretch"
+                       Visibility="{Binding DisplayComissions,
+                                            Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FIX_STAKE_COMMISSION}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="fixStakeCommission"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding fixStakeCommission}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1"
+                    Visibility="{Binding DisplayComissions,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}" />
+            <DockPanel Margin="0,10,0,0"
+                       HorizontalAlignment="Stretch"
+                       Visibility="{Binding DisplayComissions,
+                                            Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FLEX_COMMISSION}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="flexCommission"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding flexCommission}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_SHOP_OWNER_SHARE}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="shopOwnerShare"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding shopOwnerShare}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0"
+                       HorizontalAlignment="Stretch"
+                       Visibility="{Binding FranchisorShareVisibility}">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FRANCHISOR_SHARE}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="franchisorShare"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding franchisorShare}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CREDIT_TO_SHOP}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="creditToShop"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding creditToShop}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PAYMENT_FROM_SHOP}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="paymentFromShop"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding paymentFromShop}"
+                           TextAlignment="Right" />
+            </DockPanel>
+            <Border HorizontalAlignment="Stretch"
+                    BorderBrush="White"
+                    BorderThickness="0,0,0,1" />
+            <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CASH_TRANSFER}}"
+                           TextAlignment="Left" />
+                <TextBlock AutomationProperties.AutomationId="cashTransfer"
+                           DockPanel.Dock="Right"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding cashTransfer}"
+                           TextAlignment="Right" />
+            </DockPanel>
+
+            <!--  station part  -->
+            <!--
+                <DockPanel Margin="0,50,0,0">
+                <TextBlock DockPanel.Dock="Left" Style="{StaticResource importantText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TERMINAL}}" ></TextBlock>
+                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource importantText}" Text="{Binding StationRepository.Currency}" ></TextBlock>
+                </DockPanel>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left" TextAlignment="Left" Style="{StaticResource rowEntry}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_IN}}"></TextBlock>
+                <TextBlock DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource rowEntry}" Text="{Binding stationTotalCashIn}" AutomationProperties.AutomationId="stationTotalCashIn"></TextBlock>
+                </DockPanel>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left" TextAlignment="Left"  Style="{StaticResource rowEntry}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_OUT}}"></TextBlock>
+                <TextBlock DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource rowEntry}" Text="{Binding stationTotalCashOut}" AutomationProperties.AutomationId="stationTotalCashOut"></TextBlock>
+                </DockPanel>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left" TextAlignment="Left"  Style="{StaticResource rowEntry}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PRINT_STAKE_TOTAL}}"></TextBlock>
+                <TextBlock DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource rowEntry}" Text="{Binding stationTotalStake}" AutomationProperties.AutomationId="stationTotalStake"></TextBlock>
+                </DockPanel>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left" TextAlignment="Left"  Style="{StaticResource rowEntry}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_WINNINGS}}"></TextBlock>
+                <TextBlock DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource rowEntry}" Text="{Binding stationTotalWinning}" AutomationProperties.AutomationId="stationTotalWinning"></TextBlock>
+                </DockPanel>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left" TextAlignment="Left"  Style="{StaticResource rowEntry}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TAX}}"></TextBlock>
+                <TextBlock DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource rowEntry}" Text="{Binding stationTax}" AutomationProperties.AutomationId="stationTax"></TextBlock>
+                </DockPanel>
+                <Border BorderBrush="White" BorderThickness="0,0,0,1" HorizontalAlignment="Stretch"></Border>
+                <DockPanel Margin="0,10,0,0" HorizontalAlignment="Stretch">
+                <TextBlock DockPanel.Dock="Left" TextAlignment="Left"  Style="{StaticResource rowEntry}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_BASIS_FOR_PROFIT_SHARING}}"></TextBlock>
+                <TextBlock DockPanel.Dock="Right" TextAlignment="Right" Style="{StaticResource rowEntry}" Text="{Binding stationBasisForProfitSharing}" AutomationProperties.AutomationId="stationBasisForProfitSharing"></TextBlock>
+                </DockPanel>
+            -->
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+            <Button Width="200"
+                    Margin="10"
+                    AutomationProperties.AutomationId="PrintForLocation"
+                    Command="{Binding onPrintReportForLocation}"
+                    Style="{StaticResource registrationButton}">
+                <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PRINT_CHECKPOINT_FOR_LOCATION}}" />
+                </Viewbox>
+            </Button>
+            <!--
+                <Button
+                Width="200"
+                Margin="10"
+                Command="{Binding onPrintReportForTerminal}"
+                Style="{StaticResource registrationButton}"
+                AutomationProperties.AutomationId="PrintForTerminal">
+                <Viewbox StretchDirection="DownOnly">
+                <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PRINT_CHECKPOINT_FOR_TERMINAL}}"></TextBlock>
+                </Viewbox>
+                </Button>
+            -->
+        </StackPanel>
+    </Grid>
+</UserControl>

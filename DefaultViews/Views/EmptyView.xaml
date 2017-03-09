@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="DefaultViews.Views.EmptyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:EmptyViewModel}"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+</UserControl>

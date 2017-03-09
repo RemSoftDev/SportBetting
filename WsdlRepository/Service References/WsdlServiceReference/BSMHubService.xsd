@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://objects.types.bas.ws.bs.sportradar.com/" elementFormDefault="qualified" targetNamespace="http://objects.types.bas.ws.bs.sportradar.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ticket">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="ticket_number" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="accountBalance">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="1" name="reserved" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="accountSystemSettingsWS">
+    <xs:sequence>
+      <xs:element minOccurs="1" name="confidence_factor" type="xs:decimal" />
+      <xs:element minOccurs="1" name="user_deposit_limit_daily" type="xs:decimal" />
+      <xs:element minOccurs="1" name="user_deposit_limit_weekly" type="xs:decimal" />
+      <xs:element minOccurs="1" name="user_deposit_limit_monthly" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uid">
+    <xs:sequence>
+      <xs:element name="session_id" nillable="true" type="xs:string" />
+      <xs:element name="username" nillable="true" type="xs:string" />
+      <xs:element name="account_id" nillable="true" type="xs:integer" />
+      <xs:element name="franchisor_id" nillable="true" type="xs:int" />
+      <xs:element name="location_id" nillable="true" type="xs:int" />
+      <xs:element name="station_id" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dateInterval">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="start_date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="end_date" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="amountInterval">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="from" type="xs:decimal" />
+      <xs:element minOccurs="0" name="to" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="betsCountInterval">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="from" type="xs:int" />
+      <xs:element minOccurs="0" name="to" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="profileForm">
+    <xs:sequence>
+      <xs:element name="fields" type="tns:formFields" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="registrationForm">
+    <xs:sequence>
+      <xs:element name="fields" type="tns:formFields" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="searchRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="criteria" nillable="true" type="tns:criteria" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="criteria">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="accounts">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="account" type="tns:account" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="account">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field" nillable="true" type="tns:valueField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="playedTickets">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ticket" nillable="true" type="tns:playedTicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="playedTicket">
+    <xs:sequence>
+      <xs:element name="status" type="xs:integer" />
+      <xs:element name="ticket_number" type="xs:string" />
+      <xs:element name="amount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="history">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="history_row" nillable="true" type="tns:historyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="historyRow">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="history_row" nillable="true" type="tns:historyData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="historyData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="type" type="xs:integer" />
+      <xs:element minOccurs="0" name="ticket_number" type="xs:string" />
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="comment" type="xs:string" />
+      <xs:element minOccurs="0" name="created_at" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="operator_id" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueForm">
+    <xs:sequence>
+      <xs:element name="fields" type="tns:valueFields" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueFields">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field" nillable="true" type="tns:valueField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueField">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="formFields">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field" nillable="true" type="tns:formField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldValidationRules">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="validation_rule" nillable="true" type="tns:fieldValidationRule" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldValidationRule">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldOptions">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field_option" nillable="true" type="tns:fieldOption" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fieldOption">
+    <xs:sequence>
+      <xs:element name="id" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="formField">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element minOccurs="0" name="mandatory" type="xs:boolean" />
+      <xs:element minOccurs="0" name="readonly" type="xs:boolean" />
+      <xs:element minOccurs="0" name="searchable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="hidden" type="xs:boolean" />
+      <xs:element minOccurs="0" name="type" type="xs:string" />
+      <xs:element minOccurs="0" name="sequence" type="xs:int" />
+      <xs:element minOccurs="0" name="validation_rules" type="tns:fieldValidationRules" />
+      <xs:element minOccurs="0" name="field_options" type="tns:fieldOptions" />
+      <xs:element minOccurs="0" name="value" type="xs:string" />
+      <xs:element minOccurs="0" name="default_value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="abstractCollection" abstract="true">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="abstractList" abstract="true">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:abstractCollection">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="arrayList">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:abstractList">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StoredTicket">
+    <xs:sequence>
+      <xs:element name="account_id" type="xs:long" />
+      <xs:element name="number" type="xs:string" />
+      <xs:element name="code" type="xs:string" />
+      <xs:element name="pin" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfStoredTicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ticket" nillable="true" type="tns:StoredTicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="parameter" nillable="true" type="tns:parameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parameter">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="06882c75-c337-49b1-8318-2e1d1260bb55" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://213.35.151.244:18080/BSMHub/services/BSMHubService?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BSMHubService.xsd" MetadataType="Schema" ID="14ea0bf1-bd79-40ab-a2ad-e3018311c837" SourceId="1" SourceUrl="http://213.35.151.244:18080/BSMHub/services/BSMHubService?xsd=BettingAccountServerTypesObjects" />
+    <MetadataFile FileName="BSMHubService1.xsd" MetadataType="Schema" ID="f0083afe-0152-4612-9cec-134d8d8cad08" SourceId="1" SourceUrl="http://213.35.151.244:18080/BSMHub/services/BSMHubService?xsd=BettingServerTypesMessages" />
+    <MetadataFile FileName="BSMHubService2.xsd" MetadataType="Schema" ID="47cdb896-8272-4a9a-b726-ef8680745dd0" SourceId="1" SourceUrl="http://213.35.151.244:18080/BSMHub/services/BSMHubService?xsd=BettingAccountServerTypesMessages" />
+    <MetadataFile FileName="BSMHubService3.xsd" MetadataType="Schema" ID="08e5fc2e-d204-4941-8695-dc2f5fb1cd70" SourceId="1" SourceUrl="http://213.35.151.244:18080/BSMHub/services/BSMHubService?xsd=StationTypesMessages" />
+    <MetadataFile FileName="BSMHubService1.wsdl" MetadataType="Wsdl" ID="1bb2624c-364d-4041-bb36-40558043d31e" SourceId="1" SourceUrl="http://213.35.151.244:18080/BSMHub/services/BSMHubService?wsdl" />
+    <MetadataFile FileName="BSMHubService4.xsd" MetadataType="Schema" ID="376f34bb-ca48-4300-b868-79120d1b827c" SourceId="1" SourceUrl="http://213.35.151.244:18080/BSMHub/services/BSMHubService?xsd=BettingServerTypesObjects" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

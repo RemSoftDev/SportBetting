@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="SPFSchema.xsd" 
+Codepage="850">
+	<Line LineSpacing="100"> 
+		<TextItem Alignment="Right" Characterspacing="4" Size="3" Style="Bold">MY TERMINAL</TextItem>
+	</Line>
+	<Line>
+		<TextItem  Alignment="Center" Characterspacing="11" Size="2" Style="None">Wettschein</TextItem>
+	</Line>
+	<Line>
+		<BarCodeItem Alignment="Center" HRIPos="Above" Height="100"  Type="ITF">12345678</BarCodeItem>
+	</Line>
+	<!--<Line>		
+		<FillItem>_</FillItem>
+	</Line>-->
+	<Line>
+	</Line>
+	<Line>
+		<TextItem Alignment="Left" Font="FontB" Size="1">Date</TextItem>
+		<FillItem>*</FillItem>
+		<TextItem Indent="32" Alignment="Right" Font="FontA">Info32R</TextItem>
+		<FillItem>*</FillItem>
+		<TextItem Indent="42" Alignment="Right" Font="FontB">Zeit42R</TextItem>
+	</Line>
+	<Line Underline="1">
+		<FillItem>_</FillItem>
+		<TextItem Alignment="Left" Font="FontA" Size="1">fill</TextItem>
+		<FillItem>=</FillItem>
+		<TextItem  Font="FontA" Size="1">fill</TextItem>
+		<FillItem>*</FillItem>
+		<TextItem  Font="FontB" Size="1">fill</TextItem>
+		<FillItem>=</FillItem>
+		<TextItem  Font="FontA" Size="1">fill</TextItem>
+		<FillItem>_</FillItem>
+	</Line>
+	<Line Underline="1">
+		<FillItem>  </FillItem>
+		<TextItem  Underline="0" Alignment="Left" Font="FontB" Size="3">fill</TextItem>		
+	</Line>
+	<Line Underline="1">
+		<FillItem>  </FillItem>
+		<TextItem  Underline="0" Alignment="Left" Font="FontB" Size="3">#TicketNUMBER#</TextItem>
+	</Line>
+	<Line Underline="0">
+		<FillItem>_</FillItem>
+		<TextItem Alignment="Left" Font="FontA" Size="3">fill</TextItem>
+		<FillItem>_</FillItem>
+	</Line>
+	<Line Underline="1">		
+		<TextItem Alignment="Left" Font="FontA" Size="1">fill</TextItem>
+		<FillItem>=</FillItem>
+	</Line>
+	<Line LineSpacing="100" >
+		<TextItem Alignment="Left" Font="FontA">TicketNr:</TextItem>
+		<TextItem Alignment="Right" Font="FontA" Size="3">123456</TextItem>
+	</Line>
+	<Line>
+		<TextItem Alignment="Left" Font="FontA">Code:</TextItem>		
+		<TextItem Alignment="Right" Font="FontA">1234</TextItem>
+	</Line>
+
+	<Line>
+		<FillItem>=</FillItem>
+	</Line>
+	<Line Underline="true">
+		<TextItem Alignment="Left">Wettart:</TextItem>
+		<TextItem  Indent="42" Alignment="Right">Kombiwette</TextItem>
+	</Line>
+	<Line Underline="true">
+		<TextItem Alignment="Left">Wettart:</TextItem>
+		<TextItem Alignment="Right">Kombiwette</TextItem>
+	</Line>	
+	<Line LineSpacing="100">
+		<TextItem Alignment="Left" Font="FontB">12345</TextItem>
+		<TextItem Alignment="Right" Font="FontB">heute um 19 uhr abends CET</TextItem>
+	</Line>
+	<Line>
+		<TextItem Alignment="Center" Font="FontA" Invert="true" Size="1" > Sportart </TextItem>
+	</Line>
+	<Line LineSpacing="100">
+		<TextItem Alignment="Center" Size="2" >Wettereignis</TextItem>
+	</Line>
+	<Line>
+		<TextItem Alignment="Left" Font="FontB">Tipp 1</TextItem>
+		<TextItem Indent="31" Alignment="Right" Font="FontA" Style="Bold">Quote:</TextItem>
+		<TextItem Indent="32" Alignment="Left" Font="FontA" Style="Emphasized">12,89</TextItem>
+	</Line>
+	<Line>
+		<FillItem>-</FillItem>
+	</Line>
+	<Line>		
+	</Line>
+	<Line>		
+	</Line>
+	<Line>
+	</Line>
+	<Line>
+	</Line>
+	<Line>
+	</Line>
+	<Line>
+	</Line>
+	<Line>
+	</Line>
+	<Line>
+	</Line>
+</Page>

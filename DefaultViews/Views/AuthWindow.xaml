@@ -1,0 +1,78 @@
+﻿<Window x:Class="DefaultViews.Views.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+        xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+        AutomationProperties.AutomationId="AuthWindow"
+        SizeToContent="Manual"
+        SnapsToDevicePixels="True"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        WindowStyle="None"
+        d:DataContext="{d:DesignInstance viewModels:AuthViewModel}"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        >
+
+    <Window.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </Window.Background>
+
+    <i:Interaction.Behaviors>
+        <baseObjects:EventToCommandBehavior Command="{Binding KeydownCommand,
+                                                              Mode=TwoWay}"
+                                            Event="PreviewKeyDown"
+                                            PassArguments="True" />
+        <baseObjects:EventToCommandBehavior Command="{Binding MouseDownCommand,
+                                                              Mode=TwoWay}"
+                                            Event="PreviewMouseDown"
+                                            PassArguments="True" />
+
+    </i:Interaction.Behaviors>
+
+    
+
+        <Grid>
+            <Grid.LayoutTransform>
+                <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                        ScaleX="{Binding ChangeTracker.Screen2WindowScale}"
+                        ScaleY="{Binding ChangeTracker.Screen2WindowScale}" />
+        </Grid.LayoutTransform>
+            <Grid.Background>
+                <ImageBrush AlignmentX="Left"
+                            AlignmentY="Top"
+                            ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                            Stretch="None"
+                            TileMode="Tile"
+                            Viewport="0,0,3,3"
+                            ViewportUnits="Absolute" />
+            </Grid.Background>
+            <!--  Authorization Content  -->
+
+            <Grid x:Name="grdAuthContainer">
+                <baseObjects:MyContentRegion HorizontalAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             baseObjects:MyRegionManager.RegionName="AuthContentRegion" />
+
+            </Grid>
+            <Grid x:Name="grdVKContainer"
+                  MinHeight="340"
+                  VerticalAlignment="Bottom">
+                <baseObjects:MyContentRegion baseObjects:MyRegionManager.RegionName="LoginKeyboardRegion" />
+            </Grid>
+
+        </Grid>
+    
+
+</Window>

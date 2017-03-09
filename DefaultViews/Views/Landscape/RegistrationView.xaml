@@ -1,0 +1,435 @@
+﻿<UserControl x:Class="DefaultViews.Views.Landscape.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+             xmlns:viewModels1="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels1:RegistrationViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityConverter" />
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="myInverseBooleanToVisibilityConverter" />
+        <viewModels:RegistrationDataTemplateSelector x:Key="RegistrationDataTemplateSelector" />
+
+
+        <Style x:Key="regNextButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Height" Value="60" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlContent"
+                                   Width="{TemplateBinding Width}"
+                                   Height="60"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenterOrange.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       Height="60"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownOrangeLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       Height="60"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonRightOrange.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenterDownOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonLeftDownOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonRightDownOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding RegistrationStep}" Value="3">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=SmallButtonCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=SmallButtonLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=SmallButtonRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </UserControl.Resources>
+
+    <DockPanel Name="RegistrationContent">
+        <Button HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Command="{Binding UnfocusComand}">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border x:Name="_border"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="0" />
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+
+
+
+            <StackPanel x:Name="grdContentControl">
+                <ItemsControl HorizontalAlignment="Center"
+                              HorizontalContentAlignment="Center"
+                              DockPanel.Dock="Top"
+                              ItemsSource="{Binding RegistrationSteps}">
+                    <ItemsControl.Resources>
+                        <DataTemplate DataType="{x:Type viewModels1:StepButton}">
+                            <RadioButton Name="StepButton"
+                                         Margin="-20,0,0,0"
+                                         Command="{Binding DataContext.StepCommand,
+                                                           ElementName=RegistrationContent}"
+                                         CommandParameter="{Binding}"
+                                         GroupName="StepButtons"
+                                         IsChecked="{Binding IsSelected}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                                        <DockPanel x:Name="dpnlContent"
+                                                   Width="{TemplateBinding Width}"
+                                                   LastChildFill="True">
+                                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                              RecognizesAccessKey="True"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        </DockPanel>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                                <Grid Height="60">
+                                    <!--  first button  -->
+                                    <Image Height="60" Visibility="{Binding IsFirst, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Setter Property="Source" Value="{converters2:ResolveImagePath Path=step_01.png}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                                        <Setter Property="Source" Value="{converters2:ResolveImagePath Path=step_01_checked.png}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                    <!--  middle Button  -->
+                                    <Image Height="60" Visibility="{Binding IsMiddle, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Setter Property="Source" Value="{converters2:ResolveImagePath Path=step_02.png}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                                        <Setter Property="Source" Value="{converters2:ResolveImagePath Path=step_02_checked.png}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+
+                                    <!--  last Button  -->
+                                    <Image Height="60" Visibility="{Binding IsLast, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                        <Image.Style>
+                                            <Style TargetType="{x:Type Image}">
+                                                <Setter Property="Source" Value="{converters2:ResolveImagePath Path=step_03.png}" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                                                        <Setter Property="Source" Value="{converters2:ResolveImagePath Path=step_03_checked.png}" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+
+
+                                    <Label Margin="0"
+                                           HorizontalContentAlignment="Center"
+                                           VerticalContentAlignment="Center"
+                                           AutomationProperties.AutomationId="Step"
+                                           Padding="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="18"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFEFEFEF"
+                                                       LineHeight="18"
+                                                       LineStackingStrategy="BlockLineHeight"
+                                                       Text="{l:Translate Key={x:Static l:MultistringTags.STEP}}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="Wrap" />
+                                            <TextBlock Margin="5,0,0,0"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       FontFamily="Play"
+                                                       FontSize="18"
+                                                       FontWeight="Bold"
+                                                       Foreground="#FFEFEFEF"
+                                                       LineHeight="18"
+                                                       LineStackingStrategy="BlockLineHeight"
+                                                       Text="{Binding StepNumber}"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Label>
+                                </Grid>
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.Resources>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+
+                <ScrollViewer x:Name="ScrollViewer"
+                              Height="330"
+                              MaxHeight="330"
+                              Margin="0,0,0,0"
+                              PanningMode="VerticalOnly"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              Template="{StaticResource hiddenScrollViewerControl}">
+                    <ItemsControl HorizontalContentAlignment="Stretch"
+                                  ItemTemplateSelector="{StaticResource ResourceKey=RegistrationDataTemplateSelector}"
+                                  ItemsSource="{Binding VisibleFields}" />
+                </ScrollViewer>
+
+                <StackPanel Margin="0,0,0,9"
+                            HorizontalAlignment="Center"
+                            Focusable="False"
+                            Orientation="Horizontal">
+
+                    <Button Grid.Row="0"
+                            Width="150"
+                            Height="60"
+                            Margin="0,17,5,0"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="Back"
+                            Command="{Binding HideWindowCommand}"
+                            Focusable="False"
+                            Style="{StaticResource registrationButton}"
+                            Visibility="{Binding IsOperatorUser,
+                                                 Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.CLOSE}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                        </Viewbox>
+                    </Button>
+
+                    <Button Width="150"
+                            Height="60"
+                            Margin="0,17,5,0"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="BindCard"
+                            Command="{Binding BindCardCommand}"
+                            Focusable="False"
+                            IsEnabled="{Binding IsEnabledBindCard}"
+                            Style="{StaticResource registrationButton}"
+                            Visibility="{Binding IsOperatorUser,
+                                                 Converter={StaticResource myBooleanToVisibilityConverter}}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <Grid>
+                                <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                               Visibility="{Binding StationRepository.IsIdCardEnabled, Converter={StaticResource myBooleanToVisibilityConverter}}"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.BIND_CARD}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                                <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                               Visibility="{Binding StationRepository.IsIdCardEnabled, Converter={StaticResource myInverseBooleanToVisibilityConverter}}"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.BIND_BARCODECARD}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                            </Grid>
+
+                        </Viewbox>
+                    </Button>
+
+                    <Button Width="150"
+                            Height="60"
+                            Margin="0,17,5,0"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="Register"
+                            Command="{Binding RegisterCommand}"
+                            Focusable="False"
+                            IsEnabled="{Binding IsEnabledRegister}"
+                            Style="{StaticResource orangeButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_REGISTER}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                        </Viewbox>
+                    </Button>
+
+
+                    <Button Width="150"
+                            Height="60"
+                            Margin="0,17,5,0"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="Clear"
+                            Command="{Binding ClearCommand}"
+                            Focusable="False"
+                            Style="{StaticResource registrationButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_CLEAR}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                        </Viewbox>
+                    </Button>
+
+                    <Button Grid.Row="0"
+                            Width="150"
+                            Height="60"
+                            Margin="5,17,0,0"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="Back"
+                            Command="{Binding BackStepCommand}"
+                            Focusable="False"
+                            Style="{StaticResource registrationButton}"
+                            Visibility="{Binding ChangeTracker.IsLandscapeMode,
+                                                 Converter={StaticResource myBooleanToVisibilityConverter}}">
+
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="Back"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                        </Viewbox>
+                    </Button>
+
+                    <Button Grid.Row="0"
+                            Width="150"
+                            Height="60"
+                            Margin="5,17,0,0"
+                            HorizontalAlignment="Center"
+                            AutomationProperties.AutomationId="Back"
+                            Command="{Binding NextStepCommand}"
+                            Focusable="False"
+                            Style="{StaticResource registrationButton}"
+                            Visibility="{Binding ChangeTracker.IsLandscapeMode,
+                                                 Converter={StaticResource myBooleanToVisibilityConverter}}">
+
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontFamily="Myriad Pro"
+                                       FontSize="22"
+                                       FontWeight="Normal"
+                                       Foreground="#262626"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="Next"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                        </Viewbox>
+                    </Button>
+
+                </StackPanel>
+            </StackPanel>
+        </Button>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,78 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Nbt.Services.Scf.CashIn" GeneratedClassName="CashInSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NumOfValidators" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="PrefValidatorKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Validator</Value>
+    </Setting>
+    <Setting Name="PrefValidatorDevice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Device</Value>
+    </Setting>
+    <Setting Name="PrefName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CashIn</Value>
+    </Setting>
+    <Setting Name="PrefValidatorChannel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Channel_</Value>
+    </Setting>
+    <Setting Name="PrefValidatorWriteDelay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_WriteDelay_ms</Value>
+    </Setting>
+    <Setting Name="PrefValidatorBaud" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Baudrate</Value>
+    </Setting>
+    <Setting Name="PrefValidatorDatabits" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Databits</Value>
+    </Setting>
+    <Setting Name="PrefValidatorStopbits" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Stopbits</Value>
+    </Setting>
+    <Setting Name="PrefValidatorParity" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Parity</Value>
+    </Setting>
+    <Setting Name="ValidatorBaudrate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
+    <Setting Name="ValidatorDatabits" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="ValidatorStopbits" Type="System.IO.Ports.StopBits" Scope="User">
+      <Value Profile="(Default)">Two</Value>
+    </Setting>
+    <Setting Name="ValidatorParity" Type="System.IO.Ports.Parity" Scope="User">
+      <Value Profile="(Default)">None</Value>
+    </Setting>
+    <Setting Name="PrefValidatorNoOverpay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_NoOverpay</Value>
+    </Setting>
+    <Setting Name="ValidatorNoOverpay" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RM5_WaitAfterInput" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RM5_DelayPoll" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="RM5_ChannelCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">6</Value>
+    </Setting>
+    <Setting Name="NV10_ChannelCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8</Value>
+    </Setting>
+    <Setting Name="PrefValidatorType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Type</Value>
+    </Setting>
+    <Setting Name="PrefValidatorAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_Address</Value>
+    </Setting>
+    <Setting Name="PrefValidatorEncryptionKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_EncryptionKey</Value>
+    </Setting>
+    <Setting Name="UseAcceptorValues" Type="System.String" Scope="User">
+      <Value Profile="(Default)">_UseAcceptorValues</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

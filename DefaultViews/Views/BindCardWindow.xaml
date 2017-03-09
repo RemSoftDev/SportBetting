@@ -1,0 +1,192 @@
+﻿<Window x:Class="DefaultViews.Views.BindCardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+        xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+        xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+        AllowsTransparency="True"
+        AutomationProperties.AutomationId="BindCardWindow"
+        Background="{StaticResource ResourceKey=OverlayBackground}"
+        SizeToContent="Manual"
+        SnapsToDevicePixels="True"
+        Topmost="True"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        WindowStyle="None"
+        d:DataContext="{d:DesignInstance viewModels:BindCardViewModel}"
+        mc:Ignorable="d">
+    <i:Interaction.Behaviors>
+        <baseObjects:EventToCommandBehavior Command="{Binding MouseDownCommand,
+                                                              Mode=TwoWay}"
+                                            Event="PreviewMouseDown"
+                                            PassArguments="True" />
+    </i:Interaction.Behaviors>
+    <Window.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityConverter" />
+        <shared:ImagePathConverter x:Key="ImagePathConverter" />
+
+    </Window.Resources>
+    <Grid Grid.Row="0" Grid.Column="0">
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                        ScaleX="{Binding ChangeTracker.Screen2WindowScale}"
+                        ScaleY="{Binding ChangeTracker.Screen2WindowScale}" />
+        </Grid.LayoutTransform>
+        <DockPanel>
+            <DockPanel.Background>
+                <ImageBrush AlignmentX="Left"
+                            AlignmentY="Top"
+                            ImageSource="{converters:ResolveImagePath Path=transparentPixel.png}"
+                            Stretch="Fill"
+                            TileMode="Tile"
+                            Viewport="0,0,800,600"
+                            ViewportUnits="Absolute" />
+            </DockPanel.Background>
+            <DockPanel MinHeight="80">
+                <DockPanel Width="500"
+                           Height="210"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <DockPanel.Background>
+                        <ImageBrush AlignmentX="Left"
+                                    AlignmentY="Top"
+                                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                                    Stretch="None"
+                                    TileMode="Tile"
+                                    Viewport="0,0,3,3"
+                                    ViewportUnits="Absolute" />
+                    </DockPanel.Background>
+
+                    <StackPanel Height="100"
+                                Margin="10,20,10,20"
+                                DockPanel.Dock="Top">
+                        <TextBlock Margin="20"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="24"
+                                   LineHeight="24"
+                                   LineStackingStrategy="BlockLineHeight"
+                                   Text="{Binding Text}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Status}" Value="0">
+                                            <Setter Property="TextBlock.Foreground" Value="White" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Status}" Value="1">
+                                            <Setter Property="TextBlock.Foreground" Value="White" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Status}" Value="2">
+                                            <Setter Property="TextBlock.Foreground" Value="Black" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+
+                        </TextBlock>
+
+                        <StackPanel.Style>
+                            <Style>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Status}" Value="0">
+                                        <Setter Property="StackPanel.Background" Value="Green" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="1">
+                                        <Setter Property="StackPanel.Background" Value="Red" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Status}" Value="2">
+                                        <Setter Property="StackPanel.Background" Value="Yellow" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                DockPanel.Dock="Bottom"
+                                Orientation="Horizontal">
+                        <!--  cancel button  -->
+                        <Button Width="149"
+                                Height="60"
+                                Margin="5,0,5,0"
+                                AutomationProperties.AutomationId="btnCancel"
+                                Command="{Binding CancelCommand}"
+                                Focusable="False"
+                                IsDefault="False"
+                                Style="{StaticResource navigationButton}"
+                                Visibility="{Binding CancelButton,
+                                                     Converter={StaticResource myBooleanToVisibilityConverter}}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#FFEFEFEF"
+                                           LineHeight="22"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CANCEL}}"
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                            </Viewbox>
+                        </Button>
+                        <!--  accept button  -->
+                        <Button Width="149"
+                                Height="60"
+                                Margin="5,0,5,0"
+                                AutomationProperties.AutomationId="btnOK"
+                                Command="{Binding AcceptCommand}"
+                                Focusable="False"
+                                IsDefault="False"
+                                IsEnabled="{Binding IsCardReady}"
+                                Style="{StaticResource orangeButton}"
+                                Visibility="{Binding AcceptButton,
+                                                     Converter={StaticResource myBooleanToVisibilityConverter}}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#FFEFEFEF"
+                                           LineHeight="22"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_OK}}"
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                            </Viewbox>
+                        </Button>
+                        <Button Width="149"
+                                Height="60"
+                                Margin="5,0,5,0"
+                                Command="{Binding LogoutCommand}"
+                                Focusable="False"
+                                IsDefault="False"
+                                Style="{StaticResource orangeButton}"
+                                Visibility="{Binding IsVisibleLogoutButton,
+                                                     Converter={StaticResource myBooleanToVisibilityConverter}}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#FFEFEFEF"
+                                           LineHeight="22"
+                                           LineStackingStrategy="BlockLineHeight"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LOGOUT}}"
+                                           TextAlignment="Left"
+                                           TextWrapping="Wrap" />
+                            </Viewbox>
+                        </Button>
+
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>

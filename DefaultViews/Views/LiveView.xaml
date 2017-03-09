@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="DefaultViews.Views.LiveView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             xmlns:viewObjects="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+             x:Name="MatchesViewControl"
+             d:DataContext="{d:DesignInstance Type=viewModels2:LiveViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="SportsBarCheckboxOrange" TargetType="CheckBox">
+            <BulletDecorator HorizontalAlignment="Center" Background="Transparent">
+                <BulletDecorator.Bullet>
+                    <StackPanel HorizontalAlignment="Center"
+                                Background="Transparent"
+                                Orientation="Vertical">
+                        <Image x:Name="imgTopToggleButton"
+                               Width="46"
+                               Height="46"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Source="{Binding Icon}" />
+                        <TextBlock x:Name="sportsBarText"
+                                   Margin="0,5,0,0"
+                                   HorizontalAlignment="Center"
+                                   FontSize="22"
+                                   FontWeight="Normal"
+                                   Foreground="#fff"
+                                   Opacity="0.9"
+                                   Text="{Binding SportName}" />
+                    </StackPanel>
+                </BulletDecorator.Bullet>
+                <ContentPresenter HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  RecognizesAccessKey="True" />
+            </BulletDecorator>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter TargetName="imgTopToggleButton" Property="Source" Value="{Binding IconActive}" />
+                    <Setter TargetName="sportsBarText" Property="Foreground" Value="#FF5C26" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              MinHeight="109"
+              HorizontalAlignment="Stretch"
+              Visibility="{Binding SportsBarVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Width="46"
+                    Height="46"
+                    Margin="11,0,0,0"
+                    Command="{Binding ScrollLeftStart}"
+                    IsEnabled="{Binding CanScrollLeft}"
+                    Style="{shared:ResourceResolver RoundButtonScrollLeft}" />
+            <Button Grid.Column="2"
+                    Width="46"
+                    Height="46"
+                    Margin="0,0,11,0"
+                    Command="{Binding ScrollRightStart}"
+                    IsEnabled="{Binding CanScrollRight}"
+                    Style="{shared:ResourceResolver RoundButtonScrollRight}" />
+
+            <ScrollViewer x:Name="SportsBarScrollLive"
+                          Grid.Column="1"
+                          Margin="15,0,15,0"
+                          PanningMode="HorizontalOnly"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding SportsBarItemsLive}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel MinWidth="135"
+                                        Margin="0,5,0,5"
+                                        VerticalAlignment="Center"
+                                        Orientation="Vertical">
+                                <CheckBox Grid.Column="0"
+                                          HorizontalAlignment="Center"
+                                          Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                           AncestorLevel=2,
+                                                                                           AncestorType={x:Type Grid}},
+                                                            Path=DataContext.CheckedBox}"
+                                          CommandParameter="{Binding}"
+                                          IsChecked="{Binding IsChecked,
+                                                              Mode=TwoWay}"
+                                          Template="{StaticResource SportsBarCheckboxOrange}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ScrollChanged">
+                        <i:InvokeCommandAction Command="{Binding LiveScrollChangedCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ScrollViewer>
+        </Grid>
+
+        <ListView Name="Matches"
+                  Grid.Row="1"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  AlternationCount="30000"
+                  BorderBrush="Black"
+                  BorderThickness="0"
+                  ItemTemplate="{DynamicResource CommonLiveMatchTemplate}"
+                  ItemsSource="{Binding Matches}"
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  VirtualizingPanel.ScrollUnit="Pixel"
+                  VirtualizingStackPanel.IsVirtualizing="True"
+                  VirtualizingStackPanel.VirtualizationMode="Recycling">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LayoutUpdated">
+                    <i:InvokeCommandAction Command="{Binding ListCreated}" CommandParameter="{Binding ElementName=Matches}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <!--
+                <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                <Button Name="Match"  Content="{Binding Name}" />
+                </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            -->
+            <ListView.Template>
+                <ControlTemplate TargetType="ListView">
+                    <Border Background="Transparent"
+                            BorderBrush="{TemplateBinding Border.BorderBrush}"
+                            BorderThickness="{TemplateBinding Border.BorderThickness}"
+                            Padding="{TemplateBinding Control.Padding}"
+                            SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="ScrollViewer"
+                                      CanContentScroll="True"
+                                      PanningMode="VerticalOnly"
+                                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                      Template="{shared:ResourceResolver ResourceKey=secondVisibleScrollView}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ScrollChanged">
+                                    <i:InvokeCommandAction Command="{Binding ScrollChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ContentVerticalOffset}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ListView.Template>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Name="VPanel" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+
+    </Grid>
+</UserControl>

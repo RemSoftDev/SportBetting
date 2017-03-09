@@ -1,0 +1,1537 @@
+﻿<UserControl x:Class="DefaultViews.Views.Landscape.HeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="clr-namespace:SportBetting.WPF.Prism.Shared.Models;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+             xmlns:viewModels3="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels3:HeaderViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityCollapsedConverter" />
+        <converters:MultiBooleanANDToVisibilityHiddenConverter x:Key="myMultyBooleanToVisibilityConverter" />
+        <converters:MultiBooleanANDToVisibilityCollapsedConverter x:Key="myMultyBooleanToVisibilityCollapsedConverter" />
+        <converters:MultiBooleanORToVisibilityConverter x:Key="myBooleanToVisibilityConverter" />
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="myInverseBooleanToVisibilityConverter" />
+        <shared:BiggerThanToBooleanConverter x:Key="BiggerThanToBooleanConverter" />
+        <shared:SportDescriptorImageSelector x:Key="SportDescriptorToIconConverter" />
+
+        <Style x:Key="searchRadioButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="3"
+                                      ShadowDepth="1"
+                                      Color="#FFC3C3C3" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <DockPanel x:Name="dpnlContent"
+                                   Width="{TemplateBinding Width}"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BreadcrumbsButtonCenter.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BreadcrumbsLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BreadcrumbsRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedBreadcrumbsButtonCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedBreadcrumbsButtonLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedBreadcrumbsButtonRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenterOrange.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownOrangeLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownOrangeRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="3"
+                                              ShadowDepth="1"
+                                              Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Storyboard x:Key="BasketBlink">
+            <ObjectAnimationUsingKeyFrames Duration="0:0:1.5" Storyboard.TargetProperty="Background">
+                <ObjectAnimationUsingKeyFrames.KeyFrames>
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=Basket_Highlited.png}" Stretch="Fill" />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.3">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=Basket_Box.png}" Stretch="Fill" />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.6">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=Basket_Highlited.png}" Stretch="Fill" />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.9">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=Basket_Box.png}" Stretch="Fill" />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+
+                    <DiscreteObjectKeyFrame KeyTime="0:0:1.2">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=Basket_Highlited.png}" Stretch="Fill" />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+
+                    <DiscreteObjectKeyFrame KeyTime="0:0:1.5">
+                        <DiscreteObjectKeyFrame.Value>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=Basket_Box.png}" Stretch="Fill" />
+                        </DiscreteObjectKeyFrame.Value>
+                    </DiscreteObjectKeyFrame>
+
+                </ObjectAnimationUsingKeyFrames.KeyFrames>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Style x:Key="WrapableTextBlock" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="MaxWidth" Value="120" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="sportsToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <StackPanel Background="Transparent" Orientation="Vertical">
+                            <Image x:Name="imgTopToggleButton"
+                                   Width="86"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   Source="{converters2:ResolveImagePath Path=SportsIcon.png}" />
+                            <Viewbox Width="80"
+                                     Height="37"
+                                     MaxWidth="80"
+                                     MaxHeight="40"
+                                     VerticalAlignment="Bottom"
+                                     StretchDirection="DownOnly">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Viewbox>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=SportsIconSelected.png}" />
+                                <Setter Property="Foreground" Value="#FFFF4D00" />
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsEnabled" Value="False">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=SportsIconDisabled.png}" />
+                                <Setter Property="Foreground" Value="#5A6164" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="3"
+                                              ShadowDepth="1"
+                                              Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="liveToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <StackPanel Background="Transparent" Orientation="Vertical">
+                            <Image x:Name="imgTopToggleButton"
+                                   Width="86"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   Source="{converters2:ResolveImagePath Path=LiveIcon.png}" />
+                            <Viewbox Width="80"
+                                     Height="37"
+                                     MaxWidth="80"
+                                     MaxHeight="40"
+                                     VerticalAlignment="Bottom"
+                                     StretchDirection="DownOnly">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Viewbox>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=LiveIconSelected.png}" />
+                                <Setter Property="Foreground" Value="#FFFF4D00" />
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsEnabled" Value="False">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=LiveIconDisabled.png}" />
+                                <Setter Property="Foreground" Value="#5A6164" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="3"
+                                              ShadowDepth="1"
+                                              Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="resultsToggleButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <StackPanel Background="Transparent" Orientation="Vertical">
+                            <Image x:Name="imgTopToggleButton"
+                                   Width="86"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   Source="{converters2:ResolveImagePath Path=ResultsIcon.png}" />
+                            <Viewbox Width="80"
+                                     Height="37"
+                                     MaxWidth="80"
+                                     MaxHeight="40"
+                                     VerticalAlignment="Bottom"
+                                     StretchDirection="DownOnly">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Viewbox>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=ResultsIconSelected.png}" />
+                                <Setter Property="Foreground" Value="#FFFF4D00" />
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsEnabled" Value="False">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=ResultsIconDisabled.png}" />
+                                <Setter Property="Foreground" Value="#5A6164" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="3"
+                                              ShadowDepth="1"
+                                              Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="virtualToggleButton" TargetType="{x:Type RadioButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <StackPanel Background="Transparent" Orientation="Vertical">
+                            <Image x:Name="imgTopToggleButton"
+                                   Width="86"
+                                   Height="60"
+                                   HorizontalAlignment="Center"
+                                   Source="{converters2:ResolveImagePath Path=VirtualSportsIcon.png}" />
+                            <Viewbox Width="80"
+                                     Height="37"
+                                     MaxWidth="80"
+                                     MaxHeight="40"
+                                     VerticalAlignment="Bottom"
+                                     StretchDirection="DownOnly">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Viewbox>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=VirtualSportsIconSelected.png}" />
+                                <Setter Property="Foreground" Value="#FFFF4D00" />
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsEnabled" Value="False">
+                                <Setter TargetName="imgTopToggleButton" Property="Source" Value="{converters2:ResolveImagePath Path=VirtualSportsIconDisabled.png}" />
+                                <Setter Property="Foreground" Value="#5A6164" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect BlurRadius="3"
+                                              ShadowDepth="1"
+                                              Color="Black" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <viewModels:UserTemplateSelector x:Key="UserTemplateSelector" />
+        <shared:UserToBooleanConverter x:Key="UserToBooleanConverter" />
+        <shared:InverseUserToBooleanConverter x:Key="InverseUserToBooleanConverter" />
+        <shared:InvertBooleanConverter x:Key="myInvertBooleanConverter" />
+        <shared:MultistringTagConverter x:Key="MultistringTagConverter" />
+
+        <Style x:Key="showHideButton"
+               BasedOn="{StaticResource navigationButton}"
+               TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ChangeTracker.CurrentUser, Converter={StaticResource InverseUserToBooleanConverter}, ConverterParameter=OperatorUser}" Value="True">
+                    <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="navigationButtonOrangeHeader" TargetType="{x:Type RadioButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <DockPanel x:Name="dpnlContent"
+                                   Width="{TemplateBinding Width}"
+                                   Height="102"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonCenter.png}" />
+                            </DockPanel.Background>
+
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="4"
+                                       Height="102"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="4"
+                                       Height="102"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedHeaderButtonCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedHeaderButtonLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedHeaderButtonRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="navigationOrangeHeader" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="-1,0,0,0" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlContent"
+                                   Width="{TemplateBinding Width}"
+                                   Height="102"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonCenter.png}" />
+                            </DockPanel.Background>
+
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="4"
+                                       Height="102"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="4"
+                                       Height="102"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedHeaderButtonCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedHeaderButtonLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedHeaderButtonRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="navigationButtonOrangeHeaderAndPressed"
+               BasedOn="{StaticResource navigationButtonOrangeHeader}"
+               TargetType="{x:Type RadioButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <DockPanel x:Name="dpnlContent"
+                                   Width="{TemplateBinding Width}"
+                                   Height="102"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonCenter.png}" />
+                            </DockPanel.Background>
+
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="4"
+                                       Height="102"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="4"
+                                       Height="102"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="dpnlContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonOrangeCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonOrangeLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=HeaderButtonOrangeRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="ShowHideText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Regular" />
+            <Setter Property="Foreground" Value="#FFEFEFEF" />
+            <Setter Property="LineHeight" Value="13" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ShowMenu}" Value="true">
+                    <Setter Property="Text" Value="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_HIDE}}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ShowMenu}" Value="false">
+                    <Setter Property="Text" Value="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_SHOW}}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters2:ResolveImagePath Path=HeaderBackground.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,1,120"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+
+    <StackPanel Height="auto">
+        <!--  header  -->
+        <Grid x:Name="cnvHeader"
+              Height="120"
+              HorizontalAlignment="Stretch">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush AlignmentX="Left"
+                                        AlignmentY="Top"
+                                        ImageSource="{converters2:ResolveImagePath Path=BackgroundTile.png}"
+                                        Stretch="None"
+                                        TileMode="Tile"
+                                        Viewport="0,0,3,3"
+                                        ViewportUnits="Absolute" />
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding StationRepository.IsTestMode}" Value="True">
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush AlignmentX="Left"
+                                                AlignmentY="Top"
+                                                ImageSource="{converters2:ResolveImagePath Path=texture.png}"
+                                                Stretch="None"
+                                                TileMode="Tile"
+                                                Viewport="0,0,3,3"
+                                                ViewportUnits="Absolute" />
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Width="350"
+                        MaxWidth="411"
+                        MaxHeight="108"
+                        Orientation="Horizontal">
+                <RadioButton x:Name="sportsToggleButton"
+                             Height="97"
+                             MaxWidth="85"
+                             Command="{Binding ShowCategoriesViewCommand}"
+                             Focusable="False"
+                             GroupName="headerBtn"
+                             IsChecked="{Binding ChangeTracker.SelectedSports}"
+                             IsEnabled="{Binding ChangeTracker.CurrentUser,
+                                                 Converter={StaticResource InverseUserToBooleanConverter},
+                                                 ConverterParameter=OperatorUser}"
+                             Style="{StaticResource sportsToggleButton}"
+                             Visibility="{Binding StationRepository.IsPrematchEnabled,
+                                                  Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <Viewbox Width="85"
+                             Height="30"
+                             MinWidth="85"
+                             MinHeight="30"
+                             MaxWidth="85"
+                             MaxHeight="30"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             StretchDirection="DownOnly">
+                        <TextBlock Width="125"
+                                   MaxWidth="125"
+                                   Style="{StaticResource WrapableTextBlock}"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_SPORTS}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton x:Name="liveToggleButton"
+                             Height="97"
+                             MaxWidth="85"
+                             Command="{Binding ShowLiveViewCommand}"
+                             Focusable="False"
+                             GroupName="headerBtn"
+                             IsChecked="{Binding ChangeTracker.SelectedLive}"
+                             IsEnabled="{Binding ChangeTracker.CurrentUser,
+                                                 Converter={StaticResource InverseUserToBooleanConverter},
+                                                 ConverterParameter=OperatorUser}"
+                             Style="{StaticResource liveToggleButton}"
+                             Visibility="{Binding StationRepository.IsLiveMatchEnabled,
+                                                  Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <Viewbox Width="85"
+                             Height="30"
+                             MinWidth="85"
+                             MinHeight="30"
+                             MaxWidth="85"
+                             MaxHeight="30"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             StretchDirection="DownOnly">
+                        <TextBlock Width="125"
+                                   MaxWidth="125"
+                                   Style="{StaticResource WrapableTextBlock}"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LIVE_BETS}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton x:Name="resultsToggleButton"
+                             Height="97"
+                             MaxWidth="85"
+                             Command="{Binding ShowResultsViewCommand}"
+                             Focusable="False"
+                             GroupName="headerBtn"
+                             IsChecked="{Binding ChangeTracker.SelectedResults}"
+                             IsEnabled="{Binding ChangeTracker.CurrentUser,
+                                                 Converter={StaticResource InverseUserToBooleanConverter},
+                                                 ConverterParameter=OperatorUser}"
+                             Style="{StaticResource resultsToggleButton}"
+                             Visibility="{Binding StationRepository.ResultsVisible,
+                                                  Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <Viewbox Width="85"
+                             Height="30"
+                             MinWidth="85"
+                             MinHeight="30"
+                             MaxWidth="85"
+                             MaxHeight="30"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             StretchDirection="DownOnly">
+                        <TextBlock Width="125"
+                                   MaxWidth="125"
+                                   Style="{StaticResource WrapableTextBlock}"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton x:Name="virtualToggleButton"
+                             Height="97"
+                             MaxWidth="85"
+                             Command="{Binding ShowEntertainmentCommand}"
+                             Focusable="False"
+                             GroupName="headerBtn"
+                             IsChecked="{Binding ChangeTracker.SelectedVirtualSports}"
+                             IsEnabled="{Binding ChangeTracker.CurrentUser,
+                                                 Converter={StaticResource InverseUserToBooleanConverter},
+                                                 ConverterParameter=OperatorUser}"
+                             Style="{StaticResource virtualToggleButton}">
+                    <RadioButton.Visibility>
+                        <MultiBinding Converter="{StaticResource myBooleanToVisibilityConverter}">
+                            <Binding Path="StationRepository.AllowVfl" />
+                            <Binding Path="StationRepository.AllowVhc" />
+                        </MultiBinding>
+                    </RadioButton.Visibility>
+                    <Viewbox Width="85"
+                             Height="40"
+                             MinWidth="85"
+                             MinHeight="40"
+                             MaxWidth="85"
+                             MaxHeight="40"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             StretchDirection="DownOnly">
+                        <TextBlock Width="125"
+                                   MaxWidth="125"
+                                   Style="{StaticResource WrapableTextBlock}"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_VIRTUAL_SPORTS}}" />
+                    </Viewbox>
+                </RadioButton>
+
+            </StackPanel>
+            <!--  </Viewbox>  -->
+            <!--  login  -->
+            <Grid Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Name="LockedStatusLabel" HorizontalContentAlignment="Stretch" VerticalAlignment="Center" Width="238" Height="102">
+                    <Label.Background>
+                        <ImageBrush AlignmentX="Left"
+                                AlignmentY="Top"
+                                ImageSource="{converters2:ResolveImagePath Path=BackgroundBets.png}"
+                                Stretch="Fill" />
+                    </Label.Background>
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="234" Height="96">
+                        <Image Source="{converters2:ResolveImagePath Path=WarningIconSmall.png}" VerticalAlignment="Center" Width="41" Height="37" DockPanel.Dock="Left" Margin="20,0,0,0"></Image>
+                        <TextBlock DockPanel.Dock="Left" TextWrapping="Wrap" Foreground="White" FontSize="20" FontWeight="Bold" TextAlignment="Center" Margin="10,0,20,0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding LockText}"></TextBlock>
+                    </DockPanel>
+                    <Label.Visibility>
+                        <MultiBinding Converter="{StaticResource myMultyBooleanToVisibilityCollapsedConverter}">
+                            <MultiBinding.Bindings>
+                                <Binding Path="IsStationLocked"></Binding>
+                                <Binding Converter="{StaticResource UserToBooleanConverter}"
+                                     ConverterParameter="OperatorUser"
+                                     Path="ChangeTracker.CurrentUser" />
+                            </MultiBinding.Bindings>
+                        </MultiBinding>
+                    </Label.Visibility>
+                </Label>
+                
+                <Label Name="UserControl"
+                   Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   HorizontalContentAlignment="Stretch"
+                   Content="{Binding ChangeTracker.CurrentUser}"
+                   ContentTemplateSelector="{StaticResource UserTemplateSelector}" />
+            </Grid>
+
+
+            <!--  insert credit  -->
+            <Grid Grid.Column="5"
+                  Width="68"
+                  Height="102"
+                  HorizontalAlignment="Left">
+                <RadioButton x:Name="BtnInsCrdt"
+                             Width="68"
+                             Height="102"
+                             AutomationProperties.AutomationId="InsertTicket"
+                             Command="{Binding InsertCreditNoteCommand}"
+                             FontSize="20"
+                             FontWeight="Bold"
+                             Foreground="#FFC0C0C0"
+                             GroupName="headerBtn"
+                             IsChecked="{Binding ChangeTracker.SelectedTicket}"
+                             IsEnabled="{Binding ChangeTracker.CurrentUser,
+                                                 Converter={StaticResource InverseUserToBooleanConverter},
+                                                 ConverterParameter=OperatorUser}"
+                             Style="{StaticResource navigationButtonOrangeHeaderAndPressed}">
+                    <DockPanel Width="60" Height="102">
+                        <Image Width="48"
+                               Height="26"
+                               Margin="0,15,0,0"
+                               DockPanel.Dock="Top"
+                               Source="{converters2:ResolveImagePath Path=InsertCNicon.png}" />
+
+                        <TextBlock DockPanel.Dock="Bottom"
+                                   Margin="0,0,0,15"
+                                   VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="14"
+                                   Foreground="White"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INSERT_TICKET}}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </DockPanel>
+                </RadioButton>
+
+                <Grid Name="grdClosed" Visibility="{Binding ElementName=BtnInsCrdt, Path=IsEnabled, Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="{converters2:ResolveImagePath Path=SmallDisabled_row.png}" />
+                    </Grid.Background>
+                </Grid>
+            </Grid>
+            <Button x:Name="btnCashOut"
+                    Grid.Column="6"
+                    Width="68"
+                    Height="102"
+                    Margin="3, 0, 0 , 0"
+                    HorizontalAlignment="Left"
+                    AutomationProperties.AutomationId="CashOut"
+                    Command="{Binding PrintCreditNoteCommand}"
+                    Focusable="False"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFC0C0C0"
+                    Style="{StaticResource navigationOrangeHeader}">
+                <Button.Visibility>
+                    <MultiBinding Converter="{StaticResource myMultyBooleanToVisibilityCollapsedConverter}">
+                        <MultiBinding.Bindings>
+                            <Binding Converter="{StaticResource UserToBooleanConverter}"
+                                     ConverterParameter="AnonymousUser"
+                                     Path="ChangeTracker.CurrentUser" />
+                            <Binding Path="StationRepository.AllowAnonymousBetting" />
+                            <Binding Converter="{StaticResource BiggerThanToBooleanConverter}"
+                                     ConverterParameter="0"
+                                     Path="ChangeTracker.CurrentUser.Cashpool" />
+                            <Binding Converter="{StaticResource myInvertBooleanConverter}" Path="StationRepository.IsTestMode" />
+                        </MultiBinding.Bindings>
+                    </MultiBinding>
+                </Button.Visibility>
+                <DockPanel Width="60" Height="102" HorizontalAlignment="Center">
+                    <Image Width="68"
+                           Height="35"
+                           Margin="0,15,0,0"
+                           DockPanel.Dock="Top"
+                           Source="{converters2:ResolveImagePath Path=CashOutIcon.png}" />
+                    <TextBlock FontFamily="Play" DockPanel.Dock="Bottom" Margin="0,0,0,15"
+                               FontSize="14"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.CASH_OUT}}"
+                               VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </DockPanel>
+            </Button>
+            <!--  testMode section  -->
+            <Grid Grid.Column="7"
+                  Width="250"
+                  Height="102"
+                  Margin="5, 0, 0, 0"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Center"
+                  Visibility="{Binding StationRepository.IsTestMode,
+                                       Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                <Grid.Background>
+                    <ImageBrush AlignmentX="Left"
+                                AlignmentY="Top"
+                                ImageSource="{converters2:ResolveImagePath Path=BackgroundBets_Test.png}"
+                                Stretch="Fill" />
+                </Grid.Background>
+
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontFamily="Play"
+                           FontSize="30"
+                           FontWeight="Bold"
+                           IsHyphenationEnabled="True"
+                           LineHeight="30"
+                           LineStackingStrategy="BlockLineHeight"
+                           Text="TEST MODE"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+
+            </Grid>
+
+            <Button x:Name="btnExitTextMode"
+                    Grid.Column="8"
+                    Width="68"
+                    Height="102"
+                    HorizontalAlignment="Left"
+                    AutomationProperties.AutomationId="ExitTextMode"
+                    Command="{Binding ExitTestMode}"
+                    Focusable="False"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFC0C0C0"
+                    Style="{StaticResource navigationOrangeHeader}"
+                    Visibility="{Binding StationRepository.IsTestMode,
+                                         Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                <DockPanel Width="60" Height="102">
+                    <Image Width="68"
+                           Height="35"
+                           Margin="0,10,0,0"
+                           DockPanel.Dock="Top"
+                           Source="{converters2:ResolveImagePath Path=exit_white.png}" />
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock DockPanel.Dock="Bottom"
+                                   FontFamily="Play"
+                                   FontSize="14"
+                                   Foreground="White"
+                                   Text="Exit"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </Viewbox>
+                </DockPanel>
+            </Button>
+
+        </Grid>
+        <!--  breadcrumbs  -->
+        <Grid Height="60"
+              HorizontalAlignment="Stretch"
+              Visibility="{Binding ChangeTracker.HeaderVisible,
+                                   Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+            <Grid.Background>
+                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=BreadcrumbsCenter.png}" />
+            </Grid.Background>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel HorizontalAlignment="Right" Grid.Column="2">
+                <Image Width="4"
+                           Height="60"
+                           Margin="0,0,-1,0"
+                           Source="{converters2:ResolveImagePath Path=BreadcrumbsRight.png}" />
+                <StackPanel.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ChangeTracker.CurrentUser, Converter={StaticResource InverseUserToBooleanConverter}, ConverterParameter=OperatorUser}" Value="True">
+                                <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+            </StackPanel>
+
+            <!--  navigation and notifications  -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+
+                <Button Width="65"
+                        Height="60"
+                        Command="{Binding ShowMenuCommand}"
+                        CommandParameter="1"
+                        DockPanel.Dock="Left"
+                        Style="{StaticResource showHideButton}">
+                    <StackPanel>
+                        <Image Width="24"
+                               Height="20"
+                               Margin="5, 0, 5, 5"
+                               DockPanel.Dock="Top"
+                               Source="{converters2:ResolveImagePath Path=close_icon01.png}" />
+                        <TextBlock Margin="0, 4, 0, 0"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource ShowHideText}" />
+                    </StackPanel>
+
+                </Button>
+
+                <Button x:Name="btnPrev"
+                        Width="60"
+                        Height="60"
+                        AutomationProperties.AutomationId="Back"
+                        Command="{Binding PrevView}"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#FFC0C0C0"
+                        Style="{StaticResource navigationButton}"
+                        Visibility="{Binding StationRepository.IsTestMode,
+                                             Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+                    <Image Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Height="29"
+                               Source="{converters2:ResolveImagePath Path=BackActive.png}" />
+                </Button>
+                <Button x:Name="btnNext"
+                        Width="60"
+                        Height="60"
+                        AutomationProperties.AutomationId="Forward"
+                        Command="{Binding NextView}"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="#FFC0C0C0"
+                        Style="{StaticResource navigationButtonOrange}"
+                        Visibility="{Binding StationRepository.IsTestMode,
+                                             Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+                    <Image Width="22" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Height="29"
+                               DockPanel.Dock="Right"
+                               Source="{converters2:ResolveImagePath Path=FwdActive.png}" />
+                </Button>
+
+                <StackPanel>
+                    <Image Width="4" HorizontalAlignment="Left"
+                           Height="60"
+                           Margin="-1,0,0,0"
+                           Source="{converters2:ResolveImagePath Path=BreadcrumbsLeft.png}" />
+                    <StackPanel.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.CurrentUser, Converter={StaticResource InverseUserToBooleanConverter}, ConverterParameter=OperatorUser}" Value="True">
+                                    <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                </StackPanel>
+
+                <StackPanel Margin="10"
+                            VerticalAlignment="Center"
+                            DockPanel.Dock="Left"
+                            Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style x:Key="NormalHiddenText"
+                               BasedOn="{StaticResource normalText}"
+                               TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.AdminTitle2}" Value="{x:Null}">
+                                    <Setter Property="TextBlock.Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+                    <StackPanel.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.CurrentUser, Converter={StaticResource InverseUserToBooleanConverter}, ConverterParameter=OperatorUser}" Value="True">
+                                    <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <TextBlock Style="{StaticResource normalText}" Text="{Binding ChangeTracker.AdminTitle1, Converter={StaticResource MultistringTagConverter}}" />
+                    <TextBlock Margin="5,0,5,0"
+                               Style="{StaticResource NormalHiddenText}"
+                               Text="/" />
+                    <TextBlock Style="{StaticResource normalText}" Text="{Binding ChangeTracker.AdminTitle2, Converter={StaticResource MultistringTagConverter}}" />
+
+                </StackPanel>
+            </StackPanel>
+
+            <Grid x:Name="spnlLeftButtons"
+                  Grid.Column="1"
+                  HorizontalAlignment="Stretch"
+                  Visibility="{Binding ChangeTracker.IsBetdomainViewOpen,
+                                       Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+                <Grid.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ChangeTracker.CurrentUser, Converter={StaticResource InverseUserToBooleanConverter}, ConverterParameter=OperatorUser}" Value="False">
+                                <Setter Property="Canvas.Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <Image Width="4" HorizontalAlignment="Left"
+                           Height="60"
+                           Margin="-1,0,0,0"
+                           Source="{converters2:ResolveImagePath Path=BreadcrumbsLeft.png}" />
+
+                <Image Width="4" HorizontalAlignment="Right"
+                           Height="60"
+                           Margin="-1,0,0,0"
+                           Source="{converters2:ResolveImagePath Path=BreadcrumbsRight.png}" />
+
+                <!--  live match buttons  -->
+                <Grid Name="LiveMatchFilters"
+                      HorizontalAlignment="Stretch"
+                      Visibility="{Binding ChangeTracker.SelectedLive,
+                                           Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <UniformGrid HorizontalAlignment="Stretch" Columns="3">
+                        <RadioButton Grid.Column="0"
+                                     Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="livebysport"
+                                     Command="{Binding LiveModeCommand}"
+                                     CommandParameter="0"
+                                     GroupName="LiveTimeFilterButtons"
+                                     IsChecked="{Binding LiveBySportChecked}"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Width="34"
+                                           Height="34"
+                                           VerticalAlignment="Center"
+                                           Source="{converters2:ResolveImagePath Path=World.png}" />
+                                    <TextBlock Margin="9,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="23"
+                                               FontWeight="Bold"
+                                               Foreground="#fff"
+                                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_LIVE_BY_SPORT}}" />
+                                </StackPanel>
+                            </Viewbox>
+                        </RadioButton>
+
+                        <RadioButton Grid.Column="0"
+                                     Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="topgameslive"
+                                     Command="{Binding LiveModeCommand}"
+                                     CommandParameter="4"
+                                     GroupName="LiveTimeFilterButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Width="34"
+                                           Height="34"
+                                           VerticalAlignment="Center"
+                                           Source="{converters2:ResolveImagePath Path=Top.png}" />
+                                    <TextBlock Margin="9,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="23"
+                                               FontWeight="Bold"
+                                               Foreground="#fff"
+                                               Text="{l:Translate Key={x:Static l:MultistringTags.TOP_GAMES}}" />
+                                </StackPanel>
+                            </Viewbox>
+                        </RadioButton>
+
+                        <RadioButton Grid.Column="0"
+                                     Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="livetimetable"
+                                     Command="{Binding LiveModeCommand}"
+                                     CommandParameter="3"
+                                     GroupName="LiveTimeFilterButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Width="34"
+                                           Height="34"
+                                           VerticalAlignment="Center"
+                                           Source="{converters2:ResolveImagePath Path=Live.png}" />
+                                    <TextBlock Margin="9,0,0,0"
+                                               VerticalAlignment="Center"
+                                               FontSize="23"
+                                               FontWeight="Bold"
+                                               Foreground="#fff"
+                                               Text="{l:Translate Key={x:Static l:MultistringTags.LIVE_TIMETABLE}}" />
+                                </StackPanel>
+                            </Viewbox>
+                        </RadioButton>
+                    </UniformGrid>
+                </Grid>
+
+                <!--  match filters  -->
+                <Grid Name="MatchFilters"
+                      HorizontalAlignment="Stretch"
+                      Visibility="{Binding ChangeTracker.SelectedSports,
+                                           Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="31*" />
+                        <ColumnDefinition Width="21*" />
+                        <ColumnDefinition Width="24*" />
+                        <ColumnDefinition Width="22*" />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton Grid.Column="0"
+                                 Height="60"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 AutomationProperties.AutomationId="toptournaments"
+                                 Command="{Binding TopTournamentsCommand}"
+                                 GroupName="MatchFilterButtons"
+                                 IsChecked="{Binding TopTournamentsChecked}"
+                                 Style="{StaticResource sportBarRadioButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Width="34"
+                                       Height="34"
+                                       VerticalAlignment="Center"
+                                       Source="{converters2:ResolveImagePath Path=Top.png}" />
+                                <TextBlock Margin="9,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOP_TOURNAMENTS}}" />
+                            </StackPanel>
+                        </Viewbox>
+                    </RadioButton>
+
+                    <RadioButton Grid.Column="1"
+                                 Height="60"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 AutomationProperties.AutomationId="allsports"
+                                 Command="{Binding AllSportsCommand}"
+                                 GroupName="MatchFilterButtons"
+                                 IsChecked="False"
+                                 Style="{StaticResource sportBarRadioButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Width="34"
+                                       Height="34"
+                                       VerticalAlignment="Center"
+                                       Source="{converters2:ResolveImagePath Path=World.png}" />
+                                <TextBlock Margin="9,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.ALL_SPORTS}}" />
+                            </StackPanel>
+                        </Viewbox>
+                    </RadioButton>
+
+                    <RadioButton Grid.Column="2"
+                                 Height="60"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 AutomationProperties.AutomationId="todaysoffer"
+                                 Command="{Binding TodaysOfferCommand}"
+                                 GroupName="MatchFilterButtons"
+                                 IsChecked="False"
+                                 Style="{StaticResource sportBarRadioButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Width="34"
+                                       Height="34"
+                                       VerticalAlignment="Center"
+                                       Source="{converters2:ResolveImagePath Path=Today.png}" />
+                                <TextBlock Margin="9,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_OFFER_TODAY}}" />
+                            </StackPanel>
+                        </Viewbox>
+                    </RadioButton>
+
+                    <RadioButton Grid.Column="3"
+                                 Height="60"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 AutomationProperties.AutomationId="lastminute"
+                                 Command="{Binding LastMinuteCommand}"
+                                 GroupName="MatchFilterButtons"
+                                 IsChecked="False"
+                                 Style="{StaticResource sportBarRadioButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Width="34"
+                                       Height="34"
+                                       VerticalAlignment="Center"
+                                       Source="{converters2:ResolveImagePath Path=LastMinute.png}" />
+                                <TextBlock Margin="9,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_LASTMINUTE}}" />
+                            </StackPanel>
+                        </Viewbox>
+                    </RadioButton>
+                </Grid>
+
+                <!--  results buttons  -->
+                <Grid HorizontalAlignment="Stretch" Visibility="{Binding ShowResultFilters, Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15*" />
+                        <ColumnDefinition Width="15*" />
+                        <ColumnDefinition Width="70*" />
+                    </Grid.ColumnDefinitions>
+
+                    <RadioButton Grid.Column="0"
+                                 Height="60"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 AutomationProperties.AutomationId="resultstoday"
+                                 Command="{Binding ResultsTimeCommand}"
+                                 CommandParameter="0"
+                                 GroupName="resultsBarlButtons"
+                                 IsChecked="{Binding TodayResultsChecked}"
+                                 Style="{StaticResource sportBarRadioButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontSize="23"
+                                       FontWeight="Bold"
+                                       Foreground="#fff"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_TODAY}}" />
+                        </Viewbox>
+                    </RadioButton>
+
+                    <RadioButton Grid.Column="1"
+                                 Height="60"
+                                 HorizontalAlignment="Stretch"
+                                 VerticalAlignment="Center"
+                                 AutomationProperties.AutomationId="resultsyesterday"
+                                 Command="{Binding ResultsTimeCommand}"
+                                 CommandParameter="1"
+                                 GroupName="resultsBarlButtons"
+                                 Style="{StaticResource sportBarRadioButton}">
+                        <Viewbox StretchDirection="DownOnly">
+                            <TextBlock FontSize="23"
+                                       FontWeight="Bold"
+                                       Foreground="#fff"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_YESTERDAY}}" />
+                        </Viewbox>
+                    </RadioButton>
+
+                    <UniformGrid Grid.Column="2" Columns="5">
+                        <RadioButton Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="resultsminus2"
+                                     Command="{Binding ResultsTimeCommand}"
+                                     CommandParameter="2"
+                                     GroupName="resultsBarlButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_MINUS_X_DAYS},
+                                                              Args=2}" />
+                            </Viewbox>
+                        </RadioButton>
+
+                        <RadioButton Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="resultsminus3"
+                                     Command="{Binding ResultsTimeCommand}"
+                                     CommandParameter="3"
+                                     GroupName="resultsBarlButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_MINUS_X_DAYS},
+                                                              Args=3}" />
+                            </Viewbox>
+                        </RadioButton>
+
+                        <RadioButton Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="resultsminus4"
+                                     Command="{Binding ResultsTimeCommand}"
+                                     CommandParameter="4"
+                                     GroupName="resultsBarlButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_MINUS_X_DAYS},
+                                                              Args=4}" />
+                            </Viewbox>
+                        </RadioButton>
+
+                        <RadioButton Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="resultsminus5"
+                                     Command="{Binding ResultsTimeCommand}"
+                                     CommandParameter="5"
+                                     GroupName="resultsBarlButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_MINUS_X_DAYS},
+                                                              Args=5}" />
+                            </Viewbox>
+                        </RadioButton>
+
+                        <RadioButton Height="60"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Center"
+                                     AutomationProperties.AutomationId="resultsminus6"
+                                     Command="{Binding ResultsTimeCommand}"
+                                     CommandParameter="6"
+                                     GroupName="resultsBarlButtons"
+                                     Style="{StaticResource sportBarRadioButton}">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontSize="23"
+                                           FontWeight="Bold"
+                                           Foreground="#fff"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESULTS_MINUS_X_DAYS},
+                                                              Args=6}" />
+                            </Viewbox>
+                        </RadioButton>
+                    </UniformGrid>
+                </Grid>
+            </Grid>
+
+
+            <!--  right navigation control (search...)  -->
+            <StackPanel x:Name="spnlRightButtons"
+                        Grid.Column="2"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <RadioButton Width="60"
+                             Height="60"
+                             Margin="0,0,0,0"
+                             AutomationProperties.AutomationId="Search"
+                             Command="{Binding DoSearchCommand}"
+                             GroupName="headerBtn"
+                             Style="{StaticResource searchRadioButton}"
+                             Visibility="{Binding ChangeTracker.SearchVisibility}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <Image Width="34"
+                               Height="34"
+                               Source="{converters2:ResolveImagePath Path=SearchIcon.png}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <Button Width="200"
+                        Height="60"
+                        AutomationProperties.AutomationId="RestoreTicket"
+                        Command="{Binding RestoreTicketCommand}"
+                        Focusable="False"
+                        Visibility="{Binding StationRepository.IsStoreTicketEnabled,
+                                             Converter={StaticResource myBooleanToVisibilityCollapsedConverter}}">
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource navigationButton}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.CurrentUser, Converter={StaticResource InverseUserToBooleanConverter}, ConverterParameter=OperatorUser}" Value="False">
+                                    <Setter Property="Canvas.Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Margin="10,0,5,0"
+                                   Focusable="False"
+                                   FontFamily="Play"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="#FFC0C0C0"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_RESTORE_TICKET}}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>

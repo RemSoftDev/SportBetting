@@ -1,0 +1,1205 @@
+﻿<UserControl x:Class="BlackWhite.Resources.CommonLiveMonitorTemplate"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+             xmlns:wpfHelper="clr-namespace:SportBetting.WPF.Prism.Shared.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             d:DataContext="{d:DesignInstance Type=viewModels:MatchVw}"
+             d:DesignWidth="1000"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:MatchColorBarConverter x:Key="sMatchColorImage" />
+    </UserControl.Resources>
+    <Label Margin="0"
+           HorizontalContentAlignment="Stretch"
+           AutomationProperties.AutomationId="Match"
+           Padding="0"
+           Visibility="{Binding Visibility}">
+        <VirtualizingStackPanel Orientation="Vertical"
+                                VirtualizationMode="Recycling"
+                                Visibility="{Binding Visibility}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LayoutUpdated">
+                    <i:InvokeCommandAction Command="{Binding DataContext.ItemCreated, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type VirtualizingStackPanel}}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <!--  sport header  -->
+            <Grid HorizontalAlignment="Stretch" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}, Path=DataContext.rotating, Converter={StaticResource InverseBooleanToVisibilityCollapsedConverter}}">
+                <DockPanel Name="HeaderTemplate"
+                           Height="45"
+                           Background="#FFbcbcbc"
+                           LastChildFill="False"
+                           Visibility="{Binding IsHeaderForLiveMonitor,
+                                                Converter={StaticResource myBooleanToVisibilityConverter}}"
+                           wpfHelper:SizeObserver.Observe="True">
+
+                    <TextBlock Margin="15,10,0,0"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"
+                               FontSize="30"
+                               Style="{StaticResource headerText}"
+                               Text="{Binding SportView.DisplayName}" />
+
+                    <StackPanel Width="430"
+                                Margin="0, 10, 0, 0"
+                                DockPanel.Dock="Right"
+                                Orientation="Horizontal">
+                        <TextBlock Width="69"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="1"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="X"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="2"
+                                   TextAlignment="Center" />
+
+                        <TextBlock Width="69"
+                                   Margin="9,0,10,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="G"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   Margin="-5,0,0,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="U"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   Margin="0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="O"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+            <Grid HorizontalAlignment="Stretch" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ItemsControl}}, Path=DataContext.rotating, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <DockPanel Name="RotatingHeaderTemplate"
+                           Height="45"
+                           Background="#FFbcbcbc"
+                           LastChildFill="False"
+                           Visibility="{Binding IsHeaderForRotation,
+                                                Converter={StaticResource myBooleanToVisibilityConverter}}"
+                           wpfHelper:SizeObserver.Observe="True">
+
+                    <TextBlock Margin="15,10,0,0"
+                               VerticalAlignment="Center"
+                               DockPanel.Dock="Left"
+                               FontSize="30"
+                               Style="{StaticResource headerText}"
+                               Text="{Binding SportView.DisplayName}" />
+
+                    <StackPanel Width="430"
+                                Margin="0, 10, 0, 0"
+                                DockPanel.Dock="Right"
+                                Orientation="Horizontal">
+                        <TextBlock Width="69"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="1"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="X"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="2"
+                                   TextAlignment="Center" />
+
+                        <TextBlock Width="69"
+                                   Margin="9,0,10,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="G"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   Margin="-5,0,0,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="U"
+                                   TextAlignment="Center" />
+                        <TextBlock Width="69"
+                                   Margin="0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="30"
+                                   Style="{StaticResource headerText}"
+                                   Text="O"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+
+            <Border BorderBrush="#FFbcbcbc" BorderThickness="0, 1, 0, 0">
+                <Grid Name="MatchTemplate7" Margin="0,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="45" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="44*" />
+                        <ColumnDefinition Width="16*" />
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Background" Value="#FF4d4d4d" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=(ItemsControl.AlternationIndex), Converter={StaticResource AlterationIndexAsOddEvenToBooleanConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type ContentPresenter}}}" Value="true">
+                                    <Setter Property="Background" Value="#FF393939" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <!--  temporary closed cover  -->
+                    <Grid Grid.RowSpan="2" Grid.ColumnSpan="5">
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Style.Triggers>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>interrupted</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <ImageBrush AlignmentX="Left"
+                                                            AlignmentY="Top"
+                                                            ImageSource="{converters:ResolveImagePath Path=Disabled_row.png}"
+                                                            Stretch="Fill" />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="ZIndex" Value="1" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Play"
+                                   FontSize="32"
+                                   FontWeight="Medium"
+                                   Foreground="#FFb3b3b3"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>interrupted</DataTrigger.Value>
+                                            <Setter Property="Text" Value="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TEMPORARY_CLOSED}}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+
+                    <Canvas Grid.Row="0"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="2"
+                            Background="White"
+                            Opacity="0.05" />
+
+                    <Canvas Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1">
+                        <Canvas.Style>
+                            <Style TargetType="Canvas">
+                                <Style.Triggers>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>red</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#99d01f00" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#99ffa800" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>green</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#9967b457" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>purple</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#997470c0" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                        <Setter Property="Canvas.Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5">
+                                                    <GradientStop Offset="1.0" Color="#99FF8211" />
+                                                    <GradientStop Offset="0.0" Color="#00FFFFFF" />
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Canvas.Style>
+                    </Canvas>
+
+                    <!--  not today  -->
+                    <DockPanel Grid.Row="0"
+                               Grid.RowSpan="2"
+                               Grid.Column="0"
+                               Width="160"
+                               Height="90"
+                               HorizontalAlignment="Left"
+                               IsEnabled="False"
+                               Visibility="{Binding StartDate,
+                                                    Converter={StaticResource bInversTimeToVisibilityConverter}}">
+
+                        <DockPanel.Style>
+                            <Style TargetType="DockPanel">
+                                <Style.Triggers>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>red</DataTrigger.Value>
+                                        <Setter Property="Background" Value="#99d01f00" />
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange</DataTrigger.Value>
+                                        <Setter Property="Background" Value="#99ffa800" />
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>green</DataTrigger.Value>
+                                        <Setter Property="Background" Value="#9967b457" />
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>purple</DataTrigger.Value>
+                                        <Setter Property="Background" Value="#997470c0" />
+                                    </DataTrigger>
+                                    <DataTrigger>
+                                        <DataTrigger.Binding>
+                                            <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                <Binding Path="IsEnabled" />
+                                                <Binding Path="LivePeriodInfo" />
+                                                <Binding Path="AllEnabledOddCount" />
+                                                <Binding Path="LineObject" />
+                                            </MultiBinding>
+                                        </DataTrigger.Binding>
+                                        <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                        <Setter Property="Background" Value="#99FF8211" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DockPanel.Style>
+
+                        <VirtualizingStackPanel Margin="5,2,5,0"
+                                                VerticalAlignment="Bottom"
+                                                DockPanel.Dock="Top"
+                                                Orientation="Horizontal"
+                                                VirtualizationMode="Recycling"
+                                                Visibility="{Binding StartDate,
+                                                                     Converter={StaticResource bInversTimeToVisibilityConverter}}">
+                            <!--  date  -->
+                            <Viewbox Width="42"
+                                     MaxWidth="42"
+                                     Stretch="Uniform"
+                                     StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="36"
+                                           FontWeight="Bold"
+                                           Foreground="#FFE5E5E5"
+                                           Text="{Binding StartDate,
+                                                          StringFormat={}{0:dd}}"
+                                           TextAlignment="Center"
+                                           TextWrapping="NoWrap" />
+                            </Viewbox>
+                            <!--  month  -->
+                            <Viewbox MaxWidth="77"
+                                     Margin="5,0,0,0"
+                                     Stretch="Uniform"
+                                     StretchDirection="DownOnly">
+
+                                <TextBlock FontFamily="Play"
+                                           FontSize="36"
+                                           FontWeight="Bold"
+                                           Foreground="#FFE5E5E5"
+                                           Text="{Binding StartDate,
+                                                          StringFormat={}{0:MMM.}}"
+                                           TextAlignment="Center"
+                                           TextWrapping="NoWrap" />
+                            </Viewbox>
+                        </VirtualizingStackPanel>
+                        <!--  time && day  -->
+                        <VirtualizingStackPanel Margin="5,-5,5,2"
+                                                DockPanel.Dock="Bottom"
+                                                VirtualizationMode="Recycling">
+                            <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+                                <VirtualizingStackPanel DockPanel.Dock="Bottom"
+                                                        Orientation="Horizontal"
+                                                        VirtualizationMode="Recycling">
+                                    <!--  time  -->
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="16"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:HH:mm}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                    <!--  day  -->
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="16"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding StartDate,
+                                                              StringFormat={}{0:dddd}}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </VirtualizingStackPanel>
+                            </Viewbox>
+                        </VirtualizingStackPanel>
+                    </DockPanel>
+
+                    <!--  today  -->
+                    <VirtualizingStackPanel Grid.Row="0"
+                                            Grid.RowSpan="2"
+                                            Grid.Column="0"
+                                            Width="160"
+                                            Height="90"
+                                            HorizontalAlignment="Center"
+                                            IsEnabled="False"
+                                            Visibility="{Binding StartDate,
+                                                                 Converter={StaticResource bTimeToVisibilityConverter}}">
+
+                        <!--  not started  -->
+                        <Grid Grid.Row="0"
+                              Grid.Column="0"
+                              MinHeight="90"
+                              Visibility="{Binding LiveBetStatus,
+                                                   Converter={StaticResource bStatusToVisibilityConverter}}">
+
+                            <Grid.Style>
+                                <Style TargetType="Grid">
+                                    <Style.Triggers>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>red</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#99d01f00" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>orange</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#99ffa800" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>green</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#9967b457" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>purple</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#997470c0" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#99FF8211" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6" />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="15" />
+                                <RowDefinition Height="36" />
+                                <RowDefinition Height="15" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+
+                            <Viewbox Grid.Row="1"
+                                     Grid.Column="2"
+                                     MinWidth="58"
+                                     MaxWidth="58"
+                                     Margin="0,2,2,-2"
+                                     HorizontalAlignment="Right"
+                                     Stretch="Uniform"
+                                     StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="30"
+                                           Foreground="#FFE5E5E5"
+                                           Text="{Binding StartDate,
+                                                          StringFormat={}{0:mm}}"
+                                           TextAlignment="Center"
+                                           TextWrapping="NoWrap" />
+                            </Viewbox>
+
+                            <!--  main text  -->
+                            <Viewbox Grid.Row="2"
+                                     Grid.Column="2"
+                                     Margin="0,-5,0,-5"
+                                     Stretch="Uniform"
+                                     StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="35"
+                                           FontWeight="Bold"
+                                           Foreground="#FFE5E5E5"
+                                           Text="{Binding StartDate,
+                                                          StringFormat={}{0:HH}}"
+                                           TextAlignment="Center"
+                                           TextWrapping="NoWrap" />
+                            </Viewbox>
+                        </Grid>
+
+                        <!--  started  -->
+                        <StackPanel Grid.Row="0"
+                                    Grid.Column="0"
+                                    MinHeight="90"
+                                    Orientation="Horizontal"
+                                    Visibility="{Binding LiveBetStatus,
+                                                         Converter={StaticResource bInversStatusToVisibilityConverter}}">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Style.Triggers>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>red</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#99d01f00" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>orange</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#99ffa800" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>green</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#9967b457" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>purple</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#997470c0" />
+                                        </DataTrigger>
+                                        <DataTrigger>
+                                            <DataTrigger.Binding>
+                                                <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                    <Binding Path="IsEnabled" />
+                                                    <Binding Path="LivePeriodInfo" />
+                                                    <Binding Path="AllEnabledOddCount" />
+                                                    <Binding Path="LineObject" />
+                                                </MultiBinding>
+                                            </DataTrigger.Binding>
+                                            <DataTrigger.Value>orange_overtime</DataTrigger.Value>
+                                            <Setter Property="Background" Value="#99FF8211" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
+                            <Grid Visibility="{Binding ShomMinutes}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="60" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="5" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="36" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <!--  status image  -->
+                                <Image Grid.Row="0"
+                                       Grid.RowSpan="5"
+                                       Grid.Column="0"
+                                       Width="6"
+                                       Height="70">
+                                    <Image.Source>
+
+                                        <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                            <Binding Path="IsEnabled" />
+                                            <Binding Path="LivePeriodInfo" />
+                                            <Binding Path="AllEnabledOddCount" />
+                                            <Binding Path="LineObject" />
+                                        </MultiBinding>
+
+                                    </Image.Source>
+                                </Image>
+
+
+                                <!--  main text  -->
+                                <Viewbox Grid.Row="2"
+                                         Grid.Column="2"
+                                         Margin="0,-5,0,-5"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <TextBlock FontFamily="Play"
+                                               FontSize="50"
+                                               FontWeight="Bold"
+                                               Foreground="#FFE5E5E5"
+                                               Text="{Binding LiveMinuteToShow}"
+                                               TextAlignment="Center"
+                                               TextWrapping="NoWrap" />
+                                </Viewbox>
+
+                                <Viewbox Grid.Row="2"
+                                         Grid.Column="3"
+                                         Margin="0,-5,0,-5"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+                                    <StackPanel Width="230" Orientation="Vertical">
+                                        <TextBlock FontFamily="Play"
+                                                   FontSize="35"
+                                                   FontWeight="Bold"
+                                                   Foreground="#FFE5E5E5"
+                                                   Text="{Binding LivePeriodInfoString}"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Viewbox>
+                            </Grid>
+
+                            <Grid Visibility="{Binding InverseShomMinutes}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6" />
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="150" />
+                                    <!--
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="5" />
+                                    -->
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="36" />
+                                    <RowDefinition Height="15" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <!--  main text  -->
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="2"
+                                           Width="150"
+                                           Height="20"
+                                           Margin="0,-5,0,-5"
+                                           FontFamily="Play"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#FFE5E5E5"
+                                           Text="{Binding LivePeriodInfoString}" />
+                            </Grid>
+
+                        </StackPanel>
+
+                    </VirtualizingStackPanel>
+
+                    <!--  go to bet domains button  -->
+                    <Border Grid.RowSpan="2"
+                            Grid.Column="1"
+                            BorderBrush="#FFFFFFFF"
+                            BorderThickness="1, 0, 0, 0">
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="45" />
+                                <RowDefinition Height="45" />
+                            </Grid.RowDefinitions>
+                            <!--  upper row  -->
+                            <TextBlock Grid.Row="0"
+                                       Margin="10, 0, 0, 0"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Play"
+                                       FontSize="24"
+                                       FontWeight="Medium"
+                                       Foreground="#FFFFFFFF"
+                                       LineHeight="24"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{Binding Name}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap" />
+                            <!--  bottom row  -->
+                            <TextBlock Grid.Row="1"
+                                       Margin="10, 0, 0, 0"
+                                       FontFamily="Play"
+                                       FontSize="22"
+                                       FontWeight="Regular"
+                                       Foreground="#FFCCCCCC"
+                                       Text="{Binding TournamentNameToShow}"
+                                       TextAlignment="Left"
+                                       TextTrimming="WordEllipsis"
+                                       TextWrapping="NoWrap" />
+                        </Grid>
+
+                    </Border>
+
+
+                    <DockPanel Grid.RowSpan="2"
+                               Grid.Column="2"
+                               Height="90"
+                               Margin="-1,0,4,0"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch">
+                        <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                            <!--  current score  -->
+                            <TextBlock Margin="5,5"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Play"
+                                       FontSize="24"
+                                       FontWeight="Medium"
+                                       Foreground="#FFFFFFFF"
+                                       Text="{Binding LiveScore}"
+                                       TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger>
+                                                <DataTrigger.Binding>
+                                                    <MultiBinding Converter="{StaticResource ResourceKey=sMatchColorImage}">
+                                                        <Binding Path="IsEnabled" />
+                                                        <Binding Path="LivePeriodInfo" />
+                                                        <Binding Path="AllEnabledOddCount" />
+                                                        <Binding Path="LineObject" />
+                                                    </MultiBinding>
+                                                </DataTrigger.Binding>
+                                                <DataTrigger.Value>interrupted</DataTrigger.Value>
+                                                <Setter Property="Visibility" Value="Hidden" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Border>
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="0"
+                               Grid.Column="3"
+                               Height="45"
+                               Margin="-1,0,4,0"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch">
+                        <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                            <!--  current score  -->
+                            <TextBlock Margin="5,5"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       FontFamily="Play"
+                                       FontSize="22"
+                                       FontWeight="Medium"
+                                       Foreground="#FFcccccc"
+                                       Text="{Binding BaseBetDomainView.DisplayName}" />
+                        </Border>
+                    </DockPanel>
+
+                    <!--  odd buttons  -->
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="4"
+                                Orientation="Horizontal">
+                        <StackPanel Width="207" Orientation="Horizontal">
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BaseBetDomainView.Odd1}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BaseBetDomainView.Odd2}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BaseBetDomainView.Odd3}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Width="218"
+                                    Margin="5,0,0,0"
+                                    Orientation="Horizontal">
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,10,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding UnderOverBetDomain}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding SpecialOddValue,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                               Foreground="#FFFF4D00"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitor}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding UnderOverBetDomain.Odd1}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding UnderOverBetDomain.Odd3}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--  second row  -->
+                    <DockPanel Grid.Row="1"
+                               Grid.Column="3"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch">
+                        <DockPanel LastChildFill="True">
+                            <!--
+                                <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0" DockPanel.Dock="Right">
+                                <TextBlock Margin="5"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Left"
+                                FontFamily="Play"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="#FF656565"
+                                LineHeight="20"
+                                LineStackingStrategy="BlockLineHeight"
+                                Text="{Binding SecondMatchButtonRowText}"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap" />
+                                </Border>
+                            -->
+                            <TextBlock Margin="5"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Right"
+                                       FontFamily="Play"
+                                       FontSize="22"
+                                       FontWeight="Medium"
+                                       Foreground="#FFcccccc"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{Binding BottomSpecialBetDomain.DisplayName}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap" />
+                        </DockPanel>
+                    </DockPanel>
+
+                    <DockPanel Grid.Row="1"
+                               Grid.Column="3"
+                               Height="45"
+                               Margin="-1,0,4,0"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch">
+                        <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                            <TextBlock Margin="5"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"
+                                       DockPanel.Dock="Right"
+                                       FontFamily="Play"
+                                       FontSize="22"
+                                       FontWeight="Medium"
+                                       Foreground="#FFcccccc"
+                                       LineHeight="22"
+                                       LineStackingStrategy="BlockLineHeight"
+                                       Text="{Binding SecondMatchButtonRowText}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap" />
+                        </Border>
+                    </DockPanel>
+
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="4"
+                                Orientation="Horizontal">
+                        <StackPanel Width="207" Orientation="Horizontal">
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BottomSpecialBetDomain.Odd1}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BottomSpecialBetDomain.Odd2}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BottomSpecialBetDomain.Odd3}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+
+                        <StackPanel Width="218"
+                                    Margin="5,0,0,0"
+                                    Orientation="Horizontal">
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,10,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BottomUnderOverBetdomain}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding SpecialOddValue,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                               Foreground="#FFFF4D00"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitor}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BottomUnderOverBetdomain.Odd1}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+
+                            <Border BorderBrush="#FFFFFFFF" BorderThickness="1, 0, 0, 0">
+                                <DockPanel Width="69"
+                                           Margin="-1,0,0,0"
+                                           HorizontalAlignment="Right"
+                                           DataContext="{Binding BottomUnderOverBetdomain.Odd3}"
+                                           Visibility="{Binding Visibility}">
+                                    <Canvas Width="63" Height="63">
+                                        <Label Canvas.Top="6"
+                                               Content="{Binding Value,
+                                                                 ConverterCulture={x:Static gl:CultureInfo.CurrentCulture},
+                                                                 StringFormat=\{0:n2\}}"
+                                               Foreground="White"
+                                               Style="{StaticResource OddResultTextBlockLiveMonitorWithBlinking}" />
+                                    </Canvas>
+                                </DockPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </VirtualizingStackPanel>
+    </Label>
+
+</UserControl>

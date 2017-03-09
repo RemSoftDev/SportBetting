@@ -1,0 +1,845 @@
+﻿<UserControl x:Class="DefaultViews.Views.Mode3x4.UserManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewModels2:UserManagementViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityConverter" />
+        <converters2:MultiBooleanConverter x:Key="myMultiBooleanConverter" />
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="myInverseBooleanToVisibilityCollapsedConverter" />
+
+        <Style x:Key="enablePinText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#FFEFEFEF" />
+            <Setter Property="LineHeight" Value="22" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ChangeTracker.CurrentUser.PinEnabled}" Value="true">
+                    <Setter Property="Text" Value="{l:Translate Key={x:Static l:MultistringTags.DISABLE_PIN}}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ChangeTracker.CurrentUser.PinEnabled}" Value="false">
+                    <Setter Property="Text" Value="{l:Translate Key={x:Static l:MultistringTags.ENABLE_PIN}}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="italicText" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Foreground" Value="#FFEFEFEF" />
+            <Setter Property="LineHeight" Value="18" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0"
+              Grid.Column="2"
+              Width="auto"
+              Height="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="grdContentContainer"
+                  Grid.Row="1"
+                  VerticalAlignment="Stretch">
+                <baseObjects:MyContentRegion VerticalAlignment="Stretch" baseObjects:MyRegionManager.RegionName="UsermanagementContentRegion" />
+            </Grid>
+        </Grid>
+        <DockPanel x:Name="userManagementSubButtons"
+                   Grid.Row="0"
+                   Grid.RowSpan="2"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Stretch"
+                   Background="#3B5A68">
+            <DockPanel.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowMenu}" Value="False">
+                            <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
+            <!--  Ticket Sub Buttons  -->
+            <StackPanel Width="200"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Top"
+                        Orientation="Vertical"
+                        Visibility="{Binding ElementName=TicketButton,
+                                             Path=IsChecked,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="BindMyCard"
+                             Command="{Binding ShowPayoutCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.TicketChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_PAYOUT}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="BindMyCard"
+                             Command="{Binding PrintLastTicketCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.PrintTicketChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.PRINT_TICKETS}}" />
+                    </Viewbox>
+                </RadioButton>
+                <Button Height="60"
+                        Margin="0, 5, 0, 0"
+                        AutomationProperties.AutomationId="PrintDuplicate"
+                        Command="{Binding PrintDublicateCommand}"
+                        Style="{StaticResource nonRadioUserProfileButton}"
+                        Visibility="{Binding PrintDublicateVisibility}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.PRINT_DUPLICATE}}" />
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+
+            <!--  Accounting Sub Buttons  -->
+            <StackPanel Width="200"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Top"
+                        Orientation="Vertical"
+                        Visibility="{Binding ElementName=AccountingButton,
+                                             Path=IsChecked,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="OperShiftReport"
+                             Command="{Binding ShowOperatorShiftReportCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.OperatorsShiftsReporChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding OperatorShiftButtonActive,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_OPER_SHIFT_REPORT}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <RadioButton Name="CashHistory"
+                             Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="CashHistory"
+                             Command="{Binding ShowCashHistoryCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.CashHistoryChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.ViewCashHistory,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.SHOW_CASH_HISTORY}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <Button Height="60"
+                        Margin="0,5,0,0"
+                        AutomationProperties.AutomationId="CloseBalance"
+                        Command="{Binding CloseBalance}"
+                        Style="{StaticResource nonRadioUserProfileButton}"
+                        Visibility="{Binding ChangeTracker.CurrentUser.ViewEmptyBox,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_EMPTY_BOX}}" />
+                    </Viewbox>
+                </Button>
+
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="LOShiftReport"
+                             Command="{Binding ShowOperatorShiftReportsCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.OpenShiftsChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding OperatorShiftReportButtonActive,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_LO_SHIFT_REPORT}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <!--  from accounting  -->
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="CashOperations"
+                             Command="{Binding CashOperationsCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.CashOperationsChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.CashStatistic,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.CASH_OPERATIONS}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <!--
+                    <RadioButton Height="60"
+                    Margin="0,5,0,0"
+                    AutomationProperties.AutomationId="BalanceOperations"
+                    Command="{Binding BalanceOperationsCommand}"
+                    GroupName="SmallButtons"
+                    IsChecked="{Binding ChangeTracker.BalanceOperationsChecked}"
+                    IsEnabled="{Binding EnabledBalanceOpereations}"
+                    Style="{StaticResource extraLargeUserProfileButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.BALANCE_OPERATIONS}}" />
+                    </Viewbox>
+                    </RadioButton>
+                -->
+
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="ProfitAccountig"
+                             Command="{Binding ProfitAccountingCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.ProfitAccountingChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.ProfitShareCheckpointRead,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PROFIT_ACCOUNTING}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="ShopPayments"
+                             Command="{Binding ShopPaymentsCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.ShopPaymentsChecked}"
+                             IsEnabled="{Binding EnabledShopPayments}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.ShopPaymentsRead,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_SHOP_PAYMENTS}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <!--  Terminal accounting  -->
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="TerminalAccounting"
+                             Command="{Binding TerminalAccountingCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.TerminalAccountingChecked}"
+                             IsEnabled="{Binding EnabledShopPayments}"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_TERMINAL_ACCOUNTING}}" />
+                    </Viewbox>
+                </RadioButton>
+
+            </StackPanel>
+            <!--  User Sub Buttons  -->
+            <StackPanel Width="200"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Top"
+                        Orientation="Vertical"
+                        Visibility="{Binding ElementName=UserBigButton,
+                                             Path=IsChecked,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <!--  search  -->
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="SearchUsers"
+                             Command="{Binding ShowSearchUsersCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.SearchUsersChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.UserManagement,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.SEARCH_USERS}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <!--  register  -->
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="RegisterUser"
+                             Command="{Binding ShowUserRegistrationCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.RegisterUserChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.CreateUser,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.REGISTER_USER}}" />
+                    </Viewbox>
+                </RadioButton>
+            </StackPanel>
+
+            <!--  System Sub Buttons  -->
+            <StackPanel Width="200"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Top"
+                        Orientation="Vertical"
+                        Visibility="{Binding ElementName=Systembutton,
+                                             Path=IsChecked,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="VerifyStation"
+                             Command="{Binding VerifyCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.VerifyStationChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.VerifyStation,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_VERIFY_STATION}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="SystemInfo"
+                             Command="{Binding ShowSystemInfoCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.SystemInfoChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.ViewSystemInfo,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_SYSTEM_INFO}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="Monitors"
+                             Command="{Binding ShowSystemInfoMonitorsCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.SystemInfoMonitorsChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.ViewSystemInfoMonitors,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS}}" />
+                    </Viewbox>
+                </RadioButton>
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="Network"
+                             Command="{Binding ShowSystemInfoNetworkCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.SystemInfoNetworkChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.ViewSystemInfoNetwork,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INFO_NETWORK_TITLE}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <Button Height="60"
+                        Margin="0,5,0,0"
+                        AutomationProperties.AutomationId="SendLogs"
+                        Command="{Binding SendLogsCommand}"
+                        IsEnabled="{Binding EnabledSendLogs}"
+                        Style="{StaticResource nonRadioUserProfileButton}"
+                        Visibility="{Binding ChangeTracker.CurrentUser.ViewSystemInfo,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_SENDLOGS}}" />
+                            <TextBlock Foreground="White"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_SENDLOGS_IN_PROGRESS}}"
+                                       Visibility="{Binding SendInProgress}" />
+                        </StackPanel>
+                    </Viewbox>
+                </Button>
+                <!--  print test page  -->
+                <Button Height="60"
+                        Margin="0,5,0,0"
+                        AutomationProperties.AutomationId="PrintLastPage"
+                        Command="{Binding PrintTestPageCommand}"
+                        IsEnabled="{Binding EnabledShopPayments}"
+                        Style="{StaticResource nonRadioUserProfileButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_PRINTER_TEST}}" />
+                    </Viewbox>
+                </Button>
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="RestartTerminal"
+                             Command="{Binding RestartTerminalCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.RestartChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.TerminalRestart,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_RESTART_TERMINAL}}" />
+                    </Viewbox>
+                </RadioButton>
+                <!--  Test Mode  -->
+                <Button Height="60"
+                        Margin="0,5,0,0"
+                        AutomationProperties.AutomationId="TestMode"
+                        Command="{Binding TestModeCommand}"
+                        IsEnabled="{Binding EnabledShopPayments}"
+                        Style="{StaticResource nonRadioUserProfileButton}"
+                        Visibility="{Binding ChangeTracker.CurrentUser.AccessTestMode,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_TEST_MODE}}" />
+                    </Viewbox>
+                </Button>
+                <Button Height="60"
+                        Margin="0,5,0,0"
+                        AutomationProperties.AutomationId="Shutdown"
+                        Command="{Binding ShutdownCommand}"
+                        Style="{StaticResource nonRadioUserProfileButton}"
+                        Visibility="{Binding ChangeTracker.CurrentUser.AccessShutdownTerminal,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_SHUTDOWN}}" />
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+
+            <!--  Administration Sub Buttons  -->
+            <StackPanel Width="200"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        DockPanel.Dock="Top"
+                        Orientation="Vertical"
+                        Visibility="{Binding ElementName=AdministrationButton,
+                                             Path=IsChecked,
+                                             Converter={StaticResource myBooleanToVisibilityConverter}}">
+                <RadioButton AutomationProperties.AutomationId="HiddenButton"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.AdministrationHiddenChecked}"
+                             Visibility="Collapsed" />
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="SearchOperators"
+                             Command="{Binding ShowSearchOperatorsCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.SearchOperatorUsersChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.AdminManagement,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.SEARCH_OPERATORS}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="RegisterOperator"
+                             Command="{Binding ShowOperatorRegistrationCommand}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.RegisterOperatorChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.CreateOperator,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.REGISTER_OPERATOR}}" />
+                    </Viewbox>
+                </RadioButton>
+
+                <RadioButton Height="60"
+                             Margin="0,5,0,0"
+                             AutomationProperties.AutomationId="CardAndPin"
+                             Command="{Binding ShowCardPin}"
+                             GroupName="SmallButtons"
+                             IsChecked="{Binding ChangeTracker.CardAndPinChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <Viewbox StretchDirection="DownOnly">
+                        <Grid>
+                            <TextBlock Style="{StaticResource normalText}"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.CARD_AND_PIN}}"
+                                       Visibility="{Binding StationRepository.IsIdCardEnabled,
+                                                            Converter={StaticResource myBooleanToVisibilityConverter}}" />
+                            <TextBlock Style="{StaticResource normalText}"
+                                       Text="{l:Translate Key={x:Static l:MultistringTags.BARCODECARD_AND_PIN}}"
+                                       Visibility="{Binding StationRepository.IsIdCardEnabled,
+                                                            Converter={StaticResource myInverseBooleanToVisibilityCollapsedConverter}}" />
+                        </Grid>
+                    </Viewbox>
+                </RadioButton>
+            </StackPanel>
+
+        </DockPanel>
+
+        <Border Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Stretch"
+                Background="#3B5A68"
+                BorderBrush="#FF000000"
+                BorderThickness="0, 0, 2, 0">
+            <DockPanel x:Name="userManagementButtons">
+                <DockPanel.Style>
+                    <Style TargetType="DockPanel">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <ImageBrush AlignmentX="Left"
+                                            AlignmentY="Top"
+                                            ImageSource="{converters:ResolveImagePath Path=BackgroundTile.png}"
+                                            Stretch="None"
+                                            TileMode="Tile"
+                                            Viewport="0,0,3,3"
+                                            ViewportUnits="Absolute" />
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ShowMenu}" Value="False">
+                                <Setter Property="StackPanel.Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DockPanel.Style>
+
+
+                <!--  Ticket  -->
+                <RadioButton Name="TicketButton"
+                             Width="250"
+                             Height="100"
+                             Margin="10,10,10,0"
+                             AutomationProperties.AutomationId="Ticket"
+                             Command="{Binding OpenTicketCategoryCommand}"
+                             DockPanel.Dock="Top"
+                             GroupName="BigButtons"
+                             Visibility="{Binding Path=ChangeTracker.CurrentUser.PayoutPaymentNote,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+                    <RadioButton.Style>
+                        <Style BasedOn="{StaticResource extraLargeUserProfileButton}" TargetType="RadioButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.PrintTicketChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.TicketChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                    <Grid Width="220" Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0"
+                                 Margin="0, 10, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TICKET}}" />
+                        </Viewbox>
+                        <Viewbox Grid.Row="1"
+                                 Margin="0, 5, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource italicText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_TICKET_DESC}}" />
+                        </Viewbox>
+                    </Grid>
+
+
+                </RadioButton>
+
+
+
+                <StackPanel Width="200"
+                            Margin="0,0,10,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top"
+                            Orientation="Vertical"
+                            Visibility="{Binding ElementName=TicketButton,
+                                                 Path=IsChecked,
+                                                 Converter={StaticResource myBooleanToVisibilityConverter}}" />
+
+                <!--  Accounting  -->
+                <RadioButton Name="AccountingButton"
+                             Width="250"
+                             Height="100"
+                             Margin="10,10,10,0"
+                             AutomationProperties.AutomationId="Accounting"
+                             Command="{Binding OpenAccountingCategoryCommand}"
+                             DockPanel.Dock="Top"
+                             GroupName="BigButtons"
+                             Padding="0,0,0,0"
+                             Visibility="{Binding StationRepository.IsTestMode,
+                                                  Converter={StaticResource myInverseBooleanToVisibilityCollapsedConverter}}">
+                    <RadioButton.Style>
+                        <Style BasedOn="{StaticResource extraLargeUserProfileButton}" TargetType="RadioButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.OperatorsShiftsReporChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.CashHistoryChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.OpenShiftsChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding ChangeTracker.OpenShiftsChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.CashOperationsChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <!--
+                                    <DataTrigger Binding="{Binding ChangeTracker.BalanceOperationsChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                    </DataTrigger>
+                                -->
+                                <DataTrigger Binding="{Binding ChangeTracker.ProfitAccountingChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.ShopPaymentsChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.TerminalAccountingChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.EmptyBoxChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+
+                    <Grid Width="220" Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0"
+                                 Margin="0, 10, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_ACCOUNTING}}" />
+                        </Viewbox>
+                        <Viewbox Grid.Row="1"
+                                 Margin="0, 5, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource italicText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_ACCOUNTING_DESC}}" />
+                        </Viewbox>
+                    </Grid>
+                </RadioButton>
+
+
+                <!--  User  -->
+                <RadioButton Name="UserBigButton"
+                             Width="250"
+                             Height="100"
+                             Margin="10,10,10,0"
+                             AutomationProperties.AutomationId="User"
+                             Command="{Binding OpenUserCategoryCommand}"
+                             DockPanel.Dock="Top"
+                             GroupName="BigButtons"
+                             IsChecked="{Binding ChangeTracker.UserChecked}"
+                             Visibility="{Binding ChangeTracker.CurrentUser.UserManagement,
+                                                  Converter={StaticResource myBooleanToVisibilityConverter}}">
+
+                    <RadioButton.Style>
+                        <Style BasedOn="{StaticResource extraLargeUserProfileButton}" TargetType="RadioButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.SearchUsersChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.RegisterUserChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                    <Grid Width="220" Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0"
+                                 Margin="0, 10, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_USER}}" />
+                        </Viewbox>
+                        <Viewbox Grid.Row="1"
+                                 Margin="0, 5, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource italicText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_USER_DESC}}" />
+                        </Viewbox>
+                    </Grid>
+                </RadioButton>
+
+                <!--  System  -->
+                <RadioButton Name="Systembutton"
+                             Width="250"
+                             Height="100"
+                             Margin="10,10,10,0"
+                             AutomationProperties.AutomationId="System"
+                             Command="{Binding OpenSystemCategoryCommand}"
+                             DockPanel.Dock="Top"
+                             GroupName="BigButtons">
+                    <RadioButton.Style>
+                        <Style BasedOn="{StaticResource extraLargeUserProfileButton}" TargetType="RadioButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.VerifyStationChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.SystemInfoChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.SystemInfoMonitorsChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.SystemInfoNetworkChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.RestartChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.PrintTestPageChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                    <Grid Width="220" Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0"
+                                 Margin="0, 10, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_PRINT_SYSTEM}}" />
+                        </Viewbox>
+                        <Viewbox Grid.Row="1"
+                                 Margin="0, 5, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource italicText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_SYSTEM_DESC}}" />
+                        </Viewbox>
+                    </Grid>
+                </RadioButton>
+
+                <!--  Administration  -->
+                <RadioButton Name="AdministrationButton"
+                             Width="250"
+                             Height="100"
+                             Margin="10,10,10,0"
+                             AutomationProperties.AutomationId="Administration"
+                             Command="{Binding OpenAdministrationCategoryCommand}"
+                             DockPanel.Dock="Top"
+                             GroupName="BigButtons"
+                             Visibility="{Binding StationRepository.IsTestMode,
+                                                  Converter={StaticResource myInverseBooleanToVisibilityCollapsedConverter}}">
+                    <RadioButton.Style>
+                        <Style BasedOn="{StaticResource extraLargeUserProfileButton}" TargetType="RadioButton">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ChangeTracker.SearchOperatorUsersChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.RegisterOperatorChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ChangeTracker.CardAndPinChecked}" Value="True">
+                                    <Setter Property="IsChecked" Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RadioButton.Style>
+                    <Grid Width="220" Height="80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*" />
+                            <RowDefinition Height="50*" />
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0"
+                                 Margin="0, 10, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_ADMINISTRATION}}" />
+                        </Viewbox>
+                        <Viewbox Grid.Row="1"
+                                 Margin="0, 5, 0, 0"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Top"
+                                 StretchDirection="DownOnly">
+                            <TextBlock Style="{StaticResource italicText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ADMIN_MENU_ADMINISTRATION_DESC}}" />
+                        </Viewbox>
+                    </Grid>
+                </RadioButton>
+                <Canvas />
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+
+            <baseObjects:MyContentRegion baseObjects:MyRegionManager.RegionName="UserManagementKeyboardRegion" />
+        </Grid>
+    </Grid>
+
+
+</UserControl>

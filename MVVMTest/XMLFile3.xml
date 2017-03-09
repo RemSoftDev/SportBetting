@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="SPFSchema.xsd" Codepage="850">
+  <Line>
+    <ImageItem Alignment="Center" Path="" />
+  </Line>
+  <Line Underline="true">
+    <TextItem  Alignment="Center" Characterspacing="8" Size="2" Style="None">Bet Ticket</TextItem>
+  </Line>
+  <Line>
+    <BarCodeItem Alignment="Center" HRIPos="None" Height="100"  Type="CODE93">000241400007560682</BarCodeItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Left" Font="FontB" Size="1">10.09.2014</TextItem>
+    <TextItem  Alignment="Right" Font="FontB">12:49</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem  Alignment="Left" Size="1" Style="None">Ticket-Nr.:</TextItem>
+    <TextItem  Alignment="Right" Size="2" Style="None">0024140000756</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem  Alignment="Left" Size="1" Style="None">Code: </TextItem>
+    <TextItem  Alignment="Right" Size="2" Style="None">0682</TextItem>
+  </Line>
+  <Line>
+    <FillItem>=</FillItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem Alignment="Left">Ticket Type:</TextItem>
+    <TextItem Alignment="Right" Size="2">Anonymous ticket</TextItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Left">Bet Type:</TextItem>
+    <TextItem Alignment="Right" Style="Bold">Multiple</TextItem>
+  </Line>
+  <Line>
+    <FillItem>=</FillItem>
+  </Line>
+  <Line>
+    <TextItem Font="FontB">776</TextItem>
+    <TextItem Font="FontB" Style="Bold">Live: Great Britain F16, Singles</TextItem>
+    <TextItem Alignment="Right" Font="FontB">10.09.2014 12:10</TextItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Center" Font="FontA" Style="Bold">MARTIN, TOBY - BROADY, LIAM</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem Alignment="Left">Who wins the Match?</TextItem>
+  </Line>
+  <Line Underline="true">
+    <TextItem Alignment="Left">Sel 1</TextItem>
+    <TextItem Alignment="Right" Font="FontA">Odds:6,25</TextItem>
+  </Line>
+  <Line>
+    <TextItem Font="FontB">3208</TextItem>
+    <TextItem Font="FontB" Style="Bold">Live: Sofia, Singles W-C25-BUL-01A</TextItem>
+    <TextItem Alignment="Right" Font="FontB">10.09.2014 12:00</TextItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Center" Font="FontA" Style="Bold">EVTIMOVA, DIA - ARSHINKOVA,...</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem Alignment="Left">Who wins the set 2?</TextItem>
+  </Line>
+  <Line Underline="true">
+    <TextItem Alignment="Left">Sel 1</TextItem>
+    <TextItem Alignment="Right" Font="FontA">Odds:1,10</TextItem>
+  </Line>
+  <Line>
+    <TextItem Font="FontB">38696</TextItem>
+    <TextItem Font="FontB" Style="Bold">Live: Moscow, Singles W-C25-RUS-05A</TextItem>
+    <TextItem Alignment="Right" Font="FontB">10.09.2014 12:05</TextItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Center" Font="FontA" Style="Bold">DIATCHENKO,... - RUDAKOVA, AN...</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem Alignment="Left">Who wins the Match?</TextItem>
+  </Line>
+  <Line Underline="true">
+    <TextItem Alignment="Left">Sel 1</TextItem>
+    <TextItem Alignment="Right" Font="FontA">Odds:1,03</TextItem>
+  </Line>
+  <Line Underline="false">
+    <FillItem>=</FillItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem  Alignment="Left" Size="1" Style="None">Total odds</TextItem>
+    <TextItem  Alignment="Right" Size="1" Style="Bold">7,08</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem  Alignment="Left" Size="1" Style="None">Stake</TextItem>
+    <TextItem  Alignment="Right" Size="4" Style="Bold">3,00 EUR</TextItem>
+  </Line>
+  <Line>
+    <TextItem Font="FontA" Alignment="Left" Style="Bold">Superbonus +5%</TextItem>
+    <TextItem Alignment="Right" Font="FontA" Style="Bold">1,06 EUR</TextItem>
+  </Line>
+  <Line Underline="false">
+    <TextItem  Alignment="Left" Size="1" Style="None">Possible Winning</TextItem>
+    <TextItem  Alignment="Right" Size="4" Style="Bold">22,31 EUR</TextItem>
+  </Line>
+  <Line>
+    <FillItem>=</FillItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Center" Indent="1" Font="FontA" Style="Bold">Superbonus</TextItem>
+  </Line>
+  <Line>
+    <TextItem Alignment="Center" Indent="1" Font="FontB" >Only if all matches take place</TextItem>
+  </Line>
+  <Line>
+    <FillItem>=</FillItem>
+  </Line>
+</Page>

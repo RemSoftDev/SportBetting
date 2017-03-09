@@ -1,0 +1,276 @@
+﻿<UserControl x:Class="DefaultViews.Views.WithdrawMoneyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             Background="Black"
+             d:DataContext="{d:DesignInstance viewModels:WithdrawMoneyViewModel}"
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style x:Key="HiglightedAmountLabelTitle"
+               BasedOn="{StaticResource notImportantText}"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="22" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="False">
+                    <Setter Property="Foreground" Value="#FA5200" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="True">
+                    <Setter Property="Foreground" Value="#FF9FA7AF" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HiglightedAmountLabel"
+               BasedOn="{StaticResource notImportantText}"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="22" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="False">
+                    <Setter Property="Foreground" Value="#FA5200" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="True">
+                    <Setter Property="Foreground" Value="#FEFEFE" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HiglightedBalanceLabelTitle"
+               BasedOn="{StaticResource notImportantText}"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="22" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="True">
+                    <Setter Property="Foreground" Value="#FA5200" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="False">
+                    <Setter Property="Foreground" Value="#FF9FA7AF" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="HiglightedBalanceLabel"
+               BasedOn="{StaticResource notImportantText}"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="22" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="True">
+                    <Setter Property="Foreground" Value="#FA5200" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding WithdrawBut}" Value="False">
+                    <Setter Property="Foreground" Value="#FEFEFE" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <ImageBrush AlignmentX="Left"
+                                    AlignmentY="Top"
+                                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                                    Stretch="None"
+                                    TileMode="Tile"
+                                    Viewport="0,0,3,3"
+                                    ViewportUnits="Absolute" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Grid.Style>
+
+        <DockPanel Margin="100, 0, 100, 100"
+                   HorizontalAlignment="Center"
+                   LastChildFill="False">
+
+            <Grid Width="456"
+                  Margin="10"
+                  HorizontalAlignment="Center"
+                  DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0"
+                             Width="140"
+                             Height="90"
+                             HorizontalAlignment="Center"
+                             AutomationProperties.AutomationId="CashOut"
+                             Command="{Binding CashOutCommand}"
+                             DockPanel.Dock="Left"
+                             Focusable="False"
+                             GroupName="WithdrawButtons"
+                             IsChecked="{Binding CashOutChecked}"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.CASH_OUT}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </RadioButton>
+                <RadioButton Grid.Column="1"
+                             Width="140"
+                             Height="90"
+                             HorizontalAlignment="Center"
+                             AutomationProperties.AutomationId="CashOutBut"
+                             Command="{Binding WithdrawButCommand}"
+                             DockPanel.Dock="Left"
+                             Focusable="False"
+                             GroupName="WithdrawButtons"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.CASH_OUT_BUT}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </RadioButton>
+                <RadioButton Grid.Column="2"
+                             Width="140"
+                             Height="90"
+                             HorizontalAlignment="Center"
+                             AutomationProperties.AutomationId="CashOutAll"
+                             Command="{Binding WithdrawAllCommand}"
+                             DockPanel.Dock="Left"
+                             Focusable="False"
+                             GroupName="WithdrawButtons"
+                             Style="{StaticResource extraLargeUserProfileButton}">
+                    <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.CASH_OUT_ALL}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </RadioButton>
+            </Grid>
+
+            <Grid Width="456"
+                  Margin="10"
+                  DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource HiglightedAmountLabelTitle}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_WITHDRAWN_AMOUNT}}" />
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           Margin="0,0,5,0"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="Amount"
+                           FontWeight="Bold"
+                           Style="{StaticResource HiglightedAmountLabel}"
+                           Text="{Binding AmountDescription}" />
+                <TextBlock Grid.Row="0"
+                           Grid.Column="2"
+                           HorizontalAlignment="Right"
+                           FontWeight="Bold"
+                           Style="{StaticResource HiglightedAmountLabel}"
+                           Text="{Binding Currency}" />
+                <!--  cashpool amount (text)  -->
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#FF9FA7AF"
+                           Style="{DynamicResource notImportantText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CASHPOOL_AMOUNT}}" />
+                <!--  cashpool amount (value)  -->
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Margin="0,0,5,0"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="Balance"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#FEFEFE"
+                           Style="{DynamicResource notImportantText}"
+                           Text="{Binding CashpoolDescription}" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="2"
+                           HorizontalAlignment="Right"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#FEFEFE"
+                           Style="{DynamicResource notImportantText}"
+                           Text="{Binding Currency}" />
+                <!--  cashpool amount (text)  -->
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource HiglightedBalanceLabelTitle}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.NEW_AMOUNT}}" />
+                <!--  cashpool amount (value)  -->
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Margin="0,0,5,0"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="NewBalance"
+                           FontWeight="Bold"
+                           Style="{StaticResource HiglightedBalanceLabel}"
+                           Text="{Binding NewAmountDescription}" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="2"
+                           HorizontalAlignment="Right"
+                           FontWeight="Bold"
+                           Style="{StaticResource HiglightedBalanceLabel}"
+                           Text="{Binding Currency}" />
+
+
+            </Grid>
+            <DockPanel Margin="0,-20,0,0" DockPanel.Dock="Top">
+                <baseObjects:MyContentRegion DockPanel.Dock="Top" baseObjects:MyRegionManager.RegionName="EnterAmountPayoutPinKeyboardRegion" />
+            </DockPanel>
+
+            <Button Width="456"
+                    Height="90"
+                    HorizontalAlignment="Center"
+                    AutomationProperties.AutomationId="Withdraw"
+                    Command="{Binding WithdrawCommand}"
+                    DockPanel.Dock="Top"
+                    IsEnabled="{Binding IsWithdrawEnabled}"
+                    Style="{StaticResource orangeButton}">
+                <TextBlock FontFamily="Play"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           LineHeight="22"
+                           LineStackingStrategy="BlockLineHeight"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.WITHDRAW}}"
+                           TextAlignment="Left"
+                           TextWrapping="Wrap" />
+            </Button>
+
+
+        </DockPanel>
+    </Grid>
+</UserControl>

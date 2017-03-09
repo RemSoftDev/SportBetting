@@ -1,0 +1,2099 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://station.ws.bs.sportradar.com/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:bs="http://messages.types.bs.ws.bs.sportradar.com/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:bsm="http://messages.types.bsm.ws.bs.sportradar.com/" xmlns:basm="http://messages.types.bas.ws.bs.sportradar.com/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BSMHubService" targetNamespace="http://station.ws.bs.sportradar.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IBSMHubService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://station.ws.bs.sportradar.com/Imports">
+      <xsd:import schemaLocation="/BSMHub/services/BSMHubService?xsd=StationTypesMessages" namespace="http://messages.types.bsm.ws.bs.sportradar.com/" />
+      <xsd:import schemaLocation="/BSMHub/services/BSMHubService?xsd=BettingAccountServerTypesMessages" namespace="http://messages.types.bas.ws.bs.sportradar.com/" />
+      <xsd:import schemaLocation="/BSMHub/services/BSMHubService?xsd=BettingServerTypesMessages" namespace="http://messages.types.bs.ws.bs.sportradar.com/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="HubServiceException">
+    <wsdl:part name="exception" element="bsm:HubServiceException" />
+  </wsdl:message>
+  <wsdl:message name="GetLatestConfidenceFactorsUpdate">
+    <wsdl:part name="parameters" element="bs:GetLatestConfidenceFactorsUpdate" />
+  </wsdl:message>
+  <wsdl:message name="GetLatestConfidenceFactorsUpdateResponse">
+    <wsdl:part name="parameters" element="bs:GetLatestConfidenceFactorsUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationCashInfo">
+    <wsdl:part name="parameters" element="bs:GetStationCashInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetStationCashInfoResponse">
+    <wsdl:part name="parameters" element="bs:GetStationCashInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationCashHistory">
+    <wsdl:part name="parameters" element="bsm:GetStationCashHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetStationCashHistoryResponse">
+    <wsdl:part name="parameters" element="bsm:GetStationCashHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCashInfo">
+    <wsdl:part name="parameters" element="bs:GetCashInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCashInfoResponse">
+    <wsdl:part name="parameters" element="bs:GetCashInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationResource">
+    <wsdl:part name="parameters" element="bs:GetStationResource" />
+  </wsdl:message>
+  <wsdl:message name="GetStationResourceResponse">
+    <wsdl:part name="parameters" element="bs:GetStationResourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentManagementData">
+    <wsdl:part name="parameters" element="bs:GetContentManagementData" />
+  </wsdl:message>
+  <wsdl:message name="GetContentManagementDataResponse">
+    <wsdl:part name="parameters" element="bs:GetContentManagementDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBettingBalance">
+    <wsdl:part name="parameters" element="bs:GetBettingBalance" />
+  </wsdl:message>
+  <wsdl:message name="GetBettingBalanceResponse">
+    <wsdl:part name="parameters" element="bs:GetBettingBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLiveStreamFeed">
+    <wsdl:part name="parameters" element="bsm:GetLiveStreamFeed" />
+  </wsdl:message>
+  <wsdl:message name="GetLiveStreamFeedResponse">
+    <wsdl:part name="parameters" element="bsm:GetLiveStreamFeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMatchSorting">
+    <wsdl:part name="parameters" element="bs:GetMatchSorting" />
+  </wsdl:message>
+  <wsdl:message name="GetMatchSortingResponse">
+    <wsdl:part name="parameters" element="bs:GetMatchSortingResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterCash">
+    <wsdl:part name="parameters" element="bsm:RegisterCash" />
+  </wsdl:message>
+  <wsdl:message name="RegisterCashResponse">
+    <wsdl:part name="parameters" element="bsm:RegisterCashResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingRecieptData">
+    <wsdl:part name="parameters" element="bsm:GetAccountingRecieptData" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingRecieptDataResponse">
+    <wsdl:part name="parameters" element="bsm:GetAccountingRecieptDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLineConfig">
+    <wsdl:part name="parameters" element="bs:UpdateLineConfig" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLineConfigResponse">
+    <wsdl:part name="parameters" element="bs:UpdateLineConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="CashOut">
+    <wsdl:part name="parameters" element="bsm:CashOut" />
+  </wsdl:message>
+  <wsdl:message name="CashOutResponse">
+    <wsdl:part name="parameters" element="bsm:CashOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCasheOuts">
+    <wsdl:part name="parameters" element="bs:GetCasheOuts" />
+  </wsdl:message>
+  <wsdl:message name="GetCasheOutsResponse">
+    <wsdl:part name="parameters" element="bs:GetCasheOutsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationProperties">
+    <wsdl:part name="parameters" element="bsm:GetStationProperties" />
+  </wsdl:message>
+  <wsdl:message name="GetStationPropertiesResponse">
+    <wsdl:part name="parameters" element="bsm:GetStationPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportLogData">
+    <wsdl:part name="parameters" element="bsm:ExportLogData" />
+  </wsdl:message>
+  <wsdl:message name="ExportLogDataResponse">
+    <wsdl:part name="parameters" element="bsm:ExportLogDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessProps">
+    <wsdl:part name="parameters" element="bs:GetBusinessProperties" />
+  </wsdl:message>
+  <wsdl:message name="GetBusinessPropsResponse">
+    <wsdl:part name="parameters" element="bs:GetBusinessPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="StationEvent">
+    <wsdl:part name="parameters" element="bs:StationEvent" />
+  </wsdl:message>
+  <wsdl:message name="StationEventResponse">
+    <wsdl:part name="parameters" element="bs:StationEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveTicket">
+    <wsdl:part name="parameters" element="bsm:SaveTicket" />
+  </wsdl:message>
+  <wsdl:message name="SaveTicketRequestWS_Headers">
+    <wsdl:part name="transactionId" element="bsm:transactionId" />
+  </wsdl:message>
+  <wsdl:message name="SaveTicketResponse">
+    <wsdl:part name="parameters" element="bsm:SaveTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBSMHubService_LoadTicket_InputMessage">
+    <wsdl:part name="parameters" element="bsm:LoadTicket" />
+  </wsdl:message>
+  <wsdl:message name="IBSMHubService_LoadTicket_OutputMessage">
+    <wsdl:part name="parameters" element="bsm:LoadTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="INbtService_UpdateLocalization_InputMessage">
+    <wsdl:part name="parameters" element="bs:UpdateLocalization" />
+  </wsdl:message>
+  <wsdl:message name="INbtService_UpdateLocalization_OutputMessage">
+    <wsdl:part name="parameters" element="bs:UpdateLocalizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="INbtService_UpdateLine_InputMessage">
+    <wsdl:part name="parameters" element="bs:UpdateLine" />
+  </wsdl:message>
+  <wsdl:message name="INbtService_UpdateLine_OutputMessage">
+    <wsdl:part name="parameters" element="bs:UpdateLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatistics">
+    <wsdl:part name="parameters" element="bs:UpdateStatistics" />
+  </wsdl:message>
+  <wsdl:message name="UpdateStatisticsResponse">
+    <wsdl:part name="parameters" element="bs:UpdateStatisticsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFlags">
+    <wsdl:part name="parameters" element="bs:UpdateFlags" />
+  </wsdl:message>
+  <wsdl:message name="UpdateFlagsResponse">
+    <wsdl:part name="parameters" element="bs:UpdateFlagsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelTicket">
+    <wsdl:part name="parameters" element="bs:CancelTicket" />
+  </wsdl:message>
+  <wsdl:message name="CancelTicketResponse">
+    <wsdl:part name="parameters" element="bs:CancelTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="INbtService_GetLockedOffer_InputMessage">
+    <wsdl:part name="parameters" element="bs:GetLockedOffer" />
+  </wsdl:message>
+  <wsdl:message name="INbtService_GetLockedOffer_OutputMessage">
+    <wsdl:part name="parameters" element="bs:GetLockedOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBSMHubService_WriteRemoteError2Log_InputMessage">
+    <wsdl:part name="parameters" element="bs:WriteRemoteErrorToLog" />
+  </wsdl:message>
+  <wsdl:message name="IBSMHubService_WriteRemoteError2Log_OutputMessage">
+    <wsdl:part name="parameters" element="bs:WriteRemoteErrorToLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveCreditNote">
+    <wsdl:part name="parameters" element="bsm:SaveCreditNote" />
+  </wsdl:message>
+  <wsdl:message name="SaveCreditNoteResponse">
+    <wsdl:part name="parameters" element="bsm:SaveCreditNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadCreditNote">
+    <wsdl:part name="parameters" element="bsm:LoadCreditNote" />
+  </wsdl:message>
+  <wsdl:message name="LoadCreditNoteResponse">
+    <wsdl:part name="parameters" element="bsm:LoadCreditNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="PayCreditNote">
+    <wsdl:part name="parameters" element="bsm:PayCreditNote" />
+  </wsdl:message>
+  <wsdl:message name="PayCreditNoteResponse">
+    <wsdl:part name="parameters" element="bsm:PayCreditNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationPaymentFlowData">
+    <wsdl:part name="parameters" element="bsm:GetStationPaymentFlowData" />
+  </wsdl:message>
+  <wsdl:message name="GetStationPaymentFlowDataResponse">
+    <wsdl:part name="parameters" element="bsm:GetStationPaymentFlowDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddPaymentFlow">
+    <wsdl:part name="parameters" element="bsm:AddPaymentFlow" />
+  </wsdl:message>
+  <wsdl:message name="AddPaymentFlowResponse">
+    <wsdl:part name="parameters" element="bsm:AddPaymentFlowResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationPlugins">
+    <wsdl:part name="parameters" element="bsm:GetStationPlugins" />
+  </wsdl:message>
+  <wsdl:message name="GetStationPluginsResponse">
+    <wsdl:part name="parameters" element="bsm:GetStationPluginsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterAccount">
+    <wsdl:part name="parameters" element="bsm:RegisterAccount" />
+  </wsdl:message>
+  <wsdl:message name="RegisterAccountResponse">
+    <wsdl:part name="parameters" element="bsm:RegisterAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="AccountServiceException">
+    <wsdl:part name="exception" element="basm:AccountServiceException" />
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationForm">
+    <wsdl:part name="parameters" element="basm:GetRegistrationForm" />
+  </wsdl:message>
+  <wsdl:message name="GetRegistrationFormResponse">
+    <wsdl:part name="parameters" element="basm:GetRegistrationFormResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadProfile">
+    <wsdl:part name="parameters" element="basm:LoadProfile" />
+  </wsdl:message>
+  <wsdl:message name="LoadProfileResponse">
+    <wsdl:part name="parameters" element="basm:LoadProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchForOperators">
+    <wsdl:part name="parameters" element="bsm:SearchForOperators" />
+  </wsdl:message>
+  <wsdl:message name="SearchForOperatorsResponse">
+    <wsdl:part name="parameters" element="bsm:SearchForOperatorsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOperatorsWithShifts">
+    <wsdl:part name="parameters" element="bsm:GetAllOperatorsWithShifts" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOperatorsWithShiftsResponse">
+    <wsdl:part name="parameters" element="bsm:GetAllOperatorsWithShiftsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckForEmptyBoxAndPayments">
+    <wsdl:part name="parameters" element="bsm:CheckForEmptyBoxAndPayments" />
+  </wsdl:message>
+  <wsdl:message name="CheckForEmptyBoxAndPaymentsResponse">
+    <wsdl:part name="parameters" element="bsm:CheckForEmptyBoxAndPaymentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProfitAccountingReport">
+    <wsdl:part name="parameters" element="bsm:GetProfitAccountingReport" />
+  </wsdl:message>
+  <wsdl:message name="GetProfitAccountingReportResponse">
+    <wsdl:part name="parameters" element="bsm:GetProfitAccountingReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateProfitAccountingCheckpoint">
+    <wsdl:part name="parameters" element="bsm:CreateProfitAccountingCheckpoint" />
+  </wsdl:message>
+  <wsdl:message name="CreateProfitAccountingCheckpointResponse">
+    <wsdl:part name="parameters" element="bsm:CreateProfitAccountingCheckpointResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProfitAccountingCheckpoint">
+    <wsdl:part name="parameters" element="bsm:GetProfitAccountingCheckpoint" />
+  </wsdl:message>
+  <wsdl:message name="GetProfitAccountingCheckpointResponse">
+    <wsdl:part name="parameters" element="bsm:GetProfitAccountingCheckpointResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOperator">
+    <wsdl:part name="parameters" element="bsm:UpdateOperator" />
+  </wsdl:message>
+  <wsdl:message name="UpdateOperatorResponse">
+    <wsdl:part name="parameters" element="bsm:UpdateOperatorResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePlayedTickets">
+    <wsdl:part name="parameters" element="bsm:UpdatePlayedTickets" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePlayedTicketsResponse">
+    <wsdl:part name="parameters" element="bsm:UpdatePlayedTicketsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProfile">
+    <wsdl:part name="parameters" element="basm:UpdateProfile" />
+  </wsdl:message>
+  <wsdl:message name="UpdateProfileResponse">
+    <wsdl:part name="parameters" element="basm:UpdateProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="OpenSession">
+    <wsdl:part name="parameters" element="bsm:OpenSession" />
+  </wsdl:message>
+  <wsdl:message name="OpenSessionResponse">
+    <wsdl:part name="parameters" element="bsm:OpenSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="CloseSession">
+    <wsdl:part name="parameters" element="bsm:CloseSession" />
+  </wsdl:message>
+  <wsdl:message name="CloseSessionResponse">
+    <wsdl:part name="parameters" element="bsm:CloseSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ToggleAccountState">
+    <wsdl:part name="parameters" element="basm:ToggleAccountState" />
+  </wsdl:message>
+  <wsdl:message name="ToggleAccountStateResponse">
+    <wsdl:part name="parameters" element="basm:ToggleAccountStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadUserComment">
+    <wsdl:part name="parameters" element="basm:LoadUserComment" />
+  </wsdl:message>
+  <wsdl:message name="LoadUserCommentResponse">
+    <wsdl:part name="parameters" element="basm:LoadUserCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserComment">
+    <wsdl:part name="parameters" element="basm:DeleteUserComment" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserCommentResponse">
+    <wsdl:part name="parameters" element="basm:DeleteUserCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="EditUserComment">
+    <wsdl:part name="parameters" element="basm:EditUserComment" />
+  </wsdl:message>
+  <wsdl:message name="EditUserCommentResponse">
+    <wsdl:part name="parameters" element="basm:EditUserCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserComment">
+    <wsdl:part name="parameters" element="basm:AddUserComment" />
+  </wsdl:message>
+  <wsdl:message name="AddUserCommentResponse">
+    <wsdl:part name="parameters" element="basm:AddUserCommentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIdCard">
+    <wsdl:part name="parameters" element="bsm:UpdateIdCard" />
+  </wsdl:message>
+  <wsdl:message name="UpdateIdCardResponse">
+    <wsdl:part name="parameters" element="bsm:UpdateIdCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeIDCardPin">
+    <wsdl:part name="parameters" element="basm:ChangeIDCardPin" />
+  </wsdl:message>
+  <wsdl:message name="ChangeIDCardPinResponse">
+    <wsdl:part name="parameters" element="basm:ChangeIDCardPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOperatorIDCardPin">
+    <wsdl:part name="parameters" element="bsm:ChangeOperatorIDCardPin" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOperatorIDCardPinResponse">
+    <wsdl:part name="parameters" element="bsm:ChangeOperatorIDCardPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginWithIdCard">
+    <wsdl:part name="parameters" element="bsm:LoginWithIdCard" />
+  </wsdl:message>
+  <wsdl:message name="LoginWithIdCardResponse">
+    <wsdl:part name="parameters" element="bsm:LoginWithIdCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterIdCard">
+    <wsdl:part name="parameters" element="basm:RegisterIdCard" />
+  </wsdl:message>
+  <wsdl:message name="RegisterIdCardResponse">
+    <wsdl:part name="parameters" element="basm:RegisterIdCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIdCardInfo">
+    <wsdl:part name="parameters" element="bsm:GetIdCardInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetIdCardInfoResponse">
+    <wsdl:part name="parameters" element="bsm:GetIdCardInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidateIdCard">
+    <wsdl:part name="parameters" element="bsm:ValidateIdCard" />
+  </wsdl:message>
+  <wsdl:message name="ValidateIdCardResponse">
+    <wsdl:part name="parameters" element="bsm:ValidateIdCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOperator">
+    <wsdl:part name="parameters" element="bsm:RegisterOperator" />
+  </wsdl:message>
+  <wsdl:message name="RegisterOperatorResponse">
+    <wsdl:part name="parameters" element="bsm:RegisterOperatorResponse" />
+  </wsdl:message>
+  <wsdl:message name="UnbindIdCard">
+    <wsdl:part name="parameters" element="bsm:UnbindIdCard" />
+  </wsdl:message>
+  <wsdl:message name="UnbindIdCardResponse">
+    <wsdl:part name="parameters" element="bsm:UnbindIdCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="BindOperatorIdCard">
+    <wsdl:part name="parameters" element="bsm:BindOperatorIdCard" />
+  </wsdl:message>
+  <wsdl:message name="BindOperatorIdCardResponse">
+    <wsdl:part name="parameters" element="bsm:BindOperatorIdCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoles">
+    <wsdl:part name="parameters" element="bsm:GetAllRoles" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRolesResponse">
+    <wsdl:part name="parameters" element="bsm:GetAllRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateCheckpoint">
+    <wsdl:part name="parameters" element="bsm:CreateCheckpoint" />
+  </wsdl:message>
+  <wsdl:message name="CreateCheckpointResponse">
+    <wsdl:part name="parameters" element="bsm:CreateCheckpointResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateOperatorShiftCheckpoint">
+    <wsdl:part name="parameters" element="bsm:CreateOperatorShiftCheckpoint" />
+  </wsdl:message>
+  <wsdl:message name="CreateOperatorShiftCheckpointResponse">
+    <wsdl:part name="parameters" element="bsm:CreateOperatorShiftCheckpointResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOperatorShiftReport">
+    <wsdl:part name="parameters" element="bsm:GetOperatorShiftReport" />
+  </wsdl:message>
+  <wsdl:message name="GetOperatorShiftReportResponse">
+    <wsdl:part name="parameters" element="bsm:GetOperatorShiftReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProduceOperatorSettlement">
+    <wsdl:part name="parameters" element="bsm:ProduceOperatorSettlement" />
+  </wsdl:message>
+  <wsdl:message name="ProduceOperatorSettlementResponse">
+    <wsdl:part name="parameters" element="bsm:ProduceOperatorSettlementResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSettlementHistory">
+    <wsdl:part name="parameters" element="bsm:GetSettlementHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetSettlementHistoryResponse">
+    <wsdl:part name="parameters" element="bsm:GetSettlementHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSettlementHistoryDetails">
+    <wsdl:part name="parameters" element="bsm:GetSettlementHistoryDetails" />
+  </wsdl:message>
+  <wsdl:message name="GetSettlementHistoryDetailsResponse">
+    <wsdl:part name="parameters" element="bsm:GetSettlementHistoryDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOperatorShiftCheckpoints">
+    <wsdl:part name="parameters" element="bsm:GetOperatorShiftCheckpoints" />
+  </wsdl:message>
+  <wsdl:message name="GetOperatorShiftCheckpointsResponse">
+    <wsdl:part name="parameters" element="bsm:GetOperatorShiftCheckpointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationBalanceCheckpoints">
+    <wsdl:part name="parameters" element="bsm:GetStationBalanceCheckpoints" />
+  </wsdl:message>
+  <wsdl:message name="GetStationBalanceCheckpointsResponse">
+    <wsdl:part name="parameters" element="bsm:GetStationBalanceCheckpointsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IssueCreditToStationBalance">
+    <wsdl:part name="parameters" element="bsm:IssueCreditToStationBalance" />
+  </wsdl:message>
+  <wsdl:message name="IssueCreditToStationBalanceResponse">
+    <wsdl:part name="parameters" element="bsm:IssueCreditToStationBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="EndUserVerification">
+    <wsdl:part name="parameters" element="basm:EndUserVerification" />
+  </wsdl:message>
+  <wsdl:message name="EndUserVerificationResponse">
+    <wsdl:part name="parameters" element="basm:EndUserVerificationResponse" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPaymentNote">
+    <wsdl:part name="parameters" element="basm:RegisterPaymentNote" />
+  </wsdl:message>
+  <wsdl:message name="RegisterPaymentNoteResponse">
+    <wsdl:part name="parameters" element="basm:RegisterPaymentNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadPaymentNote">
+    <wsdl:part name="parameters" element="bsm:LoadPaymentNote" />
+  </wsdl:message>
+  <wsdl:message name="LoadPaymentNoteResponse">
+    <wsdl:part name="parameters" element="bsm:LoadPaymentNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="WithdrawByPaymentNote">
+    <wsdl:part name="parameters" element="bsm:WithdrawByPaymentNote" />
+  </wsdl:message>
+  <wsdl:message name="WithdrawByPaymentNoteResponse">
+    <wsdl:part name="parameters" element="bsm:WithdrawByPaymentNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="Deposit">
+    <wsdl:part name="parameters" element="bsm:Deposit" />
+  </wsdl:message>
+  <wsdl:message name="DepositRequestWS_Headers">
+    <wsdl:part name="transactionId" element="bsm:transactionId" />
+  </wsdl:message>
+  <wsdl:message name="DepositResponse">
+    <wsdl:part name="parameters" element="bsm:DepositResponse" />
+  </wsdl:message>
+  <wsdl:message name="DepositByTicket">
+    <wsdl:part name="parameters" element="bsm:DepositByTicket" />
+  </wsdl:message>
+  <wsdl:message name="DepositByTicketRequestWS_Headers">
+    <wsdl:part name="transactionId" element="bsm:transactionId" />
+  </wsdl:message>
+  <wsdl:message name="DepositByTicketResponse">
+    <wsdl:part name="parameters" element="bsm:DepositByTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="DepositByCreditNote">
+    <wsdl:part name="parameters" element="bsm:DepositByCreditNote" />
+  </wsdl:message>
+  <wsdl:message name="DepositByCreditNoteRequestWS_Headers">
+    <wsdl:part name="transactionId" element="bsm:transactionId" />
+  </wsdl:message>
+  <wsdl:message name="DepositByCreditNoteResponse">
+    <wsdl:part name="parameters" element="bsm:DepositByCreditNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBalance">
+    <wsdl:part name="parameters" element="bsm:GetBalance" />
+  </wsdl:message>
+  <wsdl:message name="GetBalanceResponse">
+    <wsdl:part name="parameters" element="bsm:GetBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="WithdrawByTicket">
+    <wsdl:part name="parameters" element="basm:WithdrawByTicket" />
+  </wsdl:message>
+  <wsdl:message name="WithdrawByTicketResponse">
+    <wsdl:part name="parameters" element="basm:WithdrawByTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="Reserve">
+    <wsdl:part name="parameters" element="basm:Reserve" />
+  </wsdl:message>
+  <wsdl:message name="ReserveResponse">
+    <wsdl:part name="parameters" element="basm:ReserveResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStationByVerificationNumber">
+    <wsdl:part name="parameters" element="bsm:GetStationByVerificationNumber" />
+  </wsdl:message>
+  <wsdl:message name="GetStationByVerificationNumberResponse">
+    <wsdl:part name="parameters" element="bsm:GetStationByVerificationNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="StoreTicket">
+    <wsdl:part name="parameters" element="bsm:StoreTicket" />
+  </wsdl:message>
+  <wsdl:message name="StoreTicketRequestWS_Headers">
+    <wsdl:part name="transactionId" element="bsm:transactionId" />
+  </wsdl:message>
+  <wsdl:message name="StoreTicketResponse">
+    <wsdl:part name="parameters" element="bsm:StoreTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountByTicket">
+    <wsdl:part name="parameters" element="basm:GetAccountByTicket" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountByTicketResponse">
+    <wsdl:part name="parameters" element="basm:GetAccountByTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountByRegistrationNote">
+    <wsdl:part name="parameters" element="basm:GetAccountByRegistrationNote" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountByRegistrationNoteResponse">
+    <wsdl:part name="parameters" element="basm:GetAccountByRegistrationNoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="History">
+    <wsdl:part name="parameters" element="basm:History" />
+  </wsdl:message>
+  <wsdl:message name="HistoryResponse">
+    <wsdl:part name="parameters" element="basm:HistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadStoredTickets">
+    <wsdl:part name="parameters" element="bsm:LoadStoredTickets" />
+  </wsdl:message>
+  <wsdl:message name="LoadStoredTicketsResponse">
+    <wsdl:part name="parameters" element="bsm:LoadStoredTicketsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTickets">
+    <wsdl:part name="parameters" element="basm:GetUserTickets" />
+  </wsdl:message>
+  <wsdl:message name="GetUserTicketsResponse">
+    <wsdl:part name="parameters" element="basm:GetUserTicketsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PluginProtocol">
+    <wsdl:part name="parameters" element="bsm:PluginProtocol" />
+  </wsdl:message>
+  <wsdl:message name="PluginProtocolResponse">
+    <wsdl:part name="parameters" element="bsm:PluginProtocolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordFromTerminal">
+    <wsdl:part name="parameters" element="basm:ChangePasswordFromTerminal" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordFromTerminalResponse">
+    <wsdl:part name="parameters" element="basm:ChangePasswordFromTerminalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordFromShop">
+    <wsdl:part name="parameters" element="basm:ChangePasswordFromShop" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordFromShopResponse">
+    <wsdl:part name="parameters" element="basm:ChangePasswordFromShopResponse" />
+  </wsdl:message>
+  <wsdl:message name="RestorePasswordByUsername">
+    <wsdl:part name="parameters" element="basm:RestorePasswordByUsername" />
+  </wsdl:message>
+  <wsdl:message name="RestorePasswordByUsernameResponse">
+    <wsdl:part name="parameters" element="basm:RestorePasswordByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="RestorePasswordByEmail">
+    <wsdl:part name="parameters" element="basm:RestorePasswordByEmail" />
+  </wsdl:message>
+  <wsdl:message name="RestorePasswordByEmailResponse">
+    <wsdl:part name="parameters" element="basm:RestorePasswordByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="AccountSearch">
+    <wsdl:part name="parameters" element="bsm:AccountSearch" />
+  </wsdl:message>
+  <wsdl:message name="AccountSearchResponse">
+    <wsdl:part name="parameters" element="bsm:AccountSearchResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBSMHubService">
+    <wsdl:operation name="GetBusinessProps">
+      <wsdl:documentation>Get last unique IDs for newly created station
+			</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetBusinessProps" message="tns:GetBusinessProps" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetBusinessPropsResponse" message="tns:GetBusinessPropsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetBusinessProps/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadTicket">
+      <wsdl:documentation>Loads the whole ticket,
+				• Shop: checking and
+				loading tickets (also details)
+				• Terminal: pay out
+				ticket and show the
+				details of the ticket (general like overall won state, when the bet
+				took
+				place, …)
+			</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadTicket" message="tns:IBSMHubService_LoadTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadTicketResponse" message="tns:IBSMHubService_LoadTicket_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadTicket/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="WriteRemoteError2Log">
+      <wsdl:documentation>Sends a log message with the criticality of the
+				message to the service</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/WriteRemoteError2Log" message="tns:IBSMHubService_WriteRemoteError2Log_InputMessage" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/WriteRemoteError2LogResponse" message="tns:IBSMHubService_WriteRemoteError2Log_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/WriteRemoteError2Log/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLockedOffer">
+      <wsdl:input wsaw:Action="http://bsservice.ws.bs.sportradar.com/INbtService/GetLockedOffer" message="tns:INbtService_GetLockedOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://bsservice.ws.bs.sportradar.com/INbtService/GetLockedOfferResponse" message="tns:INbtService_GetLockedOffer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetLockedOffer/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelTicket">
+      <wsdl:documentation>Cancels an
+				already existing ticket
+			</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CancelTicket" message="tns:CancelTicket" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CancelTicketResponse" message="tns:CancelTicketResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CancelTicket/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLocalization">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLocalization" message="tns:INbtService_UpdateLocalization_InputMessage" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLocalizationResponse" message="tns:INbtService_UpdateLocalization_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLocalization/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLine" message="tns:INbtService_UpdateLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLineResponse" message="tns:INbtService_UpdateLine_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLine/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFlags">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateFlags" message="tns:UpdateFlags" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateFlagsResponse" message="tns:UpdateFlagsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateFlags/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatistics">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateStatistics" message="tns:UpdateStatistics" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateStatisticsResponse" message="tns:UpdateStatisticsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateStatistics/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveCreditNote">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/SaveCreditNote" message="tns:SaveCreditNote" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/SaveCreditNoteResponse" message="tns:SaveCreditNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/SaveCreditNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadCreditNote">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadCreditNote" message="tns:LoadCreditNote" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadCreditNoteResponse" message="tns:LoadCreditNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadCreditNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="PayCreditNote">
+      <wsdl:input wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/PayCreditNote" message="tns:PayCreditNote" />
+      <wsdl:output wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/PayCreditNoteResponse" message="tns:PayCreditNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/PayCreditNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPaymentFlow">
+      <wsdl:documentation>Gets station plugins.</wsdl:documentation>
+      <wsdl:input name="AddPaymentFlow" message="tns:AddPaymentFlow" />
+      <wsdl:output name="AddPaymentFlowResponse" message="tns:AddPaymentFlowResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/AddPaymentFlow/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationPaymentFlowData">
+      <wsdl:documentation>Gets station plugins.</wsdl:documentation>
+      <wsdl:input name="GetStationPaymentFlowData" message="tns:GetStationPaymentFlowData" />
+      <wsdl:output name="GetStationPaymentFlowDataResponse" message="tns:GetStationPaymentFlowDataResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationPaymentFlowDatat/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationPlugins">
+      <wsdl:documentation>Gets station plugins.</wsdl:documentation>
+      <wsdl:input name="GetStationPlugins" message="tns:GetStationPlugins" />
+      <wsdl:output name="GetStationPluginsResponse" message="tns:GetStationPluginsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationPlugins/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestConfidenceFactorsUpdate">
+      <wsdl:documentation>Gets the last canfidence factor update
+			</wsdl:documentation>
+      <wsdl:input name="GetLatestConfidenceFactorsUpdate" message="tns:GetLatestConfidenceFactorsUpdate" />
+      <wsdl:output name="GetLatestConfidenceFactorsUpdateResponse" message="tns:GetLatestConfidenceFactorsUpdateResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetLatestConfidenceFactorsUpdate/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationCashInfo">
+      <wsdl:documentation>Gets cash history information for station
+			</wsdl:documentation>
+      <wsdl:input name="GetStationCashInfo" message="tns:GetStationCashInfo" />
+      <wsdl:output name="GetStationCashInfoResponse" message="tns:GetStationCashInfoResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationCashInfo/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationCashHistory">
+      <wsdl:documentation>Gets cash history information for station
+			</wsdl:documentation>
+      <wsdl:input name="GetStationCashHistory" message="tns:GetStationCashHistory" />
+      <wsdl:output name="GetStationCashHistoryResponse" message="tns:GetStationCashHistoryResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationCashHistory/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCashInfo">
+      <wsdl:documentation>Gets cash info for current station/location
+			</wsdl:documentation>
+      <wsdl:input name="GetCashInfo" message="tns:GetCashInfo" />
+      <wsdl:output name="GetCashInfoResponse" message="tns:GetCashInfoResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetCashInfo/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationResource">
+      <wsdl:documentation>Gets station resource by resourceId.
+			</wsdl:documentation>
+      <wsdl:input name="GetStationResource" message="tns:GetStationResource" />
+      <wsdl:output name="GetStationResourceResponse" message="tns:GetStationResourceResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationResource/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentManagementData">
+      <wsdl:documentation>Gets station resource by resourceId.
+			</wsdl:documentation>
+      <wsdl:input name="GetContentManagementData" message="tns:GetContentManagementData" />
+      <wsdl:output name="GetContentManagementDataResponse" message="tns:GetContentManagementDataResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetContentManagementData/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBettingBalance">
+      <wsdl:documentation>Gets station betting balance.
+			</wsdl:documentation>
+      <wsdl:input name="GetBettingBalance" message="tns:GetBettingBalance" />
+      <wsdl:output name="GetBettingBalanceResponse" message="tns:GetBettingBalanceResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetBettingBalance/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLiveStreamFeed">
+      <wsdl:documentation>Gets station betting balance.
+			</wsdl:documentation>
+      <wsdl:input name="GetLiveStreamFeed" message="tns:GetLiveStreamFeed" />
+      <wsdl:output name="GetLiveStreamFeedResponse" message="tns:GetLiveStreamFeedResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetLiveStreamFeed/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMatchSorting">
+      <wsdl:documentation>Gets station betting balance.
+			</wsdl:documentation>
+      <wsdl:input name="GetMatchSorting" message="tns:GetMatchSorting" />
+      <wsdl:output name="GetMatchSortingResponse" message="tns:GetMatchSortingResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetMatchSorting/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCash">
+      <wsdl:documentation>Register inserted or repoved moneys from station.
+			</wsdl:documentation>
+      <wsdl:input name="RegisterCash" message="tns:RegisterCash" />
+      <wsdl:output name="RegisterCashResponse" message="tns:RegisterCashResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RegisterCash/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingRecieptData">
+      <wsdl:documentation>Gets accounting reciept data by date range and
+				station(location)</wsdl:documentation>
+      <wsdl:input name="GetAccountingRecieptData" message="tns:GetAccountingRecieptData" />
+      <wsdl:output name="GetAccountingRecieptDataResponse" message="tns:GetAccountingRecieptDataResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetAccountingRecieptData/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLineConfig">
+      <wsdl:documentation>Updates line config</wsdl:documentation>
+      <wsdl:input name="UpdateLineConfig" message="tns:UpdateLineConfig" />
+      <wsdl:output name="UpdateLineConfigResponse" message="tns:UpdateLineConfigResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLineConfig/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CashOut">
+      <wsdl:documentation>Cash out on station</wsdl:documentation>
+      <wsdl:input name="CashOut" message="tns:CashOut" />
+      <wsdl:output name="CashOutResponse" message="tns:CashOutResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CashOut/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCasheOuts">
+      <wsdl:documentation>Get cash out list for station
+			</wsdl:documentation>
+      <wsdl:input name="GetCasheOuts" message="tns:GetCasheOuts" />
+      <wsdl:output name="GetCasheOutsResponse" message="tns:GetCasheOutsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetCasheOuts/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOperator">
+      <wsdl:input name="RegisterOperator" message="tns:RegisterOperator" />
+      <wsdl:output name="RegisterOperatorResponse" message="tns:RegisterOperatorResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RegisterOperator/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UnbindIdCard">
+      <wsdl:input name="UnbindIdCard" message="tns:UnbindIdCard" />
+      <wsdl:output name="UnbindIdCardResponse" message="tns:UnbindIdCardResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UnbindIdCard/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="BindOperatorIdCard">
+      <wsdl:input name="BindOperatorIdCard" message="tns:BindOperatorIdCard" />
+      <wsdl:output name="BindOperatorIdCardResponse" message="tns:BindOperatorIdCardResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/BindOperatorIdCard/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <wsdl:input name="GetAllRoles" message="tns:GetAllRoles" />
+      <wsdl:output name="GetAllRolesResponse" message="tns:GetAllRolesResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetAllRoles/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOperatorShiftCheckpoint">
+      <wsdl:input name="CreateOperatorShiftCheckpoint" message="tns:CreateOperatorShiftCheckpoint" />
+      <wsdl:output name="CreateOperatorShiftCheckpointResponse" message="tns:CreateOperatorShiftCheckpointResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CreateOperatorShiftCheckpoint/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOperatorShiftReport">
+      <wsdl:input name="GetOperatorShiftReport" message="tns:GetOperatorShiftReport" />
+      <wsdl:output name="GetOperatorShiftReportResponse" message="tns:GetOperatorShiftReportResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetOperatorShiftReport/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ProduceOperatorSettlement">
+      <wsdl:input name="ProduceOperatorSettlement" message="tns:ProduceOperatorSettlement" />
+      <wsdl:output name="ProduceOperatorSettlementResponse" message="tns:ProduceOperatorSettlementResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ProduceOperatorSettlement/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSettlementHistory">
+      <wsdl:input name="GetSettlementHistory" message="tns:GetSettlementHistory" />
+      <wsdl:output name="GetSettlementHistoryResponse" message="tns:GetSettlementHistoryResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetSettlementHistory/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSettlementHistoryDetails">
+      <wsdl:input name="GetSettlementHistoryDetails" message="tns:GetSettlementHistoryDetails" />
+      <wsdl:output name="GetSettlementHistoryDetailsResponse" message="tns:GetSettlementHistoryDetailsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetSettlementHistoryDetails/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOperatorShiftCheckpoints">
+      <wsdl:input name="GetOperatorShiftCheckpoints" message="tns:GetOperatorShiftCheckpoints" />
+      <wsdl:output name="GetOperatorShiftCheckpointsResponse" message="tns:GetOperatorShiftCheckpointsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetOperatorShiftCheckpoints/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateCheckpoint">
+      <wsdl:input name="CreateCheckpoint" message="tns:CreateCheckpoint" />
+      <wsdl:output name="CreateCheckpointResponse" message="tns:CreateCheckpointResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CreateCheckpoint/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationBalanceCheckpoints">
+      <wsdl:input name="GetStationBalanceCheckpoints" message="tns:GetStationBalanceCheckpoints" />
+      <wsdl:output name="GetStationBalanceCheckpointsResponse" message="tns:GetStationBalanceCheckpointsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationBalanceCheckpoints/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="IssueCreditToStationBalance">
+      <wsdl:input name="IssueCreditToStationBalance" message="tns:IssueCreditToStationBalance" />
+      <wsdl:output name="IssueCreditToStationBalanceResponse" message="tns:IssueCreditToStationBalanceResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/IssueCreditToStationBalance/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterAccount">
+      <wsdl:documentation>Registers new user in system and sets default
+				limits by specified currency.</wsdl:documentation>
+      <wsdl:input name="RegisterAccount" message="tns:RegisterAccount" />
+      <wsdl:output name="RegisterAccountResponse" message="tns:RegisterAccountResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RegisterAccount/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOperatorIDCardPin">
+      <wsdl:documentation>Method changes pin code of the active card.
+			</wsdl:documentation>
+      <wsdl:input name="ChangeOperatorIDCardPin" message="tns:ChangeOperatorIDCardPin" />
+      <wsdl:output name="ChangeOperatorIDCardPinResponse" message="tns:ChangeOperatorIDCardPinResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ChangeOperatorIDCardPin/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeIDCardPin">
+      <wsdl:documentation>Method changes pin code of the active card.
+			</wsdl:documentation>
+      <wsdl:input name="ChangeIDCardPin" message="tns:ChangeIDCardPin" />
+      <wsdl:output name="ChangeIDCardPinResponse" message="tns:ChangeIDCardPinResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ChangeIDCardPin/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithIdCard">
+      <wsdl:input name="LoginWithIdCard" message="tns:LoginWithIdCard" />
+      <wsdl:output name="LoginWithIdCardResponse" message="tns:LoginWithIdCardResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoginWithIdCard/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterIdCard">
+      <wsdl:input name="RegisterIdCard" message="tns:RegisterIdCard" />
+      <wsdl:output name="RegisterIdCardResponse" message="tns:RegisterIdCardResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RegisterIdCard/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIdCard">
+      <wsdl:input name="UpdateIdCard" message="tns:UpdateIdCard" />
+      <wsdl:output name="UpdateIdCardResponse" message="tns:UpdateIdCardResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateIdCard/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIdCardInfo">
+      <wsdl:input name="GetIdCardInfo" message="tns:GetIdCardInfo" />
+      <wsdl:output name="GetIdCardInfoResponse" message="tns:GetIdCardInfoResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetIdCardInfo/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateIdCard">
+      <wsdl:input name="ValidateIdCard" message="tns:ValidateIdCard" />
+      <wsdl:output name="ValidateIdCardResponse" message="tns:ValidateIdCardResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ValidateIdCard/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationForm">
+      <wsdl:documentation>Returns registration form fields and its
+				parameters.</wsdl:documentation>
+      <wsdl:input name="GetRegistrationForm" message="tns:GetRegistrationForm" />
+      <wsdl:output name="GetRegistrationFormResponse" message="tns:GetRegistrationFormResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetRegistrationForm/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadProfile">
+      <wsdl:documentation>Read user profile data</wsdl:documentation>
+      <wsdl:input name="LoadProfile" message="tns:LoadProfile" />
+      <wsdl:output name="LoadProfileResponse" message="tns:LoadProfileResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadProfile/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfitAccountingReport">
+      <wsdl:input name="GetProfitAccountingReport" message="tns:GetProfitAccountingReport" />
+      <wsdl:output name="GetProfitAccountingReportResponse" message="tns:GetProfitAccountingReportResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetProfitAccountingReport/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProfitAccountingCheckpoint">
+      <wsdl:input name="CreateProfitAccountingCheckpoint" message="tns:CreateProfitAccountingCheckpoint" />
+      <wsdl:output name="CreateProfitAccountingCheckpointResponse" message="tns:CreateProfitAccountingCheckpointResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CreateProfitAccountingCheckpoint/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfitAccountingCheckpoint">
+      <wsdl:input name="GetProfitAccountingCheckpoint" message="tns:GetProfitAccountingCheckpoint" />
+      <wsdl:output name="GetProfitAccountingCheckpointResponse" message="tns:GetProfitAccountingCheckpointResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetProfitAccountingCheckpoint/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchForOperators">
+      <wsdl:documentation>Update user profile data on server
+			</wsdl:documentation>
+      <wsdl:input name="SearchForOperators" message="tns:SearchForOperators" />
+      <wsdl:output name="SearchForOperatorsResponse" message="tns:SearchForOperatorsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/SearchForOperators/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckForEmptyBoxAndPayments">
+      <wsdl:documentation>Update user profile data on server
+			</wsdl:documentation>
+      <wsdl:input name="CheckForEmptyBoxAndPayments" message="tns:CheckForEmptyBoxAndPayments" />
+      <wsdl:output name="CheckForEmptyBoxAndPaymentsResponse" message="tns:CheckForEmptyBoxAndPaymentsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CheckForEmptyBoxAndPayments/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOperatorsWithShifts">
+      <wsdl:documentation>Update user profile data on server
+			</wsdl:documentation>
+      <wsdl:input name="GetAllOperatorsWithShifts" message="tns:GetAllOperatorsWithShifts" />
+      <wsdl:output name="GetAllOperatorsWithShiftsResponse" message="tns:GetAllOperatorsWithShiftsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetAllOperatorsWithShifts/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOperator">
+      <wsdl:documentation>Update user profile data on server
+			</wsdl:documentation>
+      <wsdl:input name="UpdateOperator" message="tns:UpdateOperator" />
+      <wsdl:output name="UpdateOperatorResponse" message="tns:UpdateOperatorResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateOperator/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayedTickets">
+      <wsdl:documentation>Update user profile data on server
+			</wsdl:documentation>
+      <wsdl:input name="UpdatePlayedTickets" message="tns:UpdatePlayedTickets" />
+      <wsdl:output name="UpdatePlayedTicketsResponse" message="tns:UpdatePlayedTicketsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdatePlayedTickets/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProfile">
+      <wsdl:documentation>Update user profile data on server
+			</wsdl:documentation>
+      <wsdl:input name="UpdateProfile" message="tns:UpdateProfile" />
+      <wsdl:output name="UpdateProfileResponse" message="tns:UpdateProfileResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateProfile/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <wsdl:documentation>Generates session for the station, returns
+				session id</wsdl:documentation>
+      <wsdl:input name="OpenSession" message="tns:OpenSession" />
+      <wsdl:output name="OpenSessionResponse" message="tns:OpenSessionResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/OpenSession/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <wsdl:documentation>Close session by its uid</wsdl:documentation>
+      <wsdl:input name="CloseSession" message="tns:CloseSession" />
+      <wsdl:output name="CloseSessionResponse" message="tns:CloseSessionResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/CloseSession/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ToggleAccountState">
+      <wsdl:documentation>Activates/blocks user account
+			</wsdl:documentation>
+      <wsdl:input name="ToggleAccountState" message="tns:ToggleAccountState" />
+      <wsdl:output name="ToggleAccountStateResponse" message="tns:ToggleAccountStateResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ToggleAccountState/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadUserComment">
+      <wsdl:documentation>Load user comment
+			</wsdl:documentation>
+      <wsdl:input name="LoadUserComment" message="tns:LoadUserComment" />
+      <wsdl:output name="LoadUserCommentResponse" message="tns:LoadUserCommentResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadUserComment/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserComment">
+      <wsdl:documentation>Delete user comment
+			</wsdl:documentation>
+      <wsdl:input name="DeleteUserComment" message="tns:DeleteUserComment" />
+      <wsdl:output name="DeleteUserCommentResponse" message="tns:DeleteUserCommentResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/DeleteUserComment/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="EditUserComment">
+      <wsdl:documentation>Edit user comment
+			</wsdl:documentation>
+      <wsdl:input name="EditUserComment" message="tns:EditUserComment" />
+      <wsdl:output name="EditUserCommentResponse" message="tns:EditUserCommentResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/EditUserComment/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserComment">
+      <wsdl:documentation>Add user comment
+			</wsdl:documentation>
+      <wsdl:input name="AddUserComment" message="tns:AddUserComment" />
+      <wsdl:output name="AddUserCommentResponse" message="tns:AddUserCommentResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/AddUserComment/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="EndUserVerification">
+      <wsdl:documentation>Finalize person verification process.
+			</wsdl:documentation>
+      <wsdl:input name="EndUserVerification" message="tns:EndUserVerification" />
+      <wsdl:output name="EndUserVerificationResponse" message="tns:EndUserVerificationResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/EndUserVerification/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPaymentNote">
+      <wsdl:documentation>Registers payment note</wsdl:documentation>
+      <wsdl:input name="RegisterPaymentNote" message="tns:RegisterPaymentNote" />
+      <wsdl:output name="RegisterPaymentNoteResponse" message="tns:RegisterPaymentNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RegisterPaymentNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPaymentNote">
+      <wsdl:documentation>Loads payment note</wsdl:documentation>
+      <wsdl:input name="LoadPaymentNote" message="tns:LoadPaymentNote" />
+      <wsdl:output name="LoadPaymentNoteResponse" message="tns:LoadPaymentNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadPaymentNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="WithdrawByPaymentNote">
+      <wsdl:documentation>Withdraws money by payment note
+			</wsdl:documentation>
+      <wsdl:input name="WithdrawByPaymentNote" message="tns:WithdrawByPaymentNote" />
+      <wsdl:output name="WithdrawByPaymentNoteResponse" message="tns:WithdrawByPaymentNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/WithdrawByPaymentNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <wsdl:documentation>Deposit money to user account
+			</wsdl:documentation>
+      <wsdl:input name="Deposit" message="tns:Deposit" />
+      <wsdl:output name="DepositResponse" message="tns:DepositResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/Deposit/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="DepositByTicket">
+      <wsdl:documentation>Deposit money by ticket to user account
+			</wsdl:documentation>
+      <wsdl:input name="DepositByTicket" message="tns:DepositByTicket" />
+      <wsdl:output name="DepositByTicketResponse" message="tns:DepositByTicketResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/DepositByTicket/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="DepositByCreditNote">
+      <wsdl:documentation>Deposit money by credit note to user account
+			</wsdl:documentation>
+      <wsdl:input name="DepositByCreditNote" message="tns:DepositByCreditNote" />
+      <wsdl:output name="DepositByCreditNoteResponse" message="tns:DepositByCreditNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/DepositByCreditNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <wsdl:documentation>Return balanse and reserved amount of money
+			</wsdl:documentation>
+      <wsdl:input name="GetBalance" message="tns:GetBalance" />
+      <wsdl:output name="GetBalanceResponse" message="tns:GetBalanceResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetBalance/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="Reserve">
+      <wsdl:documentation>Reserve amount of money on account and generate
+				bill</wsdl:documentation>
+      <wsdl:input name="Reserve" message="tns:Reserve" />
+      <wsdl:output name="ReserveResponse" message="tns:ReserveResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/Reserve/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <wsdl:documentation>Return history filtered by type. If type is not
+				defined then returns all entries
+			</wsdl:documentation>
+      <wsdl:input name="History" message="tns:History" />
+      <wsdl:output name="HistoryResponse" message="tns:HistoryResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/History/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountByTicket">
+      <wsdl:documentation>Return account_id by ticket number. Throws
+				exception if no such ticket found.
+			</wsdl:documentation>
+      <wsdl:input name="GetAccountByTicket" message="tns:GetAccountByTicket" />
+      <wsdl:output name="GetAccountByTicketResponse" message="tns:GetAccountByTicketResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetAccountByTicket/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountByRegistrationNote">
+      <wsdl:documentation>Return account_id by ticket number. Throws
+				exception if no such ticket found.
+			</wsdl:documentation>
+      <wsdl:input name="GetAccountByRegistrationNote" message="tns:GetAccountByRegistrationNote" />
+      <wsdl:output name="GetAccountByRegistrationNoteResponse" message="tns:GetAccountByRegistrationNoteResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetAccountByRegistrationNote/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadStoredTickets">
+      <wsdl:documentation>Load previously stored tickets by account_id.
+			</wsdl:documentation>
+      <wsdl:input name="LoadStoredTickets" message="tns:LoadStoredTickets" />
+      <wsdl:output name="LoadStoredTicketsResponse" message="tns:LoadStoredTicketsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/LoadStoredTickets/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserTickets">
+      <wsdl:documentation>Load previously stored tickets by account_id.
+			</wsdl:documentation>
+      <wsdl:input name="GetUserTickets" message="tns:GetUserTickets" />
+      <wsdl:output name="GetUserTicketsResponse" message="tns:GetUserTicketsResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetUserTickets/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="PluginProtocol">
+      <wsdl:documentation>Do request from plugin (Base64)
+			</wsdl:documentation>
+      <wsdl:input name="PluginProtocol" message="tns:PluginProtocol" />
+      <wsdl:output name="PluginProtocolResponse" message="tns:PluginProtocolResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/PluginProtocol/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordFromTerminal">
+      <wsdl:documentation>Change users account password
+			</wsdl:documentation>
+      <wsdl:input name="ChangePasswordFromTerminal" message="tns:ChangePasswordFromTerminal" />
+      <wsdl:output name="ChangePasswordFromTerminalResponse" message="tns:ChangePasswordFromTerminalResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ChangePasswordFromTerminal/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordFromShop">
+      <wsdl:documentation>Change users account password
+			</wsdl:documentation>
+      <wsdl:input name="ChangePasswordFromShop" message="tns:ChangePasswordFromShop" />
+      <wsdl:output name="ChangePasswordFromShopResponse" message="tns:ChangePasswordFromShopResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ChangePasswordFromShop/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RestorePasswordByUsername">
+      <wsdl:documentation>Generates new password for specified user. Looks
+				on his profile for e-mail or mobile phone and
+				sends there newly
+				generated password
+			</wsdl:documentation>
+      <wsdl:input name="RestorePasswordByUsername" message="tns:RestorePasswordByUsername" />
+      <wsdl:output name="RestorePasswordByUsernameResponse" message="tns:RestorePasswordByUsernameResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RestorePasswordByUsername/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="RestorePasswordByEmail">
+      <wsdl:documentation>Generates new password for specified user and
+				sends it to email</wsdl:documentation>
+      <wsdl:input name="RestorePasswordByEmail" message="tns:RestorePasswordByEmail" />
+      <wsdl:output name="RestorePasswordByEmailResponse" message="tns:RestorePasswordByEmailResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/RestorePasswordByEmail/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationProperties">
+      <wsdl:documentation>Load settings for shop/terminal
+			</wsdl:documentation>
+      <wsdl:input name="GetStationProperties" message="tns:GetStationProperties" />
+      <wsdl:output name="GetStationPropertiesResponse" message="tns:GetStationPropertiesResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationProperties/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStationByVerificationNumber">
+      <wsdl:documentation>Get station number by verification code
+			</wsdl:documentation>
+      <wsdl:input name="GetStationByVerificationNumber" message="tns:GetStationByVerificationNumber" />
+      <wsdl:output name="GetStationByVerificationNumberResponse" message="tns:GetStationByVerificationNumberResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/GetStationByVerificationNumber/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="StationEvent">
+      <wsdl:documentation>
+			Invoked when station event occured.
+			</wsdl:documentation>
+      <wsdl:input name="StationEvent" message="tns:StationEvent" />
+      <wsdl:output name="StationEventResponse" message="tns:StationEventResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/StationEvent/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTicket">
+      <wsdl:documentation>Saves the ticket on the server. Checks, if the
+				ticket is ok and returns if ticket is saved or why
+				it is declined
+			</wsdl:documentation>
+      <wsdl:input name="SaveTicket" message="tns:SaveTicket" />
+      <wsdl:output name="SaveTicketResponse" message="tns:SaveTicketResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/SaveTicket/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="StoreTicket">
+      <wsdl:documentation>Stores the ticket on the server. Checks, if the
+				ticket is ok and returns if ticket is Stored or why it is declined
+			</wsdl:documentation>
+      <wsdl:input name="StoreTicket" message="tns:StoreTicket" />
+      <wsdl:output name="StoreTicketResponse" message="tns:StoreTicketResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/StoreTicket/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountSearch">
+      <wsdl:input name="AccountSearch" message="tns:AccountSearch" />
+      <wsdl:output name="AccountSearchResponse" message="tns:AccountSearchResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/AccountSearch/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportLogData">
+      <wsdl:documentation>receive exported log data as zip file
+			</wsdl:documentation>
+      <wsdl:input name="ExportLogData" message="tns:ExportLogData" />
+      <wsdl:output name="ExportLogDataResponse" message="tns:ExportLogDataResponse" />
+      <wsdl:fault wsaw:Action="http://station.ws.bs.sportradar.com/IBSMHubService/ExportLogData/Fault/HubServiceException" name="fault" message="tns:HubServiceException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IBSMHubService" type="tns:IBSMHubService">
+    <wsp:PolicyReference URI="#WSHttpBinding_IBSMHubService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ExportLogData">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ExportLogData">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ExportLogDataResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingRecieptData">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetAccountingRecieptData">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAccountingRecieptDataResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCash">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RegisterCash">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterCashResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLatestConfidenceFactorsUpdate">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetLatestConfidenceFactorsUpdate">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetLatestConfidenceFactorsUpdateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationCashInfo">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationCashInfo">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationCashInfoResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationCashHistory">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationCashHistory">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationCashHistoryResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCashInfo">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetCashInfo">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCashInfoResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationResource">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationResource">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationResourceResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentManagementData">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetContentManagementData">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetContentManagementDataResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBettingBalance">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetBettingBalance">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBettingBalanceResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLiveStreamFeed">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetLiveStreamFeed">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetLiveStreamFeedResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMatchSorting">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetMatchSorting">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetMatchSortingResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLineConfig">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="UpdateLineConfig">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateLineConfigResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CashOut">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="CashOut">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CashOutResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCasheOuts">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetCasheOuts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetCasheOutsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBusinessProps">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/GetBusinessProps" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadTicket">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/LoadTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelTicket">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/CancelTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WriteRemoteError2Log">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/WriteRemoteError2Log" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLine">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFlags">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateFlags" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatistics">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateStatistics" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLocalization">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/UpdateLocalization" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveCreditNote">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/SaveCreditNote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadCreditNote">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/LoadCreditNote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PayCreditNote">
+      <soap12:operation soapAction="http://station.ws.bs.sportradar.com/IBSMHubService/PayCreditNote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPaymentFlow">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="AddPaymentFlow">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddPaymentFlowResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationPaymentFlowData">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationPaymentFlowData">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationPaymentFlowDataResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationPlugins">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationPlugins">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationPluginsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterAccount">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RegisterAccount">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterAccountResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegistrationForm">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetRegistrationForm">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetRegistrationFormResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadProfile">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="LoadProfile">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="LoadProfileResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfitAccountingReport">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetProfitAccountingReport">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetProfitAccountingReportResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProfitAccountingCheckpoint">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="CreateProfitAccountingCheckpoint">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateProfitAccountingCheckpointResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfitAccountingCheckpoint">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetProfitAccountingCheckpoint">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetProfitAccountingCheckpointResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchForOperators">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="SearchForOperators">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SearchForOperatorsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckForEmptyBoxAndPayments">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="CheckForEmptyBoxAndPayments">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CheckForEmptyBoxAndPaymentsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOperatorsWithShifts">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetAllOperatorsWithShifts">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAllOperatorsWithShiftsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateOperator">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="UpdateOperator">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateOperatorResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayedTickets">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="UpdatePlayedTickets">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdatePlayedTicketsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateProfile">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="UpdateProfile">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateProfileResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeIDCardPin">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ChangeIDCardPin">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ChangeIDCardPinResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOperatorIDCardPin">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ChangeOperatorIDCardPin">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ChangeOperatorIDCardPinResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithIdCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="LoginWithIdCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="LoginWithIdCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterIdCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RegisterIdCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterIdCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterOperator">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RegisterOperator">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterOperatorResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnbindIdCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="UnbindIdCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UnbindIdCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BindOperatorIdCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="BindOperatorIdCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="BindOperatorIdCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetAllRoles">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAllRolesResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateCheckpoint">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="CreateCheckpoint">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateCheckpointResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOperatorShiftCheckpoint">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="CreateOperatorShiftCheckpoint">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CreateOperatorShiftCheckpointResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOperatorShiftReport">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetOperatorShiftReport">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetOperatorShiftReportResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProduceOperatorSettlement">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ProduceOperatorSettlement">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ProduceOperatorSettlementResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettlementHistory">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetSettlementHistory">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetSettlementHistoryResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSettlementHistoryDetails">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetSettlementHistoryDetails">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetSettlementHistoryDetailsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOperatorShiftCheckpoints">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetOperatorShiftCheckpoints">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetOperatorShiftCheckpointsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationBalanceCheckpoints">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationBalanceCheckpoints">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationBalanceCheckpointsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IssueCreditToStationBalance">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="IssueCreditToStationBalance">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="IssueCreditToStationBalanceResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateIdCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="UpdateIdCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateIdCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateIdCard">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ValidateIdCard">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ValidateIdCardResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdCardInfo">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetIdCardInfo">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetIdCardInfoResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OpenSession">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="OpenSession">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="OpenSessionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CloseSession">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="CloseSession">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="CloseSessionResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ToggleAccountState">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ToggleAccountState">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ToggleAccountStateResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadUserComment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="LoadUserComment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="LoadUserCommentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserComment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="DeleteUserComment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DeleteUserCommentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditUserComment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="EditUserComment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EditUserCommentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserComment">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="AddUserComment">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AddUserCommentResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndUserVerification">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="EndUserVerification">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="EndUserVerificationResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Deposit">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="Deposit">
+        <soap12:header message="tns:DepositRequestWS_Headers" part="transactionId" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DepositResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterPaymentNote">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RegisterPaymentNote">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RegisterPaymentNoteResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPaymentNote">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="LoadPaymentNote">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="LoadPaymentNoteResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="WithdrawByPaymentNote">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="WithdrawByPaymentNote">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="WithdrawByPaymentNoteResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DepositByTicket">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="DepositByTicket">
+        <soap12:header message="tns:DepositByTicketRequestWS_Headers" part="transactionId" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DepositByTicketResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DepositByCreditNote">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="DepositByCreditNote">
+        <soap12:header message="tns:DepositByCreditNoteRequestWS_Headers" part="transactionId" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="DepositByCreditNoteResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBalance">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetBalance">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetBalanceResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Reserve">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="Reserve">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ReserveResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountByTicket">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetAccountByTicket">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAccountByTicketResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountByRegistrationNote">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetAccountByRegistrationNote">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetAccountByRegistrationNoteResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="History">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="History">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HistoryResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadStoredTickets">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="LoadStoredTickets">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="LoadStoredTicketsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserTickets">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetUserTickets">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetUserTicketsResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PluginProtocol">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="PluginProtocol">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="PluginProtocolResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordFromTerminal">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ChangePasswordFromTerminal">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ChangePasswordFromTerminalResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordFromShop">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="ChangePasswordFromShop">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ChangePasswordFromShopResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestorePasswordByUsername">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RestorePasswordByUsername">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RestorePasswordByUsernameResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestorePasswordByEmail">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="RestorePasswordByEmail">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="RestorePasswordByEmailResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationProperties">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationProperties">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationPropertiesResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationByVerificationNumber">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="GetStationByVerificationNumber">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetStationByVerificationNumberResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StationEvent">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="StationEvent">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="StationEventResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTicket">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="SaveTicket">
+        <soap12:header message="tns:SaveTicketRequestWS_Headers" part="transactionId" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SaveTicketResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StoreTicket">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="StoreTicket">
+        <soap12:header message="tns:StoreTicketRequestWS_Headers" part="transactionId" use="literal" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="StoreTicketResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountSearch">
+      <soap12:operation soapAction="" style="document" />
+      <wsdl:input name="AccountSearch">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="AccountSearchResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLockedOffer">
+      <soap12:operation soapAction="http://bsservice.ws.bs.sportradar.com/INbtService/GetLockedOffer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BSMHubService">
+    <wsdl:port name="WSHttpBinding_IBSMHubService" binding="tns:WSHttpBinding_IBSMHubService">
+      <soap12:address location="http://localhost:8080/BSMHubService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:8080/BSMHubService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

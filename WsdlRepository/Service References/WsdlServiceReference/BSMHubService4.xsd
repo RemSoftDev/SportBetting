@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://objects.types.bs.ws.bs.sportradar.com/" elementFormDefault="qualified" targetNamespace="http://objects.types.bs.ws.bs.sportradar.com/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="StationEventType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PRINTER_ERROR" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PayoutType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PAYOUT_LIVE" />
+      <xs:enumeration value="PAYOUT_PREMATCH" />
+      <xs:enumeration value="PAYOUT_MIXED" />
+      <xs:enumeration value="PAYOUT_BALANCE" />
+      <xs:enumeration value="PAYOUT_VFL" />
+      <xs:enumeration value="PAYOUT_VHC" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CashAcceptorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CoinAcceptor" />
+      <xs:enumeration value="BillValidator" />
+      <xs:enumeration value="VirtualMoney" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DriverType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DRIVER_CASH_COIN_ACCEPTOR" />
+      <xs:enumeration value="DRIVER_PRINTER" />
+      <xs:enumeration value="DRIVER_CARD_READER" />
+      <xs:enumeration value="DRIVER_TOUCH_SCREEN" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ResourceType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RESOURCE_TICKET_IMAGE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="UpdateRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="data" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dataSyncCacheId" type="xs:long" />
+      <xs:element minOccurs="0" name="dataSyncCacheType" type="xs:int" />
+      <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateRecord" nillable="true" type="tns:UpdateRecord" />
+  <xs:complexType name="DriverInfo">
+    <xs:sequence>
+      <xs:element name="type" nillable="true" type="tns:DriverType" />
+      <xs:element name="manufacturer" nillable="true" type="xs:string" />
+      <xs:element name="details" nillable="true" type="xs:string" />
+      <xs:element name="version" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PeripheralInfo">
+    <xs:sequence>
+      <xs:element name="billValidatorState" nillable="true" type="xs:boolean" />
+      <xs:element name="billValidatorVersion" nillable="true" type="xs:string" />
+      <xs:element name="coinAcceptorState" nillable="true" type="xs:boolean" />
+      <xs:element name="coinAcceptorVersion" nillable="true" type="xs:string" />
+      <xs:element name="printerState" nillable="true" type="xs:boolean" />
+      <xs:element name="printerVersion" nillable="true" type="xs:string" />
+      <xs:element name="cardReaderState" nillable="true" type="xs:boolean" />
+      <xs:element name="cardReaderVersion" nillable="true" type="xs:string" />
+      <xs:element name="monitors" nillable="true" type="xs:string" />
+      <xs:element name="monitors_updated_at" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TicketWS">
+    <xs:sequence>
+      <xs:element name="acceptedBy" nillable="true" type="xs:string" />
+      <xs:element name="acceptedTime" type="xs:dateTime" />
+      <xs:element name="balanceCorrection" type="xs:decimal" />
+      <xs:element name="betTax" type="xs:decimal" />
+      <xs:element name="bets" nillable="true" type="tns:ArrayOfBetWS" />
+      <xs:element name="calculated" type="xs:boolean" />
+      <xs:element name="cancelled" type="xs:boolean" />
+      <xs:element name="cancelledBy" nillable="true" type="xs:string" />
+      <xs:element name="cancelledTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="checkSum" nillable="true" type="xs:string" />
+      <xs:element name="enablePay" type="xs:boolean" />
+      <xs:element name="enablePayTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="isLateTicket" type="xs:boolean" />
+      <xs:element name="isPendingApproval" type="xs:boolean" />
+      <xs:element name="isOfflineTicket" type="xs:boolean" />
+      <xs:element name="isStored" type="xs:boolean" />
+      <xs:element name="isSynchronized" type="xs:boolean" />
+      <xs:element name="manipulationFee" type="xs:decimal" />
+      <xs:element name="paid" type="xs:boolean" />
+      <xs:element name="paidBy" nillable="true" type="xs:string" />
+      <xs:element name="paidTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="payAmount" type="xs:decimal" />
+      <xs:element name="stake" type="xs:decimal" />
+      <xs:element name="superBonus" type="xs:decimal" />
+      <xs:element name="ticketNbr" nillable="true" type="xs:string" />
+      <xs:element name="ticketTyp" type="xs:int" />
+      <xs:element name="won" type="xs:boolean" />
+      <xs:element name="wonAmount" type="xs:decimal" />
+      <xs:element name="wonExpireTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="isAnonymous" type="xs:boolean" />
+      <xs:element name="userId" type="xs:int" />
+      <xs:element name="manipulationFeeValue" type="xs:decimal" />
+      <xs:element name="superBonusValue" type="xs:decimal" />
+      <xs:element name="franchisorId" type="xs:int" />
+      <xs:element name="locationId" type="xs:int" />
+      <xs:element name="wonExpired" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TicketWS" nillable="true" type="tns:TicketWS" />
+  <xs:complexType name="AccountingRecieptWS">
+    <xs:sequence>
+      <xs:element name="LocationAccountingRecieptProperties" nillable="true" type="tns:LocationAccountingRecieptProperties" />
+      <xs:element minOccurs="0" name="vflSingleDoubleStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vflSingleDoubleStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vflMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflSuperMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vflSuperMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflTotalStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vflTotalSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflTotalWinStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vflTotalWinSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflTotalTaxSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflTotalPayoutSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vflTotalPayoutCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vhcSingleDoubleStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vhcSingleDoubleStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vhcMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcSuperMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vhcSuperMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcTotalStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vhcTotalSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcTotalWinStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="vhcTotalWinSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcTotalTaxSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcTotalPayoutSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="vhcTotalPayoutCount" type="xs:int" />
+      <xs:element minOccurs="0" name="pmSingleDoubleStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="pmSingleDoubleStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="pmMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmSuperMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="pmSuperMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmTotalStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="pmTotalSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmTotalWinStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="pmTotalWinSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmTotalTaxSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmTotalPayoutSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="pmTotalPayoutCount" type="xs:int" />
+      <xs:element minOccurs="0" name="liveSingleDoubleStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="liveSingleDoubleStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="liveMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveSuperMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="liveSuperMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveTotalStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="liveTotalSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveTotalWinStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="liveTotalWinSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveTotalTaxSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveTotalPayoutSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="liveTotalPayoutCount" type="xs:int" />
+      <xs:element minOccurs="0" name="mixedSingleDoubleStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="mixedSingleDoubleStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="mixedMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedSuperMultiStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="mixedSuperMultiStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedTotalStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="mixedTotalSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedTotalWinStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="mixedTotalWinSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedTotalTaxSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedTotalPayoutSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="mixedTotalPayoutCount" type="xs:int" />
+      <xs:element minOccurs="0" name="totalStakeCount" type="xs:int" />
+      <xs:element minOccurs="0" name="totalStakeSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="totalWinCount" type="xs:int" />
+      <xs:element minOccurs="0" name="totalWinSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="totalTaxSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="totalPayoutSum" type="xs:decimal" />
+      <xs:element minOccurs="0" name="totalPayoutCount" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LocationAccountingRecieptProperties">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="enableVHC" type="xs:int" />
+      <xs:element minOccurs="0" name="enableVFL" type="xs:int" />
+      <xs:element minOccurs="0" name="enablePrematch" type="xs:int" />
+      <xs:element minOccurs="0" name="enableLive" type="xs:int" />
+      <xs:element minOccurs="0" name="enableMixed" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StationWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="accountID" type="xs:int" />
+      <xs:element minOccurs="0" name="isAnonymousBettingEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="isStatisticsEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="active" type="xs:int" />
+      <xs:element minOccurs="0" name="allowMultiBet" type="xs:boolean" />
+      <xs:element minOccurs="0" name="allowOffLine" type="xs:boolean" />
+      <xs:element minOccurs="0" name="barcodeScannerAlwayActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="betTerms" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="bonusFromOdd" type="xs:decimal" />
+      <xs:element minOccurs="0" name="bonusRanges" nillable="true" type="tns:ArrayOfBonusRangeWS" />
+      <xs:element minOccurs="0" name="canIgnoreCombiLimit" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cashAcceptorAlwayActive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="closingTimeBeforeMatch" type="xs:int" />
+      <xs:element minOccurs="0" name="combiLimits" nillable="true" type="tns:ArrayOfCombiLimitWS" />
+      <xs:element minOccurs="0" name="combiLiveBetTicketAcceptTime" type="xs:int" />
+      <xs:element minOccurs="0" name="creditNoteExpireDays" type="xs:int" />
+      <xs:element minOccurs="0" name="creditnoteImmediatelyPaid" type="xs:boolean" />
+      <xs:element minOccurs="0" name="daysNotPayedWins" type="xs:int" />
+      <xs:element minOccurs="0" name="discriminator" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="doExecuteCmd" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="doRestart" type="xs:int" />
+      <xs:element minOccurs="0" name="footerLine1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="footerLine2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="franchisorID" type="xs:int" />
+      <xs:element minOccurs="0" name="hasDefault" type="xs:boolean" />
+      <xs:element minOccurs="0" name="hasLiveBet" type="xs:boolean" />
+      <xs:element minOccurs="0" name="hasSportBet" type="xs:boolean" />
+      <xs:element minOccurs="0" name="headerLine1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="headerLine2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="headerLine3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="headerLine4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="importFullDB" type="xs:int" />
+      <xs:element minOccurs="0" name="info" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="isAssigned" type="xs:boolean" />
+      <xs:element minOccurs="0" name="lastUpdateRequest" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="lastViewIdleTime" type="xs:int" />
+      <xs:element minOccurs="0" name="locationID" type="xs:int" />
+      <xs:element minOccurs="0" name="lockOfferOnLimit" type="xs:boolean" />
+      <xs:element minOccurs="0" name="maxCombination" type="xs:int" />
+      <xs:element minOccurs="0" name="maxOdd" type="xs:decimal" />
+      <xs:element minOccurs="0" name="maxOffLineTime" type="xs:int" />
+      <xs:element minOccurs="0" name="maxStakeCombi" type="xs:decimal" />
+      <xs:element minOccurs="0" name="maxStakeSingleBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="maxStakeSystemBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="maxSystemBet" type="xs:int" />
+      <xs:element minOccurs="0" name="maxWinSingleBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="maxWinSystemBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="minCombination" type="xs:int" />
+      <xs:element minOccurs="0" name="minStakeCombiBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="minStakeSingleBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="minStakeSystemBet" type="xs:decimal" />
+      <xs:element minOccurs="0" name="modifyData" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="notinUse" type="xs:boolean" />
+      <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="oddGraduation" type="xs:decimal" />
+      <xs:element minOccurs="0" name="oddGraduationStatus" type="xs:int" />
+      <xs:element minOccurs="0" name="onlineTimeAfterLogin" type="xs:int" />
+      <xs:element minOccurs="0" name="printLogo" type="xs:boolean" />
+      <xs:element minOccurs="0" name="printingDefaultLanguage" type="xs:int" />
+      <xs:element minOccurs="0" name="printingLanguageSetting" type="xs:int" />
+      <xs:element minOccurs="0" name="requestNewDatebaseAfterHours" type="xs:int" />
+      <xs:element minOccurs="0" name="sendDatabaseAfterHours" type="xs:int" />
+      <xs:element minOccurs="0" name="sendLogFile" type="xs:boolean" />
+      <xs:element minOccurs="0" name="sendLogFileDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="serialNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="setSyncDBFromDate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="shouldSendDatabase" type="xs:boolean" />
+      <xs:element minOccurs="0" name="showAddictionMsg" type="xs:boolean" />
+      <xs:element minOccurs="0" name="showNotPayedWins" type="xs:int" />
+      <xs:element minOccurs="0" name="showTerminalLogin" type="xs:int" />
+      <xs:element minOccurs="0" name="showU18Msg" type="xs:boolean" />
+      <xs:element minOccurs="0" name="sngLiveBetTicketAcceptTime" type="xs:int" />
+      <xs:element minOccurs="0" name="splitAccounting" type="xs:int" />
+      <xs:element minOccurs="0" name="stationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="franchisorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="locationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="syncDBFromDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="syncInterval" type="xs:int" />
+      <xs:element minOccurs="0" name="telefon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="terminalLoginCode" type="xs:int" />
+      <xs:element minOccurs="0" name="timeZoneDiff" type="xs:decimal" />
+      <xs:element minOccurs="0" name="useCashButtons" type="xs:boolean" />
+      <xs:element minOccurs="0" name="useCashPool" type="xs:int" />
+      <xs:element minOccurs="0" name="propertyAutoLogout" type="xs:int" />
+      <xs:element minOccurs="0" name="propertyDoAutoUpdate" type="xs:int" />
+      <xs:element minOccurs="0" name="propertyIdCard" type="xs:int" />
+      <xs:element minOccurs="0" name="propertyLiveMatch" type="xs:int" />
+      <xs:element minOccurs="0" name="propertyPrematch" type="xs:int" />
+      <xs:element minOccurs="0" name="updateLineLimit" type="xs:int" />
+      <xs:element minOccurs="0" name="authorizedTicketScanning" type="xs:boolean" />
+      <xs:element minOccurs="0" name="userCardPinSetting" type="xs:int" />
+      <xs:element minOccurs="0" name="operatorCardPinSetting" type="xs:int" />
+      <xs:element minOccurs="0" name="doExportLog" type="xs:boolean" />
+      <xs:element minOccurs="0" name="logRotationNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="logRotationFileSize" type="xs:int" />
+      <xs:element minOccurs="0" name="payoutExpiredPaymentCreditNotes" type="xs:boolean" />
+      <xs:element minOccurs="0" name="stationStoreTicketEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="stationAllowFutureMatches" type="xs:boolean" />
+      <xs:element minOccurs="0" name="multiBetBonusFromOdd" type="xs:decimal" />
+      <xs:element minOccurs="0" name="allowMixedStakes" type="xs:boolean" />
+      <xs:element minOccurs="0" name="enableOddsChangeIndication" type="xs:boolean" />
+      <xs:element minOccurs="0" name="stationAutorestartTime" type="xs:string" />
+      <xs:element minOccurs="0" name="peripheralInfo" nillable="true" type="tns:PeripheralInfo" />
+      <xs:element minOccurs="0" name="displayTaxField" type="xs:boolean" />
+      <xs:element minOccurs="0" name="vflVideoSourceType" type="xs:int" />
+      <xs:element minOccurs="0" name="enableVideoLiveStreaming" type="xs:int" />
+      <xs:element minOccurs="0" name="ticketLogoId" type="xs:int" />
+      <xs:element minOccurs="0" name="enableVHC" type="xs:int" />
+      <xs:element minOccurs="0" name="enableVFL" type="xs:int" />
+      <xs:element minOccurs="0" name="updateCmData" type="xs:int" />
+      <xs:element minOccurs="0" name="timezoneOffset" type="xs:int" />
+      <xs:element minOccurs="0" name="minStakePerRow" type="xs:decimal" />
+      <xs:element minOccurs="0" name="currencyCode" type="xs:string" />
+      <xs:element minOccurs="0" name="terminalLanguages" type="xs:string" />
+      <xs:element minOccurs="0" name="layoutName" type="xs:string" />
+      <xs:element minOccurs="0" name="authorizationSetting" type="xs:string" />
+      <xs:element minOccurs="0" name="stationType" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StationWS" nillable="true" type="tns:StationWS" />
+  <xs:complexType name="TipWS">
+    <xs:sequence>
+      <xs:element name="accepted" type="xs:boolean" />
+      <xs:element name="acceptedTime" type="xs:dateTime" />
+      <xs:element name="bank" type="xs:boolean" />
+      <xs:element name="bankGroupID" type="xs:long" />
+      <xs:element name="betDomainNumber" type="xs:int" />
+      <xs:element name="betIndex" type="xs:int" />
+      <xs:element name="calculated" type="xs:boolean" />
+      <xs:element name="matchCode" type="xs:int" />
+      <xs:element name="multiwayIdx" type="xs:int" />
+      <xs:element name="odd" type="xs:decimal" />
+      <xs:element name="oddTag" nillable="true" type="xs:string" />
+      <xs:element name="stake" type="xs:decimal" />
+      <xs:element name="svrOddID" type="xs:long" />
+      <xs:element name="winnerOddID" type="xs:long" />
+      <xs:element name="won" type="xs:boolean" />
+      <xs:element name="tipDetailsWS" type="tns:TipDetailsWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TipWS" nillable="true" type="tns:TipWS" />
+  <xs:complexType name="TipDetailsWS">
+    <xs:sequence>
+      <xs:element name="betDomainName" nillable="true" type="xs:string" />
+      <xs:element name="specialLiveOddValueFull" nillable="true" type="xs:string" />
+      <xs:element name="specialOddValue" nillable="true" type="xs:string" />
+      <xs:element name="betdomainORMID" nillable="true" type="xs:string" />
+      <xs:element name="ligaName" nillable="true" type="xs:string" />
+      <xs:element name="matchCode" nillable="true" type="xs:string" />
+      <xs:element name="matchORMID" nillable="true" type="xs:string" />
+      <xs:element name="minCombi" nillable="true" type="xs:int" />
+      <xs:element name="multiway" nillable="true" type="xs:boolean" />
+      <xs:element name="result" nillable="true" type="xs:string" />
+      <xs:element name="startdate" nillable="true" type="xs:dateTime" />
+      <xs:element name="team1" nillable="true" type="xs:string" />
+      <xs:element name="team2" nillable="true" type="xs:string" />
+      <xs:element name="event_name" nillable="true" type="xs:string" />
+      <xs:element name="tip" nillable="true" type="xs:string" />
+      <xs:element name="winnerTip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TipDetailsWS" nillable="true" type="tns:TipDetailsWS" />
+  <xs:complexType name="BetWS">
+    <xs:sequence>
+      <xs:element name="bankTips" nillable="true" type="tns:ArrayOfTipWS" />
+      <xs:element name="betType" nillable="true" type="xs:string" />
+      <xs:element name="isMaxOddBet" type="xs:boolean" />
+      <xs:element name="maxOdd" type="xs:decimal" />
+      <xs:element name="maxWin" type="xs:decimal" />
+      <xs:element name="rows" type="xs:int" />
+      <xs:element name="stake" type="xs:decimal" />
+      <xs:element name="systemX" type="xs:int" />
+      <xs:element name="systemY" type="xs:int" />
+      <xs:element name="ticket" nillable="true" type="tns:TicketWS" />
+      <xs:element name="tips2BetMulti" nillable="true" type="tns:ArrayOfTipWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BetWS" nillable="true" type="tns:BetWS" />
+  <xs:complexType name="ShortTicketWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="acceptedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="betTyp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="calculated" type="xs:boolean" />
+      <xs:element minOccurs="0" name="cancelled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="enablePay" type="xs:boolean" />
+      <xs:element minOccurs="0" name="maxOdd" type="xs:decimal" />
+      <xs:element minOccurs="0" name="maxWin" type="xs:decimal" />
+      <xs:element minOccurs="0" name="paid" type="xs:boolean" />
+      <xs:element minOccurs="0" name="stake" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ticketNbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="won" type="xs:boolean" />
+      <xs:element minOccurs="0" name="wonAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="isPendingForApproval" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShortTicketWS" nillable="true" type="tns:ShortTicketWS" />
+  <xs:complexType name="BonusRangeWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bonus" type="xs:decimal" />
+      <xs:element minOccurs="0" name="manipulationFee" type="xs:int" />
+      <xs:element minOccurs="0" name="tipSize" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BonusRangeWS" nillable="true" type="tns:BonusRangeWS" />
+  <xs:complexType name="ArrayOfShortTicketWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ShortTicketWS" nillable="true" type="tns:ShortTicketWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShortTicketWS" nillable="true" type="tns:ArrayOfShortTicketWS" />
+  <xs:complexType name="ArrayOfTipWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TipWS" nillable="true" type="tns:TipWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTipWS" nillable="true" type="tns:ArrayOfTipWS" />
+  <xs:complexType name="ArrayOfBetWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BetWS" nillable="true" type="tns:BetWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBetWS" nillable="true" type="tns:ArrayOfBetWS" />
+  <xs:complexType name="ArrayOfBonusRangeWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BonusRangeWS" nillable="true" type="tns:BonusRangeWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBonusRangeWS" nillable="true" type="tns:ArrayOfBonusRangeWS" />
+  <xs:complexType name="ArrayOfCombiLimitWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CombiLimitWS" nillable="true" type="tns:CombiLimitWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCombiLimitWS" nillable="true" type="tns:ArrayOfCombiLimitWS" />
+  <xs:complexType name="CombiLimitWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="combiSize" type="xs:int" />
+      <xs:element minOccurs="0" name="limit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="manipulationFee" type="xs:decimal" />
+      <xs:element minOccurs="0" name="manipulationFee_Livebet" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CombiLimitWS" nillable="true" type="tns:CombiLimitWS" />
+  <xs:complexType name="CreditNoteWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="stationNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="paidDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="expireDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="createdAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="paidBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="paidByStation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditNoteWS" nillable="true" type="tns:CreditNoteWS" />
+  <xs:complexType name="OfferDisableWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BetDomainText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EnableDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastModified" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LockDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OfferDisableID" type="xs:int" />
+      <xs:element minOccurs="0" name="StationNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SvrOddID" type="xs:long" />
+      <xs:element minOccurs="0" name="SvrTournamentID" type="xs:int" />
+      <xs:element minOccurs="0" name="TicketNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TipText" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOflong">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="long" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOflong" nillable="true" type="tns:ArrayOflong" />
+  <xs:complexType name="ArrayOfUpdateRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpdateRecord" nillable="true" type="tns:UpdateRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUpdateRecord" nillable="true" type="tns:ArrayOfUpdateRecord" />
+  <xs:complexType name="ArrayOfstring">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+  <xs:complexType name="ArrayOfTicketNumbers">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ticketNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTicketNumbers" nillable="true" type="tns:ArrayOfTicketNumbers" />
+  <xs:complexType name="ArrayOfDriverInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="driverInfo" nillable="true" type="tns:DriverInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueForm">
+    <xs:sequence>
+      <xs:element name="fields" type="tns:valueFields" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueFields">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field" nillable="true" type="tns:valueField" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="valueField">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfOddsWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OddWS" nillable="true" type="tns:OddWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOddsWS" nillable="true" type="tns:ArrayOfOddsWS" />
+  <xs:complexType name="OddWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="svrOddID" type="xs:int" />
+      <xs:element minOccurs="0" name="value" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OddWS" nillable="true" type="tns:OddWS" />
+  <xs:complexType name="ArrayOfCashResultWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CashResultWS" nillable="true" type="tns:CashResultWS" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCashResultWS" nillable="true" type="tns:ArrayOfCashResultWS" />
+  <xs:complexType name="CashResultWS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashDrawerTyp" type="xs:int" />
+      <xs:element minOccurs="0" name="Depot" type="xs:decimal" />
+      <xs:element minOccurs="0" name="EndAccountingTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Invoices" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NbtUserLoginName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotPayedWin" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OtherBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OtherCashOut" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OwnDeposit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="StartAccountingTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TicketCashIn" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TicketCashOut" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TransmitTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UnpayedCashIn" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CashResultWS" nillable="true" type="tns:CashResultWS" />
+  <xs:complexType name="parameters">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="parameter" nillable="true" type="tns:parameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="parameter">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

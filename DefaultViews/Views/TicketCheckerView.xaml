@@ -1,0 +1,246 @@
+﻿<UserControl x:Class="DefaultViews.Views.TicketCheckerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             x:Name="TicketCheckerViewControl"
+             d:DataContext="{d:DesignInstance viewModels:TicketCheckerViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="myInverseBooleanToVisibilityConverter" />
+
+        <Style x:Key="rowEntry" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#FF9FA7AF" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="Play" />
+            <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+            <Setter Property="LineHeight" Value="18" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+
+        <Style x:Key="togglePressButton" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <DockPanel x:Name="dpnlToggleButtonContent"
+                                   Width="{TemplateBinding Width}"
+                                   Height="70"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonCenter.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       Height="70"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       Height="70"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter Property="Foreground" Value="#FFE5E5E5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+
+
+
+    <DockPanel>
+
+
+        <DockPanel HorizontalAlignment="Center" LastChildFill="True">
+            <!--  ticket checker  -->
+            <ScrollViewer x:Name="ScrollViewer"
+                          Height="100"
+                          DockPanel.Dock="Top"
+                          PanningMode="VerticalOnly"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          Template="{StaticResource hiddenScrollViewerControl}">
+                <!--  container  -->
+                <StackPanel Orientation="Vertical">
+                    <!--  details  -->
+                    <!--
+                        <StackPanel Margin="0,5,0,5"
+                        Orientation="Horizontal"
+                        Visibility="{Binding IsDetailsButtonhidden,
+                        Converter={StaticResource ResourceKey=myInverseBooleanToVisibilityConverter}}">
+                        <Button Width="460"
+                        Command="{Binding ButtonDetailsCommand}"
+                        IsEnabled="{Binding DetailsEnabled}"
+                        Style="{StaticResource detailsButton}">
+                        <TextBlock Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_NUMPAD_DETAILS}}" />
+                        </Button>
+                        </StackPanel>
+                    -->
+                    <!--  ticketnumber code  -->
+                    <StackPanel Margin="0,20,0,5" Orientation="Vertical">
+                        <!--  header  -->
+                        <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
+                            <Viewbox Width="300"
+                                     HorizontalAlignment="Left"
+                                     StretchDirection="DownOnly">
+                                <TextBlock FontSize="20"
+                                           Style="{StaticResource rowEntry}"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CREDIT_NOTE_TICKET_NUMBER}}" />
+                            </Viewbox>
+                            <Viewbox Width="130"
+                                     Margin="20,0,0,0"
+                                     HorizontalAlignment="Left"
+                                     StretchDirection="DownOnly">
+                                <TextBlock FontSize="20"
+                                           Style="{StaticResource rowEntry}"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TICKETCODE}}" />
+                            </Viewbox>
+                        </StackPanel>
+                        <!--  textbox  -->
+                        <StackPanel Margin="0,5,0,5" Orientation="Horizontal">
+                            <TextBox Width="300"
+                                     VerticalContentAlignment="Center"
+                                     AutomationProperties.AutomationId="TicketNo"
+                                     FontFamily="Play"
+                                     FontSize="30"
+                                     Style="{StaticResource UsernameTextBoxStyle}"
+                                     Text="{Binding TicketNumber,
+                                                    Mode=TwoWay}"
+                                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocusedNumber,
+                                                                                  Mode=TwoWay}" />
+                            <TextBox Width="135"
+                                     Margin="20,0,0,0"
+                                     VerticalContentAlignment="Center"
+                                     AutomationProperties.AutomationId="TicketCode"
+                                     FontFamily="Play"
+                                     FontSize="30"
+                                     Style="{StaticResource UsernameTextBoxStyle}"
+                                     Text="{Binding TicketCode}"
+                                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocusedCode,
+                                                                                  Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!--  PinKeyboard region  -->
+            <DockPanel DockPanel.Dock="Top">
+                <baseObjects:MyContentRegion Margin="0, 10, 0, 0"
+                                             DockPanel.Dock="Top"
+                                             baseObjects:MyRegionManager.RegionName="PinKeyboardRegion" />
+
+                <StackPanel Height="100"
+                            Margin="0, 10, 0, 0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            DockPanel.Dock="Top"
+                            Orientation="Horizontal">
+                    <ToggleButton Width="220"
+                                  Height="100"
+                                  Margin="0,0,5,0"
+                                  AutomationProperties.AutomationId="btnInsertTicket"
+                                  IsChecked="{Binding IsTicket}"
+                                  Style="{StaticResource togglePressButton}">
+                        <TextBlock FontSize="16"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INSERT_TICKET_NUMBER}}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </ToggleButton>
+                    <ToggleButton Width="220"
+                                  Height="100"
+                                  Margin="5,0,0,0"
+                                  AutomationProperties.AutomationId="btnInsertCreditNote"
+                                  IsChecked="{Binding IsCreditNote}"
+                                  Style="{StaticResource togglePressButton}"
+                                  Visibility="{Binding StationRepository.IsTestMode,
+                                                       Converter={StaticResource myInverseBooleanToVisibilityConverter}}">
+                        <TextBlock FontSize="16"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_INSERT_CREDIT_NOTE_NUMBER}}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </ToggleButton>
+                </StackPanel>
+            </DockPanel>
+
+
+        </DockPanel>
+    </DockPanel>
+
+
+</UserControl>

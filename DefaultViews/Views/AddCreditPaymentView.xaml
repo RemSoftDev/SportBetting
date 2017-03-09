@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="DefaultViews.Views.AddCreditPaymentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Models1="clr-namespace:SportBetting.WPF.Prism.Shared.Models;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DesignHeight="485"
+             d:DataContext="{d:DesignInstance viewModels:AddCreditPaymentViewModel}"
+             d:DesignWidth="392"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:ImagePathConverter x:Key="ImagePathConverter" />
+    </UserControl.Resources>
+    <DockPanel HorizontalAlignment="Stretch">
+        <Border DockPanel.Dock="Top" HorizontalAlignment="Stretch"
+                Margin="10, 5, 10, 5"
+                BorderBrush="#FFEFEFEF"
+                BorderThickness="1"
+                Padding="10, 5, 10, 5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*" />
+                    <ColumnDefinition Width="50*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_TOTAL_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="TotalStationCash"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding Saldo}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.LOCATION_CASH_POSITION}}" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="CashPosition"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding CashPosition}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.PAYMENT_BALANCE}}" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="PaymentBalance"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding PaymentBalance}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource largeText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.LOCATION_CASH_BALANCE}}" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           AutomationProperties.AutomationId="CashBalance"
+                           Style="{StaticResource largeText}">
+                    <Run Text="{Binding CashBalance}" />
+                    <Run Text=" " />
+                    <Run Text="{Binding StationRepository.Currency}" />
+                </TextBlock>
+            </Grid>
+        </Border>
+        
+        <Grid DockPanel.Dock="Top" Width="auto"
+              Margin="20,0,0,0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Margin="0,5,0,5"
+                       HorizontalAlignment="Center"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="White"
+                       Text="{Binding HeaderText}"
+                       TextAlignment="Left" />
+            
+            <StackPanel Width="300" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                <TextBlock
+                       Margin="0,10,0,10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_AMOUNT}}"
+                       TextAlignment="Left" />
+                <TextBox
+                     Height="42"
+                     Margin="0,0,0,0"
+                     HorizontalAlignment="Stretch"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="Value"
+                     FontFamily="Play"
+                     FontSize="30"
+                     Style="{StaticResource UsernameTextBoxStyle}"
+                     Text="{Binding Amount,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=True}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocusedNumber,
+                                                                  Mode=TwoWay}" />
+
+                <TextBlock 
+                       Margin="0,10,0,10"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_HISTORY_TYPE_DESC}}"
+                       TextAlignment="Left" />
+                
+                <TextBox 
+                     Height="110"
+                     Margin="0,0,0,0"
+                     HorizontalAlignment="Stretch"
+                     AutomationProperties.AutomationId="Description"
+                     FontFamily="Play"
+                     FontSize="30"
+                     Text="{Binding Comment,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     TextWrapping="Wrap"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocusedComment,
+                                                                  Mode=TwoWay}" />
+                <StackPanel 
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                    <Button Width="Auto"
+                        MinWidth="150"
+                        Margin="5,0,0,0"
+                        AutomationProperties.AutomationId="Confirm"
+                        Command="{Binding YesCommand}"
+                        Focusable="False"
+                        IsDefault="False"
+                        Style="{StaticResource registrationButton}">
+                        <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{Binding YesButtonText}"
+                               TextAlignment="Left"
+                               TextWrapping="NoWrap" />
+                    </Button>
+
+                    <!--  no button  -->
+
+                    <Button Width="Auto"
+                        MinWidth="150"
+                        Margin="5,0,0,0"
+                        AutomationProperties.AutomationId="Cancel"
+                        Command="{Binding CloseCommand}"
+                        Focusable="False"
+                        IsDefault="False"
+                        Style="{StaticResource registrationButton}">
+                        <TextBlock FontFamily="Play"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#FFEFEFEF"
+                               LineHeight="22"
+                               LineStackingStrategy="BlockLineHeight"
+                               Text="{Binding NoButtonText}"
+                               TextAlignment="Left"
+                               TextWrapping="NoWrap" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>

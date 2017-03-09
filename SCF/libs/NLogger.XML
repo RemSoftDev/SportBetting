@@ -1,0 +1,624 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NLogger</name>
+    </assembly>
+    <members>
+        <member name="T:NLogger.Appenders.ConsoleLoggerAppender">
+            <summary>
+            Console Logger Appender
+            </summary>
+        </member>
+        <member name="T:NLogger.Appenders.ILogAppender">
+            <summary>
+            Defines the LogAppender interface
+            </summary>
+        </member>
+        <member name="M:NLogger.ILoggerBase.Log(System.String,System.Exception,NLogger.LoggingLevel)">
+            <summary>
+            Logs a message with exception and specified logging level
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+            <param name="level">Logging level</param>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.Name">
+            <summary>
+            Gets or sets the appender's name
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.LoggingLevels">
+            <summary>
+            Logging level
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.Queued">
+            <summary>
+            Number of items in the log queue
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.LogPattern">
+            <summary>
+            Pattern for logging
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.Parameters">
+            <summary>
+            Parameters for logging
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.TimeSinceLastWrite">
+            <summary>
+            Maximum amount of time to cache data between writes
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.MaxQueueCache">
+            <summary>
+            Maximum number of items in queue before writes
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.TimeBetweenChecks">
+            <summary>
+            Time between cache write checks in milliseconds
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.MaxFileSize">
+            <summary>
+            Gets or sets the maximum allowed log file size before a new file is created
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.Location">
+            <summary>
+            Gets or sets the location of log file
+            </summary>
+        </member>
+        <member name="P:NLogger.Appenders.ILogAppender.MaxLogCount">
+            <summary>
+            Gets or sets the maximum amount of logs kept
+            </summary>
+        </member>
+        <member name="E:NLogger.Appenders.ILogAppender.OnLogWritten">
+            <summary>
+            Event fired when log is written
+            </summary>
+        </member>
+        <member name="E:NLogger.Appenders.ConsoleLoggerAppender.OnLogWritten">
+            <summary>
+            Fired when log is written
+            </summary>
+        </member>
+        <member name="T:NLogger.Appenders.FileLoggerAppender">
+            <summary>
+            File Logger Appender
+            </summary>
+        </member>
+        <member name="M:NLogger.Appenders.FileLoggerAppender.#ctor">
+            <summary>
+            Initializes a new FileLoggerAppender
+            </summary>
+        </member>
+        <member name="E:NLogger.Appenders.FileLoggerAppender.OnLogWritten">
+            <summary>
+            Fired when log is written
+            </summary>
+        </member>
+        <member name="T:NLogger.Appenders.MemoryLoggerAppender">
+            <summary>
+            Memory Logger Appender
+            </summary>
+        </member>
+        <member name="M:NLogger.Appenders.MemoryLoggerAppender.#ctor">
+            <summary>
+            Initializes a new class of MemoryLoggerAppender
+            </summary>
+        </member>
+        <member name="E:NLogger.Appenders.MemoryLoggerAppender.OnLogWritten">
+            <summary>
+            Fired when log is written
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerAppender">
+            <summary>
+            Generic logger appender configuration element
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.RootAppender">
+            <summary>
+            Root appender
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.RootAppender.Level">
+            <summary>
+            Logging level
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.RootAppender.Pattern">
+            <summary>
+            Logging pattern
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.Name">
+            <summary>
+            Appender name
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.Type">
+            <summary>
+            Appender type
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.Parameters">
+            <summary>
+            Appender parameters
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.File">
+            <summary>
+            Appender file options
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.TimeSinceLastWrite">
+            <summary>
+            Maximum time allowed between writes even if queue is not long enough
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.MaxQueueSize">
+            <summary>
+            Maximum allowed queue size before a write occurs
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppender.TimeBetweenChecks">
+            <summary>
+            Time between queue checks
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerAppenderCollection">
+            <summary>
+            Appender configuration section
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerAppenderLevel">
+            <summary>
+            Appender levels definition
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderLevel.Fatal">
+            <summary>
+            Log fatal messages
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderLevel.Error">
+            <summary>
+            Log error messages
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderLevel.Warning">
+            <summary>
+            Log warning messages
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderLevel.Info">
+            <summary>
+            Log info messages
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderLevel.Debug">
+            <summary>
+            Log debug messages
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderLevel.Trace">
+            <summary>
+            Log trace messages
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerAppenderPattern">
+            <summary>
+            Log pattern configuration element
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerAppenderPattern.Value">
+            <summary>
+            Pattern value
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerConfigurationSection">
+            <summary>
+            Logger configuration section
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerConfigurationSection.Appenders">
+            <summary>
+            Appenders section
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerConfigurationSection.Root">
+            <summary>
+            Root appender section
+            </summary>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerConfigurationSectionXmlLoader">
+            <summary>
+            Customization to enable loading from an XML string
+            </summary>
+        </member>
+        <member name="M:NLogger.Configuration.NLoggerConfigurationSectionXmlLoader.#ctor(System.String)">
+            <summary>
+            Initializes a new class
+            </summary>
+            <param name="xml">XML string</param>
+        </member>
+        <member name="T:NLogger.Configuration.NLoggerFile">
+            <summary>
+            Logger file configuration
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerFile.Location">
+            <summary>
+            File location
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerFile.MaxSize">
+            <summary>
+            Maximum allowed file size before creating a new file
+            </summary>
+        </member>
+        <member name="P:NLogger.Configuration.NLoggerFile.MaxCount">
+            <summary>
+            Maximum number of logs to keep
+            </summary>
+        </member>
+        <member name="M:NLogger.ILogger.Initialize(NLogger.Configuration.NLoggerConfigurationSection)">
+            <summary>
+            Initializes the class and loads settings from configuration file
+            </summary>
+            <param name="configurationSection">Custom configuration section</param>
+        </member>
+        <member name="M:NLogger.ILogger.Log(System.String)">
+            <summary>
+            Logs a message with default logging level
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.Log(System.String,NLogger.LoggingLevel)">
+            <summary>
+            Logs a message with specified logging level
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="level">Logging level</param>
+        </member>
+        <member name="M:NLogger.ILogger.Log(System.String,System.Exception)">
+            <summary>
+            Logs a message with exception and default logging level
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogFatal(System.String)">
+            <summary>
+            Logs a fatal message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogFatal(System.String,System.Exception)">
+            <summary>
+            Logs a fatal message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogError(System.String)">
+            <summary>
+            Logs an error message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogError(System.String,System.Exception)">
+            <summary>
+            Logs an error message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogWarning(System.String)">
+            <summary>
+            Logs a warning message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogWarning(System.String,System.Exception)">
+            <summary>
+            Logs a warning message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogInfo(System.String)">
+            <summary>
+            Logs an information message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogInfo(System.String,System.Exception)">
+            <summary>
+            Logs an information message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogDebug(System.String)">
+            <summary>
+            Logs a debug message with exception
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogDebug(System.String,System.Exception)">
+            <summary>
+            Logs a debug message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogTrace(System.String)">
+            <summary>
+            Logs a trace message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.ILogger.LogTrace(System.String,System.Exception)">
+            <summary>
+            Logs a trace message
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="P:NLogger.ILogger.Appenders">
+            <summary>
+            Logger appenders
+            </summary>
+        </member>
+        <member name="P:NLogger.ILogger.Root">
+            <summary>
+            Logger root
+            </summary>
+        </member>
+        <member name="P:NLogger.ILogger.Queued">
+            <summary>
+            Number of items in the queue
+            </summary>
+        </member>
+        <member name="P:NLogger.ILogger.Debug">
+            <summary>
+            Gets or sets debug mode
+            </summary>
+        </member>
+        <member name="P:NLogger.ILogger.DefaultLoggingLevel">
+            <summary>
+            Gets or sets the default logging level
+            </summary>
+        </member>
+        <member name="T:NLogger.Log">
+            <summary>
+            Static class for logging
+            </summary>
+        </member>
+        <member name="F:NLogger.Log.Instance">
+            <summary>
+            Instance of logger
+            </summary>
+        </member>
+        <member name="M:NLogger.Log.Fatal(System.String)">
+            <summary>
+                Logs a fatal message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.Log.Fatal(System.String,System.Exception)">
+            <summary>
+                Logs a fatal message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.Log.Error(System.String)">
+            <summary>
+                Logs an error message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.Log.Error(System.String,System.Exception)">
+            <summary>
+                Logs an error message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.Log.Warning(System.String)">
+            <summary>
+                Logs a warning message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.Log.Warning(System.String,System.Exception)">
+            <summary>
+                Logs a warning message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.Log.Info(System.String)">
+            <summary>
+                Logs an information message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.Log.Info(System.String,System.Exception)">
+            <summary>
+                Logs an information message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.Log.Debug(System.String)">
+            <summary>
+                Logs a debug message with exception
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.Log.Debug(System.String,System.Exception)">
+            <summary>
+                Logs a debug message with exception
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.Log.Trace(System.String)">
+            <summary>
+                Logs a trace message
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="M:NLogger.Log.Trace(System.String,System.Exception)">
+            <summary>
+                Logs a trace message
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+        </member>
+        <member name="M:NLogger.Log.FatalFormat(System.String,System.Object[])">
+            <summary>
+            Logs a fatal message with format arguments
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="args">Message arguments</param>
+        </member>
+        <member name="M:NLogger.Log.ErrorFormat(System.String,System.Object[])">
+            <summary>
+            Logs an error message with format arguments
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="args">Message arguments</param>
+        </member>
+        <member name="M:NLogger.Log.WarningFormat(System.String,System.Object[])">
+            <summary>
+            Logs a warning message with format arguments
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="args">Message arguments</param>
+        </member>
+        <member name="M:NLogger.Log.DebugFormat(System.String,System.Object[])">
+            <summary>
+            Logs a debug message with format arguments
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="args">Message arguments</param>
+        </member>
+        <member name="M:NLogger.Log.InfoFormat(System.String,System.Object[])">
+            <summary>
+            Logs an info message with format arguments
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="args">Message arguments</param>
+        </member>
+        <member name="M:NLogger.Log.TraceFormat(System.String,System.Object[])">
+            <summary>
+            Logs a trace message with format arguments
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="args">Message arguments</param>
+        </member>
+        <member name="T:NLogger.Logger">
+            <summary>
+            Logger implementation
+            </summary>
+        </member>
+        <member name="M:NLogger.Logger.FormatLog(System.String,NLogger.LogItem,System.Collections.Generic.Dictionary{System.String,System.Func{NLogger.LogItem,System.String}})">
+            <summary>
+            Formats the log item into string according to specified formatting parameters
+            </summary>
+            <param name="format">Log format</param>
+            <param name="item">Log item</param>
+            <param name="overrides">Formatting parameter overrides</param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:NLogger.Logger.#ctor">
+            <summary>
+            Initializes a new Logger class
+            </summary>
+        </member>
+        <member name="T:NLogger.Logger.LogWritten">
+            <summary>
+            Log Written delegated
+            </summary>
+            <param name="logItems">Log items</param>
+        </member>
+        <member name="T:NLogger.LoggingLevel">
+            <summary>
+            Logging level types
+            </summary>
+        </member>
+        <member name="F:NLogger.LoggingLevel.Fatal">
+            <summary>
+            Fatal error message
+            </summary>
+        </member>
+        <member name="F:NLogger.LoggingLevel.Error">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="F:NLogger.LoggingLevel.Warning">
+            <summary>
+            Warning message
+            </summary>
+        </member>
+        <member name="F:NLogger.LoggingLevel.Info">
+            <summary>
+            Information message
+            </summary>
+        </member>
+        <member name="F:NLogger.LoggingLevel.Debug">
+            <summary>
+            Debug message
+            </summary>
+        </member>
+        <member name="F:NLogger.LoggingLevel.Trace">
+            <summary>
+            Trace message
+            </summary>
+        </member>
+        <member name="T:NLogger.LogItem">
+            <summary>
+            Log item
+            </summary>
+        </member>
+        <member name="M:NLogger.LogItem.#ctor(System.String,System.Exception,NLogger.LoggingLevel)">
+            <summary>
+            Initializes a new LogItem class
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="exception">Exception to log</param>
+            <param name="level">Message level</param>
+        </member>
+        <member name="P:NLogger.LogItem.Message">
+            <summary>
+            Message to log
+            </summary>
+        </member>
+        <member name="P:NLogger.LogItem.Created">
+            <summary>
+            Logging datetime
+            </summary>
+        </member>
+        <member name="P:NLogger.LogItem.Exception">
+            <summary>
+            Exception to include with log
+            </summary>
+        </member>
+        <member name="P:NLogger.LogItem.Level">
+            <summary>
+            Logging level
+            </summary>
+        </member>
+    </members>
+</doc>

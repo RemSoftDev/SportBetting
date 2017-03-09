@@ -1,0 +1,2252 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:Models="clr-namespace:SportBetting.WPF.Prism.Models;assembly=SportBetting.WPF.Prism.Shared"
+                    xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+                    xmlns:baseObjects="clr-namespace:BaseObjects;assembly=BaseObjects"
+                    xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+                    xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+                    xmlns:resources="clr-namespace:SportBetting.WPF.Prism.Resources"
+                    xmlns:resources2="clr-namespace:DefaultViews.Resources"
+                    xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+                    xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+                    xmlns:viewObjects="clr-namespace:SportRadar.DAL.ViewObjects;assembly=DAL"
+                    xmlns:wpfHelper="clr-namespace:SportBetting.WPF.Prism.Shared.WpfHelper;assembly=SportBetting.WPF.Prism.Shared">
+
+    <shared:BooleanToVisibilityCollapsedConverter x:Key="myBooleanToVisibilityConverter" />
+    <shared:BooleanToVisibilityHiddenConverter x:Key="myStrBooleanToVisibilityConverter" />
+    <shared:InverseBooleanToVisibilityHiddenConverter x:Key="myInverseStrBooleanToVisibilityConverter" />
+    <shared:InverseBooleanToVisibilityCollapsedConverter x:Key="InverseBooleanToVisibilityCollapsedConverter" />
+    <shared:TimeToVisibilityConverter x:Key="bTimeToVisibilityConverter" />
+    <shared:InversTimeToVisibilityConverter x:Key="bInversTimeToVisibilityConverter" />
+    <shared:StatusToVisibilityConverter x:Key="bStatusToVisibilityConverter" />
+    <shared:InversStatusToVisibilityConverter x:Key="bInversStatusToVisibilityConverter" />
+    <shared:MatchColorBarConverter x:Key="sMatchColorImage" />
+    <shared:TextPresentToVisibilityConverter x:Key="textPresentToVisibilityConverter" />
+    <shared:BiggerThanToVisibilityConverter x:Key="BiggerThanToVisibilityConverter" />
+    <shared:BiggerThanToVisibilityCollapsedConverter x:Key="BiggerThanToVisibilityCollapsedConverter" />
+    <shared:BiggerThanToBooleanConverter x:Key="BiggerThanToBooleanConverter" />
+    <shared:InverseBiggerThanToVisibilityCollapsedConverter x:Key="InverseBiggerThanToVisibilityCollapsedConverter" />
+    <shared:AlterationIndexAsOddEvenToBooleanConverter x:Key="AlterationIndexAsOddEvenToBooleanConverter" />
+    <converters2:CashpoolColorConverter x:Key="CashpoolColorConverter" />
+    <shared:SportDescriptorImageSelector x:Key="SportDescriptorToIconConverter" />
+
+    <Storyboard x:Key="cameraStoryboard">
+        <DoubleAnimation AutoReverse="True"
+                         Duration="0:0:1"
+                         From="1"
+                         RepeatBehavior="Forever"
+                         Storyboard.TargetProperty="Opacity"
+                         To="0.1" />
+    </Storyboard>
+
+
+    <Style x:Key="OddResultTextBlockLive" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="63" />
+        <Setter Property="FontFamily" Value="Play" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <!--  <Setter Property="Foreground" Value="#FFE5E5E5" />  -->
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style x:Key="OddButtonSpecialbetLive" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#FFE5E5E5" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.PlaceBet}" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <DockPanel x:Name="dpnlToggleButtonContent"
+                               Width="{TemplateBinding Width}"
+                               Height="45"
+                               LastChildFill="True">
+                        <DockPanel.Background>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenter.png}" />
+                        </DockPanel.Background>
+                        <Image x:Name="imgToggleButtonLeft"
+                               Width="3"
+                               Height="45"
+                               DockPanel.Dock="Left"
+                               Source="{converters2:ResolveImagePath Path=PressButtonLeft.png}" />
+                        <Image x:Name="imgToggleButtonRight"
+                               Width="3"
+                               Height="45"
+                               DockPanel.Dock="Right"
+                               Source="{converters2:ResolveImagePath Path=PressButtonRight.png}" />
+                        <Grid>
+
+
+                            <TextBlock Name="txtOddValue"
+                                       Style="{StaticResource OddResultTextBlockLive}"
+                                       Text="{Binding Value,
+                                                      StringFormat=\{0:n2\}}" />
+
+
+                            <DockPanel Name="dockChangeUp">
+                                <Grid Name="imgGridUp"
+                                      DockPanel.Dock="Top"
+                                      Visibility="Hidden">
+                                    <Polygon Width="15"
+                                             Height="15"
+                                             Margin="-36,-16,6,6"
+                                             Fill="LawnGreen"
+                                             Points="0,0 7,0 , 0,7"
+                                             Stroke="LawnGreen" />
+
+                                    <Grid>
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Foreground="LawnGreen"
+                                                   Style="{StaticResource OddResultTextBlockLive2}"
+                                                   Text="{Binding Value,
+                                                                  StringFormat=\{0:n2\}}" />
+
+                                    </Grid>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel Name="dockChangeDown">
+                                <Grid Name="imgGridDown"
+                                      DockPanel.Dock="Bottom"
+                                      Visibility="Hidden">
+                                    <Polygon Width="15"
+                                             Height="15"
+                                             Margin="-36,0,6,-40"
+                                             Fill="Red"
+                                             Points="0,0 0,7 , 7,7"
+                                             Stroke="Red" />
+
+                                    <Grid>
+                                        <TextBlock VerticalAlignment="Center"
+                                                   Foreground="Red"
+                                                   Style="{StaticResource OddResultTextBlockLive2}"
+                                                   Text="{Binding Value,
+                                                                  StringFormat=\{0:n2\}}" />
+
+                                    </Grid>
+                                </Grid>
+                            </DockPanel>
+                        </Grid>
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ToggleButton.IsPressed" Value="true">
+                            <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="imgToggleButtonLeft" Property="Source" Value="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                            <Setter TargetName="imgToggleButtonRight" Property="Source" Value="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsEnabled" Value="false">
+                            <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{x:Null}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="imgToggleButtonLeft" Property="Source" Value="{x:Null}" />
+                            <Setter TargetName="imgToggleButtonRight" Property="Source" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                            <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenterGreen.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="imgToggleButtonLeft" Property="Source" Value="{converters2:ResolveImagePath Path=PressButtonLeftGreen.png}" />
+                            <Setter TargetName="imgToggleButtonRight" Property="Source" Value="{converters2:ResolveImagePath Path=PressButtonRightGreen.png}" />
+                        </Trigger>
+
+                        <DataTrigger Binding="{Binding ChangedUp}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeUpStoryboard" Storyboard="{StaticResource ChangeUpStoryboard}" />
+
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ChangedDown}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeDownStoryboard" Storyboard="{StaticResource ChangeDownStoryboard}" />
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter Property="Foreground" Value="#FFE5E5E5" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="#FFb3b3b3" />
+            </Trigger>
+            <Trigger Property="DataContext" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Hidden" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="OddButtonLive" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="#FFE5E5E5" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.PlaceBet}" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <DockPanel x:Name="dpnlToggleButtonContent"
+                               Width="{TemplateBinding Width}"
+                               Height="68"
+                               LastChildFill="True">
+                        <DockPanel.Background>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenter.png}" />
+                        </DockPanel.Background>
+                        <Image x:Name="imgToggleButtonLeft"
+                               Width="4"
+                               Height="68"
+                               DockPanel.Dock="Left"
+                               Source="{converters2:ResolveImagePath Path=PressButtonLeft.png}" />
+                        <Image x:Name="imgToggleButtonRight"
+                               Width="4"
+                               Height="68"
+                               DockPanel.Dock="Right"
+                               Source="{converters2:ResolveImagePath Path=PressButtonRight.png}" />
+
+
+                        <Polygon Width="15"
+                                 Height="15"
+                                 Margin="-45,5,0,0"
+                                 DockPanel.Dock="Top"
+                                 Fill="LawnGreen"
+                                 Points="0,0 12,0 , 0,12"
+                                 Stroke="LawnGreen"
+                                 Visibility="Hidden" />
+                        <!--  Points="0,9 10,9 , 5,0" Stroke="LawnGreen" Fill="LawnGreen"/>  -->
+                        <Polygon Width="15"
+                                 Height="15"
+                                 Margin="-45,5,0,0"
+                                 DockPanel.Dock="Bottom"
+                                 Fill="Red"
+                                 Points="0,0 0,12 , 12,12"
+                                 Stroke="Red"
+                                 Visibility="Hidden" />
+                        <Grid>
+
+                            <TextBlock Name="txtOddValue"
+                                       Style="{StaticResource OddResultTextBlockLive}"
+                                       Text="{Binding DisplayValue}" />
+
+                            <DockPanel Name="dockChangeUp">
+                                <Grid Name="imgGridUp"
+                                      DockPanel.Dock="Top"
+                                      Visibility="Hidden">
+                                    <Polygon Width="15"
+                                             Height="15"
+                                             Margin="-36,-36,6,6"
+                                             Fill="LawnGreen"
+                                             Points="0,0 12,0 , 0,12"
+                                             Stroke="LawnGreen" />
+
+                                    <Grid>
+                                        <TextBlock Margin="0,1,0,0"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="LawnGreen"
+                                                   Style="{StaticResource OddResultTextBlockLive2}"
+                                                   Text="{Binding Value,
+                                                                  StringFormat=\{0:n2\}}" />
+
+                                    </Grid>
+                                </Grid>
+                            </DockPanel>
+                            <DockPanel Name="dockChangeDown">
+                                <Grid Name="imgGridDown"
+                                      DockPanel.Dock="Bottom"
+                                      Visibility="Hidden">
+                                    <Polygon Width="15"
+                                             Height="15"
+                                             Margin="-36,0,6,-46"
+                                             Fill="Red"
+                                             Points="0,0 0,12 , 12,12"
+                                             Stroke="Red" />
+
+                                    <Grid>
+                                        <TextBlock Margin="0,1,0,0"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="Red"
+                                                   Style="{StaticResource OddResultTextBlockLive2}"
+                                                   Text="{Binding Value,
+                                                                  StringFormat=\{0:n2\}}" />
+
+                                    </Grid>
+                                </Grid>
+                            </DockPanel>
+
+                        </Grid>
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ToggleButton.IsPressed" Value="true">
+                            <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressedOddsSelectedCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="imgToggleButtonLeft" Property="Source" Value="{converters2:ResolveImagePath Path=PressedOddsSelectedLeft.png}" />
+                            <Setter TargetName="imgToggleButtonRight" Property="Source" Value="{converters2:ResolveImagePath Path=PressedOddsSelectedRight.png}" />
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsEnabled" Value="false">
+                            <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{x:Null}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="imgToggleButtonLeft" Property="Source" Value="{x:Null}" />
+                            <Setter TargetName="imgToggleButtonRight" Property="Source" Value="{x:Null}" />
+                        </Trigger>
+                        <Trigger Property="ToggleButton.IsChecked" Value="true">
+                            <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenterGreen.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="imgToggleButtonLeft" Property="Source" Value="{converters2:ResolveImagePath Path=PressButtonLeftGreen.png}" />
+                            <Setter TargetName="imgToggleButtonRight" Property="Source" Value="{converters2:ResolveImagePath Path=PressButtonRightGreen.png}" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding ChangedUp}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeUpStoryboard" Storyboard="{StaticResource ChangeUpStoryboard}" />
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ChangedDown}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeDownStoryboard" Storyboard="{StaticResource ChangeDownStoryboard}" />
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                <Setter Property="Foreground" Value="#FFE5E5E5" />
+            </Trigger>
+            <Trigger Property="ToggleButton.IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="#FFb3b3b3" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="MatchButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="68" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <DockPanel x:Name="dpnlContent"
+                               Width="{TemplateBinding Width}"
+                               Height="68"
+                               LastChildFill="True">
+                        <DockPanel.Background>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenter.png}" />
+                        </DockPanel.Background>
+                        <DockPanel x:Name="dpnlLeft"
+                                   Width="4"
+                                   Height="68"
+                                   DockPanel.Dock="Left">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonLeft.png}" />
+                            </DockPanel.Background>
+                        </DockPanel>
+                        <DockPanel x:Name="dpnlRight"
+                                   Width="4"
+                                   Height="68"
+                                   DockPanel.Dock="Right">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonRight.png}" />
+                            </DockPanel.Background>
+                        </DockPanel>
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="true">
+                            <Setter TargetName="dpnlContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlLeft" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlRight" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Button.IsEnabled" Value="false">
+                            <Setter TargetName="dpnlContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlLeft" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlRight" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.OpenMatch}" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+    </Style>
+    <Style x:Key="MatchButtonSpecialbet" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="45" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <DockPanel x:Name="dpnlContent"
+                               Width="{TemplateBinding Width}"
+                               Height="45"
+                               LastChildFill="True">
+                        <DockPanel.Background>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenter.png}" />
+                        </DockPanel.Background>
+                        <DockPanel x:Name="dpnlLeft"
+                                   Width="3"
+                                   Height="45"
+                                   DockPanel.Dock="Left">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonLeft.png}" />
+                            </DockPanel.Background>
+                        </DockPanel>
+                        <DockPanel x:Name="dpnlRight"
+                                   Width="3"
+                                   Height="45"
+                                   DockPanel.Dock="Right">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonRight.png}" />
+                            </DockPanel.Background>
+                        </DockPanel>
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="true">
+                            <Setter TargetName="dpnlContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlLeft" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlRight" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Button.IsEnabled" Value="false">
+                            <Setter TargetName="dpnlContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlLeft" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlRight" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.OpenMatch}" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+    </Style>
+
+    <Style x:Key="OutrightButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Height" Value="68" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <DockPanel x:Name="dpnlContent"
+                               Width="{TemplateBinding Width}"
+                               Height="68"
+                               LastChildFill="True">
+                        <DockPanel.Background>
+                            <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonCenter.png}" />
+                        </DockPanel.Background>
+                        <DockPanel x:Name="dpnlLeft"
+                                   Width="4"
+                                   Height="68"
+                                   DockPanel.Dock="Left">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonLeft.png}" />
+                            </DockPanel.Background>
+                        </DockPanel>
+                        <DockPanel x:Name="dpnlRight"
+                                   Width="4"
+                                   Height="68"
+                                   DockPanel.Dock="Right">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonRight.png}" />
+                            </DockPanel.Background>
+                        </DockPanel>
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsPressed" Value="true">
+                            <Setter TargetName="dpnlContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlLeft" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlRight" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Button.IsEnabled" Value="false">
+                            <Setter TargetName="dpnlContent" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlLeft" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="dpnlRight" Property="Background">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="{converters2:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.OpenOutrightMatch}" />
+        <Setter Property="CommandParameter" Value="{Binding}" />
+    </Style>
+
+
+    <Style x:Key="OddResultTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Width" Value="63" />
+        <Setter Property="FontFamily" Value="Play" />
+        <Setter Property="FontSize" Value="23" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <!--  <Setter Property="Foreground" Value="#FFE5E5E5" />  -->
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+
+    <Style x:Key="OddResultTextBlockLiveMonitor" TargetType="{x:Type Label}">
+        <Setter Property="Width" Value="63" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontFamily" Value="Play" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <!--  <Setter Property="Foreground" Value="#FFE5E5E5" />  -->
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+
+
+
+    <Style x:Key="OddResultTextBlockBasketWithBlinking"
+           BasedOn="{StaticResource OddResultTextBlockLiveMonitor}"
+           TargetType="{x:Type Label}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+
+
+                        <TextBlock Name="txtOddValue" Text="{Binding Value, StringFormat=\{0:n2\}}" />
+
+
+                        <DockPanel Name="dockChangeUp">
+                            <Grid Name="imgGridUp"
+                                  DockPanel.Dock="Top"
+                                  Visibility="Hidden">
+
+                                <Grid>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Foreground="LawnGreen"
+                                               Text="{Binding Value,
+                                                              StringFormat=\{0:n2\}}" />
+
+                                </Grid>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel Name="dockChangeDown">
+                            <Grid Name="imgGridDown"
+                                  DockPanel.Dock="Bottom"
+                                  Visibility="Hidden">
+                                <Grid>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Foreground="Red"
+                                               Text="{Binding Value,
+                                                              StringFormat=\{0:n2\}}" />
+
+                                </Grid>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ChangedUp}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeUpStoryboard" Storyboard="{StaticResource ChangeUpStoryboard}" />
+
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ChangedDown}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeDownStoryboard" Storyboard="{StaticResource ChangeDownStoryboard}" />
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="OddResultTextBlockLiveMonitorWithBlinking"
+           BasedOn="{StaticResource OddResultTextBlockLiveMonitor}"
+           TargetType="{x:Type Label}">
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid HorizontalAlignment="Center">
+
+
+                        <TextBlock Name="txtOddValue" Text="{Binding Value, StringFormat=\{0:n2\}}" />
+
+
+                        <DockPanel Name="dockChangeUp">
+                            <Grid Name="imgGridUp"
+                                  DockPanel.Dock="Top"
+                                  Visibility="Hidden">
+
+                                <Grid>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Foreground="LawnGreen"
+                                               Text="{Binding Value,
+                                                              StringFormat=\{0:n2\}}" />
+
+                                </Grid>
+                            </Grid>
+                        </DockPanel>
+                        <DockPanel Name="dockChangeDown">
+                            <Grid Name="imgGridDown"
+                                  DockPanel.Dock="Bottom"
+                                  Visibility="Hidden">
+                                <Grid>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Foreground="Red"
+                                               Text="{Binding Value,
+                                                              StringFormat=\{0:n2\}}" />
+
+                                </Grid>
+                            </Grid>
+                        </DockPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding ChangedUp}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeUpStoryboard" Storyboard="{StaticResource ChangeUpStoryboard}" />
+
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ChangedDown}" Value="true">
+                            <DataTrigger.EnterActions>
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeDownStoryboard" />
+                                <RemoveStoryboard BeginStoryboardName="BeginChangeUpStoryboard" />
+                                <BeginStoryboard x:Name="BeginChangeDownStoryboard" Storyboard="{StaticResource ChangeDownStoryboard}" />
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
+
+    <Style x:Key="OddResultTextBlockVirtual" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="99" />
+        <Setter Property="FontFamily" Value="Play" />
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <!--  <Setter Property="Foreground" Value="#FFE5E5E5" />  -->
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style x:Key="OddResultNameTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Width" Value="55" />
+        <Setter Property="FontFamily" Value="Play" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="FontWeight" Value="Normal" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <Style x:Key="headerText" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Play" />
+        <Setter Property="FontSize" Value="22" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#FF000000" />
+        <Setter Property="LineHeight" Value="22" />
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Storyboard x:Key="FadeImageStoryboard">
+        <DoubleAnimation AutoReverse="False"
+                         Duration="0:0:0.7"
+                         From="1.0"
+                         RepeatBehavior="7x"
+                         Storyboard.TargetName="IncreaseDecreaseImage"
+                         Storyboard.TargetProperty="Opacity"
+                         To="0.0" />
+    </Storyboard>
+
+    <DataTemplate x:Key="NewLiveMatchTemplate" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate1 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CommonLiveMatchTemplate" DataType="viewObjects:MatchVw">
+        <resources2:CommonLiveTemplate />
+    </DataTemplate>
+
+    <DataTemplate x:Key="CommonLiveMonitorTemplate" DataType="viewObjects:MatchVw">
+        <resources2:CommonLiveMonitorTemplate />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NewLiveMatchTemplateBasketball" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate2 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NewPreMatchTemplateMatchBetOnly" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate3 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NewPreMatchTemplate" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate4 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NewPreMatchOutrightTemplate" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate4_1 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NewPreMatchTemplateTwoItems" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate5 />
+    </DataTemplate>
+    <DataTemplate x:Key="NewPreMatchTemplateTwoItemsUnderOver" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate5_1 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="NewLiveMatchTemplateTwoItems" DataType="viewObjects:MatchVw">
+        <resources:MatchTemplate6 />
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateText" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="320"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyle}"
+                     Text="{Binding Path=Value,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                  Mode=TwoWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateCheckbox" DataType="viewModels:Registration">
+
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <StackPanel.Resources>
+                <ControlTemplate x:Key="ImageCheckboxOrange" TargetType="CheckBox">
+                    <BulletDecorator Width="65"
+                                     Height="65"
+                                     Background="Transparent">
+                        <BulletDecorator.Bullet>
+                            <Border Width="39"
+                                    Height="39"
+                                    Margin="15, 0, 0, 26"
+                                    BorderBrush="White"
+                                    BorderThickness="2">
+                                <Image Name="TickImage"
+                                       Width="35"
+                                       Height="35"
+                                       Source="{converters2:ResolveImagePath Path=checkbox_img.png}" />
+                            </Border>
+                        </BulletDecorator.Bullet>
+                        <ContentPresenter Margin="4,0,0,0"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True" />
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="TickImage" Property="Source" Value="{converters2:ResolveImagePath Path=checkbox_checked_orange.png}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </StackPanel.Resources>
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly" />
+            <!--  </Button>  -->
+            <Grid Margin="-15,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0"
+                          Margin="0,0,5,10"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top"
+                          VerticalContentAlignment="Top"
+                          AutomationProperties.AutomationId="CheckBoxTermsConditions"
+                          BorderBrush="White"
+                          BorderThickness="1"
+                          IsChecked="{Binding ValueBool}"
+                          Template="{StaticResource ImageCheckboxOrange}" />
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               FontFamily="Play"
+                               FontSize="22"
+                               Foreground="#B6B9B9"
+                               LineHeight="22"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.AGREE_TERMS_CONDITIONS}}" />
+                    <TextBlock Grid.Row="1"
+                               FontFamily="Play"
+                               FontSize="22"
+                               Foreground="#B6B9B9"
+                               LineHeight="22"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMS_CONDITIONS}}"
+                               TextDecorations="Underline" />
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseUp">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.OpenTermsAndConditions}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </Grid>
+
+            </Grid>
+
+
+
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateTextVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="272"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyleWithLabelOnly}"
+                     Text="{Binding Path=Value,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                  Mode=TwoWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTaxNumber" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="320"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyle}"
+                     Text="{Binding Path=Value,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                                 AncestorLevel=1,
+                                                                                                 AncestorType={x:Type Grid}},
+                                                                  Path=DataContext.IsFocusedTaxNumber,
+                                                                  Mode=TwoWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTaxNumberVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="272"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyleWithLabelOnly}"
+                     Text="{Binding Path=Value,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                                 AncestorLevel=1,
+                                                                                                 AncestorType={x:Type Grid}},
+                                                                  Path=DataContext.IsFocusedTaxNumber,
+                                                                  Mode=TwoWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDateDisabledTemplate" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <!--
+                <Button Width="320"
+                Height="60"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                AutomationProperties.AutomationId="{Binding Path=Label, StringFormat='field_{0}'}"
+                Padding="10,0,10,0"
+                Style="{StaticResource navigationButton}">
+            -->
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+
+            <Viewbox VerticalAlignment="Center" StretchDirection="DownOnly">
+                <Grid Width="320"
+                      Height="50"
+                      VerticalAlignment="Center"
+                      Background="#FF494949">
+                    <TextBlock Width="320"
+                               MaxHeight="50"
+                               VerticalAlignment="Center"
+                               AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                           StringFormat='value_{0}'}"
+                               FontFamily="Play"
+                               FontSize="26"
+                               Foreground="White"
+                               Padding="10,0,0,0"
+                               Text="{Binding Path=Value,
+                                              UpdateSourceTrigger=PropertyChanged,
+                                              ValidatesOnDataErrors=true,
+                                              NotifyOnValidationError=true}"
+                               TextWrapping="Wrap" />
+                </Grid>
+            </Viewbox>
+
+        </StackPanel>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="RegistrationDateDisabledTemplateVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Left"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+
+            <Viewbox VerticalAlignment="Center" StretchDirection="DownOnly">
+                <Grid Width="272"
+                      Height="50"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      Background="#FF494949">
+                    <TextBlock Width="320"
+                               MaxHeight="50"
+                               VerticalAlignment="Center"
+                               AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                           StringFormat='value_{0}'}"
+                               FontFamily="Play"
+                               FontSize="26"
+                               Foreground="White"
+                               Padding="10,0,0,0"
+                               Text="{Binding Path=Value,
+                                              UpdateSourceTrigger=PropertyChanged,
+                                              ValidatesOnDataErrors=true,
+                                              NotifyOnValidationError=true}"
+                               TextWrapping="Wrap" />
+                </Grid>
+            </Viewbox>
+
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplate_Selector" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <!--
+                <Button Width="320"
+                Height="60"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                AutomationProperties.AutomationId="{Binding Path=Label, StringFormat='field_{0}'}"
+                Padding="10,0,10,0"
+                Style="{StaticResource navigationButton}">
+            -->
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <ComboBox Width="320"
+                      Height="50"
+                      AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                  StringFormat='value_{0}'}"
+                      IsEditable="False"
+                      IsEnabled="{Binding IsEnabled}"
+                      ItemsSource="{Binding Options,
+                                            Mode=OneWay}"
+                      Padding="10,0,0,0"
+                      SelectedValue="{Binding Value,
+                                              Mode=TwoWay,
+                                              UpdateSourceTrigger=PropertyChanged,
+                                              ValidatesOnDataErrors=true,
+                                              NotifyOnValidationError=true}"
+                      SelectedValuePath="Value"
+                      Style="{DynamicResource userManagementSquareComboBox}">
+                <ComboBox.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" />
+                </ComboBox.Resources>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="5,10,5,10"
+                                   FontFamily="Play"
+                                   FontSize="26"
+                                   FontWeight="Bold"
+                                   Visibility="{Binding Visibility}"
+                                   Foreground="#FFC0C0C0"
+                                   Text="{Binding Path=Name}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplate_SelectorVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <ComboBox Width="272"
+                      Height="50"
+                      AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                  StringFormat='value_{0}'}"
+                      IsEditable="False"
+                      IsEnabled="{Binding IsEnabled}"
+                      ItemsSource="{Binding Options,
+                                            Mode=OneWay}"
+                      Padding="10,0,0,0"
+                      SelectedValue="{Binding Value,
+                                              Mode=TwoWay,
+                                              UpdateSourceTrigger=PropertyChanged,
+                                              ValidatesOnDataErrors=true,
+                                              NotifyOnValidationError=true}"
+                      SelectedValuePath="Value"
+                      Style="{DynamicResource userManagementSquareComboBox}">
+                <ComboBox.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" />
+                </ComboBox.Resources>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="5,10,5,10"
+                                   FontFamily="Play"
+                                   FontSize="26"
+                                   FontWeight="Bold"
+                                   Visibility="{Binding Visibility}"
+                                   Foreground="#FFC0C0C0"
+                                   Text="{Binding Path=Name}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplatePassword" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <!--
+                <Button Width="320"
+                Height="60"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                AutomationProperties.AutomationId="{Binding Path=Label, StringFormat='field_{0}'}"
+                Padding="10,0,10,0"
+                Style="{StaticResource navigationButton}">
+            -->
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="320"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyle}"
+                     Text="{Binding Path=ValueMasked,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                  Mode=TwoWay}">
+
+                <i:Interaction.Behaviors>
+                    <baseObjects:EventToCommandBehavior Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                                         AncestorLevel=1,
+                                                                                                         AncestorType={x:Type Grid}},
+                                                                          Path=DataContext.SelectionChanged}"
+                                                        Event="SelectionChanged"
+                                                        PassArguments="True" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplatePasswordVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="272"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyleWithLabelOnly}"
+                     Text="{Binding Path=ValueMasked,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                  Mode=TwoWay}">
+
+                <i:Interaction.Behaviors>
+                    <baseObjects:EventToCommandBehavior Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                                                                                         AncestorLevel=1,
+                                                                                                         AncestorType={x:Type Grid}},
+                                                                          Path=DataContext.SelectionChanged}"
+                                                        Event="SelectionChanged"
+                                                        PassArguments="True" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateNumeric" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="320"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyle}"
+                     Text="{Binding Path=ValueInt,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                  Mode=TwoWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateNumericVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <TextBox Width="272"
+                     VerticalContentAlignment="Center"
+                     AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                 StringFormat='value_{0}'}"
+                     FontFamily="Play"
+                     FontSize="26"
+                     IsEnabled="{Binding IsEnabled}"
+                     Padding="10,0,0,0"
+                     Style="{DynamicResource UsernameTextBoxStyleWithLabelOnly}"
+                     Text="{Binding Path=ValueInt,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    ValidatesOnDataErrors=true,
+                                    NotifyOnValidationError=true}"
+                     WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                  Mode=TwoWay}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateDate" DataType="viewModels:Registration">
+        <StackPanel Width="800"
+                    Margin="0,14,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <!--
+                <Button Width="320"
+                Height="60"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                AutomationProperties.AutomationId="{Binding Path=Label, StringFormat='field_{0}'}"
+                Padding="10,0,10,0"
+                Style="{StaticResource navigationButton}">
+            -->
+            <Viewbox Width="300"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Right"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <Button Width="320"
+                    Height="50"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                StringFormat='value_{0}'}"
+                    Command="{Binding SelectDateCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Padding="10,0,0,0"
+                    Style="{StaticResource registrationSmallButton}">
+                <TextBlock Margin="-3,10,-4,10"
+                           HorizontalAlignment="Stretch"
+                           FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFC0C0C0"
+                           Style="{StaticResource ValidationTextBlockStyle}"
+                           Text="{Binding Path=Value,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          ValidatesOnDataErrors=true,
+                                          NotifyOnValidationError=true}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+            </Button>
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RegistrationDataTemplateDateVertical" DataType="viewModels:Registration">
+        <StackPanel Width="272"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Vertical"
+                    Visibility="{Binding Visible,
+                                         Converter={StaticResource myBooleanToVisibilityConverter}}">
+            <Viewbox Width="272"
+                     Margin="0, 0, 10, 0"
+                     HorizontalAlignment="Left"
+                     StretchDirection="DownOnly">
+                <TextBlock FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           Text="{Binding Path=Label}"
+                           TextAlignment="Right"
+                           TextWrapping="Wrap" />
+            </Viewbox>
+            <!--  </Button>  -->
+            <Button Width="272"
+                    Height="50"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    AutomationProperties.AutomationId="{Binding Path=Label,
+                                                                StringFormat='value_{0}'}"
+                    Command="{Binding SelectDateCommand}"
+                    IsEnabled="{Binding IsEnabled}"
+                    Padding="10,0,0,0"
+                    Style="{StaticResource registrationSmallButton}">
+                <TextBlock Margin="-3,10,-4,10"
+                           HorizontalAlignment="Stretch"
+                           FontFamily="Play"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#FFC0C0C0"
+                           Style="{StaticResource ValidationTextBlockStyle}"
+                           Text="{Binding Path=Value,
+                                          UpdateSourceTrigger=PropertyChanged,
+                                          ValidatesOnDataErrors=true,
+                                          NotifyOnValidationError=true}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+            </Button>
+        </StackPanel>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="FullHeader">
+        <DockPanel Name="HeaderTemplate1"
+                   Height="30"
+                   Margin="0"
+                   HorizontalAlignment="Stretch"
+                   Background="#FFf0f0f0"
+                   LastChildFill="False"
+                   wpfHelper:SizeObserver.Observe="True">
+
+            <TextBlock Margin="15,0,0,0"
+                       VerticalAlignment="Center"
+                       AutomationProperties.AutomationId="SportName"
+                       DockPanel.Dock="Left"
+                       Style="{StaticResource headerText}"
+                       Text="{Binding SportView.DisplayName}" />
+
+            <StackPanel Width="422"
+                        DockPanel.Dock="Right"
+                        Orientation="Horizontal">
+                <TextBlock Width="68"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="1"
+                           TextAlignment="Center" />
+                <TextBlock Width="68"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="X"
+                           TextAlignment="Center" />
+                <TextBlock Width="68"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="2"
+                           TextAlignment="Center" />
+
+                <TextBlock Width="70"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="G"
+                           TextAlignment="Center" />
+
+                <TextBlock Width="68"
+                           Margin="0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="U"
+                           TextAlignment="Center" />
+                <TextBlock Width="68"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="O"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TwoItemsHeader">
+        <Grid Name="HeaderTemplate5"
+              Height="30"
+              Margin="0"
+              Background="#FFbcbcbc"
+              wpfHelper:SizeObserver.Observe="True">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="138" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       Margin="15,0,0,0"
+                       VerticalAlignment="Center"
+                       AutomationProperties.AutomationId="SportName"
+                       Style="{StaticResource headerText}"
+                       Text="{Binding SportView.DisplayName}" />
+
+            <TextBlock Grid.Column="1"
+                       Margin="15,0,0,0"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource headerText}"
+                       Text=" - " />
+
+            <TextBlock Grid.Column="2"
+                       Margin="15,0,0,0"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource headerText}"
+                       Text="{Binding TournamentView.DisplayName}" />
+
+            <StackPanel Grid.Column="3"
+                        Width="138"
+                        Orientation="Horizontal">
+                <TextBlock Width="69"
+                           Margin="-1,0,0,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="1"
+                           TextAlignment="Center" />
+                <TextBlock Width="69"
+                           Margin="-1,0,0,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="2"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="BasketballHEader">
+        <DockPanel Name="HeaderTemplate2"
+                   Height="30"
+                   Margin="0"
+                   Background="#FFf0f0f0"
+                   LastChildFill="False"
+                   wpfHelper:SizeObserver.Observe="True">
+
+            <TextBlock Margin="15,0,0,0"
+                       VerticalAlignment="Center"
+                       AutomationProperties.AutomationId="SportName"
+                       DockPanel.Dock="Left"
+                       Style="{StaticResource headerText}"
+                       Text="{Binding SportView.DisplayName}" />
+
+            <StackPanel Width="353"
+                        DockPanel.Dock="Right"
+                        Orientation="Horizontal">
+                <TextBlock Width="68"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="1"
+                           TextAlignment="Center" />
+                <TextBlock Width="68"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="2"
+                           TextAlignment="Center" />
+
+                <TextBlock Width="68"
+                           Margin="-1,0,0,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="G"
+                           TextAlignment="Center" />
+                <TextBlock Width="70"
+                           Margin="-1,0,0,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="U"
+                           TextAlignment="Center" />
+                <TextBlock Width="68"
+                           Margin="-1,0,0,0"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource headerText}"
+                           Text="O"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="Anonymous" DataType="Models:AnonymousUser">
+        <DockPanel Name="Anonymous"
+                   Width="238"
+                   Height="102">
+            <!--  login icon  -->
+
+
+            <Button x:Name="BtnLogin"
+                    Canvas.Left="710"
+                    Canvas.Top="10"
+                    Width="68"
+                    Height="102"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}},
+                                      Path=DataContext.OpenAuthorizationCommand}"
+                    DockPanel.Dock="Right"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFC0C0C0"
+                    Style="{StaticResource navigationButtonLogin}">
+                <DockPanel Width="60" Height="102" HorizontalAlignment="Center">
+                    <Image Width="23" DockPanel.Dock="Top" Margin="0,15,0,0" VerticalAlignment="Top"
+                           Height="30"
+                           Source="{converters2:ResolveImagePath Path=UnLockIcon.png}" />
+
+                    <TextBlock Margin="0,0,0,15" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"
+                               FontFamily="Play"
+                               FontSize="14"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LOGINSTRING}}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </DockPanel>
+            </Button>
+            <!--  content  -->
+            <StackPanel Width="172"
+                        Height="102"
+                        MaxWidth="217"
+                        MaxHeight="102"
+                        Orientation="Vertical">
+                <StackPanel.Background>
+                    <ImageBrush AlignmentX="Left"
+                                AlignmentY="Top"
+                                ImageSource="{converters2:ResolveImagePath Path=BackgroundLogin.png}"
+                                Stretch="Fill"
+                                TileMode="None"
+                                Viewport="0,0,217,102"
+                                ViewportUnits="Absolute" />
+                </StackPanel.Background>
+                <!--  insert cash or login  -->
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Margin="5,11,0,0"
+                               FontFamily="Play"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               LineHeight="18"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LOGIN_CAPITAL}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+
+                    <TextBlock Margin="5,0,0,0"
+                               FontFamily="Play"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               LineHeight="18"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_REGISTER_CAPITAL}}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+                <!--  cashpool  -->
+                <DockPanel Margin="5,0,0,0">
+                    <!--  cashpool text  -->
+                    <TextBlock MaxWidth="195"
+                               DockPanel.Dock="Top"
+                               FontFamily="Play"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               LineHeight="16"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_AVAILABLE_CASH}}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Visibility="{Binding StationRepository.AllowAnonymousBetting,
+                                                    Converter={StaticResource myBooleanToVisibilityConverter}}" />
+
+                    <StackPanel MinWidth="80"
+                                Margin="0,-5,0,0"
+                                HorizontalAlignment="Center"
+                                DockPanel.Dock="Bottom"
+                                Orientation="Horizontal"
+                                Visibility="{Binding StationRepository.AllowAnonymousBetting,
+                                                     Converter={StaticResource myBooleanToVisibilityConverter}}">
+
+                        <!--  cashpool value  -->
+                        <Viewbox HorizontalAlignment="Center" StretchDirection="DownOnly">
+                            <TextBlock AutomationProperties.AutomationId="Balance"
+                                       FontFamily="Play"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="{Binding AvailableCash,
+                                                            Converter={StaticResource CashpoolColorConverter}}"
+                                       LineHeight="16"
+                                       Text="{Binding AvailableCash,
+                                                      StringFormat=\{0:N2\},
+                                                      ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                       TextAlignment="Right"
+                                       TextWrapping="Wrap" />
+                        </Viewbox>
+                        <!--  currency  -->
+                        <TextBlock Margin="5,0,0,0"
+                                   FontFamily="Play"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   LineHeight="16"
+                                   Text="{Binding Currency}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+            <i:Interaction.Triggers>
+
+                <i:EventTrigger EventName="MouseUp">
+                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}, Path=DataContext.OpenAuthorizationCommand}" />
+                </i:EventTrigger>
+
+            </i:Interaction.Triggers>
+        </DockPanel>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="NoConnection">
+        <DockPanel Name="NoConnection"
+                   Width="238"
+                   Height="102">
+
+            <Button x:Name="BtnLogin"
+                    Canvas.Left="710"
+                    Canvas.Top="10"
+                    Width="68"
+                    Height="102"
+                    DockPanel.Dock="Right"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFC0C0C0"
+                    Style="{StaticResource navigationButtonLogin}">
+                <DockPanel Width="60" Height="102" HorizontalAlignment="Center">
+                    <Image Width="23" DockPanel.Dock="Top" Margin="0,15,0,0" VerticalAlignment="Top"
+                           Height="30"
+                           Source="{converters2:ResolveImagePath Path=UnLockIcon.png}" />
+
+                    <TextBlock Margin="0,0,0,15" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"
+                               FontFamily="Play"
+                               FontSize="14"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LOGINSTRING}}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </DockPanel>
+            </Button>
+            <!--  content  -->
+            <StackPanel Width="172"
+                        Height="102"
+                        MaxWidth="217"
+                        MaxHeight="102"
+                        Orientation="Vertical">
+                <StackPanel.Background>
+                    <ImageBrush AlignmentX="Left"
+                                AlignmentY="Top"
+                                ImageSource="{converters2:ResolveImagePath Path=BackgroundLogin.png}"
+                                Stretch="Fill"
+                                TileMode="None"
+                                Viewport="0,0,217,102"
+                                ViewportUnits="Absolute" />
+                </StackPanel.Background>
+                <!--  insert cash or login  -->
+                <TextBlock Margin="10,11,0,0"
+                           FontFamily="Play"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="Red"
+                           LineHeight="14"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_NO_CONNECTION_TO_SERVER}}"
+                           TextAlignment="Left"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </DockPanel>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="Operator" DataType="Models:OperatorUser">
+        <DockPanel Width="238"
+                   Margin="0,0,0,0"
+                   VerticalAlignment="Top">
+            <StackPanel Name="LoggedIn"
+                        Width="172"
+                        Height="102"
+                        MaxWidth="276"
+                        MaxHeight="102"
+                        Orientation="Vertical">
+                <StackPanel.Background>
+                    <ImageBrush AlignmentX="Left"
+                                AlignmentY="Top"
+                                ImageSource="{converters2:ResolveImagePath Path=LogInBckg.png}"
+                                Stretch="Fill"
+                                TileMode="None"
+                                Viewport="0,0,217,102"
+                                ViewportUnits="Absolute" />
+                </StackPanel.Background>
+                <!--  hello & username  -->
+                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                    <!--  hello  -->
+                    <TextBlock FontFamily="Play"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.HELLO}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                    <!--  username  -->
+                    <TextBlock Margin="5,0,0,0"
+                               AutomationProperties.AutomationId="Username"
+                               FontFamily="Play"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               Text="{Binding Username}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+                <!--  last login  -->
+                <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
+
+                    <TextBlock AutomationProperties.AutomationId="Role"
+                               FontFamily="Play"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               Foreground="{Binding RoleColor}"
+                               Text="{Binding Role}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Margin="10,5,0,0" Orientation="Vertical">
+                    <!--  last login  -->
+                    <TextBlock FontFamily="Play"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.LAST_LOGIN}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                    <!--  last login value  -->
+                    <TextBlock AutomationProperties.AutomationId="LastLogin"
+                               FontFamily="Play"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               Text="{Binding LastLoginDisplay,
+                                              StringFormat='MMMM dd, yyyy'}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+            </StackPanel>
+
+            <Button x:Name="BtnLogin"
+                    Width="68"
+                    Height="102"
+                    AutomationProperties.AutomationId="btnLogout"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}},
+                                      Path=DataContext.LogoutCommand}"
+                    DockPanel.Dock="Right"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFC0C0C0"
+                    Style="{StaticResource navigationButtonLogin}">
+                <DockPanel Width="60" Height="102" HorizontalAlignment="Center">
+
+                    <Image Width="23" VerticalAlignment="Top" Margin="0,15,0,0" DockPanel.Dock="Top"
+                           Height="30"
+                           Source="{converters2:ResolveImagePath Path=LockIcon.png}" />
+
+                    <TextBlock DockPanel.Dock="Bottom"
+                               FontFamily="Play"
+                               FontSize="14"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LOGOUT}}"
+                               TextAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Margin="0,0,0,15"
+                               TextWrapping="Wrap" />
+                </DockPanel>
+
+
+            </Button>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LoggedIn" DataType="Models:LoggedInUser">
+        <DockPanel Width="238"
+                   Margin="0,0,0,0"
+                   VerticalAlignment="Top">
+            <StackPanel Name="LoggedIn"
+                        Width="172"
+                        Height="102"
+                        MaxWidth="276"
+                        MaxHeight="102"
+                        Orientation="Vertical">
+                <StackPanel.Background>
+                    <ImageBrush AlignmentX="Left"
+                                AlignmentY="Top"
+                                ImageSource="{converters2:ResolveImagePath Path=LogInBckg.png}"
+                                Stretch="Fill"
+                                TileMode="None"
+                                Viewport="0,0,217,102"
+                                ViewportUnits="Absolute" />
+                </StackPanel.Background>
+                <!--  hello & username  -->
+                <StackPanel Margin="5,15,0,0" Orientation="Horizontal">
+                    <!--  hello  -->
+                    <TextBlock FontFamily="Play"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="#FF656565"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.HELLO}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                    <!--  username  -->
+                    <TextBlock Margin="5,0,0,0"
+                               AutomationProperties.AutomationId="Username"
+                               FontFamily="Play"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               Foreground="#FFFF4D00"
+                               Text="{Binding Username}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+                <!--  last login  -->
+                <StackPanel Margin="5,5,0,0" Orientation="Horizontal">
+                    <!--  last login  -->
+                    <TextBlock FontFamily="Play"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               Foreground="#FF656565"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.LAST_LOGIN}}"
+                               TextAlignment="Right"
+                               TextWrapping="Wrap" />
+                    <!--  last login value  -->
+                    <TextBlock Margin="5,0,0,0"
+                               AutomationProperties.AutomationId="LastLogin"
+                               FontFamily="Play"
+                               FontSize="11"
+                               FontWeight="Bold"
+                               Foreground="#FF656565"
+                               Text="{Binding LastLoginDisplay,
+                                              StringFormat=\{0:dd.MM.yyyy\}}"
+                               TextAlignment="Left"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                    <!--  last login  -->
+                    <Viewbox Width="162"
+                             MaxHeight="20"
+                             Margin="0,0,0,0"
+                             HorizontalAlignment="Left">
+                        <TextBlock AutomationProperties.AutomationId="OpenProfile"
+                                   FontFamily="Play"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   Foreground="#FFCBCBCB"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.CLICK_HERE_TO_OPEN_PROFILE}}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </Viewbox>
+
+                </StackPanel>
+
+
+                <!--  balance & cashpool  -->
+                <Viewbox Width="162"
+                         MaxHeight="25"
+                         Margin="5,0,0,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Bottom"
+                         StretchDirection="DownOnly">
+                    <!--  balance & cashpool  -->
+                    <DockPanel VerticalAlignment="Bottom">
+                        <!--  balance  -->
+                        <TextBlock DockPanel.Dock="Left"
+                                   FontFamily="Play"
+                                   FontSize="16"
+                                   FontWeight="Bold"
+                                   Foreground="#FFCBCBCB"
+                                   LineHeight="16"
+                                   Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_BALANCE}}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                        <!--  cashpool & currency  -->
+                        <StackPanel Margin="3,0,0,0"
+                                    VerticalAlignment="Bottom"
+                                    DockPanel.Dock="Right"
+                                    Orientation="Horizontal">
+                            <!--  cashpool  -->
+                            <TextBlock AutomationProperties.AutomationId="Balance"
+                                       FontFamily="Play"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="{Binding AvailableCash,
+                                                            Converter={StaticResource CashpoolColorConverter}}"
+                                       LineHeight="16"
+                                       Text="{Binding AvailableCash,
+                                                      StringFormat=\{0:N2\},
+                                                      ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
+                                       TextAlignment="Left"
+                                       TextWrapping="Wrap" />
+                            <!--  currency  -->
+                            <TextBlock Margin="3,0,0,0"
+                                       FontFamily="Play"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="#FFCBCBCB"
+                                       LineHeight="16"
+                                       Text="{Binding Currency}"
+                                       TextAlignment="Right"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </DockPanel>
+                </Viewbox>
+            </StackPanel>
+
+            <Button x:Name="BtnLogin"
+                    Width="68"
+                    Height="102"
+                    AutomationProperties.AutomationId="btnLogout"
+                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}},
+                                      Path=DataContext.LogoutCommand}"
+                    DockPanel.Dock="Right"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Foreground="#FFC0C0C0"
+                    Style="{StaticResource navigationButtonLogin}">
+                <DockPanel Width="60" Height="102" HorizontalAlignment="Center">
+                    
+                    <Image Width="23" VerticalAlignment="Top" Margin="0,15,0,0" DockPanel.Dock="Top"
+                           Height="30"
+                           Source="{converters2:ResolveImagePath Path=LockIcon.png}" />
+
+                    <TextBlock DockPanel.Dock="Bottom"
+                               FontFamily="Play"
+                               FontSize="14"
+                               Foreground="White"
+                               Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_LOGOUT}}"
+                               TextAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Margin="0,0,0,15"
+                               TextWrapping="Wrap" />
+                </DockPanel>
+            </Button>
+            <i:Interaction.Triggers>
+
+                <i:EventTrigger EventName="MouseUp">
+                    <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type StackPanel}}, Path=DataContext.OpenAuthorizationCommand}" />
+                </i:EventTrigger>
+
+            </i:Interaction.Triggers>
+        </DockPanel>
+    </DataTemplate>
+
+
+
+</ResourceDictionary>

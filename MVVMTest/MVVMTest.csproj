@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9EED45C-F1D6-4AD3-B7A3-51AA9B7A5DA9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVVMTest</RootNamespace>
+    <AssemblyName>MVVMTest</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apache.NMS, Version=1.6.0.3083, Culture=neutral, PublicKeyToken=82756feee3957618, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Apache.NMS.1.6.0.3083\lib\net40\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.ActiveMQ">
+      <HintPath>..\packages\Apache.NMS.ActiveMQ.1.6.3\lib\net40\Apache.NMS.ActiveMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\OutletBetting\Lib\Ninject\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Packages\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseTestClass.cs" />
+    <Compile Include="OldCode\TicketActionsTest.cs" />
+    <Compile Include="OldCode\StationRepositoryTest.cs" />
+    <Compile Include="OldCode\DataBindingTests.cs" />
+    <Compile Include="Services\AuthorizationServiceTests.cs" />
+    <Compile Include="Services\TranslationProviderTests.cs" />
+    <Compile Include="Services\MediatorTests.cs" />
+    <Compile Include="Services\TransactionQueueTests.cs" />
+    <Compile Include="Services\DatabaseTests.cs" />
+    <Compile Include="Services\UnitTest1.cs" />
+    <Compile Include="Services\ActiveMQTest.cs" />
+    <Compile Include="Services\ConfidenceFactorTest2.cs" />
+    <Compile Include="TestClasses\QuestionNoMock.cs" />
+    <Compile Include="TestClasses\TestGroupLn.cs" />
+    <Compile Include="TestClasses\TestOddVw.cs" />
+    <Compile Include="TestClasses\TestBetDomainVw.cs" />
+    <Compile Include="TestClasses\TestTipItem.cs" />
+    <Compile Include="TestClasses\TicketCalculatioinsTest.cs" />
+    <Compile Include="TestClasses\MatchVwTests.cs" />
+    <Compile Include="ViewModels\BasketViewModelTest.cs" />
+    <Compile Include="ViewModels\BetdomainsViewModelTest.cs" />
+    <Compile Include="TestClasses\QuestionYesMock.cs" />
+    <Compile Include="ViewModels\CashHistoryViewModelTest.cs" />
+    <Compile Include="ViewModels\TicketDetailsViewModelTest.cs" />
+    <Compile Include="ViewModels\TicketCheckerViewModelTest.cs" />
+    <Compile Include="ViewModels\MatchesViewModelTest.cs" />
+    <Compile Include="ViewModels\MainViewModelTest.cs" />
+    <Compile Include="ViewModels\CreateOperatorViewModelTest.cs" />
+    <Compile Include="ViewModels\SearchViewModelTest.cs" />
+    <Compile Include="ViewModels\ResultViewModelTest.cs" />
+    <Compile Include="ViewModels\DateTimeWindowTest.cs" />
+    <Compile Include="ViewModels\LiveViewModelTest.cs" />
+    <Compile Include="TestClasses\TestMatchVw.cs" />
+    <Compile Include="TestClasses\TestGroupVw.cs" />
+    <Compile Include="TestClasses\TestBetDomain.cs" />
+    <Compile Include="TestClasses\TestMatchLn.cs" />
+    <Compile Include="TestClasses\TestOdd.cs" />
+    <Compile Include="ViewModels\TopTournamentsViewModelTest.cs" />
+    <Compile Include="ViewModels\TournamentsViewModelTest.cs" />
+    <Compile Include="wpf\ConverterTest.cs" />
+    <Compile Include="ViewModels\LoginViewModelTest.cs" />
+    <Compile Include="ViewModels\ModalWindowBaseViewModelTest.cs" />
+    <Compile Include="ViewModels\FooterViewModelTest.cs" />
+    <Compile Include="OldCode\PrinterHandlerTest.cs" />
+    <Compile Include="OldCode\ParseXmlTest.cs" />
+    <Compile Include="OldCode\StationSettingsTest.cs" />
+    <Compile Include="ViewModels\UserManagementViewModelTest.cs" />
+    <Compile Include="ViewModels\LiveMonitorModelTest.cs" />
+    <Compile Include="ViewModels\HeadViewModelTest.cs" />
+    <Compile Include="ViewModels\EnterPinViewModelTest.cs" />
+    <Compile Include="ViewModels\WarningViewModelTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OutletBetting\SportRadarOldLineProvider\SportRadarOldLineProvider.csproj">
+      <Project>{6632744F-8661-44CF-BDD6-BC7C12F950FB}</Project>
+      <Name>SportRadarOldLineProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\Common\Common.csproj">
+      <Project>{0D4E9E7E-235A-445F-A97F-D502FBAF47C7}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\DAL\DAL.csproj">
+      <Project>{8AC0E79B-EFDB-45F5-9F3E-F644ADB93A89}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\IocContainer\IocContainer.csproj">
+      <Project>{171e5db2-eac9-42f8-b171-67e91a3b3417}</Project>
+      <Name>IocContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\SharedInterfaces\SharedInterfaces.csproj">
+      <Project>{4fe76384-166f-46ac-894b-ec233ebe4354}</Project>
+      <Name>SharedInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\Shared\Shared.csproj">
+      <Project>{39E0A93B-4CB5-4EAB-B656-16412D54C60C}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\TranslationByMarkupExtension\TranslationByMarkupExtension.csproj">
+      <Project>{11107eb4-aead-40da-90ce-b226e34e14fc}</Project>
+      <Name>TranslationByMarkupExtension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\OutletBetting\WsdlRepository\WsdlRepository.csproj">
+      <Project>{CAF16909-50E9-4C34-A515-6AC38F21EBC4}</Project>
+      <Name>WsdlRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SCF\SCF\CashIn_2010.csproj">
+      <Project>{461604F0-67C4-4AFF-AA82-6F5179944190}</Project>
+      <Name>CashIn_2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SPF\SPF\Spf_2010.csproj">
+      <Project>{B51C2CE2-AEA5-4FFA-83CE-B799EB662EB5}</Project>
+      <Name>Spf_2010</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BaseObjects\BaseObjects.csproj">
+      <Project>{a2a567ed-2e6a-4885-8287-87a903d0b36d}</Project>
+      <Name>BaseObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DefaultViews\DefaultViews.csproj">
+      <Project>{af2bce08-c65b-44a3-b4c9-64c0a692e3d3}</Project>
+      <Name>DefaultViews</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Preferences\Preferences.csproj">
+      <Project>{F70EEADB-C6BA-4F62-B50F-21A02810E168}</Project>
+      <Name>Preferences</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.MainWindow\MainWpfWindow.csproj">
+      <Project>{c498bdf6-5864-4293-8c4b-09cb50be9dd2}</Project>
+      <Name>MainWpfWindow</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Database\SportBetting.WPF.Prism.Database.csproj">
+      <Project>{6BCF1CE1-B0FB-4E91-968B-D826A046EC14}</Project>
+      <Name>SportBetting.WPF.Prism.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Aspects\SportBetting.WPF.Prism.Modules.Aspects.csproj">
+      <Project>{14A195A7-C838-49EF-85D1-56A0E61CD64D}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Aspects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Keyboard\SportBetting.WPF.Prism.Modules.Keyboard.csproj">
+      <Project>{827fb93f-45cf-47ad-a728-62cb5573afe3}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Keyboard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Modules.Services\SportBetting.WPF.Prism.Modules.Services.csproj">
+      <Project>{a596df82-427c-42c7-af87-9b42f27e9c8b}</Project>
+      <Name>SportBetting.WPF.Prism.Modules.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportBetting.WPF.Prism.Shared\SportBetting.WPF.Prism.Shared.csproj">
+      <Project>{79E50E95-4E0E-4C85-B9AE-E42CC380E2D3}</Project>
+      <Name>SportBetting.WPF.Prism.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+      <Project>{F535DE63-18AD-4205-A6EE-1EBFE0121372}</Project>
+      <Name>ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="groupsLanguages.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dc.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PrefFile.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLFile3.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLFile1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLFile5.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLFile6.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="App.Release.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Debug.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DatabaseResources\PgSrbsClient.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="DatabaseResources\CreateTestMatches.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="Files\CashLogFile1.log">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="bet_domain_map.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AppConfig>App.Release.config</AppConfig>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <AppConfig>App.Debug.config</AppConfig>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+</Project>

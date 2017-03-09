@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="DefaultViews.Views.StationBalanceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             xmlns:views="clr-namespace:DefaultViews.Views"
+             d:DataContext="{d:DesignInstance viewModels2:StationBalanceViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:ImagePathConverter x:Key="ImagePathConverter" />
+    </UserControl.Resources>
+    <DockPanel VerticalAlignment="Stretch">
+
+        <views:FooterBalanceOperations DockPanel.Dock="Bottom" />
+        <Grid DockPanel.Dock="Bottom" />
+    </DockPanel>
+</UserControl>

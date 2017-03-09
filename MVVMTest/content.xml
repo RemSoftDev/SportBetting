@@ -1,0 +1,375 @@
+<SportRadarLineContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<MultiString>
+<MultiStringSr>
+<m1>10715609</m1><m2>CPTR_MST_9999241</m2><m5>2014-05-15T08:41:25</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10715613</m1><m2>CPTR_MST_9999231</m2><m5>2014-05-15T08:41:36</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10715605</m1><m2>CPTR_MST_9999221</m2><m5>2014-05-15T08:41:23</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10715617</m1><m2>CPTR_MST_9999251</m2><m5>2014-05-15T08:41:38</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10706174</m1><m2>PODIUM_CHAMPIONSHIP_OUTRIGHT_MST_SHORT</m2><m4>8</m4><m5>2013-10-16T11:53:16</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10706172</m1><m2>PODIUM_CHAMPIONSHIP_OUTRIGHT_MST</m2><m4>8</m4><m5>2013-10-16T11:53:16</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>63486188</m1><m2>OUTRIGHT_MST_1125114848</m2><m4>8</m4><m5>2015-02-25T11:22:37</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10715306</m1><m2>CPTR_MST_9999211</m2><m5>2014-05-14T12:07:01</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>10715302</m1><m2>TRMT_MST_999002</m2><m4>6</m4><m5>2014-05-14T12:07:01</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>1727</m1><m2>1727_CATEGORY_MST</m2><m5>2014-02-03T15:42:44</m5>
+</MultiStringSr>
+<MultiStringSr>
+<m1>-13561</m1><m2>GROUP_SPORT_556198266004_MST</m2><m4>5</m4><m5>2014-05-20T14:18:31</m5>
+</MultiStringSr>
+
+</MultiString>
+
+  <LanguageString>
+<LanguageStringSr>
+<m1>62713409</m1><m2>RHT 41</m2><m3>10715609</m3><m4>5</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713399</m1><m2>RHT 41</m2><m3>10715609</m3><m4>7</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713415</m1><m2>RHT 41</m2><m3>10715609</m3><m4>8</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713397</m1><m2>CPTR_MST_9999241</m2><m3>10715609</m3><m4>25</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713407</m1><m2>RHT 41</m2><m3>10715609</m3><m4>9</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713403</m1><m2>RHT 41</m2><m3>10715609</m3><m4>10</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713413</m1><m2>RHT 41</m2><m3>10715609</m3><m4>11</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713401</m1><m2>RHT 41</m2><m3>10715609</m3><m4>12</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713405</m1><m2>CPTR_MST_9999241</m2><m3>10715609</m3><m4>28</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713411</m1><m2>RHT 41</m2><m3>10715609</m3><m4>30</m4><m5>2014-05-15T08:41:25</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713449</m1><m2>RHT 31</m2><m3>10715613</m3><m4>5</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713439</m1><m2>RHT 31</m2><m3>10715613</m3><m4>7</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713455</m1><m2>RHT 31</m2><m3>10715613</m3><m4>8</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713437</m1><m2>CPTR_MST_9999231</m2><m3>10715613</m3><m4>25</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713447</m1><m2>RHT 31</m2><m3>10715613</m3><m4>9</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713443</m1><m2>RHT 31</m2><m3>10715613</m3><m4>10</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713453</m1><m2>RHT 31</m2><m3>10715613</m3><m4>11</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713441</m1><m2>RHT 31</m2><m3>10715613</m3><m4>12</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713445</m1><m2>CPTR_MST_9999231</m2><m3>10715613</m3><m4>28</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713451</m1><m2>RHT 31</m2><m3>10715613</m3><m4>30</m4><m5>2014-05-15T08:41:36</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713369</m1><m2>RHT 21</m2><m3>10715605</m3><m4>5</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713359</m1><m2>RHT 21</m2><m3>10715605</m3><m4>7</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713375</m1><m2>RHT 21</m2><m3>10715605</m3><m4>8</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713357</m1><m2>CPTR_MST_9999221</m2><m3>10715605</m3><m4>25</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713367</m1><m2>RHT 21</m2><m3>10715605</m3><m4>9</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713363</m1><m2>RHT 21</m2><m3>10715605</m3><m4>10</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713373</m1><m2>RHT 21</m2><m3>10715605</m3><m4>11</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713361</m1><m2>RHT 21</m2><m3>10715605</m3><m4>12</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713365</m1><m2>CPTR_MST_9999221</m2><m3>10715605</m3><m4>28</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713371</m1><m2>RHT 21</m2><m3>10715605</m3><m4>30</m4><m5>2014-05-15T08:41:23</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713489</m1><m2>RHT 51</m2><m3>10715617</m3><m4>5</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713479</m1><m2>RHT 51</m2><m3>10715617</m3><m4>7</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713495</m1><m2>RHT 51</m2><m3>10715617</m3><m4>8</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713477</m1><m2>CPTR_MST_9999251</m2><m3>10715617</m3><m4>25</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713487</m1><m2>RHT 51</m2><m3>10715617</m3><m4>9</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713483</m1><m2>RHT 51</m2><m3>10715617</m3><m4>10</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713493</m1><m2>RHT 51</m2><m3>10715617</m3><m4>11</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713481</m1><m2>RHT 51</m2><m3>10715617</m3><m4>12</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713485</m1><m2>CPTR_MST_9999251</m2><m3>10715617</m3><m4>28</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62713491</m1><m2>RHT 51</m2><m3>10715617</m3><m4>30</m4><m5>2014-05-15T08:41:38</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62620288</m1><m2>Podium finish top 3</m2><m3>10706174</m3><m4>7</m4><m5>2013-10-16T12:25:49</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62620286</m1><m2>Podium finish top 3</m2><m3>10706172</m3><m4>7</m4><m5>2013-10-16T12:25:49</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234474</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>5</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234476</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>7</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234478</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>8</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234480</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>9</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234482</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>10</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234484</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>11</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234486</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>12</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>705234488</m1><m2>RHL - Podium1</m2><m3>63486188</m3><m4>30</m4><m5>2015-02-25T11:22:37</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710006</m1><m2>RHT 11</m2><m3>10715306</m3><m4>5</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709996</m1><m2>RHT 11</m2><m3>10715306</m3><m4>7</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710012</m1><m2>RHT 11</m2><m3>10715306</m3><m4>8</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709994</m1><m2>CPTR_MST_9999211</m2><m3>10715306</m3><m4>25</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710004</m1><m2>RHT 11</m2><m3>10715306</m3><m4>9</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710000</m1><m2>RHT 11</m2><m3>10715306</m3><m4>10</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710010</m1><m2>RHT 11</m2><m3>10715306</m3><m4>11</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709998</m1><m2>RHT 11</m2><m3>10715306</m3><m4>12</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710002</m1><m2>CPTR_MST_9999211</m2><m3>10715306</m3><m4>28</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62710008</m1><m2>RHT 11</m2><m3>10715306</m3><m4>30</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709958</m1><m2>RHL1</m2><m3>10715302</m3><m4>30</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709960</m1><m2>RHL1</m2><m3>10715302</m3><m4>9</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709962</m1><m2>RHL1</m2><m3>10715302</m3><m4>7</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709964</m1><m2>RHL1</m2><m3>10715302</m3><m4>5</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709966</m1><m2>RHL1</m2><m3>10715302</m3><m4>11</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709968</m1><m2>RHL1</m2><m3>10715302</m3><m4>12</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709970</m1><m2>RHL1s</m2><m3>10715302</m3><m4>10</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62709972</m1><m2>RHL1</m2><m3>10715302</m3><m4>8</m4><m5>2014-05-14T12:07:01</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>96817023</m1><m2>TRMT_MST_999002</m2><m3>10715302</m3><m4>25</m4><m5>2014-06-09T12:49:02</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>96817025</m1><m2>TRMT_MST_999002</m2><m3>10715302</m3><m4>28</m4><m5>2014-06-09T12:49:02</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>2303</m1><m2>Buz Hockey</m2><m3>1727</m3><m4>8</m4><m5>2011-10-08T22:18:56</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>2304</m1><m2>Ice Hockey</m2><m3>1727</m3><m4>7</m4><m5>2011-10-08T22:18:56</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>2305</m1><m2>Eishockey</m2><m3>1727</m3><m4>5</m4><m5>2011-10-08T22:18:56</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>2306</m1><m2>Ice Hockey</m2><m3>1727</m3><m4>9</m4><m5>2011-10-08T22:18:56</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>143121</m1><m2>Eishockey</m2><m3>1727</m3><m4>10</m4><m5>2011-10-08T22:18:56</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>422365</m1><m2>Хоккей на льду</m2><m3>1727</m3><m4>12</m4><m5>2012-09-07T10:00:54</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>822096</m1><m2>Hockey su ghiaccio</m2><m3>1727</m3><m4>11</m4><m5>2012-11-02T15:47:18</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62630426</m1><m2>冰上曲棍球</m2><m3>1727</m3><m4>30</m4><m5>2014-02-03T15:42:44</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62722487</m1><m2>Ice Hockey</m2><m3>-13561</m3><m4>7</m4><m5>2014-05-20T14:18:31</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62722489</m1><m2>Eishockey</m2><m3>-13561</m3><m4>5</m4><m5>2014-05-20T14:18:31</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62722491</m1><m2>Hockey su ghiaccio</m2><m3>-13561</m3><m4>11</m4><m5>2014-05-20T14:18:31</m5>
+</LanguageStringSr>
+<LanguageStringSr>
+<m1>62722493</m1><m2>Хоккей</m2><m3>-13561</m3><m4>12</m4><m5>2014-05-20T14:18:31</m5>
+</LanguageStringSr>
+
+</LanguageString>
+<Country>
+
+</Country>
+<Sport>
+<SportSr>
+<m1>4</m1><m2>4</m2><m3>Ice Hockey</m3><m4>-13561</m4><m5>2014-12-02T14:59:00</m5><m6>SPRT_ICE_HOCKEY</m6>
+</SportSr>
+
+</Sport>
+<Category>
+<CategorySr>
+<m1>5</m1><m2>1727</m2><m3>Ice Hockey</m3><m4>3</m4><m5>2011-10-26T13:01:06</m5>
+</CategorySr>
+
+</Category>
+<Tournament>
+<TournamentSr>
+<m1>17694</m1><m2>RHL1</m2><m3>999002</m3><m4>10715302</m4><m5>4</m5><m6>5</m6><m9>0</m9><m10>true</m10><m11>2014-06-09T12:51:55</m11><m14></m14><m16>400</m16><m17>false</m17><m18>false</m18><m19>false</m19>
+</TournamentSr>
+
+</Tournament>
+<Competitor>
+<CompetitorSr>
+<m1>116468</m1><m2>9999211</m2><m3>false</m3><m4>RHT 11</m4><m6>10715306</m6><m8>2014-05-14T12:07:01</m8>
+</CompetitorSr>
+<CompetitorSr>
+<m1>116699</m1><m2>9999221</m2><m3>false</m3><m4>RHT 21</m4><m6>10715605</m6><m8>2014-05-15T08:41:23</m8>
+</CompetitorSr>
+<CompetitorSr>
+<m1>116703</m1><m2>9999241</m2><m3>false</m3><m4>RHT 41</m4><m6>10715609</m6><m8>2014-05-15T08:41:25</m8>
+</CompetitorSr>
+<CompetitorSr>
+<m1>116707</m1><m2>9999231</m2><m3>false</m3><m4>RHT 31</m4><m6>10715613</m6><m8>2014-05-15T08:41:36</m8>
+</CompetitorSr>
+<CompetitorSr>
+<m1>116711</m1><m2>9999251</m2><m3>false</m3><m4>RHT 51</m4><m6>10715617</m6><m8>2014-05-15T08:41:38</m8>
+</CompetitorSr>
+
+</Competitor>
+<Match>
+<MatchSr>
+<m1>1004106</m1><m4>2015-02-25T10:47:49</m4><m5>2015-05-26T10:47:49</m5><m6>2015-05-26T10:47:49</m6><m7>0</m7><m8></m8><m9>0</m9><m10>0</m10><m11>0</m11><m12>0</m12><m13>1125114848</m13><m14>1</m14><m16>17694</m16><m17>true</m17><m18>9</m18><m19>2015-02-25T11:22:37</m19><m20>false</m20><m24>0</m24><m25></m25><m28>0</m28><m31></m31><m32>0</m32><m33>1</m33><m34>63486188</m34><m104>2015-02-25T10:47:49+01:00</m104><m105>2015-05-26T10:47:49+02:00</m105><m106>2015-05-26T10:47:49+02:00</m106>
+</MatchSr>
+
+</Match>
+<BetDomain>
+<BetDomainSr>
+<m1>7936706</m1><m4>0</m4><m5>1050</m5><m6>PodiumChampionshipOutright</m6><m7>10706174</m7><m8>10706172</m8><m10>1004106</m10><m11>9999</m11><m14>2015-02-25T11:22:37</m14><m17>0</m17><m19>false</m19><m20>false</m20><m21></m21><m22></m22>
+</BetDomainSr>
+
+</BetDomain>
+<Odd>
+<OddSr>
+<m1>23983614</m1><m2>1.20</m2><m6>1</m6><m8>10715306</m8><m9>OR_9999211</m9><m10>10715306</m10><m11>7936706</m11><m12>true</m12><m13>2015-02-25T11:22:37</m13><m14>false</m14><m15>false</m15><m16>1</m16>
+</OddSr>
+<OddSr>
+<m1>23983616</m1><m2>5.30</m2><m6>2</m6><m8>10715605</m8><m9>OR_9999221</m9><m10>10715605</m10><m11>7936706</m11><m12>true</m12><m13>2015-02-25T11:22:37</m13><m14>false</m14><m15>false</m15><m16>1</m16>
+</OddSr>
+<OddSr>
+<m1>23983618</m1><m2>6.00</m2><m6>3</m6><m8>10715613</m8><m9>OR_9999231</m9><m10>10715613</m10><m11>7936706</m11><m12>true</m12><m13>2015-02-25T11:22:37</m13><m14>false</m14><m15>false</m15><m16>1</m16>
+</OddSr>
+<OddSr>
+<m1>23983620</m1><m2>2.40</m2><m6>4</m6><m8>10715609</m8><m9>OR_9999241</m9><m10>10715609</m10><m11>7936706</m11><m12>true</m12><m13>2015-02-25T11:22:37</m13><m14>false</m14><m15>false</m15><m16>1</m16>
+</OddSr>
+<OddSr>
+<m1>23983622</m1><m2>2.00</m2><m6>5</m6><m8>10715617</m8><m9>OR_9999251</m9><m10>10715617</m10><m11>7936706</m11><m12>true</m12><m13>2015-02-25T11:22:37</m13><m14>false</m14><m15>false</m15><m16>1</m16>
+</OddSr>
+
+</Odd>
+<MatchToCompetitor>
+<MatchToCompetitorSr>
+<m1>18222590</m1><m2>1</m2><m3>116468</m3><m4>1004106</m4><m5>false</m5>
+</MatchToCompetitorSr>
+<MatchToCompetitorSr>
+<m1>18222592</m1><m2>1</m2><m3>116699</m3><m4>1004106</m4><m5>false</m5>
+</MatchToCompetitorSr>
+<MatchToCompetitorSr>
+<m1>18222594</m1><m2>1</m2><m3>116707</m3><m4>1004106</m4><m5>false</m5>
+</MatchToCompetitorSr>
+<MatchToCompetitorSr>
+<m1>18222596</m1><m2>1</m2><m3>116703</m3><m4>1004106</m4><m5>false</m5>
+</MatchToCompetitorSr>
+<MatchToCompetitorSr>
+<m1>18222598</m1><m2>1</m2><m3>116711</m3><m4>1004106</m4><m5>false</m5>
+</MatchToCompetitorSr>
+
+</MatchToCompetitor>
+</SportRadarLineContainer>

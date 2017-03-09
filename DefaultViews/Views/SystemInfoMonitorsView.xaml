@@ -1,0 +1,685 @@
+﻿<UserControl x:Class="DefaultViews.Views.SystemInfoMonitorsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters2="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels2:SystemInfoMonitorsViewModel}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:ImagePathConverter x:Key="ImagePathConverter" />
+        <BooleanToVisibilityConverter x:Key="visibilityConverter" />
+        <shared:MainMonitorToVisibiltyConverter x:Key="myMainMonitorToVisibiltyConverter" />
+        <shared:MainMonitorToVisibiltyInverseConverter x:Key="myMainMonitorToVisibiltyInverseConverter" />
+
+        <Style x:Key="TextEditBox" TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Courier New" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+
+            <Grid Width="auto"
+                  HorizontalAlignment="Center"
+                  DockPanel.Dock="Top">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Margin="0,50,0,0"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource importantText}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS}}" />
+                <Image x:Name="theader_monitors"
+                       Grid.Row="1"
+                       Width="760"
+                       Height="3"
+                       Margin="0, 20, 0, 0"
+                       HorizontalAlignment="Center"
+                       Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+                       Stretch="Fill" />
+
+            </Grid>
+        </DockPanel>
+        <StackPanel Grid.Row="1"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Center"
+                       Style="{StaticResource headerEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CONNECTED_MONITORS}}" />
+        </StackPanel>
+        <Grid Grid.Row="2"
+              Width="750"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=MonitorResolution_1}" Value="{x:Null}">
+                            <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,0,0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource rowEntry}"
+                           Text="Monitor 1" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10,10,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_RESOLUTION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonResolution"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorResolution_1}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_ORIENTATION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonOrientation"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorOrientation_1}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,00"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_CONFIG_MODE}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBox Margin="5,5,5,5"
+                         AutomationProperties.AutomationId="txtMonConf1"
+                         Style="{StaticResource TextEditBox}"
+                         Text="{Binding MonitorConfiguration_1,
+                                        Mode=TwoWay}"
+                         Visibility="{Binding MonitorConfiguration_1,
+                                              Converter={StaticResource myMainMonitorToVisibiltyConverter}}"
+                         WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                      Mode=TwoWay}" />
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonConf2"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorConfiguration_1}"
+                           Visibility="{Binding MonitorConfiguration_1,
+                                                Converter={StaticResource myMainMonitorToVisibiltyInverseConverter}}" />
+            </StackPanel>
+        </Grid>
+        <Image Grid.Row="3"
+               Width="760"
+               Height="1"
+               Margin="0, 20, 0, 0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+               Stretch="Fill"
+               Visibility="{Binding Path=IsFooterMonitorVisible_1,
+                                    Converter={StaticResource visibilityConverter}}" />
+
+        <Grid Grid.Row="4"
+              Width="760"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=MonitorResolution_2}" Value="{x:Null}">
+                            <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,0,0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource rowEntry}"
+                           Text="Monitor 2" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10,10,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_RESOLUTION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonResolution"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorResolution_2}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_ORIENTATION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonOrientation"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorOrientation_2}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,00"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_CONFIG_MODE}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBox Margin="5,5,5,5"
+                         AutomationProperties.AutomationId="txtMonConf1"
+                         Style="{StaticResource TextEditBox}"
+                         Text="{Binding MonitorConfiguration_2,
+                                        Mode=TwoWay}"
+                         Visibility="{Binding MonitorConfiguration_2,
+                                              Converter={StaticResource myMainMonitorToVisibiltyConverter}}"
+                         WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                      Mode=TwoWay}" />
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonConf2"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorConfiguration_2}"
+                           Visibility="{Binding MonitorConfiguration_2,
+                                                Converter={StaticResource myMainMonitorToVisibiltyInverseConverter}}" />
+            </StackPanel>
+        </Grid>
+        <Image Grid.Row="5"
+               Width="760"
+               Height="1"
+               Margin="0, 20, 0, 0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+               Stretch="Fill"
+               Visibility="{Binding Path=IsFooterMonitorVisible_2,
+                                    Converter={StaticResource visibilityConverter}}" />
+        <Grid Grid.Row="6"
+              Width="760"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=MonitorResolution_3}" Value="{x:Null}">
+                            <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,0,0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource rowEntry}"
+                           Text="Monitor 3" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10,10,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_RESOLUTION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonResolution"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorResolution_3}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_ORIENTATION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonOrientation"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorOrientation_3}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,00"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_CONFIG_MODE}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBox Margin="5,5,5,5"
+                         AutomationProperties.AutomationId="txtMonConf1"
+                         Style="{StaticResource TextEditBox}"
+                         Text="{Binding MonitorConfiguration_3,
+                                        Mode=TwoWay}"
+                         Visibility="{Binding MonitorConfiguration_3,
+                                              Converter={StaticResource myMainMonitorToVisibiltyConverter}}"
+                         WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                      Mode=TwoWay}" />
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonConf2"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorConfiguration_3}"
+                           Visibility="{Binding MonitorConfiguration_3,
+                                                Converter={StaticResource myMainMonitorToVisibiltyInverseConverter}}" />
+            </StackPanel>
+
+        </Grid>
+        <Image Grid.Row="7"
+               Width="760"
+               Height="1"
+               Margin="0, 20, 0, 0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+               Stretch="Fill"
+               Visibility="{Binding Path=IsFooterMonitorVisible_3,
+                                    Converter={StaticResource visibilityConverter}}" />
+
+        <Grid Grid.Row="8"
+              Width="760"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=MonitorResolution_4}" Value="{x:Null}">
+                            <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,0,0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource rowEntry}"
+                           Text="Monitor 4" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10,10,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_RESOLUTION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonResolution"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorResolution_4}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_ORIENTATION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonOrientation"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorOrientation_4}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,00"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_CONFIG_MODE}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBox Margin="5,5,5,5"
+                         AutomationProperties.AutomationId="txtMonConf1"
+                         Style="{StaticResource TextEditBox}"
+                         Text="{Binding MonitorConfiguration_4,
+                                        Mode=TwoWay}"
+                         Visibility="{Binding MonitorConfiguration_4,
+                                              Converter={StaticResource myMainMonitorToVisibiltyConverter}}"
+                         WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                      Mode=TwoWay}" />
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonConf2"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorConfiguration_4}"
+                           Visibility="{Binding MonitorConfiguration_4,
+                                                Converter={StaticResource myMainMonitorToVisibiltyInverseConverter}}" />
+            </StackPanel>
+
+        </Grid>
+        <Image Grid.Row="9"
+               Width="760"
+               Height="1"
+               Margin="0, 20, 0, 0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+               Stretch="Fill"
+               Visibility="{Binding Path=IsFooterMonitorVisible_4,
+                                    Converter={StaticResource visibilityConverter}}" />
+
+        <Grid Grid.Row="10"
+              Width="760"
+              Margin="0, 20, 0, 0"
+              HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Grid.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=MonitorResolution_5}" Value="{x:Null}">
+                            <Setter Property="FrameworkElement.Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,0,0"
+                           HorizontalAlignment="Left"
+                           FontWeight="Bold"
+                           Style="{StaticResource rowEntry}"
+                           Text="Monitor 5" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10,10,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_RESOLUTION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,10,10,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonResolution"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorResolution_5}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="10,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_ORIENTATION}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonOrientation"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorOrientation_5}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="0"
+                        Margin="10,0,0,10">
+                <TextBlock Margin="10,10,10,00"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource rowEntry}"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_MONITORS_CONFIG_MODE}}" />
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,0,0,0">
+                <TextBox Margin="5,5,5,5"
+                         AutomationProperties.AutomationId="txtMonConf1"
+                         Style="{StaticResource TextEditBox}"
+                         Text="{Binding MonitorConfiguration_5,
+                                        Mode=TwoWay}"
+                         Visibility="{Binding MonitorConfiguration_5,
+                                              Converter={StaticResource myMainMonitorToVisibiltyConverter}}"
+                         WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                      Mode=TwoWay}" />
+                <TextBlock Margin="10,10,10,0"
+                           HorizontalAlignment="Left"
+                           AutomationProperties.AutomationId="txtMonConf2"
+                           Style="{StaticResource rowEntry}"
+                           Text="{Binding MonitorConfiguration_5}"
+                           Visibility="{Binding MonitorConfiguration_5,
+                                                Converter={StaticResource myMainMonitorToVisibiltyInverseConverter}}" />
+            </StackPanel>
+        </Grid>
+        <Image Grid.Row="11"
+               Width="760"
+               Height="3"
+               Margin="0, 20, 0, 0"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               Source="{converters:ResolveImagePath Path=HeaderSeparator.png}"
+               Stretch="Fill"
+               Visibility="{Binding Path=IsFooterMonitorVisible_5,
+                                    Converter={StaticResource visibilityConverter}}" />
+
+        <StackPanel Grid.Row="12">
+            <TextBlock Margin="30,10,30,10"
+                       Style="{StaticResource rowEntry}"
+                       Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CALIBRATE_AND_ASSIGN_MANUAL_TEXT_MONITORS}}" />
+        </StackPanel>
+        <StackPanel Grid.Row="13"
+                    Margin="0,20,10,20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal">
+            <Button Margin="0,0,0,0"
+                    Command="{Binding PrintChangeOrientationBarcode}"
+                    Style="{StaticResource orangeButton}">
+                <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CHANGE_ORIENTATION}}" />
+                </Viewbox>
+            </Button>
+
+            <Button Margin="20,0,0,0"
+                    Command="{Binding CalibrateMonitor}"
+                    Style="{StaticResource orangeButton}">
+                <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_CALIBRATE_MONITORS}}" />
+                </Viewbox>
+            </Button>
+
+            <Button Margin="20,0,0,0"
+                    Command="{Binding TouchScreenAssignment}"
+                    Style="{StaticResource orangeButton}">
+                <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_ASSIGN_MONITORS}}" />
+                </Viewbox>
+            </Button>
+
+            <Button Margin="20,0,0,0"
+                    Command="{Binding IdentifyMonitors}"
+                    Style="{StaticResource orangeButton}">
+                <Viewbox StretchDirection="DownOnly">
+                    <TextBlock Style="{StaticResource normalText}" Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_IDENTIFY_MONITORS}}" />
+                </Viewbox>
+            </Button>
+
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

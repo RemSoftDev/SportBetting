@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SportBetting.WPF.Prism.Shared.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DA2_DRIVER_INF_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="DA2_DRIVER_DATE_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="DA2_DRIVER_VERSION" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ID_READER_DRIVER_INF_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="ID_READER_DRIVER_DATE_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="ID_READER_DRIVER_VERSION" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TOUCH_SCREEN_DRIVER_INF_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="TOUCH_SCREEN_DRIVER_DATE_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="TOUCH_SCREEN_DRIVER_VERSION" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PRINTER_DRIVER_INF_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="PRINTER_DRIVER_DATE_MODIFIED" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">01/01/2013 00:00:00</Value>
+    </Setting>
+    <Setting Name="PRINTER_DRIVER_VERSION" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,665 @@
+﻿<UserControl x:Class="DefaultViews.Views.Mode3x4.KeyboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Converters="clr-namespace:SportBetting.WPF.Prism.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:keyboard="clr-namespace:SportBetting.WPF.Prism.Modules.Keyboard;assembly=SportBetting.WPF.Prism.Modules.Keyboard"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:SportBetting.WPF.Prism.Modules.Keyboard.ViewModels;assembly=SportBetting.WPF.Prism.Modules.Keyboard"
+             Name="vKeyboard"
+             FontFamily="Arial Unicode MS"
+             WpfHelper:MouseOverBehavior.IsMouseOver="{Binding IsMouseOver,
+                                                               Mode=TwoWay}"
+             d:DataContext="{d:DesignInstance viewModels:KeyboardViewModel}"
+             d:DesignHeight="300"
+             d:DesignWidth="1050"
+             mc:Ignorable="d">
+
+
+    <UserControl.Resources>
+        <Converters:MultiBooleanORToVisibilityConverter x:Key="myBooleanToVisibilityConverter" />
+
+        <keyboard:CapsLockToTextConverter x:Key="capsLockToTextConverter" />
+        <keyboard:ShiftLockToTextConverter x:Key="shiftLockToTextConverter" />
+        <keyboard:WhichKBLayoutToStringConverter x:Key="kbConverter" />
+
+        <!--  default button style  -->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="#FFE5E5E5" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Content" Value="{Binding Text}" />
+            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.KeyPressCommand}" />
+            <Setter Property="CommandParameter" Value="{Binding}" />
+            <Setter Property="FontFamily" Value="Bitstream Cyberbase, Roman" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlToggleButtonContent"
+                                   Width="{TemplateBinding Width}"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonCenter.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="False">
+                    <!--  This is here because we're setting it slightly differently when the button is being pressed.  -->
+                    <Setter Property="Margin" Value="0,0,2,1" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Direction="315" Opacity="0.7" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <!--  Shift the button downward and to the right slightly, to give the affect of being pushed inward.  -->
+                    <Setter Property="Margin" Value="2,1,0,0" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Direction="135"
+                                              Opacity="0.5"
+                                              ShadowDepth="2" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--  special keys  -->
+        <Style x:Key="SpecialKey" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="FontFamily" Value="Bitstream Cyberbase, Roman" />
+            <Setter Property="Margin" Value="0,0,2,1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlToggleButtonContent"
+                                   Width="{TemplateBinding Width}"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonCenter.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="False">
+                    <!--  This is here because we're setting it slightly differently when the button is being pressed.  -->
+                    <Setter Property="Margin" Value="0,0,2,1" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Direction="315" Opacity="0.7" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <!--  Shift the button downward and to the right slightly, to give the affect of being pushed inward.  -->
+                    <Setter Property="Margin" Value="2,1,0,0" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Direction="135"
+                                              Opacity="0.5"
+                                              ShadowDepth="2" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DigitKey"
+               BasedOn="{StaticResource {x:Type Button}}"
+               TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="#FFE5E5E5" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Content" Value="{Binding Text}" />
+            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=2, AncestorType={x:Type Grid}}, Path=DataContext.KeyPressCommand}" />
+            <Setter Property="CommandParameter" Value="{Binding}" />
+            <Setter Property="FontFamily" Value="Bitstream Cyberbase, Roman" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel x:Name="dpnlToggleButtonContent"
+                                   Width="{TemplateBinding Width}"
+                                   LastChildFill="True">
+                            <DockPanel.Background>
+                                <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonCenter.png}" />
+                            </DockPanel.Background>
+                            <DockPanel x:Name="dpnlLeft"
+                                       Width="3"
+                                       DockPanel.Dock="Left">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonLeft.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <DockPanel x:Name="dpnlRight"
+                                       Width="3"
+                                       DockPanel.Dock="Right">
+                                <DockPanel.Background>
+                                    <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonRight.png}" />
+                                </DockPanel.Background>
+                            </DockPanel>
+                            <StackPanel Width="60" Orientation="Horizontal">
+                                <StackPanel Width="30"
+                                            Height="50"
+                                            VerticalAlignment="Top">
+                                    <TextBlock HorizontalAlignment="Right" Text="{Binding ShiftedCodePoint}">
+                                        <TextBlock.Style>
+
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Grid}}, Path=DataContext.IsShiftLock}" Value="true">
+                                                        <Setter Property="FontSize" Value="24" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Grid}}, Path=DataContext.IsShiftLock}" Value="false">
+                                                        <Setter Property="FontSize" Value="14" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+
+                                    </TextBlock>
+
+
+
+                                </StackPanel>
+                                <StackPanel Width="30"
+                                            Height="50"
+                                            VerticalAlignment="Bottom"
+                                            Orientation="Horizontal">
+
+
+                                    <TextBlock HorizontalAlignment="Left"
+                                               VerticalAlignment="Bottom"
+                                               Text="{Binding UnshiftedCodePoint}">
+                                        <TextBlock.Style>
+
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Grid}}, Path=DataContext.IsShiftLock}" Value="true">
+                                                        <Setter Property="FontSize" Value="14" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type Grid}}, Path=DataContext.IsShiftLock}" Value="false">
+                                                        <Setter Property="FontSize" Value="24" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+                            <!--
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            -->
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="dpnlToggleButtonContent" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownCenter.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlLeft" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownLeft.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="dpnlRight" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{converters:ResolveImagePath Path=PressButtonDownRight.png}" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsPressed" Value="False">
+                    <!--  This is here because we're setting it slightly differently when the button is being pressed.  -->
+                    <Setter Property="Margin" Value="0,0,2,1" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Direction="315" Opacity="0.7" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <!--  Shift the button downward and to the right slightly, to give the affect of being pushed inward.  -->
+                    <Setter Property="Margin" Value="2,1,0,0" />
+                    <Setter Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Direction="135"
+                                              Opacity="0.5"
+                                              ShadowDepth="2" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <DockPanel Name="KeyboardDock"
+               Height="280"
+               MaxWidth="1050"
+               Focusable="False"
+               LastChildFill="False">
+
+        <DockPanel.Visibility>
+            <MultiBinding Converter="{StaticResource myBooleanToVisibilityConverter}">
+                <Binding Path="ShowKeyboard" />
+                <Binding Path="IsMouseOver" />
+            </MultiBinding>
+        </DockPanel.Visibility>
+
+
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False">
+            <ComboBox Name="Languages"
+                      MinWidth="130"
+                      Margin="10,-66,8,4"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center"
+                      DockPanel.Dock="Left"
+                      Focusable="False"
+                      IsSynchronizedWithCurrentItem="True"
+                      ItemsSource="{Binding AvailableKeyboardLayouts,
+                                            Mode=OneWay}"
+                      SelectedValue="{Binding Path=SelectedKeyboardLayout,
+                                              Mode=TwoWay,
+                                              Converter={StaticResource kbConverter},
+                                              NotifyOnSourceUpdated=False}"
+                      Style="{DynamicResource squareComboBoxKeyboard}">
+                <ComboBox.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="White" />
+                </ComboBox.Resources>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="5,10,5,10"
+                                   FontFamily="Play"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   Foreground="White"
+                                   Text="{Binding}"
+                                   TextAlignment="Left"
+                                   TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Name="CloseKbd"
+                    Height="50"
+                    MinWidth="150"
+                    Margin="10,-66,8,4"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding HideKeyboardCommand}"
+                    DockPanel.Dock="Right"
+                    Focusable="True"
+                    IsDefault="False"
+                    Style="{StaticResource nonRadioUserProfileButton}"
+                    Visibility="Visible">
+                <TextBlock FontFamily="Play"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="#FFEFEFEF"
+                           LineHeight="20"
+                           LineStackingStrategy="BlockLineHeight"
+                           Text="{l:Translate Key={x:Static l:MultistringTags.HIDE_KEYBOARD}}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+
+
+            </Button>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="0,0,5,2"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal" />
+            </Grid>
+            <Grid Margin="8,9,8,4">
+                <Grid.Resources />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--  The topmost row - digits and symbols (KeysRow1)  -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="4*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            DataContext="{Binding Path=VK_OEM_3}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="1"
+                            DataContext="{Binding Path=VK_1}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="2"
+                            DataContext="{Binding Path=VK_2}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="3"
+                            DataContext="{Binding Path=VK_3}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="4"
+                            DataContext="{Binding Path=VK_4}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="5"
+                            DataContext="{Binding Path=VK_5}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="6"
+                            DataContext="{Binding Path=VK_6}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="7"
+                            DataContext="{Binding Path=VK_7}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="8"
+                            DataContext="{Binding Path=VK_8}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="9"
+                            DataContext="{Binding Path=VK_9}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="10"
+                            DataContext="{Binding Path=VK_0}"
+                            Style="{StaticResource DigitKey}" />
+                    <Button Grid.Column="11" DataContext="{Binding Path=VK_OEM_MINUS}" />
+                    <Button Grid.Column="12" DataContext="{Binding Path=VK_OEM_PLUS}" />
+                    <Button Grid.Column="13"
+                            Command="{Binding BackSpaceCommand}"
+                            Padding="0"
+                            Style="{StaticResource SpecialKey}">
+                        <Button.Content>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock x:Name="lblBackspace"
+                                           VerticalAlignment="Top"
+                                           Text="BS" />
+                                <Canvas x:Name="arrow30"
+                                        Margin="0,0,0,0"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Bottom">
+                                    <Path x:Name="pathLeftArrow"
+                                          Canvas.Left="-15"
+                                          Canvas.Top="-1"
+                                          Width="38"
+                                          Height="9"
+                                          Data="F1 M 0.684,18.073 L12.790,5.968 L12.790,14.385 L54.794,14.385 L54.794,21.761 L12.790,21.761 L12.790,30.178 Z "
+                                          Fill="#FFF2F2F2"
+                                          Stretch="Fill" />
+                                </Canvas>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
+
+                </Grid>
+                <!--  The 2nd row, upper-most letters (KeysRow2)  -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Command="{Binding TabCommand}"
+                            Style="{StaticResource SpecialKey}">
+                        Tab
+                    </Button>
+                    <Button Grid.Column="1" DataContext="{Binding Path=VK_Q}" />
+                    <Button Grid.Column="2" DataContext="{Binding Path=VK_W}" />
+                    <Button Grid.Column="3" DataContext="{Binding Path=VK_E}" />
+                    <Button Grid.Column="4" DataContext="{Binding Path=VK_R}" />
+                    <Button Grid.Column="5" DataContext="{Binding Path=VK_T}" />
+                    <Button Grid.Column="6" DataContext="{Binding Path=VK_Y}" />
+                    <Button Grid.Column="7" DataContext="{Binding Path=VK_U}" />
+                    <Button Grid.Column="8" DataContext="{Binding Path=VK_I}" />
+                    <Button Grid.Column="9" DataContext="{Binding Path=VK_O}" />
+                    <Button Grid.Column="10" DataContext="{Binding Path=VK_P}" />
+                    <Button Name="VK_OEM_4"
+                            Grid.Column="11"
+                            DataContext="{Binding Path=VK_OEM_4}" />
+                    <Button Name="VK_OEM_6"
+                            Grid.Column="12"
+                            DataContext="{Binding Path=VK_OEM_6}" />
+                    <Button Name="VK_OEM_5"
+                            Grid.Column="13"
+                            DataContext="{Binding Path=VK_OEM_5}" />
+                </Grid>
+                <!--  The 3rd row, middle letters (KeysRow3)  -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Command="{Binding CapsCommand}"
+                            Content="{Binding IsCapsLock,
+                                              Converter={StaticResource capsLockToTextConverter}}"
+                            Style="{StaticResource SpecialKey}" />
+                    <Button Grid.Column="1" DataContext="{Binding Path=VK_A}" />
+                    <Button Grid.Column="2" DataContext="{Binding Path=VK_S}" />
+                    <Button Grid.Column="3" DataContext="{Binding Path=VK_D}" />
+                    <Button Grid.Column="4" DataContext="{Binding Path=VK_F}" />
+                    <Button Grid.Column="5" DataContext="{Binding Path=VK_G}" />
+                    <Button Grid.Column="6" DataContext="{Binding Path=VK_H}" />
+                    <Button Grid.Column="7" DataContext="{Binding Path=VK_J}" />
+                    <Button Grid.Column="8" DataContext="{Binding Path=VK_K}" />
+                    <Button Grid.Column="9" DataContext="{Binding Path=VK_L}" />
+                    <Button Name="VK_OEM_1"
+                            Grid.Column="10"
+                            DataContext="{Binding Path=VK_OEM_1}" />
+                    <Button Name="VK_OEM_7"
+                            Grid.Column="11"
+                            DataContext="{Binding Path=VK_OEM_7}" />
+                    <Button Grid.Column="12"
+                            Command="{Binding EnterCommand}"
+                            Style="{StaticResource SpecialKey}">
+                        Enter
+                    </Button>
+                </Grid>
+                <!--  The 4th row, bottom-most keys (KeysRow4)  -->
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6.5*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="6.5*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Command="{Binding ShiftCommand}"
+                            Content="{Binding IsShiftLock,
+                                              Converter={StaticResource shiftLockToTextConverter}}"
+                            Style="{StaticResource SpecialKey}" />
+                    <Button Grid.Column="1" DataContext="{Binding Path=VK_Z}" />
+                    <Button Grid.Column="2" DataContext="{Binding Path=VK_X}" />
+                    <Button Grid.Column="3" DataContext="{Binding Path=VK_C}" />
+                    <Button Grid.Column="4" DataContext="{Binding Path=VK_V}" />
+                    <Button Grid.Column="5" DataContext="{Binding Path=VK_B}" />
+                    <Button Grid.Column="6" DataContext="{Binding Path=VK_N}" />
+                    <Button Grid.Column="7" DataContext="{Binding Path=VK_M}" />
+                    <Button Grid.Column="8" DataContext="{Binding Path=VK_OEM_COMMA}" />
+                    <Button Grid.Column="9" DataContext="{Binding Path=VK_OEM_PERIOD}" />
+                    <Button Grid.Column="10" DataContext="{Binding Path=VK_OEM_2}" />
+                    <Button Grid.Column="11"
+                            Command="{Binding ShiftCommand}"
+                            Content="{Binding IsShiftLock,
+                                              Converter={StaticResource shiftLockToTextConverter}}"
+                            Style="{StaticResource SpecialKey}" />
+                </Grid>
+                <!--  The 5th row, with Ctrl, Alt and Spacebar  -->
+
+                <Grid Grid.Row="4" Focusable="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="21*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="1" DataContext="{Binding Path=VK_AT}" />
+                    <Button Grid.Column="2"
+                            Command="{Binding SpaceCommand}"
+                            Content="space" />
+                </Grid>
+            </Grid>
+        </DockPanel>
+
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,17 @@
+Validator1_Channel_07=500
+Validator1_Channel_06=200
+Validator1_Channel_05=100
+Validator1_Channel_04=50
+Validator1_Channel_03=20
+Validator1_Channel_02=10
+Validator1_Channel_01=5
+Validator1_WriteDelay_ms=123
+Validator1_Device=COM3
+Validator1_Type=InnovativeTechnology.NV10
+Validator2_Type=Comestero.RM5
+Validator2_Channel_01=10
+Validator2_Channel_02=20
+Validator2_Channel_03=50
+Validator2_Channel_04=100
+Validator2_Channel_05=200
+Validator2_Channel_06=0

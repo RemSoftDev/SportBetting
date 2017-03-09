@@ -1,0 +1,297 @@
+﻿<UserControl x:Class="DefaultViews.Views.SearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Custom="clr-namespace:BaseObjects;assembly=BaseObjects"
+             xmlns:WpfHelper="clr-namespace:SportBetting.WPF.Prism.WpfHelper;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:converters="clr-namespace:SportBetting.WPF.Prism.Shared.Converters;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:l="clr-namespace:TranslationByMarkupExtension;assembly=TranslationByMarkupExtension"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:shared="clr-namespace:SportBetting.WPF.Prism.Shared;assembly=SportBetting.WPF.Prism.Shared"
+             xmlns:viewModels2="clr-namespace:ViewModels.ViewModels;assembly=ViewModels"
+             d:DataContext="{d:DesignInstance viewModels2:SearchViewModel}"
+             
+             x:Name="SearchViewControl"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <shared:CollectionToHeightConverter x:Key="CollectionToHeightConverter" />
+        <shared:CollectionToVisibilityConverter x:Key="CollectionToVisibilityConverter" />
+        <shared:PreMatchTemplateSelector x:Key="myTemplateSelector"
+                                         FullTemplate="{StaticResource ResourceKey=NewPreMatchTemplate}"
+                                         MatchBetTemplate="{StaticResource ResourceKey=NewPreMatchTemplateMatchBetOnly}"
+                                         TwoItemsTemplate="{StaticResource ResourceKey=NewPreMatchTemplateTwoItems}"
+                                         TwoItemsUoTemplate="{StaticResource ResourceKey=NewPreMatchTemplateTwoItemsUnderOver}"
+                                         OutrightTemplate="{StaticResource ResourceKey=NewPreMatchOutrightTemplate}"/>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <ImageBrush AlignmentX="Left"
+                    AlignmentY="Top"
+                    ImageSource="{converters:ResolveImagePath Path=BackgroundTileNotTransparent.png}"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,3,3"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+    <DockPanel>
+        <Button HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                Command="{Binding UnfocusComand}">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border x:Name="_border"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="0" />
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" VerticalAlignment="Top">
+
+
+                    <!--  search panel  -->
+                    <StackPanel Margin="0,10,0,10"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Orientation="Horizontal">
+
+                        <TextBlock Margin="0,0,10,0" FontFamily="Play" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           FontSize="30"
+                                           FontWeight="Bold"
+                                           Foreground="#FFEFEFEF"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.TERMINAL_FORM_SEARCH_BTN}}"
+                                           TextAlignment="Center" />
+                        <TextBox x:Name="txtSearchViewTextBox"
+                                 Width="320"
+                                 Margin="3,0,0,0"
+                                 VerticalContentAlignment="Center"
+                                 FontFamily="Play"
+                                 FontSize="30"
+                                 Padding="10,0,0,0"
+                                 Style="{DynamicResource UsernameTextBoxStyleNoValidation}"
+                                 Text="{Binding ChangeTracker.SearchString,
+                                                UpdateSourceTrigger=PropertyChanged,
+                                                ValidatesOnDataErrors=true,
+                                                NotifyOnValidationError=true,
+                                                Mode=TwoWay}"
+                                 TextAlignment="Left"
+                                 WpfHelper:FocusExtension.IsFocused="{Binding IsFocused,
+                                                                              Mode=TwoWay,
+                                                                              UpdateSourceTrigger=PropertyChanged}" />
+
+                        <Button Width="76"
+                                Height="60"
+                                Margin="3,0,0,0"
+                                HorizontalContentAlignment="Right"
+                                VerticalContentAlignment="Center"
+                                Command="{Binding SearchCommand}"
+                                Padding="10,0,10,0"
+                                Style="{StaticResource orangeButton}"
+                                AutomationProperties.AutomationId="btnGo">
+                            <Viewbox StretchDirection="DownOnly">
+                                <TextBlock FontFamily="Play"
+                                           FontSize="30"
+                                           FontWeight="Bold"
+                                           Foreground="#FFEFEFEF"
+                                           Text="{l:Translate Key={x:Static l:MultistringTags.Go}}"
+                                           TextAlignment="Center" />
+                            </Viewbox>
+                        </Button>
+                    </StackPanel>
+
+                    <!--  filter results  -->
+                    <DockPanel Height="60"
+                               VerticalAlignment="Top"
+                               LastChildFill="False"
+                               Visibility="{Binding Tournaments,
+                                                    Converter={StaticResource CollectionToVisibilityConverter}}">
+                        <DockPanel.Background>
+                            <ImageBrush ImageSource="{converters:ResolveImagePath Path=BreadcrumbsCenter.png}" />
+                        </DockPanel.Background>
+                        <!--  left navigation control (breadcrums...)  -->
+
+                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                            <Button Style="{StaticResource navigationButtonArrayFirst}">
+                                <Image Width="25"
+                                       Height="37"
+                                       Margin="10,0,5,0"
+                                       Source="{converters:ResolveImagePath Path=SportsIconSmall.png}" />
+                            </Button>
+                            <DockPanel Name="ResultFilters">
+                                <ComboBox Width="Auto"
+                                          HorizontalContentAlignment="Stretch"
+                                          FontFamily="Play"
+                                          FontSize="20"
+                                          FontWeight="Bold"
+                                          Foreground="#FFC0C0C0"
+                                          ItemsSource="{Binding Sports}"
+                                          Padding="0,0,0,0"
+                                          SelectedValue="{Binding SelectedSport}"
+                                          Style="{DynamicResource navigationComboBox}"
+                                          AutomationProperties.AutomationId="cmbSports">
+                                    <ComboBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel x:Name="comboDock">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="50" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="41" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock x:Name="comboText"
+                                                               Grid.Column="1"
+                                                               FontFamily="Play"
+                                                               FontSize="20"
+                                                               FontWeight="Bold"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="#FFC0C0C0"
+                                                               Padding="0,0,10,0"
+                                                               Text="{Binding Path=Name}"
+                                                               TextAlignment="Left"
+                                                               TextWrapping="Wrap" />
+                                                </Grid>
+                                            </DockPanel>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                    <Setter TargetName="comboDock" Property="Background" Value="Transparent" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
+                                                    <Setter TargetName="comboDock" Property="Background" Value="#627B86" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <ComboBox Width="Auto"
+                                          HorizontalContentAlignment="Stretch"
+                                          FontFamily="Play"
+                                          FontSize="20"
+                                          FontWeight="Bold"
+                                          Foreground="#FFC0C0C0"
+                                          ItemsSource="{Binding Tournaments}"
+                                          Padding="0,0,0,0"
+                                          SelectedValue="{Binding SelectedTournament}"
+                                          Style="{DynamicResource navigationComboBox}"
+                                          AutomationProperties.AutomationId="cmbTournaments">
+                                    <ComboBox.Resources>
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                                    </ComboBox.Resources>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Width="auto"
+                                                       Height="{Binding Tournaments,
+                                                                        Converter={StaticResource CollectionToHeightConverter}}"
+                                                       IsItemsHost="True"
+                                                       Orientation="Vertical" />
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel x:Name="comboDock">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="50" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="41" />
+                                                        <ColumnDefinition MaxWidth="259" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock x:Name="comboText"
+                                                               Grid.Column="1"
+                                                               MaxWidth="259"
+                                                               VerticalAlignment="Center"
+                                                               FontFamily="Play"
+                                                               FontSize="20"
+                                                               FontWeight="Bold"
+                                                               Foreground="#FFC0C0C0"
+                                                               Padding="0,0,10,0"
+                                                               Text="{Binding Path=Name}"
+                                                               TextAlignment="Left"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               TextWrapping="NoWrap" />
+                                                </Grid>
+                                            </DockPanel>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="True">
+                                                    <Setter TargetName="comboDock" Property="Background" Value="#627B86" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource PreviousData}}" Value="{x:Null}">
+                                                    <Setter TargetName="comboDock" Property="Background" Value="Transparent" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DockPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+
+                <ItemsControl Grid.Row="1"
+                              HorizontalContentAlignment="Stretch"
+                              BorderBrush="Black"
+                              BorderThickness="0"
+                              ItemTemplateSelector="{StaticResource myTemplateSelector}"
+                              ItemsSource="{Binding Matches}"
+                              ScrollViewer.CanContentScroll="True"
+                              VirtualizingPanel.ScrollUnit="Pixel"
+                              VirtualizingStackPanel.IsVirtualizing="True"
+                              VirtualizingStackPanel.VirtualizationMode="Recycling">
+                    <!--  ItemTemplate="{StaticResource ResourceKey=NewLiveMatchTemplate}"  -->
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <Border Background="{TemplateBinding Panel.Background}"
+                                    BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                    BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                    Padding="{TemplateBinding Control.Padding}"
+                                    SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="ScrollViewer"
+                                              CanContentScroll="True"
+                                              PanningMode="VerticalOnly"
+                                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                              Template="{StaticResource secondVisibleScrollView}">
+                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="ScrollChanged">
+                                            <i:InvokeCommandAction Command="{Binding ScrollChangedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=ContentVerticalOffset}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                <Custom:MyContentRegion Grid.Row="2"
+                                VerticalAlignment="Bottom"
+                                Custom:MyRegionManager.RegionName="KeyboardRegion" />
+
+            </Grid>
+        </Button>
+    </DockPanel>
+
+
+</UserControl>
